@@ -30,6 +30,11 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                                         'action' => 'execute'));
         $router->addRoute('indexGuardianScrape', $route);
         
+        $route = new Zend_Controller_Router_Route('scrape-anthem/:action',
+                                                  array('controller' => 'scrape-anthem',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexAnthemScrape', $route);
+        
         
         
         $route = new Zend_Controller_Router_Route('index/paypal-payment/:userId',

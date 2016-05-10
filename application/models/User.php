@@ -19,7 +19,6 @@ class Application_Model_User
     protected $_status;
     protected $_api_token;
     protected $_api_updated;
-    
     protected $_cigna_user_id;
     protected $_cigna_password;
     protected $_cigna_medical_exeid;
@@ -31,8 +30,8 @@ class Application_Model_User
     protected $_guardian_claim_exeid;
     protected $_anthem_user_id;
     protected $_anthem_password;
-    protected $_anthem_medical_exeid;
-    protected $_anthem_claims_overview_exeid;
+    protected $_anthem_exeid;
+    protected $_anthem_claim_overview_exeid;
     
     
     public function __construct($options = null)
@@ -252,24 +251,24 @@ class Application_Model_User
         return $this->_anthem_password;
     }
     
-    public function setAnthemMedicalExeid($anthemMedicalExeid)
+    public function setAnthemExeid($anthemExeid)
     {
-        $this->_anthem_medical_exeid = $anthemMedicalExeid;
+        $this->_anthem_exeid = $anthemExeid;
     }
     
-    public function getAnthemMedicalExeid()
+    public function getAnthemExeid()
     {
-        return $this->_anthem_medical_exeid;
+        return $this->_anthem_exeid;
     }
     
-    public function setAnthemClaimsOverviewExeid($anthemClaimsOverviewExeid)
+    public function setAnthemClaimOverviewExeid($anthemClaimOverviewExeid)
     {
-        $this->_anthem_claims_overview_exeid = $anthemClaimsOverviewExeid;
+        $this->_anthem_claim_overview_exeid = $anthemClaimOverviewExeid;
     }
     
     public function getAnthemClaimsOverviewExeid()
     {
-        return $this->_anthem_claims_overview_exeid;
+        return $this->_anthem_claim_overview_exeid;
     }
     
 }

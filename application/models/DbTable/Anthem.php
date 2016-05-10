@@ -9,9 +9,9 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_DbTable_AnthemBenefit extends Zend_Db_Table_Abstract
+class Application_Model_DbTable_Anthem extends Zend_Db_Table_Abstract
 {
-    protected $_name = 'anthem_benefit';
+    protected $_name = 'anthem';
     
     protected $_primary = 'id';
     

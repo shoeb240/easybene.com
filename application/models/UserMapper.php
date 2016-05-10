@@ -209,6 +209,8 @@ class Application_Model_UserMapper
             $user->setCignaClaimDetailsExeid($row->cigna_claim_details_exeid);
             $user->setGuardianClaimExeid($row->guardian_claim_exeid);
             $user->setGuardianBenefitExeid($row->guardian_benefit_exeid);
+            $user->setAnthemExeid($row->anthem_exeid);
+            $user->setAnthemClaimOverviewExeid($row->anthem_claim_overview_exeid);
             $info[] = $user;
         }
         

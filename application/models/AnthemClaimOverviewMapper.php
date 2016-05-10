@@ -8,7 +8,7 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_AnthemClaimMapper
+class Application_Model_AnthemClaimOverviewMapper
 {
     /**
      * @var Application_Model_DbTable_AnthemClaim
@@ -23,7 +23,7 @@ class Application_Model_AnthemClaimMapper
     public function getTable()
     {
         if (null == $this->_dbTable) {
-            $this->_dbTable = new Application_Model_DbTable_AnthemClaim();
+            $this->_dbTable = new Application_Model_DbTable_AnthemClaimOverview();
         }
         
         return $this->_dbTable;
@@ -120,10 +120,10 @@ class Application_Model_AnthemClaimMapper
         
     }
     
-    public function getClaimUserAll()
+    public function getClaimOverviewUserAll()
     {
         $select = $this->getTable()->select();
-        $select->from('anthem_claim', array('user_id'));
+        $select->from('anthem_claim_overview', array('user_id'));
         $rowSets = $this->getTable()->fetchAll($select);
         
         $info = array();

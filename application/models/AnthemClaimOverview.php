@@ -8,7 +8,7 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_AnthemClaim
+class Application_Model_AnthemClaimOverview
 {
     protected $_id;
     protected $_userId;
