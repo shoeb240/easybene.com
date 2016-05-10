@@ -1,0 +1,166 @@
+<div class="mcore-content-player">
+<?php //include('home/top-slider.php');?>
+<div class="page_view_left">
+    <div class="headline_rx"><h1>Cauta Search vehicles</h1></div>
+        <img alt="" style="float:left;" src="<?=BASEURL?>search_box/images/top.jpg">
+        
+            <div class="ry">
+            
+                <div class="main_container">
+                
+                    <div class="main_container_left"><!--main_container_left-->
+                    
+                        <samp style="font:14px Verdana, Arial, Helvetica, sans-serif; color:#ca0d0d;">Second-hand and new</samp>
+                        <h2 style="margin-top:5px;">Mark:</h2>
+                        <div class="input_box">
+                        
+                            <select style="width:220px; background:#FFFFFF; border:1px solid #d4d3d3; margin-top:5px;">
+                            
+                            <option></option><option>pakistan</option><option>barma</option><option>japan</option><option>Bangladesh</option>
+                            
+                                </select>
+                            
+                        </div>
+                        
+                        <h2 style="margin-top:5px;">Price up to:</h2>
+                        <div class="input_box">
+                        
+                            <select style="width:220px; background:#FFFFFF; border:1px solid #d4d3d3; margin-top:5px;">
+                            
+                            <option></option><option>pakistan</option><option>barma</option><option>japan</option><option>Bangladesh</option>
+                            
+                                </select>
+                            
+                        
+                        </div>
+                        
+                        
+                        <h2 style="margin-top:5px;">Miles to:</h2>
+                        <div class="input_box">
+                        
+                            <select style="width:220px; background:#FFFFFF; border:1px solid #d4d3d3; margin-top:5px;">
+                            
+                            <option></option><option>pakistan</option><option>barma</option><option>japan</option><option>Bangladesh</option>
+                            
+                                </select>
+                            
+                        
+                        </div>
+                        <div class="checkbox">
+                        
+                            <div class="checkbox_left"><form action=""><input type="checkbox" value="" name=""></form>
+                        
+                            <img alt="" style="margin-top:25px;_margin-top:20px; float:left;" src="<?=BASEURL?>search_box/images/icon.jpg">
+                        
+                            </div>
+                            
+                            <div class="checkbox_right"><h2> Only cars in Romania</h2></div><br>
+
+                        <a class="type" href="#">Advanced search</a>
+                        
+                        </div>
+
+                         
+                        
+                    
+                    </div><!--end main_container_left-->
+                    
+                    <div style="margin-top:2px;" class="main_container_midd"><!--main_container_midd-->
+                    
+                    <input type="radio" style="float:left; margin-right:10px;" value="" name=""><h2> Vehicles</h2>
+                    
+                        <div class="clr"></div>
+                        <h2 style="margin-top:5px;">Model:</h2>
+                        <div class="input_box">
+                        
+                            <select style="width:220px; background:#FFFFFF; border:1px solid #d4d3d3; margin-top:5px;">
+                            
+                            <option></option><option>pakistan</option><option>barma</option><option>japan</option><option>Bangladesh</option>
+                            
+                                </select>
+                            
+                        </div>
+                        
+                        <h2 style="margin-top:5px;">Year of manufacture of the:</h2>
+                        <div class="input_box">
+                        
+                            <select style="width:220px; background:#FFFFFF; border:1px solid #d4d3d3; margin-top:5px;">
+                            
+                            <option></option><option>pakistan</option><option>barma</option><option>japan</option><option>Bangladesh</option>
+                            
+                                </select>
+                            
+                        
+                        </div>
+                        
+                        
+                        <h2 style="margin-top:5px;">Type of fuel :</h2>
+                        <div class="input_box">
+                        
+                            <select style="width:220px; background:#FFFFFF; border:1px solid #d4d3d3; margin-top:5px;">
+                            
+                            <option></option><option>pakistan</option><option>barma</option><option>japan</option><option>Bangladesh</option>
+                            
+                                </select>
+                            
+                        
+                        </div>
+                        <div class="menu2">
+                        
+                            <ul>
+                            
+                                <li><a href="#"></a></li>
+                            
+                            </ul>
+                        
+                        </div>
+                    
+                    </div><!--end main_container_midd-->
+                    
+                    <div class="main_container_right"></div>
+                
+                </div>
+            
+            </div>
+        
+    <img alt="" style="float:right;" src="<?=BASEURL?>search_box/images/bottom.jpg">    </div>
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+ 
+</div>
+<div id="media-box" class="mcore-content mcore-clearfix">
+		<div id="media-info" class="mcore-column-main mcore-f-lft">
+			<div class="mcore-playerbar mcore-clearfix">
+				<?php include('home/user-choice-vote.php');?> 
+			</div>			
+			<!--div class="mcore-content-box-border">
+				<div class="mcore-media mcore-clearfix">
+					<?php //include('home/product-short-description.php');?> 
+				</div>
+				<div class="mcore-tab-container" data-include-spacer="1">
+					<h2 id="mcore-tab-comments" class="mcore-tab"><?=$lang['Contact_bar']?><span></span></h2>
+					<div id="mcore-tab-comments-panel" class="mcore-tab-panel">   
+						<?php //include('home/contact-frm.php');?>   
+					</div>
+				</div>
+			</div-->
+		</div>
+		<div id="media-sidebar" class="mcore-column-sidebar mcore-f-rgt">
+			<div class="mcore-sidebarbox thumbs" id="related-sidebar-box">
+				<?php include('home/related-ads.php');?> 
+			</div> 
+			
+			<div class="mcore-sidebarbox thumbs" id="popular-sidebar-box">
+				<?php include('home/most-view-ads.php');?> 
+			</div>  
+		</div>
+</div>

@@ -1,0 +1,125 @@
+
+input.text {
+    font-family: inherit;
+    font-size: 16px;
+    height: 24px;
+    margin: 0;
+    width: 200px;
+}
+fieldset.name fieldset.firstname {
+    margin-right: 10px;
+}
+fieldset.name fieldset {
+    float: left;
+    height: 60px;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+fieldset {
+    background-color: #F0F0F0;
+    margin-top: 10px;
+    padding-top: 10px;
+}
+input[type="text"] {
+    background-image: url("../images/home/field-bg.png");
+    background-repeat: repeat-x;
+    border: 1px solid #999999;
+    border-radius: 3px 3px 3px 3px;
+    font-size: 19px;
+    height: 16px;
+    line-height: 16px;
+    margin: 0;
+    padding: 4px;
+    vertical-align: middle;
+}
+input[type="password"] {
+    background-image: url("../images/home/field-bg.png");
+    background-repeat: repeat-x;
+    border: 1px solid #999999;
+    border-radius: 3px 3px 3px 3px;
+    font-size: 12px;
+    height: 16px;
+    line-height: 16px;
+    margin: 0;
+    padding: 4px;
+    vertical-align: middle;
+}
+input.hint, textarea.hint {
+    color: #333333;
+    float: left;
+    width: 170px;
+    font-family: 'Times New Roman',Arial,sans-serif;
+}
+.dropdown
+{
+background-color:#FFFFFF;
+border-color:#E8E8E8;
+color: #333333;
+width: 180px;
+font-family: 'Times New Roman',Arial,sans-serif;
+}
+.label
+{
+color:#202020;
+float: left;
+width: 42%;
+font-size: 14px;
+font-family: 'Times New Roman',Arial,sans-serif;
+font-weight: bold;
+padding-top: 4px;
+}
+#formcontainer
+{
+    width:78%;
+    margin:0 auto;
+    background:#E8E8E8;
+    border:1px solid #BEBEBE;
+    overflow: scroll;
+    height: 430px;
+    padding-left: 2%;
+    position: relative;
+}
+#signupcontainer
+{
+    height: 100%;
+    
+}
+.btn_div
+{
+    width: 89%;
+    height: 60px;
+}
+.btn
+{
+    float: right;
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    background-color: #444444;
+    color: white;
+    font-size: 16px;
+    padding-top: 10px;
+    cursor: pointer;
+}
+p.font
+{
+font-family:Verdana, Helvetica, sans-serif;line-height:20px;
+font-size:13px;
+text-align:justify;
+}
+.textfont
+{
+ font-family:Verdana, Helvetica, sans-serif;line-height:20px;
+font-size:13px;
+text-align:justify;
+ margin-right: 2%;
+}
+.button {
+    background: none repeat scroll 0 0 #5D5D5D;
+    border: 0 none;
+    color: #FFFFFF;
+    font-family: Georgia;
+    font-size: 12px;
+    font-style: italic;
+    height: 25px;
+}

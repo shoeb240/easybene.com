@@ -1,0 +1,20 @@
+[01-Apr-2016 13:54:26 UTC] PHP Fatal error:  Uncaught exception 'Zend_Loader_PluginLoader_Exception' with message 'Plugin by name 'DocType' was not found in the registry; used paths:
+Zend_View_Helper_: Zend/View/Helper/' in /home/rbrathwaite29/public_html/library/Zend/Loader/PluginLoader.php:412
+Stack trace:
+#0 /home/rbrathwaite29/public_html/library/Zend/View/Abstract.php(1182): Zend_Loader_PluginLoader->load('DocType')
+#1 /home/rbrathwaite29/public_html/library/Zend/View/Abstract.php(618): Zend_View_Abstract->_getPlugin('helper', 'docType')
+#2 /home/rbrathwaite29/public_html/library/Zend/View/Abstract.php(344): Zend_View_Abstract->getHelper('docType')
+#3 /home/rbrathwaite29/public_html/application/Bootstrap.php(15): Zend_View_Abstract->__call('docType', Array)
+#4 /home/rbrathwaite29/public_html/application/Bootstrap.php(15): Zend_View->docType('XHTML1_STRICT')
+#5 /home/rbrathwaite29/public_html/library/Zend/Application/Bootstrap/BootstrapAbstract.php(669): Bootstrap->_initPlaceholders()
+#6 /home/rbrathwaite29/public_html/library/Zend/Application/Boots in /home/rbrathwaite29/public_html/library/Zend/Loader/PluginLoader.php on line 412
+[01-Apr-2016 13:54:28 UTC] PHP Fatal error:  Uncaught exception 'Zend_Loader_PluginLoader_Exception' with message 'Plugin by name 'DocType' was not found in the registry; used paths:
+Zend_View_Helper_: Zend/View/Helper/' in /home/rbrathwaite29/public_html/library/Zend/Loader/PluginLoader.php:412
+Stack trace:
+#0 /home/rbrathwaite29/public_html/library/Zend/View/Abstract.php(1182): Zend_Loader_PluginLoader->load('DocType')
+#1 /home/rbrathwaite29/public_html/library/Zend/View/Abstract.php(618): Zend_View_Abstract->_getPlugin('helper', 'docType')
+#2 /home/rbrathwaite29/public_html/library/Zend/View/Abstract.php(344): Zend_View_Abstract->getHelper('docType')
+#3 /home/rbrathwaite29/public_html/application/Bootstrap.php(15): Zend_View_Abstract->__call('docType', Array)
+#4 /home/rbrathwaite29/public_html/application/Bootstrap.php(15): Zend_View->docType('XHTML1_STRICT')
+#5 /home/rbrathwaite29/public_html/library/Zend/Application/Bootstrap/BootstrapAbstract.php(669): Bootstrap->_initPlaceholders()
+#6 /home/rbrathwaite29/public_html/library/Zend/Application/Boots in /home/rbrathwaite29/public_html/library/Zend/Loader/PluginLoader.php on line 412

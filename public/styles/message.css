@@ -1,0 +1,74 @@
+DIV#messageBox, DIV.messageBoxExtra{
+    _height:18px;
+    min-height:18px;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    background-color:#E2F9E3;
+    color:#000000;
+    border:1px solid #99CC99;
+    padding: 8px 5px 5px 35px;
+    margin-bottom:5px;
+    vertical-align:top;
+    background-image:url(../images/message/icon_information.gif);
+    background-repeat:no-repeat;
+    background-position:5px 5px;
+}
+DIV#exceptionBox, DIV.exceptionBoxExtra{
+    _height:18px;
+    min-height:18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    background-color:#FFF9D7;
+    color:#FF0000;
+    border:1px solid #E2C822;
+    padding: 8px 5px 5px 35px;
+    margin-bottom:5px;
+    vertical-align:top;
+    background-image:url(../images/message/icon_error.gif);
+    background-repeat:no-repeat;
+    background-position:4px 4px;
+}
+DIV.notificationBox{
+    _height:18px;
+    min-height:18px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size:12px;
+    font-weight:bold;
+    background-color:#eef8db;
+    color:#003366;
+    border:1px solid #a0ae86;
+    padding: 8px 5px 5px 35px;
+    margin-bottom:5px;
+    vertical-align:top;
+    background-image:url(../images/message/icon_notification.gif);
+    background-repeat:no-repeat;
+    background-position:4px 4px;
+    text-align:left;
+}
+DIV.borderBox{
+    padding:20px 100px;
+    border:1px solid #333333;
+    background-color:#F0EEFD;
+}
+#redirectingBox {
+    background:#DFEAF8 none repeat scroll 0 0;
+    border:2px solid #91B3DE;
+    font-family:Arial,helvetica,Sans-serif;
+    font-size:24px;
+    font-weight:bold;
+    margin:150px auto;
+    padding:15px;
+    width:332px;
+}
+#dhtmltooltip{
+    position: absolute;
+    width: 300px;
+    border: 1px solid #243505;
+    padding: 5px;
+    background-color: #F7FCED;
+    visibility: hidden;
+    z-index: 100;
+    text-align:justify;
+}
