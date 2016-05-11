@@ -266,7 +266,7 @@ class Application_Model_User
         $this->_anthem_claim_overview_exeid = $anthemClaimOverviewExeid;
     }
     
-    public function getAnthemClaimsOverviewExeid()
+    public function getAnthemClaimOverviewExeid()
     {
         return $this->_anthem_claim_overview_exeid;
     }

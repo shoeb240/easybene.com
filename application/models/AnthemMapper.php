@@ -1,6 +1,6 @@
 <?php
 /**
- * Application_Model_AnthemBenefitMapper class
+ * Application_Model_AnthemMapper class
  * 
  * @category   Application
  * @package    Application_Model
@@ -11,14 +11,14 @@
 class Application_Model_AnthemMapper
 {
     /**
-     * @var Application_Model_DbTable_AnthemBenefit
+     * @var Application_Model_DbTable_Anthem
      */
     private $_dbTable = null;
     
     /**
      * Create Zend_Db_Adapter_Abstract object
      *
-     * @return Application_Model_DbTable_AnthemBenefit
+     * @return Application_Model_DbTable_Anthem
      */
     public function getTable()
     {
@@ -36,7 +36,7 @@ class Application_Model_AnthemMapper
      * @param  int    $userId
      * @return string
      */
-    public function getAnthemBenefit($userId)
+    public function getAnthem($userId)
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
@@ -77,9 +77,10 @@ class Application_Model_AnthemMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function insertAnthemBenefit(Application_Model_AnthemBenefit $anthem)
+    public function insertAnthem(Application_Model_Anthem $anthem)
     {
         $data = array(
+            'user_id' => $anthem->getOption('user_id'),
             'claims_benefit_coverage' => $anthem->getOption('claims_benefit_coverage'),
             'claims_deductible_for' => $anthem->getOption('claims_deductible_for'),
             'benefit_coverage' => trim($anthem->getOption('benefit_coverage')),
@@ -104,7 +105,7 @@ class Application_Model_AnthemMapper
             'claims_benefit_coverage1' => trim($anthem->getOption('claims_benefit_coverage1')),
             'claims_benefit_deductible_for' => trim($anthem->getOption('claims_benefit_deductible_for')),
         );
-        
+
         return $this->getTable()->insert($data);
     }
     
@@ -115,7 +116,7 @@ class Application_Model_AnthemMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function updateAnthemBenefit(Application_Model_AnthemBenefit $benefit)
+    public function updateAnthem(Application_Model_Anthem $benefit)
     {
         $data = array(
             'deductible_amt' => $benefit->getDeductibleAmt(),
@@ -138,7 +139,7 @@ class Application_Model_AnthemMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteAnthemBenefit($userArr)
+    public function deleteAnthem($userArr)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
         return $this->getTable()->delete($where);

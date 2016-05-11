@@ -44,12 +44,14 @@ class Application_Model_AnthemClaimOverviewMapper
         
         $claim = array();
         $claim['user_id'] = $row->user_id;
-        $claim['deductible_amt'] = $row->deductible_amt;
-        $claim['deductible_met'] = $row->deductible_met;
-        $claim['deductible_remaining'] = $row->deductible_remaining;
-        $claim['out_of_pocket_amt'] = $row->out_of_pocket_amt;
-        $claim['out_of_pocket_met'] = $row->out_of_pocket_met;
-        $claim['out_of_pocket_remaining'] = $row->out_of_pocket_remaining;
+        $claim['number'] = $row->number;
+        $claim['date'] = $row->date;
+        $claim['for'] = $row->for;
+        $claim['type'] = $row->type;
+        $claim['doctor_facility'] = $row->doctor_facility;
+        $claim['total'] = $row->total;
+        $claim['member_responsibility'] = $row->member_responsibility;
+        $claim['status'] = $row->status;
             
         return $claim;
     }
@@ -60,21 +62,18 @@ class Application_Model_AnthemClaimOverviewMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function insertAnthemClaim(Application_Model_AnthemClaim $claim)
+    public function insertAnthemClaimOverview(Application_Model_AnthemClaimOverview $claim)
     {
         $data = array(
-            'user_id' => $claim->getUserId(),
-            'patient' => trim($claim->getPatient()),
-            'coverage_type' => trim($claim->getCoverageType()),
-            'claim_number' => trim($claim->getClaimNumber()),
-            'patient_name' => trim($claim->getPatientName()),
-            'date_of_service' => trim($claim->getDateOfService()),
-            'paid_date' => trim($claim->getPaidDate()),
-            'check_number' => trim($claim->getCheckNumber()),
-            'provider_number' => trim($claim->getProviderNumber()),
-            'status' => trim($claim->getStatus()),
-            'submitted_charges' => trim($claim->getSubmittedCharges()),
-            'amount_paid' => trim($claim->getAmountPaid()),
+            'user_id' => $claim->getOption('user_id'),
+            'number' => trim($claim->getOption('number')),
+            'date' => trim($claim->getOption('date')),
+            'for' => trim($claim->getOption('for')),
+            'type' => trim($claim->getOption('type')),
+            'doctor_facility' => trim($claim->getOption('doctor_facility')),
+            'total' => trim($claim->getOption('total')),
+            'member_responsibility' => trim($claim->getOption('member_responsibility')),
+            'status' => trim($claim->getOption('status')),
         );
         echo '<pre>';
         print_r($data);
