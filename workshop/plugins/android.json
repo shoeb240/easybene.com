@@ -1,0 +1,21 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.yourname.workshop"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.yourname.workshop"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.yourname.workshop"
+        }
+    },
+    "dependent_plugins": {}
+}

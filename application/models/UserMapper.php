@@ -344,15 +344,38 @@ class Application_Model_UserMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function updateCignaCredentials($userId, $cignaUserId, $cignaPassword)
+    public function updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword)
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
         $row = $this->getTable()->fetchRow($select);
         
         if ($row) {
-            $row->cigna_user_id = $cignaUserId;
-            $row->cigna_password = $cignaPassword;
+            switch ($siteName) {
+                case 'Cigna':
+                    $row->cigna_user_id = $siteUserId;
+                    $row->cigna_password = $sitePassword;
+                    break;
+                case 'Anthem':
+                    $row->anthem_user_id = $siteUserId;
+                    $row->anthem_password = $sitePassword;
+                    break;
+                case 'Guardian':
+                    $row->guardian_user_id = $siteUserId;
+                    $row->guardian_password = $sitePassword;
+                    break;
+            }
+            switch ($siteType) {
+                case 'Medical':
+                    $row->medical_site = $siteName;
+                    break;
+                case 'Dental':
+                    $row->dental_site = $siteName;
+                    break;
+                case 'Vision':
+                    $row->vision_site = $siteName;
+                    break;
+            }
             $row->save();
         
             $userInfo = array();
@@ -360,6 +383,7 @@ class Application_Model_UserMapper
             $userInfo['username'] = $row->username;
             $userInfo['api_token'] = $row->api_token;
             $userInfo['api_updated'] = $row->api_updated;
+            
             if (!empty($row->cigna_user_id) && !empty($row->cigna_password)) {
                 $userInfo['cigna_exists'] = 'yes';
             } else {

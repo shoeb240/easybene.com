@@ -55,11 +55,13 @@ class ApiUserController extends My_Controller_ApiAbstract //Zend_Controller_Acti
         //exit;
         try{
             $userId = $this->_getParam('user_id', null);
-            $cignaUserId = $this->_getParam('cigna_user_id', null);
-            $cignaPassword = $this->_getParam('cigna_password', null);
+            $siteName = $this->_getParam('site_name', null);
+            $siteType = $this->_getParam('site_type', null);
+            $siteUserId = $this->_getParam('site_user_id', null);
+            $sitePassword = $this->_getParam('site_password', null);
             
             $userMapper = new Application_Model_UserMapper();
-            $userInfo = $userMapper->updateCignaCredentials($userId, $cignaUserId, $cignaPassword);
+            $userInfo = $userMapper->updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword);
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
             $this->getHelper('json')->sendJson($userInfo);
