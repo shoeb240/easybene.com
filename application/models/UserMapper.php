@@ -383,13 +383,10 @@ class Application_Model_UserMapper
             $userInfo['username'] = $row->username;
             $userInfo['api_token'] = $row->api_token;
             $userInfo['api_updated'] = $row->api_updated;
+            $userInfo['medical_site'] = $row->medical_site;
+            $userInfo['dental_site'] = $row->dental_site;
+            $userInfo['vision_site'] = $row->vision_site;
             
-            if (!empty($row->cigna_user_id) && !empty($row->cigna_password)) {
-                $userInfo['cigna_exists'] = 'yes';
-            } else {
-                $userInfo['cigna_exists'] = 'no';
-            }
-        
             return $userInfo;
         }
         

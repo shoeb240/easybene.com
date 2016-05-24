@@ -44,12 +44,17 @@ class Application_Model_GuardianClaimMapper
         
         $claim = array();
         $claim['user_id'] = $row->user_id;
-        $claim['deductible_amt'] = $row->deductible_amt;
-        $claim['deductible_met'] = $row->deductible_met;
-        $claim['deductible_remaining'] = $row->deductible_remaining;
-        $claim['out_of_pocket_amt'] = $row->out_of_pocket_amt;
-        $claim['out_of_pocket_met'] = $row->out_of_pocket_met;
-        $claim['out_of_pocket_remaining'] = $row->out_of_pocket_remaining;
+        $claim['patient'] = $row->patient;
+        $claim['coverage_type'] = $row->coverage_type;
+        $claim['claim_number'] = $row->claim_number;
+        $claim['patient_name'] = $row->patient_name;
+        $claim['date_of_service'] = $row->date_of_service;
+        $claim['paid_date'] = $row->paid_date;
+        $claim['check_number'] = $row->check_number;
+        $claim['provider_number'] = $row->provider_number;
+        $claim['status'] = $row->status;
+        $claim['submitted_charges'] = $row->submitted_charges;
+        $claim['amount_paid'] = $row->amount_paid;
             
         return $claim;
     }

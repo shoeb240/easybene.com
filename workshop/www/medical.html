@@ -1,0 +1,194 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+
+
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Minovate - Admin Dashboard</title>
+        <link rel="icon" type="image/ico" href="assets/images/favicon.ico" />
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+        <!-- ============================================
+        ================= Stylesheets ===================
+        ============================================= -->
+        <!-- vendor css files -->
+        <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/vendor/animate.css">
+        <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/animsition/css/animsition.min.css">
+
+        <!-- project main css files -->
+        <link rel="stylesheet" href="assets/css/main.css">
+        <!--/ stylesheets -->
+
+
+
+        <!-- ==========================================
+        ================= Modernizr ===================
+        =========================================== -->
+        <script src="assets/js/vendor/modernizr/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+        <!--/ modernizr -->
+
+
+
+
+    </head>
+
+
+
+
+
+    <body id="minovate" class="appWrapper">
+
+
+
+
+
+
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ====================================================
+        ================= Application Content ===================
+        ===================================================== -->
+        <div id="wrap" class="animsition">
+
+
+
+
+            <div class="page page-core page-login">
+
+                <div class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></div>
+                
+                <div class="table-responsive container w-420 p-15 bg-white mt-40">
+                    <div class="dataTables_length" id="basic-usage_length">
+                        <a id="summary_link" href="javascript: void();">Summary</a>&nbsp;|
+                        &nbsp;<a id="deductible_link" href="javascript: void();">Deductible</a>&nbsp;|
+                        &nbsp;<a id="claim_link" href="javascript: void();">Claims</a>
+                    </div>
+                    <div id="summary_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
+                        <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
+                        <table id="cigna-summary" class="table table-custom dataTable no-footer" role="grid">
+                        <thead>
+                        <tr role="row">
+                            <th>Who's covered</th>
+                            <th>Date of Birth</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </table>
+                        <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
+                    </div>
+                    <div id="deductible_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
+                        <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
+                        <table id="cigna-deductible" class="table table-custom dataTable no-footer" role="grid">
+                        <thead>
+                        <tr role="row">
+                            <th>Deductible Amount</th>
+                            <th>Deductible Met</th>
+                            <th>Deductible Remaining</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </table>
+                        <table id="cigna-out-of-pocket" class="table table-custom dataTable no-footer" role="grid">
+                        <thead>
+                        <tr role="row">
+                            <th>Out of Pocket Amt</th>
+                            <th>Out of Pocket Met</th>
+                            <th>Out of Pocket Remaining</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </table>
+                        <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
+                    </div>
+                    <div id="claim_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                        <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
+                        <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
+                        <table id="cigna-claim" class="table table-custom dataTable no-footer" role="grid">
+                        <thead>
+                        <tr role="row">
+                            <th>Date</th>
+                            <th>For</th>
+                            <th>Total</th>
+                            <th>You Pay</th>
+                            <th>Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                        </table>
+                        <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
+                    </div>
+
+            </div>
+
+
+
+        </div>
+        <!--/ Application Content -->
+
+
+
+
+        <script src="lib/jquery.js"></script>
+        <script src="js/app-medical.js"></script>
+
+
+        <!-- ============================================
+        ============== Vendor JavaScripts ===============
+        ============================================= -->
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')</script> -->
+
+        <script src="assets/js/vendor/bootstrap/bootstrap.min.js"></script>
+
+        <script src="assets/js/vendor/jRespond/jRespond.min.js"></script>
+
+        <script src="assets/js/vendor/sparkline/jquery.sparkline.min.js"></script>
+
+        <script src="assets/js/vendor/slimscroll/jquery.slimscroll.min.js"></script>
+
+        <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
+
+        <script src="assets/js/vendor/screenfull/screenfull.min.js"></script>
+        <!--/ vendor javascripts -->
+
+
+
+
+        <!-- ============================================
+        ============== Custom JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/main.js"></script>
+        <!--/ custom javascripts -->
+        
+        
+    </body>
+</html>

@@ -18,6 +18,10 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
         $route = new Zend_Controller_Router_Route('api-user/:username/:token/:id',
                                   array('controller' => 'api-user', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiUser', $route);
+        
+        $route = new Zend_Controller_Router_Route('api-medical/:username/:token/:id',
+                                  array('controller' => 'api-medical', 'action' => 'index', 'id' => null));
+        $router->addRoute('indexApiMedical', $route);
 
         
         $route = new Zend_Controller_Router_Route('scrape-cigna/:action',

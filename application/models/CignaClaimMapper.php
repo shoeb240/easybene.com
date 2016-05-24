@@ -40,21 +40,26 @@ class Application_Model_CignaClaimMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId);
-        $row = $this->getTable()->fetchRow($select);
+        $rowSets = $this->getTable()->fetchAll($select);
         
-        $claim = array();
-        $claim['user_id'] = $row->user_id;
-        $claim['service_date'] = $row->service_date;
-        $claim['provided_by'] = $row->provided_by;
-        $claim['for'] = $row->for;
-        $claim['status'] = $row->status;
-        $claim['amount_billed'] = $row->amount_billed;
-        $claim['what_your_plan_paid'] = $row->what_your_plan_paid;
-        $claim['my_account_paid'] = $row->my_account_paid;
-        $claim['what_i_owe'] = $row->what_i_owe;
-        $claim['claim_number'] = $row->claim_number;
+        $info = array();
+        foreach($rowSets as $k => $row) {
+            $claim = array();
+            $claim['user_id'] = $row->user_id;
+            $claim['service_date'] = $row->service_date;
+            $claim['provided_by'] = $row->provided_by;
+            $claim['for'] = $row->for;
+            $claim['status'] = $row->status;
+            $claim['amount_billed'] = $row->amount_billed;
+            $claim['what_your_plan_paid'] = $row->what_your_plan_paid;
+            $claim['my_account_paid'] = $row->my_account_paid;
+            $claim['what_i_owe'] = $row->what_i_owe;
+            $claim['claim_number'] = $row->claim_number;
             
-        return $claim;
+            $info[] = $claim;
+        }
+        
+        return $info;
     }
     
     /**

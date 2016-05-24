@@ -40,17 +40,23 @@ class Application_Model_CignaMedicalMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId);
-        $row = $this->getTable()->fetchRow($select);
+        $rowSets = $this->getTable()->fetchAll($select);
         
-        $medical = array();
-        $medical['user_id'] = $row->user_id;
-        $medical['whos_covered'] = $row->whos_covered;
-        $medical['date_of_birth'] = $row->date_of_birth;
-        $medical['relationship'] = $row->relationship;
-        $medical['coverage_from'] = $row->coverage_from;
-        $medical['to'] = $row->to;
+        $info = array();
+        foreach($rowSets as $k => $row) {
+            $medical = array();
+            $medical = array();
+            $medical['user_id'] = $row->user_id;
+            $medical['whos_covered'] = $row->whos_covered;
+            $medical['date_of_birth'] = $row->date_of_birth;
+            $medical['relationship'] = $row->relationship;
+            $medical['coverage_from'] = $row->coverage_from;
+            $medical['to'] = $row->to;
             
-        return $medical;
+            $info[] = $medical;
+        }
+        
+        return $info;
     }
     
     /**
