@@ -35,11 +35,9 @@ class AuthController extends My_Controller_ApiAbstract
                     $user = $this->_auth($username, $password);
                     $exp = strtotime($user->api_updated) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;
                     $token = $user->api_token;
-                    if (!empty($user->cigna_user_id) && !empty($user->cigna_password)) {
-                        $cigna_exists = 'yes';
-                    } else {
-                        $cigna_exists = 'no';
-                    }
+                    $result['medical_site'] = $user->medical_site;
+                    $result['dental_site'] = $user->dental_site;
+                    $result['vision_site'] = $user->vision_site;
                 } else if ($act == 'register') {
                     $data = $this->_register($username, $password);
                     $exp = strtotime($data['api_updated']) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;
@@ -55,9 +53,8 @@ class AuthController extends My_Controller_ApiAbstract
             }
             
             $code = My_Controller_ApiAbstract::RESPONSE_CREATED;
-            $result = array('token' => $token,
-                            'token_expire' => $exp,
-                            'cigna_exists' => $cigna_exists);
+            $result['token'] = $token;
+            $result['token_expire'] = $exp;
             
             $this->getResponse()->setHttpResponseCode($code);
             $this->getHelper('json')->sendJson($result);
