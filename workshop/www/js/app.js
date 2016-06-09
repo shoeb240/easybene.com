@@ -1,9 +1,6 @@
 // We use an "Immediate Function" to initialize the application to avoid leaving anything behind in the global scope
 (function () {
 
-    /* --------------------------------- Event Registration -------------------------------- */
-    //findByName();
-
     hideAll(); 
     
     var username = window.localStorage.getItem('username');
@@ -81,26 +78,6 @@
     $('#site_register').on('click', function() {
         RegisterSite();
     });
-    
-    /* ---------------------------------- Local Functions ---------------------------------- */
-    /* function findByName() {
-        service.findByName($('.search-key').val()).done(function (response) {
-            rob = JSON.parse(response);
-            var l = rob.rows.length;
-            $('.employee-list').empty();
-            var row;
-            var m;
-            for (var i = 0; i < l; i++) {
-                row = rob.rows[i];
-                m = row.length;
-                $('.employee-list').append('<li>');
-                for (var j = 2; j < m; j++) {
-                    $('.employee-list').append("=="+row[j]+"==");
-                }
-                $('.employee-list').append('</li>');
-            }
-        });
-    } */
     
     function hideAll() {
         $('#login_div_step1').css('display', 'none');
@@ -234,7 +211,6 @@
         hideAll();
         $('#site_reg_fail_div').css('display', 'block');
         $('#site_failed_type_name').html($('#site_selected_type_name').html());
-        //$('#site_selected_name').html($('#site_selected_name').html());
         $('#site_failed_type_image').attr("src", $('#site_selected_type_image').attr("src"));
     }
     
@@ -243,16 +219,16 @@
         var password = $('#reg_password').val();
         async: false,
         $.ajax({
-            url: 'http://www.easybene.com/index.php/auth',
+            url: 'http://www.easybene.com/index.php/auth/register',
             type: "POST",
             data: 'username='+email+'&password='+password,
             dataType: 'json',
             success: function(result) {
-                    //console.log(result);
+                    console.log(result);
                     window.localStorage.setItem("username", email);
                     window.localStorage.setItem("token", result.token);
                     window.localStorage.setItem("token_expire", result.token_expire);
-                    ShowRegSuccess();
+                    welcomeSelection();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     ShowRegFail();
@@ -316,6 +292,36 @@
                     //console.log(ajaxOptions);
                     //console.log(thrownError);
                     ShowSitelRegFail();
+                },
+        });
+    }
+    
+    $(window).load(function(){
+        GetSummaryData();
+    });
+            
+    function GetSummaryData() {
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+        $.ajax({
+            url: 'http://www.easybene.com/index.php/api-summary/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                //console.log(result.guardian_percent);
+                $("#abc1").data('easyPieChart').update(result.cigna_percent);
+                $("#abc1 span").html(result.cigna_percent);
+                
+                $("#abc2").data('easyPieChart').update(result.guardian_percent);
+                $("#abc2 span").html(result.guardian_percent);
+
+                //ShowWelcome();
+                },
+            error: function(xhr, ajaxOptions, thrownError) {
+                    //console.log(xhr);
+                    //console.log(ajaxOptions);
+                    //console.log(thrownError);
                 },
         });
     }

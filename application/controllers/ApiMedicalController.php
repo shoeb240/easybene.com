@@ -29,12 +29,18 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
     public function indexAction()
     {
         try{
-            $userId = 1;
-            //$userId = $this->_getParam('user_id', null);
-            //echo $userId . '==';
+            $userId = $this->_getParam('user_id', null);
             $arr = array();
             $deductibleMapper = new Application_Model_CignaDeductibleMapper();
             $arr['deductible'] = $deductibleMapper->getCignaDeductible($userId);
+            
+            $deductibleAmt = str_replace(array('$', ','), '', $arr['deductible']['deductible_amt']);
+            $deductibleMet = str_replace(array('$', ','), '', $arr['deductible']['deductible_met']);
+            $arr['cigna_deductible_percent'] = round($deductibleMet / $deductibleAmt * 100);
+            
+            $outOfPocketAmt = str_replace(array('$', ','), '', $arr['deductible']['out_of_pocket_amt']);
+            $outOfPocketMet = str_replace(array('$', ','), '', $arr['deductible']['out_of_pocket_met']);
+            $arr['cigna_out_of_pocket_percent'] = round($outOfPocketMet / $outOfPocketAmt * 100);
             
             // cingna_claim
             $claimMapper = new Application_Model_CignaClaimMapper();

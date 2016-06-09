@@ -40,23 +40,31 @@ class Application_Model_GuardianClaimMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
-        $row = $this->getTable()->fetchRow($select);
+        $rowSets = $this->getTable()->fetchAll($select);
         
-        $claim = array();
-        $claim['user_id'] = $row->user_id;
-        $claim['patient'] = $row->patient;
-        $claim['coverage_type'] = $row->coverage_type;
-        $claim['claim_number'] = $row->claim_number;
-        $claim['patient_name'] = $row->patient_name;
-        $claim['date_of_service'] = $row->date_of_service;
-        $claim['paid_date'] = $row->paid_date;
-        $claim['check_number'] = $row->check_number;
-        $claim['provider_number'] = $row->provider_number;
-        $claim['status'] = $row->status;
-        $claim['submitted_charges'] = $row->submitted_charges;
-        $claim['amount_paid'] = $row->amount_paid;
+        $info = array();
+        foreach($rowSets as $k => $row) {
+            $claim = array();
+            $claim['user_id'] = $row->user_id;
+            $claim['patient'] = $row->patient;
+            $claim['coverage_type'] = $row->coverage_type;
+            $claim['claim_number'] = $row->claim_number;
+            $claim['patient_name'] = $row->patient_name;
+            $claim['date_of_service'] = $row->date_of_service;
+            $claim['paid_date'] = $row->paid_date;
+            $claim['check_number'] = $row->check_number;
+            $claim['provider_number'] = $row->provider_number;
+            $claim['status'] = $row->status;
+            $claim['submitted_charges'] = $row->submitted_charges;
+            $claim['amount_paid'] = $row->amount_paid;
+            $submittedCharges = str_replace(array('$', ','), '', $row->submitted_charges);
+            $amountPaid = str_replace(array('$', ','), '', $row->amount_paid);
+            $claim['i_owe'] = '$' . number_format($submittedCharges - $amountPaid, 0, '.', ',');
             
-        return $claim;
+             $info[] = $claim;
+        }
+        
+        return $info;
     }
 
     /**

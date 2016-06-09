@@ -1,8 +1,10 @@
 // We use an "Immediate Function" to initialize the application to avoid leaving anything behind in the global scope
 (function () {
 
-    /* --------------------------------- Event Registration -------------------------------- */
-    //findByName();
+    $('.logout').on('click', function() {
+        ProcessLogout();
+    });
+    
     function hideAll()
     {
         $('#summary_div').css('display', 'none');
@@ -21,22 +23,20 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                    //console.log(result.claim_details);
-                    $.each(result.medical_summary, function (key, row){
-                        odd_even = key % 2 ? 'odd' : 'even';
-                        $('#cigna-summary').append('<tr role="row" class="'+odd_even+'"><td>'+row.whos_covered+'</td><td>'+row.date_of_birth+'</td></tr>');
-                    });
+                    //console.log(result.cigna_deductible_percent);
                     
-                    $('#cigna-deductible').append('<tr role="row" class="'+odd_even+'"><td>'+result.deductible.deductible_amt+'</td><td>'+result.deductible.deductible_met+'</td><td>'+result.deductible.deductible_remaining+'</td></tr>');
-                    
-                    $('#cigna-out-of-pocket').append('<tr role="row" class="'+odd_even+'"><td>'+result.deductible.out_of_pocket_amt+'</td><td>'+result.deductible.out_of_pocket_amt+'</td><td>'+result.deductible.out_of_pocket_remaining+'</td></tr>');
-                    
+                    $("#abc1").data('easyPieChart').update(result.cigna_deductible_percent);
+                    $("#abc1 span").html(result.cigna_deductible_percent);
+
+                    $("#abc2").data('easyPieChart').update(result.cigna_out_of_pocket_percent);
+                    $("#abc2 span").html(result.cigna_out_of_pocket_percent);
+
                     $.each(result.claim, function (key, row){
                         odd_even = key % 2 ? 'odd' : 'even';
-                        $('#cigna-claim').append('<tr role="row" class="'+odd_even+'"><td>'+row.service_date+'</td><td>'+row.provided_by+'</td><td>'+row.amount_billed+'</td><td>'+row.my_account_paid+'</td><td>'+row.status+'</td></tr>');
+                        $('#cigna-claim').append('<tr role="row" class="'+odd_even+'"><td>'+row.service_date+'</td><td>'+row.for+'</td><td>'+row.amount_billed+'</td><td>'+row.what_i_owe+'</td><td>'+row.status+'</td></tr>');
                     });
                     
-                    showSummaryDiv();
+                    showDeductibleDiv();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -45,6 +45,7 @@
                 },
         });
     }
+    
     function makeLinkNormal()
     {
         $('#summary_link').css('font-weight', 'normal');
@@ -76,6 +77,17 @@
         $('#claim_link').css('font-weight', 'bold');
     }
     
+    function ProcessLogout() {
+        window.localStorage.removeItem('username');
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('token_expire');
+        window.localStorage.removeItem('cigna_exists');
+        window.localStorage.removeItem('medical_site');
+        window.localStorage.removeItem('dental_site');
+        window.localStorage.removeItem('vision_site');
+        location.href = "index.html";
+    }
+    
     $('#summary_link').on('click', function() {
         showSummaryDiv();
     });
@@ -88,6 +100,8 @@
         showClaimDiv();
     });
     
-    GetMedicalData();
+    $(window).load(function(){
+        GetMedicalData();
+    });
     
 }());

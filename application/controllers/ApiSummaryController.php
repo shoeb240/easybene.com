@@ -9,7 +9,7 @@
  * @uses       Zend_Controller_Action
  * @version    1.0
  */
-class ApiDentalController extends My_Controller_ApiAbstract //Zend_Controller_Action
+class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_Action
 {
     /**
      * Initialize object
@@ -31,15 +31,28 @@ class ApiDentalController extends My_Controller_ApiAbstract //Zend_Controller_Ac
         try{
             $userId = $this->_getParam('user_id', null);
             $arr = array();
-            $benefitMapper = new Application_Model_GuardianBenefitMapper();
-            $arr['benefit'] = $benefitMapper->getGuardianBenefit($userId);
+            $deductibleMapper = new Application_Model_CignaDeductibleMapper();
+            $arr['cigna_deductible'] = $deductibleMapper->getCignaDeductible($userId);
+            
+            $deductibleAmt = str_replace(array('$', ','), '', $arr['cigna_deductible']['deductible_amt']);
+            $deductibleMet = str_replace(array('$', ','), '', $arr['cigna_deductible']['deductible_met']);
+            $arr['cigna_percent'] = round($deductibleMet / $deductibleAmt * 100);
             
             // guardian_claim
             $claimMapper = new Application_Model_GuardianClaimMapper();
-            $arr['claim'] = $claimMapper->getGuardianClaim($userId);
-
+            $arr['guardian_claim'] = $claimMapper->getGuardianClaim($userId);
+            
+            $count = count($arr['guardian_claim']);
+            $submittedCharges = 0;
+            $amountPaid = 0;
+            for($i=0; $i < $count; $i++) {
+                $submittedCharges += $arr['guardian_claim']['submitted_charges'];
+                $amountPaid += $arr['guardian_claim']['amount_paid'];
+            }
+            $arr['guardian_percent'] = round(1 - ($amountPaid / $submittedCharges));
+            
 //            echo '<pre>';
-//            print_r($arr);
+//            print_r($arr['guardian_claim']);
 //            echo '</pre>';
 //            die();
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);

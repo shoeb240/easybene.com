@@ -45,7 +45,6 @@ class Application_Model_CignaMedicalMapper
         $info = array();
         foreach($rowSets as $k => $row) {
             $medical = array();
-            $medical = array();
             $medical['user_id'] = $row->user_id;
             $medical['whos_covered'] = $row->whos_covered;
             $medical['date_of_birth'] = $row->date_of_birth;

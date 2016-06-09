@@ -1,35 +1,12 @@
 // We use an "Immediate Function" to initialize the application to avoid leaving anything behind in the global scope
 (function () {
 
-    /* --------------------------------- Event Registration -------------------------------- */
-    //findByName();
-
     hideAll(); 
     
     var username = window.localStorage.getItem('username');
     
     if (username) {
-        var token = window.localStorage.getItem('token');
-        var token_expire = window.localStorage.getItem('token_expire');
-        var medical_site = window.localStorage.getItem('medical_site');
-        var dental_site = window.localStorage.getItem('dental_site');
-        var vision_site = window.localStorage.getItem('vision_site');
-        var unix = Math.round(+new Date()/1000);
-        //alert(medical_site.length + '==' + dental_site);
-        if (token_expire > unix) {
-            if (medical_site === 'undefined' || medical_site === null) {
-                ShowMedicalSiteLinks();
-            } else if (dental_site === 'undefined' || dental_site === null) {
-                ShowDentalSiteLinks();
-            } else if (vision_site === 'undefined' || vision_site === null) {
-                ShowVisionSiteLinks();
-            } else {
-                ShowWelcome();
-            }
-        } else {
-            ShowLogin();
-        }
-        //alert(unix);
+        welcomeSelection();
     } else {
         ShowReg(null);
     }
@@ -40,6 +17,10 @@
     
     $('#login_next2').on('click', function() {
         ProcessLogin();
+    });
+    
+    $('#show_reg').on('click', function() {
+        ShowReg('');
     });
     
     $('#reg_next1').on('click', function() {
@@ -98,26 +79,6 @@
         RegisterSite();
     });
     
-    /* ---------------------------------- Local Functions ---------------------------------- */
-    /* function findByName() {
-        service.findByName($('.search-key').val()).done(function (response) {
-            rob = JSON.parse(response);
-            var l = rob.rows.length;
-            $('.employee-list').empty();
-            var row;
-            var m;
-            for (var i = 0; i < l; i++) {
-                row = rob.rows[i];
-                m = row.length;
-                $('.employee-list').append('<li>');
-                for (var j = 2; j < m; j++) {
-                    $('.employee-list').append("=="+row[j]+"==");
-                }
-                $('.employee-list').append('</li>');
-            }
-        });
-    } */
-    
     function hideAll() {
         $('#login_div_step1').css('display', 'none');
         $('#login_div_step2').css('display', 'none');
@@ -136,6 +97,44 @@
         
         $('#site_reg_div').css('display', 'none');   
         $('#site_reg_fail_div').css('display', 'none');   
+    }
+    
+    function welcomeSelection() {
+        var token = window.localStorage.getItem('token');
+        var token_expire = window.localStorage.getItem('token_expire');
+        var medical_site = window.localStorage.getItem('medical_site');
+        var dental_site = window.localStorage.getItem('dental_site');
+        var vision_site = window.localStorage.getItem('vision_site');
+        var unix = Math.round(+new Date()/1000);
+        if (token_expire > unix) {
+            if (typeof(medical_site) === 'undefined' || !medical_site) {
+                ShowMedicalSiteLinks();
+            } else if (typeof(dental_site) === 'undefined' || !dental_site) {
+                ShowDentalSiteLinks();
+            } else if (typeof(vision_site) === 'undefined' || !vision_site) {
+                ShowVisionSiteLinks();
+            } else {
+                ShowWelcome();
+            }
+        } else {
+            ShowLogin();
+        }
+    }
+    
+    function setSiteReg(result) {
+        window.localStorage.setItem('medical_site', result.medical_site);
+        window.localStorage.setItem('dental_site', result.dental_site);
+        window.localStorage.setItem('vision_site', result.vision_site);
+
+        if (typeof(result.medical_site) == "undefined" || !result.medical_site) {
+            ShowMedicalSiteLinks();
+        } else if (typeof(result.dental_site) == "undefined" || !result.dental_site) {
+            ShowDentalSiteLinks();
+        } else if (typeof(result.vision_site) == 'undefined' || !result.vision_site) {
+            ShowVisionSiteLinks();
+        } else {
+            ShowWelcome();
+        }
     }
     
     function ShowReg(error) {
@@ -212,7 +211,6 @@
         hideAll();
         $('#site_reg_fail_div').css('display', 'block');
         $('#site_failed_type_name').html($('#site_selected_type_name').html());
-        //$('#site_selected_name').html($('#site_selected_name').html());
         $('#site_failed_type_image').attr("src", $('#site_selected_type_image').attr("src"));
     }
     
@@ -252,12 +250,7 @@
                     window.localStorage.setItem("username", email);
                     window.localStorage.setItem("token", result.token);
                     window.localStorage.setItem("token_expire", result.token_expire);
-                    window.localStorage.setItem('cigna_exists', result.cigna_exists);
-                    if (result.cigna_exists == 'yes') {
-                        ShowWelcome();
-                    } else {
-                        ShowMedicalSiteLinks();
-                    }
+                    setSiteReg(result);
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     ShowLoginFail();
@@ -270,6 +263,9 @@
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('token_expire');
         window.localStorage.removeItem('cigna_exists');
+        window.localStorage.removeItem('medical_site');
+        window.localStorage.removeItem('dental_site');
+        window.localStorage.removeItem('vision_site');
         ShowLogin();
     }
     
@@ -280,7 +276,7 @@
         var site_name = $('#site_selected_name').val();
         var site_user_id = $('#site_selected_user_id').val();
         var site_password = $('#site_selected_password').val();
-        alert(site_name+'=='+site_user_id+'=='+site_password);
+        
         $.ajax({
             url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
             type: "POST",
@@ -289,25 +285,43 @@
             async: false,
             success: function(result) {
                     //console.log(result);
-                    window.localStorage.setItem('medical_site', result.medical_site);
-                    window.localStorage.setItem('dental_site', result.dental_site);
-                    window.localStorage.setItem('vision_site', result.vision_site);
-                    if (result.medical_site === 'undefined' || result.medical_site === null) {
-                        ShowMedicalSiteLinks();
-                    } else if (result.dental_site === 'undefined' || result.dental_site === null) {
-                        ShowDentalSiteLinks();
-                    } else if (result.vision_site === 'undefined' || result.vision_site === null) {
-                        ShowVisionSiteLinks();
-                    } else {
-                        ShowWelcome();
-                    }
-                    //ShowGuardianReg();
+                    setSiteReg(result)
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
                     //console.log(ajaxOptions);
                     //console.log(thrownError);
                     ShowSitelRegFail();
+                },
+        });
+    }
+    
+    $(window).load(function(){
+        GetSummaryData();
+    });
+            
+    function GetSummaryData() {
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+        $.ajax({
+            url: 'http://www.easybene.com/index.php/api-summary/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                //console.log(result.guardian_percent);
+                $("#abc1").data('easyPieChart').update(result.cigna_percent);
+                $("#abc1 span").html(result.cigna_percent);
+                
+                $("#abc2").data('easyPieChart').update(result.guardian_percent);
+                $("#abc2 span").html(result.guardian_percent);
+
+                //ShowWelcome();
+                },
+            error: function(xhr, ajaxOptions, thrownError) {
+                    //console.log(xhr);
+                    //console.log(ajaxOptions);
+                    //console.log(thrownError);
                 },
         });
     }

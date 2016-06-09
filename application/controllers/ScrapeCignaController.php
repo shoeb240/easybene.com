@@ -15,7 +15,7 @@ class ScrapeCignaController extends Zend_Controller_Action
     
     private $apiKey = "d927749cbc9bff7bcfc7beffd";
 
-    private $apiEndPoint = "https://app.cloudscrape.com/api/";
+    private $apiEndPoint = "https://api.dexi.io/";
     
     private $cignaDeductibleUserAll;
     

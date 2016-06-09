@@ -78,42 +78,35 @@
 
 
 
-            <div class="page page-core page-login">
+            <div class="page page-core page-login"  style="padding-top:0px;">
 
                 <div class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></div>
                 
-                <div class="table-responsive container w-420 p-15 bg-white mt-40">
-                    <div class="dataTables_length" id="basic-usage_length">
-                        <a id="benefit_link" href="javascript: void();">Benefit</a>&nbsp;|
-                        &nbsp;<a id="claim_link" href="javascript: void();">Claims</a>
+                <div class="table-responsive container w-360 p-15 bg-white mt-10" style="text-align: center;">
+                    <div class="form-group text-left mt-0">
+                        <a href="javascript:void(0);" class="pull-right logout">Logout</a>
                     </div>
-                    <div id="benefit_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div style="clear:both;"></div>
+                    <div class="btn-group mb-10">
+                        <button class="btn btn-default" type="button" onclick="javascript: location.href='medical.html'">Medical</button>
+                        <button class="btn btn-default" type="button" onclick="javascript: location.href='dental.html'">Dental</button>
+                        <button class="btn btn-default" type="button" onclick="javascript: location.href='#'">Vision</button>
+                    </div>
+                    
+                    <div style="clear:both;"></div>
+
+                    <div id="claim_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer" style="font-size:11px;">
                         <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
                         <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
-                        <table id="guardian-benefit" class="table table-custom dataTable no-footer" role="grid">
-                        <thead>
-                        <tr role="row">
-                            <th>Company Name</th>
-                            <th>Name</th>
-                            <th>Relationship</th>
-                            <th>Coverage</th>
-                            <!-- <th>Original Effective Date</th> -->
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </table>
-                        <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
-                    </div>
-                    <div id="claim_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                        <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
-                        <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
+                        <span style="font-size:14px; font-weight:bold;">Dental Claims</span>
                         <table id="guardian-claim" class="table table-custom dataTable no-footer" role="grid">
                         <thead>
                         <tr role="row">
-                            <th>Coverage Type</th>
-                            <th>Patient Name</th>
-                            <th>Paid Date</th>
-                            <th>Amount Paid</th>
+                            <th>Date</th>
+                            <th>For</th>
+                            <th>Total</th>
+                            <th>I&nbsp;owe</th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
