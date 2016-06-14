@@ -323,14 +323,14 @@ class Application_Model_UserMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function updateExecutionId($userId, $cignaExecutionId)
+    public function updateExecutionId($userId, $exeId, $exeFieldName)
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
         $row = $this->getTable()->fetchRow($select);
         
         if ($row) {
-            $row->cigna_execution_id = $cignaExecutionId;
+            $row->$exeFieldName = $exeId;
             return $row->save();
         }
         

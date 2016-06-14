@@ -23,9 +23,13 @@
             async: false,
             success: function(result) {
                     //console.log(result.claim);
-                    $.each(result.claim, function(key, row) {
-                        $('#guardian-claim').append('<tr role="row"><td>'+row.paid_date+'</td><td>'+row.patient_name+'</td><td>'+row.submitted_charges+'</td><td>'+row.i_owe+'</td><td>'+row.status+'</td></tr>');
-                    });
+                    if (result.claim[0]) {
+                        $.each(result.claim, function(key, row) {
+                            $('#guardian-claim').append('<tr role="row"><td>'+row.paid_date+'</td><td>'+row.patient_name+'</td><td>'+row.submitted_charges+'</td><td>'+row.i_owe+'</td><td>'+row.status+'</td></tr>');
+                        });
+                    } else {
+                        $('#guardian-claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+                    }
                     showClaimDiv();
                 },
             error: function(xhr, ajaxOptions, thrownError) {

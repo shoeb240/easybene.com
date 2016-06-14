@@ -36,10 +36,12 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
             
             $deductibleAmt = str_replace(array('$', ','), '', $arr['deductible']['deductible_amt']);
             $deductibleMet = str_replace(array('$', ','), '', $arr['deductible']['deductible_met']);
+            $arr['cigna_deductible_met'] = $arr['deductible']['deductible_met'];
             $arr['cigna_deductible_percent'] = round($deductibleMet / $deductibleAmt * 100);
             
             $outOfPocketAmt = str_replace(array('$', ','), '', $arr['deductible']['out_of_pocket_amt']);
             $outOfPocketMet = str_replace(array('$', ','), '', $arr['deductible']['out_of_pocket_met']);
+            $arr['cigna_out_of_pocket_met'] = $arr['deductible']['out_of_pocket_met'];
             $arr['cigna_out_of_pocket_percent'] = round($outOfPocketMet / $outOfPocketAmt * 100);
             
             // cingna_claim

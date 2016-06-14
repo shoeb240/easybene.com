@@ -23,6 +23,10 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                   array('controller' => 'api-medical', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiMedical', $route);
         
+        $route = new Zend_Controller_Router_Route('api-dental/:username/:token/:id',
+                                  array('controller' => 'api-dental', 'action' => 'index', 'id' => null));
+        $router->addRoute('indexApiDental', $route);
+        
         $route = new Zend_Controller_Router_Route('api-summary/:username/:token/:id',
                                   array('controller' => 'api-summary', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiSummary', $route);

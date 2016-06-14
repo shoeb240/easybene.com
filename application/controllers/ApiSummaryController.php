@@ -46,15 +46,15 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             $submittedCharges = 0;
             $amountPaid = 0;
             for($i=0; $i < $count; $i++) {
-                $submittedCharges += $arr['guardian_claim']['submitted_charges'];
-                $amountPaid += $arr['guardian_claim']['amount_paid'];
+                $submittedCharges += str_replace(array('$', ','), '', $arr['guardian_claim'][$i]['submitted_charges']);
+                $amountPaid += str_replace(array('$', ','), '', $arr['guardian_claim'][$i]['amount_paid']);;
             }
-            $arr['guardian_percent'] = round(1 - ($amountPaid / $submittedCharges));
+            $arr['guardian_percent'] = round((($amountPaid / $submittedCharges))*100);
             
-//            echo '<pre>';
-//            print_r($arr['guardian_claim']);
-//            echo '</pre>';
-//            die();
+            //echo '<pre>';
+            //print_r($arr['guardian_percent']);
+            //echo '</pre>';
+            //die();
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
             $this->getHelper('json')->sendJson($arr);
             

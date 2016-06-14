@@ -53,9 +53,9 @@ class ScrapeGuardianController extends Zend_Controller_Action
         return $result;
     }
 
-    private function myRunWithInput($data_string, $headerArray) 
+    private function myRunWithInput($data_string, $headerArray, $runId) 
     {
-        $url = $this->apiEndPoint . "/runs/" . $this->runId . "/execute/inputs";
+        $url = $this->apiEndPoint . "/runs/" . $runId . "/execute/inputs";
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
@@ -86,28 +86,45 @@ class ScrapeGuardianController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            $data['username'] = $userObj->getCignaUserId(); // 'rbrathwaite29'
-            $data['password'] = $userObj->getCignaPassword(); // 'bIMSHIRE79!'
-            $data['view_claims_for'] = 'ALL';
-            $data_string = json_encode($data);                                                                                   
-            $headerArray = $this->getHeaderArr();
-            try {
-                $result = $this->myRunWithInput($data_string, $headerArray);
-            } catch (Exception $e) {
-                echo $e->getMessage();
-                die('catch');
-            }
-            $arr = json_decode($result, true);
-            echo '<pre>';
-            print_r($arr);
-            echo '</pre>';
             
-            $cignaExecutionId = $arr['_id'];
-            $userMapper = new Application_Model_UserMapper();
-            $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $cignaExecutionId);
-            break;
+            if ( $userObj->getUserId() != 84 ) continue; // remove
+            
+            $data['user_id'] = $userObj->getGuardianUserId();
+            $data['password'] = $userObj->getGuardianPassword();
+            if (empty($data['username']) || empty($data['password'])) continue;
+            
+            for($i = 0; $i < 2; $i++) {
+                switch($i) {
+                    case 0:
+                        $runId = 'ece66e5d-c737-4136-bea7-8b2654816f4e';
+                        $exeFieldName = 'guardian_benefit_exeid';
+                        break;
+                    case 1:
+                        $data['patient'] = array(0, 1, 2, 3);
+                        $data['coverage_type'] = 'D';
+                        $runId = 'ca638336-786a-4550-b80a-4b045ba3892f';
+                        $exeFieldName = 'guardian_claim_exeid';
+                        break;
+                }
+                $data_string = json_encode($data);                                                                                   
+                $headerArray = $this->getHeaderArr();
+                try {
+                    $result = $this->myRunWithInput($data_string, $headerArray, $runId);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                    die('catch');
+                }
+                $arr = json_decode($result, true);
+                echo '<pre>';
+                print_r($arr);
+                echo '</pre>';
+                $exeId = $arr['_id'];
+                $userMapper = new Application_Model_UserMapper();
+                $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+            }
+            break; // remove
+            echo 'Done';
         }
-        
     }
     
     /**

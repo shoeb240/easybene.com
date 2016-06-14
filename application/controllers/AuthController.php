@@ -43,7 +43,7 @@ class AuthController extends My_Controller_ApiAbstract
                     $exp = strtotime($data['api_updated']) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;
                     $token = $data['api_token'];
                 } else {
-                    $this->_error(My_Controller_ApiAbstract::ERROR_DENIED);
+                    $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'Invalid action');
                     exit;
                 }
             } /*elseif ($token) {
@@ -136,7 +136,7 @@ class AuthController extends My_Controller_ApiAbstract
             );
 
             if (empty($user)) {
-                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED);
+                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'User does not exist');
                 exit;
             } else {
                 $token = $this->_generateToken();
@@ -164,12 +164,12 @@ class AuthController extends My_Controller_ApiAbstract
 
         $p_username = trim(substr($username, 0, 32));
         $p_password = trim(substr($password, 0, 32));
-
+        
         try {
             $userExists = $userTable->fetchRow(
                 array(
                     "username = ?" => $username,
-                    "password = ?" => $p_password
+                    "password = ?" => md5($p_password)
                 )
             );
 
@@ -188,12 +188,11 @@ class AuthController extends My_Controller_ApiAbstract
                 
                 return $data;
             } else {
-                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED);
+                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'This username already exists');
                 exit;
             }
         } catch(Exception $e) {
-            //echo $e->getMessage();
-            $this->_error(My_Controller_ApiAbstract::ERROR_DENIED);
+            $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, $e->getMessage());
             exit;
         }
     }

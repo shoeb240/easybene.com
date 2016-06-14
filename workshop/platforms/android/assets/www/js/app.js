@@ -4,13 +4,18 @@
     hideAll(); 
     
     var username = window.localStorage.getItem('username');
+    var token = window.localStorage.getItem("token");
     
-    if (username) {
-        welcomeSelection();
-    } else {
-        ShowReg(null);
-    }
-    
+    $(window).load(function(){
+        if (username && token) {
+            welcomeSelection();
+        } else {
+            ShowReg(null);
+        }
+    });
+            
+
+
     $('#login_next1').on('click', function() {
         ShowLoginStep2();
     });
@@ -121,22 +126,6 @@
         }
     }
     
-    function setSiteReg(result) {
-        window.localStorage.setItem('medical_site', result.medical_site);
-        window.localStorage.setItem('dental_site', result.dental_site);
-        window.localStorage.setItem('vision_site', result.vision_site);
-
-        if (typeof(result.medical_site) == "undefined" || !result.medical_site) {
-            ShowMedicalSiteLinks();
-        } else if (typeof(result.dental_site) == "undefined" || !result.dental_site) {
-            ShowDentalSiteLinks();
-        } else if (typeof(result.vision_site) == 'undefined' || !result.vision_site) {
-            ShowVisionSiteLinks();
-        } else {
-            ShowWelcome();
-        }
-    }
-    
     function ShowReg(error) {
         hideAll();
         $('#reg_step1_error_div').html(error);
@@ -156,9 +145,10 @@
         $('#reg_div_success').css('display', 'block');
     }
     
-    function ShowRegFail() {
+    function ShowRegFail(msg) {
         hideAll();
-        $('#reg_div_fail').css('display', 'block');
+        $('#reg_div_step1').css('display', 'block');
+        $('#reg_span_fail').html(msg);
     }
     
     function ShowLogin() {
@@ -166,9 +156,17 @@
         $('#login_div_step1').css('display', 'block');
     }
     
-    function ShowLoginFail() {
+    function ShowLoginFail(msg) {
         hideAll(); 
-        $('#login_div_fail').css('display', 'block');
+        $('#login_div_step1').css('display', 'block');
+        $('#login_span_fail').html(msg);
+    }
+
+    function ShowLoginRegSucc() {
+        hideAll(); 
+        $('#reg_span_succ').html('Registered successfully!');
+        $('#reg_span_succ').css('display', 'block');
+        $('#login_div_step1').css('display', 'block');
     }
 
     function ShowLoginStep2() {
@@ -181,6 +179,7 @@
     
     function ShowWelcome() {
         hideAll(); 
+        PrepareWelcomeData();
         $('#welcome_div').css('display', 'block');
     }
     
@@ -219,19 +218,16 @@
         var password = $('#reg_password').val();
         async: false,
         $.ajax({
-            url: 'http://www.easybene.com/index.php/auth',
+            url: 'http://www.easybene.com/index.php/auth/register',
             type: "POST",
             data: 'username='+email+'&password='+password,
             dataType: 'json',
             success: function(result) {
                     //console.log(result);
-                    window.localStorage.setItem("username", email);
-                    window.localStorage.setItem("token", result.token);
-                    window.localStorage.setItem("token_expire", result.token_expire);
-                    ShowRegSuccess();
+                    ShowLoginRegSucc();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
-                    ShowRegFail();
+                    ShowRegFail(xhr.responseJSON);
                 },
         });
     }
@@ -250,10 +246,14 @@
                     window.localStorage.setItem("username", email);
                     window.localStorage.setItem("token", result.token);
                     window.localStorage.setItem("token_expire", result.token_expire);
-                    setSiteReg(result);
+                    window.localStorage.setItem('medical_site', result.medical_site);
+                    window.localStorage.setItem('dental_site', result.dental_site);
+                    window.localStorage.setItem('vision_site', result.vision_site);
+
+                    welcomeSelection();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
-                    ShowLoginFail();
+                    ShowLoginFail(xhr.responseJSON);
                 },
         });
     }
@@ -285,7 +285,10 @@
             async: false,
             success: function(result) {
                     //console.log(result);
-                    setSiteReg(result)
+                    window.localStorage.setItem('medical_site', result.medical_site);
+                    window.localStorage.setItem('dental_site', result.dental_site);
+                    window.localStorage.setItem('vision_site', result.vision_site);
+                    welcomeSelection();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -296,13 +299,10 @@
         });
     }
     
-    $(window).load(function(){
-        GetSummaryData();
-    });
-            
-    function GetSummaryData() {
+    function PrepareWelcomeData() {
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
+        if (!username || !token) return false;
         $.ajax({
             url: 'http://www.easybene.com/index.php/api-summary/'+username+'/'+token,
             type: "GET",

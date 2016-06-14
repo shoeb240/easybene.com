@@ -57,9 +57,9 @@ class ScrapeCignaController extends Zend_Controller_Action
         return $result;
     }
 
-    private function myRunWithInput($data_string, $headerArray) 
+    private function myRunWithInput($data_string, $headerArray, $runId) 
     {
-        $url = $this->apiEndPoint . "/runs/" . $this->runId . "/execute/inputs";
+        $url = $this->apiEndPoint . "/runs/" . $runId . "/execute/inputs";
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
@@ -90,26 +90,48 @@ class ScrapeCignaController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            $data['username'] = $userObj->getCignaUserId(); // 'rbrathwaite29'
-            $data['password'] = $userObj->getCignaPassword(); // 'bIMSHIRE79!'
-            $data['view_claims_for'] = 'ALL';
-            $data_string = json_encode($data);                                                                                   
-            $headerArray = $this->getHeaderArr();
-            try {
-                $result = $this->myRunWithInput($data_string, $headerArray);
-            } catch (Exception $e) {
-                echo $e->getMessage();
-                die('catch');
-            }
-            $arr = json_decode($result, true);
-            echo '<pre>';
-            print_r($arr);
-            echo '</pre>';
             
-            $cignaExecutionId = $arr['_id'];
-            $userMapper = new Application_Model_UserMapper();
-            $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $cignaExecutionId);
-            break;
+            if ( $userObj->getUserId() != 84 ) continue; // remove
+            
+            $data['user_id'] = $userObj->getCignaUserId();
+            $data['password'] = $userObj->getCignaPassword();
+            if (empty($data['username']) || empty($data['password'])) continue;
+            
+            for($i = 0; $i < 3; $i++) {
+                switch($i) {
+                    case 0:
+                        $runId = '6e1a629d-815b-4f5c-ae98-7145dd8ea815';
+                        $exeFieldName = 'cigna_medical_exeid';
+                        break;
+                    case 1:
+                        $data['view_claims_for'] = 'ALL';
+                        $runId = 'fcd72b6d-fb55-4483-992f-9c18d3b2bd69';
+                        $exeFieldName = 'cigna_deductible_claim_exeid';
+                        break;
+                    case 2:
+                        $data['view_claims_for'] = 'ALL';
+                        $runId = 'dfa57d75-4ac9-4146-b099-03126c945e8c';
+                        $exeFieldName = 'cigna_claim_details_exeid';
+                        break;
+                }
+                $data_string = json_encode($data);                                                                                   
+                $headerArray = $this->getHeaderArr();
+                try {
+                    $result = $this->myRunWithInput($data_string, $headerArray, $runId);
+                } catch (Exception $e) {
+                    echo $e->getMessage();
+                    die('catch');
+                }
+                $arr = json_decode($result, true);
+                echo '<pre>';
+                print_r($arr);
+                echo '</pre>';
+                $exeId = $arr['_id'];
+                $userMapper = new Application_Model_UserMapper();
+                $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+            }
+            break; // remove
+            echo 'Done';
         }
         
     }
