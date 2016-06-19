@@ -111,9 +111,9 @@ class Application_Model_GuardianBenefitMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteGuardianBenefit($userArr)
+    public function deleteGuardianBenefit($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }

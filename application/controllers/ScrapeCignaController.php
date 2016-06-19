@@ -25,7 +25,7 @@ class ScrapeCignaController extends Zend_Controller_Action
     
     private $cignaMedicalUserAll;
     
-    private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
+    //private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
     
     /**
      * Initialize object
@@ -95,7 +95,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             
             $data['user_id'] = $userObj->getCignaUserId();
             $data['password'] = $userObj->getCignaPassword();
-            if (empty($data['username']) || empty($data['password'])) continue;
+            if (empty($data['user_id']) || empty($data['password'])) continue;
             
             for($i = 0; $i < 3; $i++) {
                 switch($i) {
@@ -105,12 +105,12 @@ class ScrapeCignaController extends Zend_Controller_Action
                         break;
                     case 1:
                         $data['view_claims_for'] = 'ALL';
-                        $runId = 'fcd72b6d-fb55-4483-992f-9c18d3b2bd69';
+                        $runId = '5cef5526-4008-46e1-a2c6-6a37a0d3d51b';
                         $exeFieldName = 'cigna_deductible_claim_exeid';
                         break;
                     case 2:
                         $data['view_claims_for'] = 'ALL';
-                        $runId = 'dfa57d75-4ac9-4146-b099-03126c945e8c';
+                        $runId = 'e8494657-90f1-4651-89ea-53f117b4a90e';
                         $exeFieldName = 'cigna_claim_details_exeid';
                         break;
                 }
@@ -166,13 +166,14 @@ class ScrapeCignaController extends Zend_Controller_Action
             $headerArray = $this->getHeaderArr();
             try {
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
-                $resultCignaMedical = $this->myExecutionResult($userObj->getCignaMedicalExeid(), $headerArray);
-                /*echo '<pre>';
-                print_r($resultCignaMedical);
-                echo '</pre>';
-                die();*/
+                //$resultCignaMedical = $this->myExecutionResult($userObj->getCignaMedicalExeid(), $headerArray);
                 $resultCignaMedicalDeductibleClaim = $this->myExecutionResult($userObj->getCignaDeductibleClaimExeid(), $headerArray);
-                $resultCignaMedicalDetails = $this->myExecutionResult($userObj->getCignaClaimDetailsExeid(), $headerArray);
+                echo '<pre>';
+                print_r($resultCignaMedicalDeductibleClaim);
+                echo '</pre>';
+                die();
+
+                //$resultCignaMedicalDetails = $this->myExecutionResult($userObj->getCignaClaimDetailsExeid(), $headerArray);
             } catch (Exception $e) {
                 echo $e->getMessage();
                 die('catch');
@@ -200,7 +201,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             // cingna_deductible
             $deductibleMapper = new Application_Model_CignaDeductibleMapper();
             if ($this->cignaDeductibleUserAll) {
-                $deductibleMapper->deleteCignaDeductible($this->cignaDeductibleUserAll);
+                $deductibleMapper->deleteCignaDeductible($userId);
             }
             foreach($arr['cigna_deductible_claim']['rows'] as $k => $eachRow) {
                 $deductibleAmt = $eachRow[array_search('deductible_amt', $arr['cigna_deductible_claim']['headers'])];
@@ -232,8 +233,9 @@ class ScrapeCignaController extends Zend_Controller_Action
             echo '<pre>';
             print_r($arr['cigna_deductible_claim']);
             echo '</pre>';
+            
             // cingna_claim
-            $claimMapper = new Application_Model_CignaClaimMapper();
+            /*$claimMapper = new Application_Model_CignaClaimMapper();
             if ($this->cignaClaimUserAll) {
                 $claimMapper->deleteCignaClaim($this->cignaClaimUserAll);
             }
@@ -260,15 +262,8 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $claim->setWhatIOwe($whatIOwe);
                 //$claim->setClaimNumber($claimNumber);
 
-                //$claimMapper = new Application_Model_CignaClaimMapper();
-                /*if (in_array($userId, $this->cignaClaimUserAll)) {
-                    echo 'update...<br/>';
-                    $claimId = $claimMapper->updateCignaClaim($claim);
-                } else {*/
-                    echo 'insert...<br/>';
-                    $claimId = $claimMapper->insertCignaClaim($claim);
-                //}
-                
+                echo 'insert...<br/>';
+                $claimId = $claimMapper->insertCignaClaim($claim);
             }
             
             // cingna_claim_details
@@ -299,7 +294,6 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $claimDetails->setServiceWhatIOwe($serviceWhatIOwe);
                 $claimDetails->setServiceSeeNotes($serviceSeeNotes);
                 
-                //$claimDetailsMapper = new Application_Model_CignaClaimDetailsMapper();
                 $claimDetailsId = $claimDetailsMapper->saveCignaClaimDetails($claimDetails);
                 echo 'insert...<br/>';
             }
@@ -324,10 +318,9 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $medical->setCoverageFrom($coverageFrom);
                 $medical->setTo($to);
                 
-                //$medicalMapper = new Application_Model_CignaMedicalMapper();
                 $medicalId = $medicalMapper->saveCignaMedical($medical);
                 echo 'insert...<br/>';
-            }
+            }*/
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();
         }

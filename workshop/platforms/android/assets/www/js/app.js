@@ -102,6 +102,11 @@
         
         $('#site_reg_div').css('display', 'none');   
         $('#site_reg_fail_div').css('display', 'none');   
+        
+        $('#reg_div_success').css('display', 'none');
+        $('#reg_span_succ').css('display', 'none');
+        $('#reg_span_fail').css('display', 'none');
+        $('#login_span_fail').html('');   
     }
     
     function welcomeSelection() {
@@ -148,7 +153,7 @@
     function ShowRegFail(msg) {
         hideAll();
         $('#reg_div_step1').css('display', 'block');
-        $('#reg_span_fail').html(msg);
+        $('#reg_span_fail').css('display', 'block');
     }
     
     function ShowLogin() {
@@ -164,7 +169,6 @@
 
     function ShowLoginRegSucc() {
         hideAll(); 
-        $('#reg_span_succ').html('Registered successfully!');
         $('#reg_span_succ').css('display', 'block');
         $('#login_div_step1').css('display', 'block');
     }

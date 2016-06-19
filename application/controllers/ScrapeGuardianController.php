@@ -15,13 +15,13 @@ class ScrapeGuardianController extends Zend_Controller_Action
     
     private $apiKey = "d927749cbc9bff7bcfc7beffd";
 
-    private $apiEndPoint = "https://app.cloudscrape.com/api/";
+    private $apiEndPoint = "https://api.dexi.io/";
     
     private $guardianBenefitUserAll;
     
     private $guardianClaimUserAll;
     
-    private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
+    //private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
     
     /**
      * Initialize object
@@ -65,6 +65,19 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
         return $result;
     }
+    
+    private function myRunWithBulk($data_string, $headerArray, $runId) 
+    {
+        $url = $this->apiEndPoint . "/runs/" . $runId . "/execute/bulk";
+        $ch = curl_init($url);                                                                      
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);                                                                                                                   
+        $result = curl_exec($ch);
+
+        return $result;
+    }
 
     private function getHeaderArr()
     {
@@ -86,34 +99,61 @@ class ScrapeGuardianController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            
             if ( $userObj->getUserId() != 84 ) continue; // remove
-            
-            $data['user_id'] = $userObj->getGuardianUserId();
-            $data['password'] = $userObj->getGuardianPassword();
-            if (empty($data['username']) || empty($data['password'])) continue;
+            $u = $userObj->getGuardianUserId();
+            $p = $userObj->getGuardianPassword();
+            if (empty($u) || empty($p)) continue;
             
             for($i = 0; $i < 2; $i++) {
+                $data = array();
                 switch($i) {
                     case 0:
+                        $data['user_id'] = $userObj->getGuardianUserId();
+                        $data['password'] = $userObj->getGuardianPassword();
                         $runId = 'ece66e5d-c737-4136-bea7-8b2654816f4e';
                         $exeFieldName = 'guardian_benefit_exeid';
+                        
+                        $data_string = json_encode($data);                                                                                   
+                        $headerArray = $this->getHeaderArr();
+                        try {
+                            $result = $this->myRunWithInput($data_string, $headerArray, $runId);
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                            die('catch');
+                        }
                         break;
                     case 1:
-                        $data['patient'] = array(0, 1, 2, 3);
-                        $data['coverage_type'] = 'D';
+                        $data[0]['user_id'] = $userObj->getGuardianUserId();
+                        $data[0]['password'] = $userObj->getGuardianPassword();
+                        $data[0]['patient'] = 0;
+                        $data[0]['coverage_type'] = 'D';
+                        $data[1]['user_id'] = $userObj->getGuardianUserId();
+                        $data[1]['password'] = $userObj->getGuardianPassword();
+                        $data[1]['patient'] = 1;
+                        $data[1]['coverage_type'] = 'D';
+                        $data[2]['user_id'] = $userObj->getGuardianUserId();
+                        $data[2]['password'] = $userObj->getGuardianPassword();
+                        $data[2]['patient'] = 2;
+                        $data[2]['coverage_type'] = 'D';
+                        $data[3]['user_id'] = $userObj->getGuardianUserId();
+                        $data[3]['password'] = $userObj->getGuardianPassword();
+                        $data[3]['patient'] = 3;
+                        $data[3]['coverage_type'] = 'D';
                         $runId = 'ca638336-786a-4550-b80a-4b045ba3892f';
                         $exeFieldName = 'guardian_claim_exeid';
+                        
+                        $data_string = json_encode($data);                                                                                   
+                        $headerArray = $this->getHeaderArr();
+                        try {
+                            $result = $this->myRunWithBulk($data_string, $headerArray, $runId);
+                        } catch (Exception $e) {
+                            echo $e->getMessage();
+                            die('catch');
+                        }
+                        
                         break;
                 }
-                $data_string = json_encode($data);                                                                                   
-                $headerArray = $this->getHeaderArr();
-                try {
-                    $result = $this->myRunWithInput($data_string, $headerArray, $runId);
-                } catch (Exception $e) {
-                    echo $e->getMessage();
-                    die('catch');
-                }
+                
                 $arr = json_decode($result, true);
                 echo '<pre>';
                 print_r($arr);
@@ -147,9 +187,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
         $this->guardianClaimUserAll = $claimMapper->getClaimUserAll();
         
         foreach($usersAll as $k => $userObj) {
-            //$executionId = $userObj->getCignaMedicalExeid(); //"912b4ad0-de95-46c5-8e37-fd43643adc04";
-            //if (!$userObj->getGuardianBenefitExeid()) continue;
-            //echo $userObj->getGuardianClaimExeid() . '==';die();
+            if ( $userObj->getUserId() != 1 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
@@ -175,13 +213,11 @@ class ScrapeGuardianController extends Zend_Controller_Action
     
     private function storeScrape($userId, $arr)
     {
-        
-        //echo $arr['rows'][0][array_search('whos_covered', $arr['headers'])];
         try{
             // cingna_deductible
             $benefitMapper = new Application_Model_GuardianBenefitMapper();
             if ($this->guardianBenefitUserAll) {
-                $benefitMapper->deleteGuardianBenefit($this->guardianBenefitUserAll);
+                $benefitMapper->deleteGuardianBenefit($userId);
             }
             foreach($arr['guardian_benefit']['rows'] as $k => $eachRow) {
                 $groupId = $eachRow[array_search('group_id', $arr['guardian_benefit']['headers'])];
@@ -217,7 +253,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
             // cingna_claim
             $claimMapper = new Application_Model_GuardianClaimMapper();
             if ($this->guardianClaimUserAll) {
-                $claimMapper->deleteGuardianClaim($this->guardianClaimUserAll);
+                $claimMapper->deleteGuardianClaim($userId);
             }
             foreach($arr['guardian_claim']['rows'] as $k => $eachRow) {
                 $patient = $eachRow[array_search('patient', $arr['guardian_claim']['headers'])];

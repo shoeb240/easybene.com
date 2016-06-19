@@ -139,9 +139,9 @@ class Application_Model_AnthemMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteAnthem($userArr)
+    public function deleteAnthem($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }

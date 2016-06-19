@@ -9,19 +9,22 @@
  * @uses       Zend_Controller_Action
  * @version    1.0
  */
+
+error_reporting(9);
+
 class ScrapeAnthemController extends Zend_Controller_Action
 {
     private $accountId = "17b650b4-4bd8-485d-9c83-cc84c542078a";
     
     private $apiKey = "d927749cbc9bff7bcfc7beffd";
 
-    private $apiEndPoint = "https://app.cloudscrape.com/api/";
+    private $apiEndPoint = "https://api.dexi.io/";
     
     private $anthemUserAll;
     
     private $anthemClaimOverviewUserAll;
     
-    private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
+    //private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
     
     /**
      * Initialize object
@@ -86,27 +89,30 @@ class ScrapeAnthemController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            
             if ( $userObj->getUserId() != 84 ) continue; // remove
+            $u = $userObj->getAnthemUserId();
+            $p = $userObj->getAnthemPassword();
+            if (empty($u) || empty($p)) continue;
             
-            $data['user_id'] = $userObj->getAnthemUserId();
-            $data['password'] = $userObj->getAnthemPassword();
-            if (empty($data['username']) || empty($data['password'])) continue;
-            
-            for($i = 0; $i < 3; $i++) {
+            for($i = 0; $i < 2; $i++) {
+                $data = array();
                 switch($i) {
                     case 0:
+                        $data['user_id'] = $userObj->getAnthemUserId();
+                        $data['password'] = $userObj->getAnthemPassword();
                         $data['claims_benefit_coverage'] = '2015-01-01_2015-12-31';
                         $data['claims_deductible_for'] = 10;
                         $runId = 'ec26174d-8550-4f07-8474-746a95275127';
                         $exeFieldName = 'anthem_exeid';
                         break;
                     case 1:
+                        $data['user_id'] = $userObj->getAnthemUserId();
+                        $data['password'] = $userObj->getAnthemPassword();
                         $runId = 'e4104e5c-9a46-445a-ae63-81f55a5966a2';
                         $exeFieldName = 'anthem_claim_overview_exeid';
                         break;
                 }
-                $data_string = json_encode($data);                                                                                   
+                $data_string = json_encode($data);    
                 $headerArray = $this->getHeaderArr();
                 try {
                     $result = $this->myRunWithInput($data_string, $headerArray, $runId);
@@ -183,7 +189,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
             // cingna_deductible
             $anthemMapper = new Application_Model_AnthemMapper();
             if ($this->anthemUserAll) {
-                $anthemMapper->deleteAnthem($this->anthemUserAll);
+                $anthemMapper->deleteAnthem($userId);
             }
             foreach($arr['anthem']['rows'] as $k => $eachRow) {
                 $claims_benefit_coverage = $eachRow[array_search('claims_benefit_coverage', $arr['anthem']['headers'])];
@@ -247,7 +253,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
             // cingna_claim
             $claimMapper = new Application_Model_AnthemClaimOverviewMapper();
             if ($this->anthemClaimOverviewUserAll) {
-                $claimMapper->deleteAnthemClaimOverview($this->anthemClaimOverviewUserAll);
+                $claimMapper->deleteAnthemClaimOverview($userId);
             }
             foreach($arr['anthem_claim_overview']['rows'] as $k => $eachRow) {
                 $number = $eachRow[array_search('number', $arr['anthem_claim_overview']['headers'])];

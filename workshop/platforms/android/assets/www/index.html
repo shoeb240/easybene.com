@@ -48,43 +48,24 @@
 
 
 
-    <body id="minovate" class="appWrapper">
-
-
-
-
-
+    <body> <!--  id="minovate" class="appWrapper" -->
 
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-
-
-
-
-
-
-
-
-
-
-
         <!-- ====================================================
         ================= Application Content ===================
         ===================================================== -->
-        <div id="wrap" class="animsition">
+        <div> <!--  id="wrap" class="animsition" -->
 
-
-
-
-            <div class="page page-core page-login" style="padding-top:0px;">
+            <div class="page page-core" style="padding-top:0px;">
 
                 <div class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></div>
 
-                <div id="reg_div_step1" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="reg_div_step1" class="col-md-12 bg-white text-center">
                     <h2 class="text-light text-greensea">Register</h2>
-                    <span id="reg_span_fail" style="color: red;"></span>
+                    <span id="reg_span_fail" style="color: red;">Registration failed!</span>
                     <form name="form" class="form-validation mt-20" novalidate="">
                         <div class="form-group">
                             <input type="email" id="reg_email" class="form-control underline-input" placeholder="Enter Your Email">
@@ -102,7 +83,7 @@
                 </div>
                 
                 
-                <div id="reg_div_step2" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="reg_div_step2" class="col-md-12 bg-white text-center">
                     <h2 class="text-light text-greensea">Register</h2>
                     <form name="form" class="form-validation mt-20" novalidate="">
                         <div class="form-group">
@@ -115,10 +96,10 @@
                 </div>
                 
                 
-                <div id="login_div_step1" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="login_div_step1" class="col-md-12 bg-white text-center">
                     <h2 class="text-light text-greensea">Log In</h2>
                     <span id="login_span_fail" style="color: red;"></span>
-                    <span id="reg_span_succ" style="color: blue;"></span>
+                    <span id="reg_span_succ" style="color: blue;">Registered successfully!</span>
                     <form name="form" class="form-validation mt-20" novalidate="">
                         <div class="form-group">
                             <input type="email" id="login_email" class="form-control underline-input" placeholder="Enter Your Email">
@@ -136,7 +117,7 @@
                 </div>
                 
                 
-                <div id="login_div_step2" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="login_div_step2" class="col-md-12 bg-white text-center">
                     <h2 class="text-light text-greensea">Log In</h2>
                     <form name="form" class="form-validation mt-20" novalidate="">
                         <div id="email_text" class="form-group text-left mt-20"></div>
@@ -150,74 +131,78 @@
                 </div>
                 
                 
-                <div id="welcome_div" class="container w-360 p-15 bg-white mt-10 text-center">
-                    <div class="form-group text-left mt-0">
+                <div id="welcome_div" class="col-md-12 bg-white text-center">
+                    <div  class="form-group text-left mt-0">
                         <a href="javascript:void(0);" class="pull-right logout">Logout</a>
                     </div>
-                    <div class="col-md-6 text-center">
-                        <div id="abc1" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                            <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div id="abc1" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px; clear: both;">
+                                <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <a href="medical.html">Medical ></a>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <a href="medical.html">Medical ></a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 text-center">
-                        <div id="abc2" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                            <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
-                        </div>
-                        <div class="form-group">
-                            <a href="dental.html">Dental ></a>
-                        </div>
-                    </div>
-                    
-                    <div style="clear:both;"></div>
-                    
-                    <div class="col-md-6 text-center">
-                        <div id="abc3" class="easypiechart" data-percent="60" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                            <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;">60</span></div>
-                        </div>
-                        <div class="form-group">
-                            <a href="vision.html">vision ></a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 text-center">
-                        <div class="form-group">
-                            <br /><br /><br />
-                            <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="#"><img src="assets/images/funds-icon.png" /></a>
-                        </div>
-                    </div>
-                    
-                    <div style="clear:both;"></div>
-                    
-                    <div class="col-md-6 text-center">
-                        <div class="form-group">
-                            <br />
-                            <a href="vision.html">ID Card</a>
-                        </div>
-                    </div>
-                    
-                    <div class="col-md-6 text-center">
-                        <div class="form-group">
-                            <a href="vision.html">FSA<br />Eligibility</a>
-                        </div>
-                    </div>
 
-                    <div style="clear:both;"></div>
+                        <div class="col-md-6 text-center">
+                            <div id="abc2" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
+                                <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <a href="dental.html">Dental ></a>
+                            </div>
+                        </div>
+                    </div> 
                     
-                    <p>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html"><img src="assets/images/medical-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="#"><img src="assets/images/vision-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="#"><img src="assets/images/funds-icon.png" /></a>
-                    </p>
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div id="abc3" class="easypiechart" data-percent="60" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
+                                <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;">60</span></div>
+                            </div>
+                            <div class="form-group">
+                                <a href="javascript: void(0);">vision ></a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                            <div class="form-group">
+                                <br /><br /><br />
+                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/funds-icon.png" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <div class="form-group">
+                                <br />
+                                <a href="javascript: void(0);">ID Card</a>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 text-center">
+                            <div class="form-group">
+                                <a href="javascript: void(0);">FSA<br />Eligibility</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 text-center">
+                            <p  style="margin-top:10px;">
+                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html"><img src="assets/images/medical-icon.png" /></a>
+                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
+                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
+                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/funds-icon.png" /></a>
+                            </p>
+                        </div>
+                    </div>
 
                 </div>
                 
                 
-                <div id="site_choice_medical_div" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="site_choice_medical_div" class="col-md-12 bg-white text-center">
                     <div class="form-group text-left mt-0">
                         <a href="javascript:void(0);" class="pull-right logout">Logout</a>
                     </div>
@@ -237,7 +222,7 @@
                     </form>
                 </div>
                 
-                <div id="site_choice_dental_div" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="site_choice_dental_div" class="col-md-12 bg-white text-center">
                     <div class="form-group text-left mt-0">
                         <a href="javascript:void(0);" class="pull-right logout">Logout</a>
                     </div>
@@ -257,7 +242,7 @@
                     </form>
                 </div>
                 
-                <div id="site_choice_vision_div" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="site_choice_vision_div" class="col-md-12 bg-white text-center">
                     <div class="form-group text-left mt-0">
                         <a href="javascript:void(0);" class="pull-right logout">Logout</a>
                     </div>
@@ -278,7 +263,7 @@
                 </div>
                 
                 
-                <div id="site_reg_div" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="site_reg_div" class="col-md-12 bg-white text-center">
                     <h2 class="text-light text-greensea"><span id="site_selected_type_name"></span> Insurance</h2>
                     <div class="form-group">
                         <img id="site_selected_type_image" class="w-100" src="" />
@@ -297,7 +282,7 @@
                     </form>
                 </div>
                 
-                <div id="site_reg_fail_div" class="container w-360 p-15 bg-white mt-10 text-center">
+                <div id="site_reg_fail_div" class="col-md-12 bg-white text-center">
                     <h2 class="text-light text-greensea"><span id="site_failed_type_name">Medical</span> Insurance</h2>
                     <div class="form-group">
                         <img id="site_failed_type_image" class="w-100" src="assets/images/cigna_logo.jpg" />

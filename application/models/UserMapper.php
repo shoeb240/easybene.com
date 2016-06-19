@@ -207,8 +207,12 @@ class Application_Model_UserMapper
             $user->setCignaMedicalExeid($row->cigna_medical_exeid);
             $user->setCignaDeductibleClaimExeid($row->cigna_deductible_claim_exeid);
             $user->setCignaClaimDetailsExeid($row->cigna_claim_details_exeid);
+            $user->setGuardianUserId($row->guardian_user_id);
+            $user->setGuardianPassword($row->guardian_password);
             $user->setGuardianClaimExeid($row->guardian_claim_exeid);
             $user->setGuardianBenefitExeid($row->guardian_benefit_exeid);
+            $user->setAnthemUserId($row->anthem_user_id);
+            $user->setAnthemPassword($row->anthem_password);
             $user->setAnthemExeid($row->anthem_exeid);
             $user->setAnthemClaimOverviewExeid($row->anthem_claim_overview_exeid);
             $info[] = $user;

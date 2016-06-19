@@ -112,9 +112,9 @@ class Application_Model_AnthemClaimOverviewMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteAnthemClaim($userArr)
+    public function deleteAnthemClaimOverview($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }

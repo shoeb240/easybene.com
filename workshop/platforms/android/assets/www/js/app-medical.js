@@ -27,9 +27,11 @@
                     
                     $("#abc1").data('easyPieChart').update(result.cigna_deductible_percent);
                     $("#abc1 span").html(result.cigna_deductible_percent);
+                    $("#abc1_dollar").html(result.cigna_deductible_met);
 
                     $("#abc2").data('easyPieChart').update(result.cigna_out_of_pocket_percent);
                     $("#abc2 span").html(result.cigna_out_of_pocket_percent);
+                    $("#abc2_dollar").html(result.cigna_out_of_pocket_met);
 
                     if (result.claim[0]) {
                         $.each(result.claim, function (key, row){
@@ -40,7 +42,7 @@
                         $('#cigna-claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
                     }
                     
-                    showDeductibleDiv();
+                    showClaimDiv();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
