@@ -48,7 +48,7 @@ class Application_Model_NaviaDayCareMapper
             $medical['user_id'] = $row->user_id;
             $medical['claim'] = $row->claim;
             $medical['annual_election'] = $row->annual_election;
-            $medical['reimburse_date'] = $row->reimburse_date;
+            $medical['reimbursed_to_date'] = $row->reimbursed_to_date;
             $medical['date_posted'] = $row->date_posted;
             $medical['transaction_type'] = $row->transaction_type;
             $medical['claim_amount'] = $row->claim_amount;
@@ -70,10 +70,10 @@ class Application_Model_NaviaDayCareMapper
     {
         $data = array(
             'user_id' => $medical->getOption('user_id'),
-            'claim' => $medical->getOption('claim'),
-            'annual_election' => $medical->getOption('annual_election'),
-            'reimburse_date' => $medical->getOption('reimburse_date'),
-            'date_posted' =>$medical->getOption('date_posted'),
+            'claim' => trim($medical->getOption('claim')),
+            'annual_election' => trim($medical->getOption('annual_election')),
+            'reimbursed_to_date' => trim($medical->getOption('reimbursed_to_date')),
+            'date_posted' => date("Y-m-d", strtotime($medical->getOption('date_posted'))),
             'transaction_type' => $medical->getOption('transaction_type'),
             'claim_amount' => $medical->getOption('claim_amount'),
             'amount' => $medical->getOption('amount'),
@@ -89,14 +89,14 @@ class Application_Model_NaviaDayCareMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteNaviaDayCare($userArr)
+    public function deleteNaviaDayCare($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }
     
-    public function getMedicalUserAll()
+    public function getNaviaDayCareUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('navia_day_care', array('user_id'))

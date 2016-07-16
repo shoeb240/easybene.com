@@ -14,7 +14,7 @@ class Application_Model_NaviaDayCare
     protected $_user_id;
     protected $_claim;
     protected $_annual_election;
-    protected $_reimburse_date;
+    protected $_reimbursed_to_date;
     protected $_date_posted;
     protected $_transaction_type;
     protected $_claim_amount;    

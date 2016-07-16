@@ -8,7 +8,7 @@
     
     $(window).load(function(){
         if (username && token) {
-            welcomeSelection();
+            welcomeSelection(false);
             //ShowMedicalSiteLinks(); // remove
         } else {
             ShowReg(null);
@@ -45,8 +45,10 @@
         ShowLogin();
     });
     
-    $('#cigna_medical_search').on('change', function() {
-        //ShowSiteReg('Medical', 'Cigna', 'cigna_logo.jpg');
+    $('#do_search_link').on('click', function() {
+        var name = $(".search-choice span").html();
+        var image_name = name.toLowerCase() + "_logo.jpg";
+        ShowSiteReg('Medical', name, image_name);
     });
     
     $('#cigna_medical').on('click', function() {
@@ -122,7 +124,7 @@
         $('#login_span_fail').html('');   
     }
     
-    function welcomeSelection() {
+    function welcomeSelection(showDentalVisionSites) {
         var token = window.localStorage.getItem('token');
         var token_expire = window.localStorage.getItem('token_expire');
         var medical_site = window.localStorage.getItem('medical_site');
@@ -132,10 +134,10 @@
         if (token_expire > unix) {
             if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
                 ShowMedicalSiteLinks();
-            //} else if (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site) {
-            //    ShowDentalSiteLinks();
-            //} else if (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site) {
-            //    ShowVisionSiteLinks();
+            } else if (showDentalVisionSites && (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site)) {
+                ShowDentalSiteLinks();
+            } else if (showDentalVisionSites && (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site)) {
+                ShowVisionSiteLinks();
             } else {
                 ShowWelcome();
             }
@@ -246,7 +248,7 @@
                     window.localStorage.setItem("token", result.token);
                     window.localStorage.setItem("token_expire", result.token_expire);
 
-                    welcomeSelection();
+                    welcomeSelection(true);
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     ShowRegFail(xhr.responseJSON);
@@ -272,7 +274,7 @@
                     window.localStorage.setItem('dental_site', result.dental_site);
                     window.localStorage.setItem('vision_site', result.vision_site);
 
-                    welcomeSelection();
+                    welcomeSelection(false);
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     ShowLoginFail(xhr.responseJSON);
@@ -309,7 +311,7 @@
                     window.localStorage.setItem('medical_site', result.medical_site);
                     window.localStorage.setItem('dental_site', result.dental_site);
                     window.localStorage.setItem('vision_site', result.vision_site);
-                    welcomeSelection();
+                    welcomeSelection(true);
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);

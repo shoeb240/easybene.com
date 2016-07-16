@@ -40,6 +40,7 @@ class Application_Model_CignaClaimMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId);
+        $select->order('service_date desc');
         $rowSets = $this->getTable()->fetchAll($select);
         
         $info = array();
@@ -68,11 +69,11 @@ class Application_Model_CignaClaimMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function insertCignaClaim(Application_Model_CignaClaim $claim)
+    public function saveCignaClaim(Application_Model_CignaClaim $claim)
     {
         $data = array(
             'user_id' => $claim->getUserId(),
-            'service_date' => $claim->getServiceDate(),
+            'service_date' => date("Y-m-d", strtotime($claim->getServiceDate())),
             'provided_by' => $claim->getProvidedBy(),
             'for' => $claim->getFor(),
             'status' => $claim->getStatus(),
@@ -126,7 +127,7 @@ class Application_Model_CignaClaimMapper
         
     }
     
-    public function getClaimUserAll()
+    public function getCignaClaimUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('cigna_claim', array('user_id'));

@@ -47,13 +47,12 @@ class Application_Model_NaviaHealthCareMapper
             $medical = array();
             $medical['user_id'] = $row->user_id;
             $medical['balance'] = $row->balance;
-            $medical['portfolio_balance'] = $row->portfolio_balance;
-            $medical['total_balance'] = $row->total_balance;
-            $medical['contributions_YTD'] = $row->contributions_YTD;
-            $medical['employer_contributions_YTD'] = $row->employer_contributions_YTD;
-            $medical['total_contributions_YTD'] = $row->total_contributions_YTD;
-            $medical['employer_per_pay_amount'] = $row->employer_per_pay_amount;
-            $medical['employee_per_pay_amount'] = $row->employee_per_pay_amount;
+            $medical['annual_election'] = $row->annual_election;
+            $medical['reimbursed_to_date'] = $row->reimbursed_to_date;
+            $medical['date_posted'] = date("Y-m-d", strtotime($row->date_posted));
+            $medical['transaction_type'] = $row->transaction_type;
+            $medical['claim_amount'] = $row->claim_amount;
+            $medical['amount'] = $row->amount;
             
             $info[] = $medical;
         }
@@ -71,14 +70,13 @@ class Application_Model_NaviaHealthCareMapper
     {
         $data = array(
             'user_id' => $medical->getOption('user_id'),
-            'balance' => $medical->getOption('balance'),
-            'portfolio_balance' => $medical->getOption('portfolio_balance'),
-            'total_balance' => $medical->getOption('total_balance'),
-            'contributions_YTD' =>$medical->getOption('contributions_YTD'),
-            'employer_contributions_YTD' => $medical->getOption('employer_contributions_YTD'),
-            'total_contributions_YTD' => $medical->getOption('total_contributions_YTD'),
-            'employer_per_pay_amount' => $medical->getOption('employer_per_pay_amount'),
-            'employee_per_pay_amount' => $medical->getOption('employee_per_pay_amount')            
+            'balance' => trim($medical->getOption('balance')),
+            'annual_election' => trim($medical->getOption('annual_election')),
+            'reimbursed_to_date' => trim($medical->getOption('reimbursed_to_date')),
+            'date_posted' => date("Y-m-d", strtotime($medical->getOption('date_posted'))),
+            'transaction_type' => $medical->getOption('transaction_type'),
+            'claim_amount' => $medical->getOption('claim_amount'),
+            'amount' => $medical->getOption('amount')            
         );
         
         return $this->getTable()->insert($data);
@@ -91,14 +89,14 @@ class Application_Model_NaviaHealthCareMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteNaviaHealthCare($userArr)
+    public function deleteNaviaHealthCare($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }
     
-    public function getMedicalUserAll()
+    public function getNaviaHealthCareUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('navia_statements', array('user_id'))

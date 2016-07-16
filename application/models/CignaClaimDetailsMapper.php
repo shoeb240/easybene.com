@@ -100,7 +100,7 @@ class Application_Model_CignaClaimDetailsMapper
         
     }
     
-    public function getClaimDetailsUserAll()
+    public function getCignaClaimDetailsUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('cigna_claim_details', array('user_id'))

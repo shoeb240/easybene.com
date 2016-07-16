@@ -45,9 +45,9 @@ class Application_Model_CignaMedical
         return $this->_id;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_user_id = $userId;
+        $this->_user_id = $value;
     }
     
     public function getUserId()
@@ -55,9 +55,9 @@ class Application_Model_CignaMedical
         return $this->_user_id;
     }
     
-    public function setWhosCovered($whosCovered)
+    public function setWhosCovered($value)
     {
-        $this->_whos_covered = $whosCovered;
+        $this->_whos_covered = $value;
     }
     
     public function getWhosCovered()
@@ -65,9 +65,9 @@ class Application_Model_CignaMedical
         return $this->_whos_covered;
     }
     
-    public function setDateOfBirth($dateOfBirth)
+    public function setDateOfBirth($value)
     {
-        $this->_date_of_birth = $dateOfBirth;
+        $this->_date_of_birth = $value;
     }
     
     public function getDateOfBirth()
@@ -75,9 +75,9 @@ class Application_Model_CignaMedical
         return $this->_date_of_birth;
     }
     
-    public function setRelationship($relationship)
+    public function setRelationship($value)
     {
-        $this->_relationship = $relationship;
+        $this->_relationship = $value;
     }
     
      public function getRelationship()
@@ -85,9 +85,9 @@ class Application_Model_CignaMedical
         return $this->_relationship;
     }
     
-    public function setCoverageFrom($coverageFrom)
+    public function setCoverageFrom($value)
     {
-        $this->_coverage_from = $coverageFrom;
+        $this->_coverage_from = $value;
     }
 
     public function getCoverageFrom()

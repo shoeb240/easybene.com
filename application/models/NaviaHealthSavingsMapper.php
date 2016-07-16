@@ -40,21 +40,26 @@ class Application_Model_NaviaHealthSavingsMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId);
+        $select->order('transaction_date desc');
         $rowSets = $this->getTable()->fetchAll($select);
-        
+
         $info = array();
         foreach($rowSets as $k => $row) {
             $medical = array();
             $medical['user_id'] = $row->user_id;
-            $medical['claim'] = $row->claim;
-            $medical['annual_election'] = $row->annual_election;
             $medical['balance'] = $row->balance;
-            $medical['election'] = $row->election;
-            $medical['reimburse_date'] = $row->reimburse_date;
-            $medical['date_posted'] = $row->date_posted;
+            $medical['portfolio_balance'] = $row->portfolio_balance;
+            $medical['total_balance'] = $row->total_balance;
+            $medical['contributions_YTD'] = $row->contributions_YTD;
+            $medical['employer_contributions_YTD'] = $row->employer_contributions_YTD;
+            $medical['total_contributions_YTD'] = $row->total_contributions_YTD;
+            $medical['employer_per_pay_amount'] = $row->employer_per_pay_amount;
+            $medical['employee_per_pay_amount'] = $row->employee_per_pay_amount;
+            $medical['transaction_date'] = $row->transaction_date;
             $medical['transaction_type'] = $row->transaction_type;
-            $medical['claim_amount'] = $row->claim_amount;
-            $medical['amount'] = $row->amount;
+            $medical['description'] = $row->description;
+            $medical['transaction_amt'] = $row->transaction_amt;
+            $medical['HSA_transaction_type'] = $row->HSA_transaction_type;
             
             $info[] = $medical;
         }
@@ -72,15 +77,19 @@ class Application_Model_NaviaHealthSavingsMapper
     {
         $data = array(
             'user_id' => $medical->getOption('user_id'),
-            'claim' => $medical->getOption('claim'),
-            'annual_election' => $medical->getOption('annual_election'),
             'balance' => $medical->getOption('balance'),
-            'election' =>$medical->getOption('election'),
-            'reimburse_date' => $medical->getOption('reimburse_date'),
-            'date_posted' => $medical->getOption('date_posted'),
+            'portfolio_balance' => $medical->getOption('portfolio_balance'),
+            'total_balance' => $medical->getOption('total_balance'),
+            'contributions_YTD' =>$medical->getOption('contributions_YTD'),
+            'employer_contributions_YTD' => $medical->getOption('employer_contributions_YTD'),
+            'total_contributions_YTD' => $medical->getOption('total_contributions_YTD'),
+            'employer_per_pay_amount' => $medical->getOption('employer_per_pay_amount'),
+            'employee_per_pay_amount' => $medical->getOption('employee_per_pay_amount'),
+            'transaction_date' => date("Y-m-d", strtotime($medical->getOption('transaction_date'))),
             'transaction_type' => $medical->getOption('transaction_type'),
-            'claim_amount' => $medical->getOption('claim_amount'),
-            'amount' => $medical->getOption('amount')
+            'description' => $medical->getOption('description'),
+            'transaction_amt' => $medical->getOption('transaction_amt'),
+            'HSA_transaction_type' => $medical->getOption('HSA_transaction_type'),
         );
         
         return $this->getTable()->insert($data);
@@ -93,14 +102,14 @@ class Application_Model_NaviaHealthSavingsMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteNaviaHealthSavings($userArr)
+    public function deleteNaviaHealthSavings($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }
     
-    public function getMedicalUserAll()
+    public function getNaviaHealthSavingsUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('navia_health_savings', array('user_id'))

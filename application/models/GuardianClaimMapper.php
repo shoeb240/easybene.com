@@ -40,6 +40,7 @@ class Application_Model_GuardianClaimMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
+        $select->order('paid_date desc');
         $rowSets = $this->getTable()->fetchAll($select);
         
         $info = array();
@@ -73,7 +74,7 @@ class Application_Model_GuardianClaimMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function insertGuardianClaim(Application_Model_GuardianClaim $claim)
+    public function saveGuardianClaim(Application_Model_GuardianClaim $claim)
     {
         $data = array(
             'user_id' => $claim->getUserId(),
@@ -81,8 +82,8 @@ class Application_Model_GuardianClaimMapper
             'coverage_type' => trim($claim->getCoverageType()),
             'claim_number' => trim($claim->getClaimNumber()),
             'patient_name' => trim($claim->getPatientName()),
-            'date_of_service' => trim($claim->getDateOfService()),
-            'paid_date' => trim($claim->getPaidDate()),
+            'date_of_service' => date("Y-m-d", strtotime(trim($claim->getDateOfService()))),
+            'paid_date' => date("Y-m-d", strtotime(trim($claim->getPaidDate()))),
             'check_number' => trim($claim->getCheckNumber()),
             'provider_number' => trim($claim->getProviderNumber()),
             'status' => trim($claim->getStatus()),
@@ -133,7 +134,7 @@ class Application_Model_GuardianClaimMapper
         
     }
     
-    public function getClaimUserAll()
+    public function getGuardianClaimUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('guardian_claim', array('user_id'));

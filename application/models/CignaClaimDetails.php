@@ -49,9 +49,9 @@ class Application_Model_CignaClaimDetails
         return $this->_id;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_userId = $userId;
+        $this->_userId = $value;
     }
     
     public function getUserId()
@@ -59,9 +59,9 @@ class Application_Model_CignaClaimDetails
         return $this->_userId;
     }
     
-    public function setServiceDateType($serviceDateType)
+    public function setServiceDateType($value)
     {
-        $this->_service_date_type = $serviceDateType;
+        $this->_service_date_type = $value;
     }
     
     public function getServiceDateType()
@@ -69,9 +69,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_date_type;
     }
     
-    public function setServiceAmountBilled($serviceAmountBilled)
+    public function setServiceAmountBilled($value)
     {
-        $this->_service_amount_billed = $serviceAmountBilled;
+        $this->_service_amount_billed = $value;
     }
     
     public function getServiceAmountBilled()
@@ -79,9 +79,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_amount_billed;
     }
     
-    public function setServiceDiscount($serviceDiscount)
+    public function setServiceDiscount($value)
     {
-        $this->_service_discount = $serviceDiscount;
+        $this->_service_discount = $value;
     }
     
      public function getServiceDiscount()
@@ -89,9 +89,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_discount;
     }
     
-    public function setServiceCoveredAmount($serviceCoveredAmount)
+    public function setServiceCoveredAmount($value)
     {
-        $this->_service_covered_amount = $serviceCoveredAmount;
+        $this->_service_covered_amount = $value;
     }
 
     public function getServiceCoveredAmount()
@@ -99,9 +99,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_covered_amount;
     }
     
-    public function setServiceCopayDeductible($serviceCopayDeductible)
+    public function setServiceCopayDeductible($value)
     {
-        $this->_service_copay_deductible = $serviceCopayDeductible;
+        $this->_service_copay_deductible = $value;
     }
 
     public function getServiceCopayDeductible()
@@ -109,9 +109,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_copay_deductible;
     }
     
-    public function setServiceWhatYourPlanPaid($serviceWhatYourPlanPaid)
+    public function setServiceWhatYourPlanPaid($value)
     {
-        $this->_service_what_your_plan_paid = $serviceWhatYourPlanPaid;
+        $this->_service_what_your_plan_paid = $value;
     }
 
     public function getServiceWhatYourPlanPaid()
@@ -119,9 +119,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_what_your_plan_paid;
     }
     
-    public function setServiceCoinsurance($serviceCoinsurance)
+    public function setServiceCoinsurance($value)
     {
-        $this->_service_coinsurance = $serviceCoinsurance;
+        $this->_service_coinsurance = $value;
     }
 
     public function getServiceCoinsurance()
@@ -129,9 +129,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_coinsurance;
     }
     
-    public function setServiceWhatIOwe($serviceWhatIOwe)
+    public function setServiceWhatIOwe($value)
     {
-        $this->_service_what_i_owe = $serviceWhatIOwe;
+        $this->_service_what_i_owe = $value;
     }
 
     public function getServiceWhatIOwe()
@@ -139,9 +139,9 @@ class Application_Model_CignaClaimDetails
         return $this->_service_what_i_owe;
     }
     
-    public function setServiceSeeNotes($serviceSeeNotes)
+    public function setServiceSeeNotes($value)
     {
-        $this->_service_see_notes = $serviceSeeNotes;
+        $this->_service_see_notes = $value;
     }
 
     public function getServiceSeeNotes()

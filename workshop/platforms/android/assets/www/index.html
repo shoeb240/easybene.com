@@ -26,6 +26,7 @@
         <link rel="stylesheet" href="assets/css/vendor/animate.css">
         <link rel="stylesheet" href="assets/css/vendor/font-awesome.min.css">
         <link rel="stylesheet" href="assets/js/vendor/animsition/css/animsition.min.css">
+        <link rel="stylesheet" href="assets/js/vendor/chosen/chosen.css">
 
         <!-- project main css files -->
         <link rel="stylesheet" href="assets/css/main.css">
@@ -40,16 +41,87 @@
         <!--/ modernizr -->
 
 
+        <style>
+        .easypiechart .pie-percent::after {
+            content: "";
+        }
+        
 
+        .col-md-1 {width: 8.33%;}
+        .col-md-2 {width: 16.66%;}
+        .col-md-3 {width: 25%;}
+        .col-md-4 {width: 33.33%;}
+        .col-md-5 {width: 41.66%;}
+        .col-md-6 {width: 50%;}
+        .col-md-7 {width: 58.33%;}
+        .col-md-8 {width: 66.66%;}
+        .col-md-9 {width: 75%;}
+        .col-md-10 {width: 83.33%;}
+        .col-md-11 {width: 91.66%;}
+        .col-md-12 {width: 100%;}
+
+        @media only screen and (min-width: 500px) {
+            body {
+                font-size: 14px; 
+                font-weight: 400;
+                text-align: center;
+            }
+            .col-md-12 {padding: 15px;}
+            .col-md-6 {padding: 15px;}
+            .wrap-reset {
+                margin: -15px;
+                padding: 15px;
+            }
+        }
+
+        @media only screen and (max-width: 500px) {
+            /* For mobile phones: */
+            body {
+                font-size: 12px; 
+                font-weight: 200;
+            }
+            .row {
+                margin-left: -5px;
+                margin-right: -5px;
+            }
+            .col-md-12 {padding: 5px;}
+            .col-md-6 {padding: 5px;}
+            .wrap-reset {
+                margin: -5px;
+                padding: 5px;
+            }
+        }
+        
+        @media only screen and (max-width: 340px) {
+            /* For mobile phones: */
+            body {
+                font-size: 11px; 
+                font-weight: 200;
+            }
+            .row {
+                margin-left: 0px;
+                margin-right: 0px;
+            }
+            .col-md-12 {padding: 3px;}
+            .col-md-6 {padding: 3px;}
+            .table.table-custom thead tr td, 
+            .table.table-custom thead tr th, 
+            .table.table-custom tbody tr td, 
+            .table.table-custom tbody tr th, 
+            .table.table-custom tfoot tr td, 
+            .table.table-custom tfoot tr th {
+                padding: 3px;
+            }
+            .wrap-reset {
+                margin: -3px;
+                padding: 5px;
+            }
+        }
+        </style>
 
     </head>
 
-
-
-
-
     <body> <!--  id="minovate" class="appWrapper" -->
-
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -61,245 +133,303 @@
 
             <div class="page page-core" style="padding-top:0px;">
 
-                <div class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></div>
+                <header class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></header>
 
-                <div id="reg_div_step1" class="col-md-12 bg-white text-center">
-                    <h2 class="text-light text-greensea">Register</h2>
-                    <span id="reg_span_fail" style="color: red;">Registration failed!</span>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            <input type="email" id="reg_email" class="form-control underline-input" placeholder="Enter Your Email">
-                        </div>
-                        <div class="form-group text-left mt-20">
-                            <a href="javascript:void(0);" class="b-0 br-2 mr-5 mt-10"></a>
-                            <a href="javascript:void(0);" id="reg_next1" class="btn btn-greensea pull-right">Next</a>
-                        </div>
-                    </form>
-                    <div class="bg-slategray lt wrap-reset mt-10">
-                        <p class="m-0">
-                            <a id="login" href="javascript:void(0);" class="text-uppercase">Login</a>
-                        </p>
-                    </div>
-                </div>
-                
-                
-                <div id="reg_div_step2" class="col-md-12 bg-white text-center">
-                    <h2 class="text-light text-greensea">Register</h2>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            <input type="password" id="reg_password" placeholder="Enter Your Password" class="form-control underline-input">
-                        </div>
-                        <div class="form-group text-left mt-20">
-                            <a href="javascript:void(0);" id="reg_next2" class="btn btn-greensea pull-right">Next</a>
-                        </div>
-                    </form>
-                </div>
-                
-                
-                <div id="login_div_step1" class="col-md-12 bg-white text-center">
-                    <h2 class="text-light text-greensea">Log In</h2>
-                    <span id="login_span_fail" style="color: red;"></span>
-                    <span id="reg_span_succ" style="color: blue;">Registered successfully!</span>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            <input type="email" id="login_email" class="form-control underline-input" placeholder="Enter Your Email">
-                        </div>
-                        <div class="form-group text-left mt-20">
-                            <a href="javascript:void(0);" class="b-0 br-2 mr-5 mt-10">Forgot Password?</a>
-                            <a href="javascript:void(0);" id="login_next1" class="btn btn-greensea pull-right">Next</a>
-                        </div>
-                    </form>
-                    <div class="bg-slategray lt wrap-reset mt-10">
-                        <p class="m-0">
-                            <a href="javascript:void(0);" id="show_reg">Register</a>
-                        </p>
-                    </div>
-                </div>
-                
-                
-                <div id="login_div_step2" class="col-md-12 bg-white text-center">
-                    <h2 class="text-light text-greensea">Log In</h2>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div id="email_text" class="form-group text-left mt-20"></div>
-                        <div class="form-group">
-                            <input type="password" id="login_password" placeholder="Enter Your Password" class="form-control underline-input">
-                        </div>
-                        <div class="form-group text-left mt-20">
-                            <a href="javascript:void(0);" id="login_next2" class="btn btn-greensea pull-right">Next</a>
-                        </div>
-                    </form>
-                </div>
-                
-                
-                <div id="welcome_div" class="col-md-12 bg-white text-center">
-                    <div  class="form-group text-left mt-0">
-                        <a href="javascript:void(0);" class="pull-right logout">Logout</a>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <div id="abc1" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px; clear: both;">
-                                <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
-                            </div>
-                            <div class="form-group">
-                                <a href="medical.html">Medical ></a>
-                            </div>
-                        </div>
-
-                        <div class="col-md-6 text-center">
-                            <div id="abc2" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                                <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
-                            </div>
-                            <div class="form-group">
-                                <a href="dental.html">Dental ></a>
-                            </div>
-                        </div>
-                    </div> 
+                <div class="col-md-12 bg-white text-center">
                     
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <div id="abc3" class="easypiechart" data-percent="60" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                                <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;">60</span></div>
-                            </div>
+                    <div id="reg_div_step1">
+                        <h2 class="text-light text-greensea">Register</h2>
+                        <span id="reg_span_fail" style="color: red;">Registration failed!</span>
+                        <div>
                             <div class="form-group">
-                                <a href="javascript: void(0);">vision ></a>
+                                <input type="email" id="reg_email" class="form-control underline-input" placeholder="Enter Your Email">
                             </div>
-                        </div>
-
-                        <div class="col-md-6 text-center">
-                            <div class="form-group">
-                                <br /><br /><br />
-                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/funds-icon.png" /></a>
+                            <div class="form-group text-left mt-20">
+                                <a href="javascript:void(0);" class="b-0 br-2 mr-5 mt-10">&nbsp;</a>
+                                <a href="javascript:void(0);" id="reg_next1" class="btn btn-greensea pull-right"  style="margin-bottom: 3px;">Next</a>
                             </div>
+                        </div>    
+                        <div class="bg-slategray lt wrap-reset mt-10" style="clear: both;">
+                            <p class="m-0">
+                                <a id="login" href="javascript:void(0);" class="text-uppercase">Login</a>
+                            </p>
                         </div>
                     </div>
                     
-                    <div class="row">
-                        <div class="col-md-6 text-center">
+                    
+                    
+                    <div id="reg_div_step2">
+                        <h2 class="text-light text-greensea">Register</h2>
+                        <div>
                             <div class="form-group">
-                                <br />
-                                <a href="javascript: void(0);">ID Card</a>
+                                <input type="password" id="reg_password" placeholder="Enter Your Password" class="form-control underline-input">
                             </div>
-                        </div>
-
-                        <div class="col-md-6 text-center">
-                            <div class="form-group">
-                                <a href="javascript: void(0);">FSA<br />Eligibility</a>
+                            <div class="form-group text-left mt-20"  style="clear: both;">
+                                <a href="javascript:void(0);" id="reg_next2" class="btn btn-greensea pull-right">Next</a>
                             </div>
+                            <div  style="clear: both;"></div>
                         </div>
                     </div>
+                    <div id="login_div_step2">
+                        <h2 class="text-light text-greensea">Log In</h2>
+                        <div>
+                            <div id="email_text" class="form-group text-left mt-20"></div>
+                            <div class="form-group">
+                                <input type="password" id="login_password" placeholder="Enter Your Password" class="form-control underline-input">
+                            </div>
+                            <div class="form-group text-left mt-20"  style="clear: both;">
+                                <a href="javascript:void(0);" id="login_next2" class="btn btn-greensea pull-right">Next</a>
+                            </div>
+                            <div  style="clear: both;"></div>
+                        </div>
+                    </div>
+
                     
-                    <div class="row">
-                        <div class="col-md-6 text-center">
-                            <p  style="margin-top:10px;">
-                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html"><img src="assets/images/medical-icon.png" /></a>
-                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
-                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
-                                <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/funds-icon.png" /></a>
+                    
+
+                    <div id="login_div_step1">
+                        <h2 class="text-light text-greensea">Log In</h2>
+                        <span id="login_span_fail" style="color: red;"></span>
+                        <!-- <span id="reg_span_succ" style="color: blue;">Registered successfully!</span> -->
+                        <div>
+                            <div class="form-group">
+                                <input type="email" id="login_email" class="form-control underline-input" placeholder="Enter Your Email">
+                            </div>
+                            <div class="form-group text-left mt-20">
+                                <a href="javascript:void(0);" class="b-0 br-2 mr-5 mt-10">Forgot Password?</a>
+                                <a href="javascript:void(0);" id="login_next1" class="btn btn-greensea pull-right"   style="margin-bottom: 3px;">Next</a>
+                            </div>
+                        </div>
+                        <div class="bg-slategray lt wrap-reset mt-10"  style="clear: both;">
+                            <p class="m-0">
+                                <a href="javascript:void(0);" id="show_reg" class="text-uppercase">Register</a>
                             </p>
                         </div>
                     </div>
 
-                </div>
-                
-                
-                <div id="site_choice_medical_div" class="col-md-12 bg-white text-center">
-                    <div class="form-group text-left mt-0">
-                        <a href="javascript:void(0);" class="pull-right logout">Logout</a>
-                    </div>
-                    <h2 class="text-light text-greensea">Add Medical Provider</h2>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            See all your benefits in one place. Add your medical, dental or vision provider.
-                        </div>
-                        <div class="form-group">
-                            Choose from one of these popular EasyBenefits choices.
-                        </div>
-                        <div class="form-group">
-                            <a id="cigna_medical" href="javascript:void(0);"><img class="w-100" src="assets/images/cigna_logo.jpg" /></a>
-                            <a id="guardian_medical" href="javascript:void(0);"><img class="w-100" src="assets/images/guardian_logo.jpg" /></a>
-                            <a id="anthem_medical" href="javascript:void(0);"><img class="w-100" src="assets/images/anthem_logo.png" /></a>
-                        </div>
-                    </form>
-                </div>
-                
-                <div id="site_choice_dental_div" class="col-md-12 bg-white text-center">
-                    <div class="form-group text-left mt-0">
-                        <a href="javascript:void(0);" class="pull-right logout">Logout</a>
-                    </div>
-                    <h2 class="text-light text-greensea">Add Dental Provider</h2>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            See all your benefits in one place. Add your medical, dental or vision provider.
-                        </div>
-                        <div class="form-group">
-                            Choose from one of these popular EasyBenefits choices.
-                        </div>
-                        <div class="form-group">
-                            <a id="cigna_dental" href="javascript:void(0);"><img class="w-100" src="assets/images/cigna_logo.jpg" /></a>
-                            <a id="guardian_dental" href="javascript:void(0);"><img class="w-100" src="assets/images/guardian_logo.jpg" /></a>
-                            <a id="anthem_dental" href="javascript:void(0);"><img class="w-100" src="assets/images/anthem_logo.png" /></a>
-                        </div>
-                    </form>
-                </div>
-                
-                <div id="site_choice_vision_div" class="col-md-12 bg-white text-center">
-                    <div class="form-group text-left mt-0">
-                        <a href="javascript:void(0);" class="pull-right logout">Logout</a>
-                    </div>
-                    <h2 class="text-light text-greensea">Add Vision Provider</h2>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            See all your benefits in one place. Add your medical, dental or vision provider.
-                        </div>
-                        <div class="form-group">
-                            Choose from one of these popular EasyBenefits choices.
-                        </div>
-                        <div class="form-group">
-                            <a id="cigna_vision" href="javascript:void(0);"><img class="w-100" src="assets/images/cigna_logo.jpg" /></a>
-                            <a id="guardian_vision" href="javascript:void(0);"><img class="w-100" src="assets/images/guardian_logo.jpg" /></a>
-                            <a id="anthem_vision" href="javascript:void(0);"><img class="w-100" src="assets/images/anthem_logo.png" /></a>
-                        </div>
-                    </form>
-                </div>
-                
-                
-                <div id="site_reg_div" class="col-md-12 bg-white text-center">
-                    <h2 class="text-light text-greensea"><span id="site_selected_type_name"></span> Insurance</h2>
-                    <div class="form-group">
-                        <img id="site_selected_type_image" class="w-100" src="" />
-                    </div>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            <input type="text" id="site_selected_user_id" placeholder="Username" class="form-control underline-input">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="site_selected_password" placeholder="Password" class="form-control underline-input">
-                        </div>
-                        <div class="form-group text-left mt-20">
-                            <input type="hidden" id="site_selected_name" value="">
-                            <a href="javascript:void(0);" id="site_register" class="btn btn-greensea pull-right">Next</a>
-                        </div>
-                    </form>
-                </div>
-                
-                <div id="site_reg_fail_div" class="col-md-12 bg-white text-center">
-                    <h2 class="text-light text-greensea"><span id="site_failed_type_name">Medical</span> Insurance</h2>
-                    <div class="form-group">
-                        <img id="site_failed_type_image" class="w-100" src="assets/images/cigna_logo.jpg" />
-                    </div>
-                    <form name="form" class="form-validation mt-20" novalidate="">
-                        <div class="form-group">
-                            Registration Fail
-                        </div>
-                        <div class="form-group text-left mt-20">
-                            <a href="javascript:void(0);" id="site_register_failed" class="btn btn-greensea pull-right">Next</a>
-                        </div>
-                    </form>
-                </div>
 
+
+
+                    <div id="welcome_div">
+                        <div  class="form-group text-left mt-0 pull-right">
+                            <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-0 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                        <div>
+                            <div class="col-md-6 text-center"  style="float:left;">
+                                <div id="abc1" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px; clear: both;">
+                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                                </div>
+                                <div class="form-group">
+                                    <a href="medical.html">Medical ></a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 text-center" style="float:left;">
+                                <div id="abc2" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
+                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                                </div>
+                                <div class="form-group">
+                                    <a href="dental.html">Dental ></a>
+                                </div>
+                            </div>
+                        </div> 
+                        <div style="clear:both;"></div>
+
+                        <div>
+                            <div class="col-md-6 text-center" style="float:left;">
+                                <div id="abc3" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
+                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                                </div>
+                                <div class="form-group">
+                                    <a href="javascript: void(0);">vision ></a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 text-center" style="float:left;">
+                                <div class="form-group">
+                                    <br /><br /><br />
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="funds.html"><img src="assets/images/funds-icon.png" /></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                        <div>
+                            <div class="col-md-6 text-center"  style="float:left;">
+                                <div class="form-group">
+                                    <br />
+                                    <a href="javascript: void(0);">ID Card</a>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 text-center"  style="float:left;">
+                                <div class="form-group">
+                                    <a href="javascript: void(0);">FSA<br />Eligibility</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="clear:both;"></div>
+
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <p  style="margin-top:10px;">
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="index.html" style="border-color: #8888ff"><img src="assets/images/home-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html"><img src="assets/images/medical-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="funds.html"><img src="assets/images/funds-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="settings.html"><img width="32" src="assets/images/Settings-icon.png" /></a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div id="site_choice_medical_div">
+                        <div  class="form-group text-left mt-0 pull-right">
+                            <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-0 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <h2 class="text-light text-greensea">Add Medical Provider</h2>
+                        <form name="form" class="form-validation mt-20" novalidate="">
+                            <div class="form-group">
+                                See all your benefits in one place. Add your medical, dental or vision provider.
+                            </div>
+                            <div style="clear:both;"></div>
+                            <!--<div class="form-group text-center">
+                                    <select id="cigna_medical_search" data-placeholder="Select Medical Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                        <option value="Cigna">Cigna</option>
+                                        <option value="Guardian">Guardian</option>
+                                        <option value="Anthem">Anthem</option>
+                                    </select>
+                            </div>
+                            <div style="clear:both;"></div>-->
+                            
+                            <div class="form-group">
+                                Choose from one of these popular EasyBenefits choices.
+                            </div>
+                            <div class="form-group">
+                                <a id="cigna_medical" href="javascript:void(0);"><img class="w-100" src="assets/images/cigna_logo.jpg" /></a>
+                                <a id="guardian_medical" href="javascript:void(0);"><img class="w-100" src="assets/images/guardian_logo.jpg" /></a>
+                                <a id="anthem_medical" href="javascript:void(0);"><img class="w-100" src="assets/images/anthem_logo.png" /></a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="site_choice_dental_div">
+                        <div  class="form-group text-left mt-0 pull-right">
+                            <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-0 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <h2 class="text-light text-greensea">Add Dental Provider</h2>
+                        <form name="form" class="form-validation mt-20" novalidate="">
+                            <div class="form-group">
+                                See all your benefits in one place. Add your medical, dental or vision provider.
+                            </div>
+                            <div class="form-group">
+                                Choose from one of these popular EasyBenefits choices.
+                            </div>
+                            <div class="form-group">
+                                <a id="cigna_dental" href="javascript:void(0);"><img class="w-100" src="assets/images/cigna_logo.jpg" /></a>
+                                <a id="guardian_dental" href="javascript:void(0);"><img class="w-100" src="assets/images/guardian_logo.jpg" /></a>
+                                <a id="anthem_dental" href="javascript:void(0);"><img class="w-100" src="assets/images/anthem_logo.png" /></a>
+                            </div>
+                            <div class="form-group text-left mt-20" style="margin-bottom:35px; border-top: 1px solid grey; padding-top: 5px;">
+                                <a href="javascript:void(0);" id="skip_dental" class="btn btn-greensea pull-right">Skip</a>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="site_choice_vision_div">
+                        <div  class="form-group text-left mt-0 pull-right">
+                            <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-0 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <h2 class="text-light text-greensea">Add Vision Provider</h2>
+                        <form name="form" class="form-validation mt-20" novalidate="">
+                            <div class="form-group">
+                                See all your benefits in one place. Add your medical, dental or vision provider.
+                            </div>
+                            <div class="form-group">
+                                Choose from one of these popular EasyBenefits choices.
+                            </div>
+                            <div class="form-group">
+                                <a id="cigna_vision" href="javascript:void(0);"><img class="w-100" src="assets/images/cigna_logo.jpg" /></a>
+                                <a id="guardian_vision" href="javascript:void(0);"><img class="w-100" src="assets/images/guardian_logo.jpg" /></a>
+                                <a id="anthem_vision" href="javascript:void(0);"><img class="w-100" src="assets/images/anthem_logo.png" /></a>
+                            </div>
+                            <div class="form-group text-left mt-20" style="margin-bottom:35px; border-top: 1px solid grey; padding-top: 5px;">
+                                <a href="javascript:void(0);" id="skip_vision" class="btn btn-greensea pull-right">Skip</a>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div id="site_reg_div">
+                        <div  class="form-group text-left mt-0 pull-right">
+                            <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-0 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <h2 class="text-light text-greensea"><span id="site_selected_type_name"></span> Insurance</h2>
+                        <div class="form-group">
+                            <img id="site_selected_type_image" class="w-100" src="" />
+                        </div>
+                        <div>
+                            <div class="form-group">
+                                <input type="text" id="site_selected_user_id" placeholder="Username" class="form-control underline-input">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="site_selected_password" placeholder="Password" class="form-control underline-input">
+                            </div>
+                            <div class="form-group text-left mt-20" style="margin-bottom:55px;">
+                                <input type="hidden" id="site_selected_name" value="">
+                                <a href="javascript:void(0);" id="site_register" class="btn btn-greensea pull-right">Next</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="site_reg_fail_div">
+                        <div  class="form-group text-left mt-0 pull-right">
+                            <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-0 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                        <h2 class="text-light text-greensea"><span id="site_failed_type_name">Medical</span> Insurance</h2>
+                        <div class="form-group">
+                            <img id="site_failed_type_image" class="w-100" src="assets/images/cigna_logo.jpg" />
+                        </div>
+                        <form name="form" class="form-validation mt-20" novalidate="">
+                            <div class="form-group">
+                                Registration Fail
+                            </div>
+                            <div class="form-group text-left mt-20">
+                                <a href="javascript:void(0);" id="site_register_failed" class="btn btn-greensea pull-right">Next</a>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
             </div>
-
-
 
         </div>
         <!--/ Application Content -->
@@ -314,8 +444,8 @@
         <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')</script> -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery/jquery-1.11.2.min.js"><\/script>')</script>
 
         <script src="assets/js/vendor/bootstrap/bootstrap.min.js"></script>
 
@@ -332,6 +462,9 @@
         <script src="assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
         
         <script src="assets/js/vendor/countTo/jquery.countTo.js"></script>
+        
+        <script src="assets/js/vendor/chosen/chosen.jquery.min.js"></script>
+
         <!--/ vendor javascripts -->
 
 
@@ -343,6 +476,6 @@
         <script src="assets/js/main.js"></script>
         <!--/ custom javascripts -->
         
-
+        
     </body>
 </html>

@@ -31,6 +31,9 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                   array('controller' => 'api-summary', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiSummary', $route);
 
+        $route = new Zend_Controller_Router_Route('api-funds/:username/:token/:id',
+                                  array('controller' => 'api-funds', 'action' => 'index', 'id' => null));
+        $router->addRoute('indexApiFunds', $route);
         
         $route = new Zend_Controller_Router_Route('scrape-cigna/:action',
                                                   array('controller' => 'scrape-cigna',
@@ -46,6 +49,11 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                                   array('controller' => 'scrape-anthem',
                                                         'action' => 'execute'));
         $router->addRoute('indexAnthemScrape', $route);
+        
+        $route = new Zend_Controller_Router_Route('scrape-navia/:action',
+                                                  array('controller' => 'scrape-navia',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexNaviaScrape', $route);
         
         
         

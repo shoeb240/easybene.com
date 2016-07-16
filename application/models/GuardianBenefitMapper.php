@@ -63,7 +63,7 @@ class Application_Model_GuardianBenefitMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function insertGuardianBenefit(Application_Model_GuardianBenefit $benefit)
+    public function saveGuardianBenefit(Application_Model_GuardianBenefit $benefit)
     {
         $data = array(
             'user_id' => $benefit->getUserId(),
@@ -73,7 +73,7 @@ class Application_Model_GuardianBenefitMapper
             'name' => trim($benefit->getName()),
             'relationship' => trim($benefit->getRelationship()),
             'coverage' => trim($benefit->getCoverage()),
-            'original_effective_date' => trim($benefit->getOriginalEffectiveDate()),
+            'original_effective_date' => date("Y-m-d", strtotime(trim($benefit->getOriginalEffectiveDate()))),
             'amounts' => trim($benefit->getAmounts()),
             'monthly_cost' => trim($benefit->getMonthlyCost())
         );
@@ -118,7 +118,7 @@ class Application_Model_GuardianBenefitMapper
         
     }
     
-    public function getBenefitUserAll()
+    public function getGuardianBenefitUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('guardian_benefit', array('user_id'));

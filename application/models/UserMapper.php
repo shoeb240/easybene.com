@@ -145,11 +145,17 @@ class Application_Model_UserMapper
         $userInfo['username'] = $row->username;
         $userInfo['api_token'] = $row->api_token;
         $userInfo['api_updated'] = $row->api_updated;
-        if (!empty($userInfo['cigna_user_id']) && !empty($userInfo['cigna_password'])) {
-            $userInfo['cigna_exists'] = 'yes';
-        } else {
-            $userInfo['cigna_exists'] = 'no';
-        }
+        $userInfo['medical_site'] = $row->medical_site;
+        $userInfo['dental_site'] = $row->dental_site;
+        $userInfo['vision_site'] = $row->vision_site;
+        $userInfo['cigna_user_id'] = $row->cigna_user_id;
+        $userInfo['cigna_password'] = $row->cigna_password;
+        $userInfo['guardian_user_id'] = $row->guardian_user_id;
+        $userInfo['guardian_password'] = $row->guardian_password;
+        $userInfo['anthem_user_id'] = $row->anthem_user_id;
+        $userInfo['anthem_password'] = $row->anthem_password;
+        $userInfo['navia_user_id'] = $row->navia_user_id;
+        $userInfo['navia_password'] = $row->navia_password;
         
         return $userInfo;
     }
@@ -215,6 +221,12 @@ class Application_Model_UserMapper
             $user->setAnthemPassword($row->anthem_password);
             $user->setAnthemExeid($row->anthem_exeid);
             $user->setAnthemClaimOverviewExeid($row->anthem_claim_overview_exeid);
+            $user->setNaviaUserId($row->navia_user_id);
+            $user->setNaviaPassword($row->navia_password);
+            $user->setNaviaStatementsExeid($row->navia_statements_exeid);
+            $user->setNaviaDayCareExeid($row->navia_day_care_exeid);
+            $user->setNaviaHealthCareExeid($row->navia_health_care_exeid);
+            $user->setNaviaHealthSavingsExeid($row->navia_health_savings_exeid);
             $info[] = $user;
         }
         

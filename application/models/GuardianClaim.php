@@ -51,9 +51,9 @@ class Application_Model_GuardianClaim
         return $this->_id;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_userId = $userId;
+        $this->_userId = $value;
     }
     
     public function getUserId()
@@ -61,9 +61,9 @@ class Application_Model_GuardianClaim
         return $this->_userId;
     }
     
-    public function setPatient($patient)
+    public function setPatient($value)
     {
-        $this->_patient = $patient;
+        $this->_patient = $value;
     }
     
     public function getPatient()
@@ -71,9 +71,9 @@ class Application_Model_GuardianClaim
         return $this->_patient;
     }
     
-    public function setCoverageType($coverageType)
+    public function setCoverageType($value)
     {
-        $this->_coverage_type = $coverageType;
+        $this->_coverage_type = $value;
     }
     
     public function getCoverageType()
@@ -81,9 +81,9 @@ class Application_Model_GuardianClaim
         return $this->_coverage_type;
     }
     
-    public function setClaimNumber($claimNumber)
+    public function setClaimNumber($value)
     {
-        $this->_claim_number = $claimNumber;
+        $this->_claim_number = $value;
     }
     
     public function getClaimNumber()
@@ -91,9 +91,9 @@ class Application_Model_GuardianClaim
         return $this->_claim_number;
     }
     
-    public function setPatientName($patientName)
+    public function setPatientName($value)
     {
-        $this->_patient_name = $patientName;
+        $this->_patient_name = $value;
     }
     
     public function getPatientName()
@@ -101,9 +101,9 @@ class Application_Model_GuardianClaim
         return $this->_patient_name;
     }
     
-    public function setDateOfService($dateOfService)
+    public function setDateOfService($value)
     {
-        $this->_date_of_service = $dateOfService;
+        $this->_date_of_service = $value;
     }
     
     public function getDateOfService()
@@ -111,9 +111,9 @@ class Application_Model_GuardianClaim
         return $this->_date_of_service;
     }
     
-    public function setPaidDate($paidDate)
+    public function setPaidDate($value)
     {
-        $this->_paid_date = $paidDate;
+        $this->_paid_date = $value;
     }
     
      public function getPaidDate()
@@ -121,9 +121,9 @@ class Application_Model_GuardianClaim
         return $this->_paid_date;
     }
     
-    public function setCheckNumber($checkNumber)
+    public function setCheckNumber($value)
     {
-        $this->_check_number = $checkNumber;
+        $this->_check_number = $value;
     }
 
     public function getCheckNumber()
@@ -131,9 +131,9 @@ class Application_Model_GuardianClaim
         return $this->_check_number;
     }
     
-    public function setProviderNumber($providerNumber)
+    public function setProviderNumber($value)
     {
-        $this->_provider_number = $providerNumber;
+        $this->_provider_number = $value;
     }
 
     public function getProviderNumber()
@@ -141,9 +141,9 @@ class Application_Model_GuardianClaim
         return $this->_provider_number;
     }
     
-    public function setStatus($status)
+    public function setStatus($value)
     {
-        $this->_status = $status;
+        $this->_status = $value;
     }
 
     public function getStatus()
@@ -151,9 +151,9 @@ class Application_Model_GuardianClaim
         return $this->_status;
     }
     
-    public function setSubmittedCharges($submittedCharges)
+    public function setSubmittedCharges($value)
     {
-        $this->_submitted_charges = $submittedCharges;
+        $this->_submitted_charges = $value;
     }
 
     public function getSubmittedCharges()
@@ -161,9 +161,9 @@ class Application_Model_GuardianClaim
         return $this->_submitted_charges;
     }
     
-    public function setAmountPaid($amountPaid)
+    public function setAmountPaid($value)
     {
-        $this->_amount_paid = $amountPaid;
+        $this->_amount_paid = $value;
     }
 
     public function getAmountPaid()

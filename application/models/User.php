@@ -19,6 +19,9 @@ class Application_Model_User
     protected $_status;
     protected $_api_token;
     protected $_api_updated;
+    protected $_medical_site;
+    protected $_dental_site;
+    protected $_vision_site;
     protected $_cigna_user_id;
     protected $_cigna_password;
     protected $_cigna_medical_exeid;
@@ -32,6 +35,12 @@ class Application_Model_User
     protected $_anthem_password;
     protected $_anthem_exeid;
     protected $_anthem_claim_overview_exeid;
+    protected $_navia_user_id;
+    protected $_navia_password;
+    protected $_navia_statements_exeid;
+    protected $_navia_day_care_exeid;
+    protected $_navia_health_care_exeid;
+    protected $_navia_health_savings_exeid;
     
     
     public function __construct($options = null)
@@ -270,5 +279,69 @@ class Application_Model_User
     {
         return $this->_anthem_claim_overview_exeid;
     }
+    
+    public function setNaviaUserId($value)
+    {
+        $this->_navia_user_id = $value;
+    }
+    
+    public function getNaviaUserId()
+    {
+        return $this->_navia_user_id;
+    }
+    
+    public function setNaviaPassword($value)
+    {
+        $this->_navia_password = $value;
+    }
+    
+    public function getNaviaPassword()
+    {
+        return $this->_navia_password;
+    }
+    
+    public function setNaviaStatementsExeid($value)
+    {
+        $this->_navia_statements_exeid = $value;
+    }
+    
+    public function getNaviaStatementsExeid()
+    {
+        return $this->_navia_statements_exeid;
+    }
+    
+    public function setNaviaDayCareExeid($value)
+    {
+        $this->_navia_day_care_exeid = $value;
+    }
+    
+    public function getNaviaDayCareExeid()
+    {
+        return $this->_navia_day_care_exeid;
+    }
+    
+    public function setNaviaHealthCareExeid($value)
+    {
+        $this->_navia_health_care_exeid = $value;
+    }
+    
+    public function getNaviaHealthCareExeid()
+    {
+        return $this->_navia_health_care_exeid;
+    }
+    
+    public function setNaviaHealthSavingsExeid($value)
+    {
+        $this->_navia_health_savings_exeid = $value;
+    }
+    
+    public function getNaviaHealthSavingsExeid()
+    {
+        return $this->_navia_health_savings_exeid;
+    }
+    
+    
+    
+    
     
 }

@@ -46,9 +46,9 @@ class Application_Model_CignaDeductible
         return $this->_id;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_userId = $userId;
+        $this->_userId = $value;
     }
     
     public function getUserId()
@@ -56,9 +56,9 @@ class Application_Model_CignaDeductible
         return $this->_userId;
     }
     
-    public function setDeductibleAmt($deductibleAmt)
+    public function setDeductibleAmt($value)
     {
-        $this->_deductible_amt = $deductibleAmt;
+        $this->_deductible_amt = $value;
     }
     
     public function getDeductibleAmt()
@@ -66,9 +66,9 @@ class Application_Model_CignaDeductible
         return $this->_deductible_amt;
     }
     
-    public function setDeductibleMet($deductibleMet)
+    public function setDeductibleMet($value)
     {
-        $this->_deductible_met = $deductibleMet;
+        $this->_deductible_met = $value;
     }
     
     public function getDeductibleMet()
@@ -76,9 +76,9 @@ class Application_Model_CignaDeductible
         return $this->_deductible_met;
     }
     
-    public function setDeductibleRemaining($deductibleRemaining)
+    public function setDeductibleRemaining($value)
     {
-        $this->_deductible_remaining = $deductibleRemaining;
+        $this->_deductible_remaining = $value;
     }
     
      public function getDeductibleRemaining()
@@ -86,9 +86,9 @@ class Application_Model_CignaDeductible
         return $this->_deductible_remaining;
     }
     
-    public function setOutOfPocketAmt($outOfPocketAmt)
+    public function setOutOfPocketAmt($value)
     {
-        $this->_out_of_pocket_amt = $outOfPocketAmt;
+        $this->_out_of_pocket_amt = $value;
     }
 
     public function getOutOfPocketAmt()
@@ -96,9 +96,9 @@ class Application_Model_CignaDeductible
         return $this->_out_of_pocket_amt;
     }
     
-    public function setOutOfPocketMet($outOfPocketMet)
+    public function setOutOfPocketMet($value)
     {
-        $this->_out_of_pocket_met = $outOfPocketMet;
+        $this->_out_of_pocket_met = $value;
     }
 
     public function getOutOfPocketMet()
@@ -106,9 +106,9 @@ class Application_Model_CignaDeductible
         return $this->_out_of_pocket_met;
     }
     
-    public function setOutOfPocketRemaining($outOfPocketRemaining)
+    public function setOutOfPocketRemaining($value)
     {
-        $this->_out_of_pocket_remaining = $outOfPocketRemaining;
+        $this->_out_of_pocket_remaining = $value;
     }
 
     public function getOutOfPocketRemaining()

@@ -92,7 +92,7 @@ class Application_Model_CignaMedicalMapper
         
     }
     
-    public function getMedicalUserAll()
+    public function getCignaMedicalUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('cigna_medical', array('user_id'))

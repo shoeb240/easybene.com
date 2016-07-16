@@ -20,12 +20,6 @@ class ScrapeAnthemController extends Zend_Controller_Action
 
     private $apiEndPoint = "https://api.dexi.io/";
     
-    private $anthemUserAll;
-    
-    private $anthemClaimOverviewUserAll;
-    
-    //private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
-    
     /**
      * Initialize object
      *
@@ -46,7 +40,6 @@ class ScrapeAnthemController extends Zend_Controller_Action
     private function myExecutionResult($executionId, $headerArray) 
     {
         $url = $this->apiEndPoint . "executions/{$executionId}/result";
-        //echo $url;
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -90,6 +83,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
 
         foreach($usersAll as $k => $userObj) {
             if ( $userObj->getUserId() != 84 ) continue; // remove
+            
             $u = $userObj->getAnthemUserId();
             $p = $userObj->getAnthemPassword();
             if (empty($u) || empty($p)) continue;
@@ -129,7 +123,6 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
             }
             break; // remove
-            echo 'Done';
         }
     }
     
@@ -146,23 +139,12 @@ class ScrapeAnthemController extends Zend_Controller_Action
         $userMapper = new Application_Model_UserMapper();
         $usersAll = $userMapper->getUserAll();
 
-        $anthemMapper = new Application_Model_AnthemMapper();
-        $this->anthemUserAll = $anthemMapper->getAnthemUserAll();
-        
-        $claimMapper = new Application_Model_AnthemClaimOverviewMapper();
-        $this->anthemClaimOverviewUserAll = $claimMapper->getClaimOverviewUserAll();
-
         foreach($usersAll as $k => $userObj) {
-            //if (!$userObj->getAnthemExeid()) continue;
-            //echo $userObj->getAnthemClaimOverviewExeid() . '==';            die('here');
+            if ( $userObj->getUserId() != 84 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
-                //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
                 $resultAnthem = $this->myExecutionResult($userObj->getAnthemExeid(), $headerArray);
                 $resultAnthemClaimOverview = $this->myExecutionResult($userObj->getAnthemClaimOverviewExeid(), $headerArray);
-                echo '<pre>';
-                print_r($resultAnthemClaimOverview);
-                echo '</pre>';
             } catch (Exception $e) {
                 echo $e->getMessage();
                 die('catch');
@@ -183,14 +165,11 @@ class ScrapeAnthemController extends Zend_Controller_Action
     
     private function storeScrape($userId, $arr)
     {
-        
-        //echo $arr['rows'][0][array_search('whos_covered', $arr['headers'])];
         try{
             // cingna_deductible
             $anthemMapper = new Application_Model_AnthemMapper();
-            if ($this->anthemUserAll) {
-                $anthemMapper->deleteAnthem($userId);
-            }
+            $anthemMapper->deleteAnthem($userId);
+            
             foreach($arr['anthem']['rows'] as $k => $eachRow) {
                 $claims_benefit_coverage = $eachRow[array_search('claims_benefit_coverage', $arr['anthem']['headers'])];
                 $claims_deductible_for = $eachRow[array_search('claims_deductible_for', $arr['anthem']['headers'])];
@@ -244,7 +223,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 
                 echo 'insert1...<br/>';
                 try {
-                    $anthemId = $anthemMapper->insertAnthem($anthem);
+                    $anthemId = $anthemMapper->saveAnthem($anthem);
                 } catch(Exception $e) {
                     echo $e->getMessage();
                 }
@@ -252,9 +231,8 @@ class ScrapeAnthemController extends Zend_Controller_Action
 
             // cingna_claim
             $claimMapper = new Application_Model_AnthemClaimOverviewMapper();
-            if ($this->anthemClaimOverviewUserAll) {
-                $claimMapper->deleteAnthemClaimOverview($userId);
-            }
+            $claimMapper->deleteAnthemClaimOverview($userId);
+            
             foreach($arr['anthem_claim_overview']['rows'] as $k => $eachRow) {
                 $number = $eachRow[array_search('number', $arr['anthem_claim_overview']['headers'])];
                 $date = $eachRow[array_search('date', $arr['anthem_claim_overview']['headers'])];
@@ -279,7 +257,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $claim->setOption('status', $status);
 
                 echo 'insert2...<br/>';
-                $claimId = $claimMapper->insertAnthemClaimOverview($claim);
+                $claimId = $claimMapper->saveAnthemClaimOverview($claim);
             }
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();

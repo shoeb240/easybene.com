@@ -33,9 +33,9 @@ class Application_Model_Scrape
         return $this;
     }
     
-    public function setScrapeId($scrapeId)
+    public function setScrapeId($value)
     {
-        $this->_scrapeId = $scrapeId;
+        $this->_scrapeId = $value;
     }
     
     public function getScrapeId()
@@ -43,9 +43,9 @@ class Application_Model_Scrape
         return $this->_scrapeId;
     }
     
-    public function setSiteId($siteId)
+    public function setSiteId($value)
     {
-        $this->_siteId = $siteId;
+        $this->_siteId = $value;
     }
     
     public function getSiteId()
@@ -53,9 +53,9 @@ class Application_Model_Scrape
         return $this->_siteId;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_userId = $userId;
+        $this->_userId = $value;
     }
     
      public function getUserId()
@@ -63,9 +63,9 @@ class Application_Model_Scrape
         return $this->_userId;
     }
     
-    public function setMedical1($medical1)
+    public function setMedical1($value)
     {
-        $this->_medical1 = $medical1;
+        $this->_medical1 = $value;
     }
 
     public function getMedical1()
@@ -73,9 +73,9 @@ class Application_Model_Scrape
         return $this->_medical1;
     }
     
-    public function setMedical2($medical2)
+    public function setMedical2($value)
     {
-        $this->_medical2 = $medical2;
+        $this->_medical2 = $value;
     }
 
     public function getMedical2()

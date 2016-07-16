@@ -49,9 +49,9 @@ class Application_Model_GuardianBenefit
         return $this->_id;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_userId = $userId;
+        $this->_userId = $value;
     }
     
     public function getUserId()
@@ -59,9 +59,9 @@ class Application_Model_GuardianBenefit
         return $this->_userId;
     }
     
-    public function setGroupId($groupId)
+    public function setGroupId($value)
     {
-        $this->_group_id = $groupId;
+        $this->_group_id = $value;
     }
     
     public function getGroupId()
@@ -69,9 +69,9 @@ class Application_Model_GuardianBenefit
         return $this->_group_id;
     }
     
-    public function setCompanyName($companyName)
+    public function setCompanyName($value)
     {
-        $this->_company_name = $companyName;
+        $this->_company_name = $value;
     }
     
     public function getCompanyName()
@@ -79,9 +79,9 @@ class Application_Model_GuardianBenefit
         return $this->_company_name;
     }
     
-    public function setMemberName($memberName)
+    public function setMemberName($value)
     {
-        $this->_member_name = $memberName;
+        $this->_member_name = $value;
     }
     
      public function getMemberName()
@@ -89,9 +89,9 @@ class Application_Model_GuardianBenefit
         return $this->_member_name;
     }
     
-    public function setName($name)
+    public function setName($value)
     {
-        $this->_name = $name;
+        $this->_name = $value;
     }
 
     public function getName()
@@ -99,9 +99,9 @@ class Application_Model_GuardianBenefit
         return $this->_name;
     }
     
-    public function setRelationship($relationship)
+    public function setRelationship($value)
     {
-        $this->_relationship = $relationship;
+        $this->_relationship = $value;
     }
 
     public function getRelationship()
@@ -109,9 +109,9 @@ class Application_Model_GuardianBenefit
         return $this->_relationship;
     }
     
-    public function setCoverage($coverage)
+    public function setCoverage($value)
     {
-        $this->_coverage = $coverage;
+        $this->_coverage = $value;
     }
 
     public function getCoverage()
@@ -119,9 +119,9 @@ class Application_Model_GuardianBenefit
         return $this->_coverage;
     }
     
-    public function setOriginalEffectiveDate($originalEffectiveDate)
+    public function setOriginalEffectiveDate($value)
     {
-        $this->_original_effective_date = $originalEffectiveDate;
+        $this->_original_effective_date = $value;
     }
 
     public function getOriginalEffectiveDate()
@@ -129,9 +129,9 @@ class Application_Model_GuardianBenefit
         return $this->_original_effective_date;
     }
     
-    public function setAmounts($amounts)
+    public function setAmounts($value)
     {
-        $this->_amounts = $amounts;
+        $this->_amounts = $value;
     }
 
     public function getAmounts()
@@ -139,9 +139,9 @@ class Application_Model_GuardianBenefit
         return $this->_amounts;
     }
     
-    public function setMonthlyCost($monthlyCost)
+    public function setMonthlyCost($value)
     {
-        $this->_monthly_cost = $monthlyCost;
+        $this->_monthly_cost = $value;
     }
 
     public function getMonthlyCost()

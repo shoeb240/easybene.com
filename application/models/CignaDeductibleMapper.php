@@ -60,7 +60,7 @@ class Application_Model_CignaDeductibleMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function insertCignaDeductible(Application_Model_CignaDeductible $deductible)
+    public function saveCignaDeductible(Application_Model_CignaDeductible $deductible)
     {
         $data = array(
             'user_id' => $deductible->getUserId(),
@@ -111,7 +111,7 @@ class Application_Model_CignaDeductibleMapper
         
     }
     
-    public function getDeductibleUserAll()
+    public function getCignaDeductibleUserAll()
     {
         $select = $this->getTable()->select();
         $select->from('cigna_deductible', array('user_id'));

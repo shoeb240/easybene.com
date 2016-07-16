@@ -17,12 +17,6 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
     private $apiEndPoint = "https://api.dexi.io/";
     
-    private $guardianBenefitUserAll;
-    
-    private $guardianClaimUserAll;
-    
-    //private $runId = "5facd97f-895a-412c-951e-0f5cf27978c6";
-    
     /**
      * Initialize object
      *
@@ -100,6 +94,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
         foreach($usersAll as $k => $userObj) {
             if ( $userObj->getUserId() != 84 ) continue; // remove
+            
             $u = $userObj->getGuardianUserId();
             $p = $userObj->getGuardianPassword();
             if (empty($u) || empty($p)) continue;
@@ -162,8 +157,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
             }
+            
             break; // remove
-            echo 'Done';
         }
     }
     
@@ -180,14 +175,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
         $userMapper = new Application_Model_UserMapper();
         $usersAll = $userMapper->getUserAll();
 
-        $benefitMapper = new Application_Model_GuardianBenefitMapper();
-        $this->guardianBenefitUserAll = $benefitMapper->getBenefitUserAll();
-        
-        $claimMapper = new Application_Model_GuardianClaimMapper();
-        $this->guardianClaimUserAll = $claimMapper->getClaimUserAll();
-        
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
+            if ( $userObj->getUserId() != 84 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
@@ -200,9 +189,9 @@ class ScrapeGuardianController extends Zend_Controller_Action
             $arr = array();
             $arr['guardian_benefit'] = json_decode($resultGuardianBenefit, true);
             $arr['guardian_claim'] = json_decode($resultGuardianClaim, true);
-//            echo '<pre>';
-//            print_r($arr);
-//            echo '</pre>';
+            echo '<pre>';
+            print_r($arr);
+            echo '</pre>';
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
             
@@ -216,9 +205,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
         try{
             // cingna_deductible
             $benefitMapper = new Application_Model_GuardianBenefitMapper();
-            if ($this->guardianBenefitUserAll) {
-                $benefitMapper->deleteGuardianBenefit($userId);
-            }
+            $benefitMapper->deleteGuardianBenefit($userId);
+            
             foreach($arr['guardian_benefit']['rows'] as $k => $eachRow) {
                 $groupId = $eachRow[array_search('group_id', $arr['guardian_benefit']['headers'])];
                 $companyName = $eachRow[array_search('company_name', $arr['guardian_benefit']['headers'])];
@@ -244,7 +232,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
                 echo 'insert...<br/>';
                 try {
-                    $benefitId = $benefitMapper->insertGuardianBenefit($benefit);
+                    $benefitId = $benefitMapper->saveGuardianBenefit($benefit);
                 } catch(Exception $e) {
                     echo $e->getMessage();
                 }
@@ -252,9 +240,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
             // cingna_claim
             $claimMapper = new Application_Model_GuardianClaimMapper();
-            if ($this->guardianClaimUserAll) {
-                $claimMapper->deleteGuardianClaim($userId);
-            }
+            $claimMapper->deleteGuardianClaim($userId);
+            
             foreach($arr['guardian_claim']['rows'] as $k => $eachRow) {
                 $patient = $eachRow[array_search('patient', $arr['guardian_claim']['headers'])];
                 $coverageType = $eachRow[array_search('coverage_type', $arr['guardian_claim']['headers'])];
@@ -283,7 +270,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $claim->setAmountPaid($amountPaid);
 
                 echo 'insert...<br/>';
-                $claimId = $claimMapper->insertGuardianClaim($claim);
+                $claimId = $claimMapper->saveGuardianClaim($claim);
             }
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();

@@ -49,9 +49,9 @@ class Application_Model_CignaClaim
         return $this->_id;
     }
     
-    public function setUserId($userId)
+    public function setUserId($value)
     {
-        $this->_userId = $userId;
+        $this->_userId = $value;
     }
     
     public function getUserId()
@@ -59,9 +59,9 @@ class Application_Model_CignaClaim
         return $this->_userId;
     }
     
-    public function setServiceDate($serviceDate)
+    public function setServiceDate($value)
     {
-        $this->_service_date = $serviceDate;
+        $this->_service_date = $value;
     }
     
      public function getServiceDate()
@@ -69,9 +69,9 @@ class Application_Model_CignaClaim
         return $this->_service_date;
     }
     
-    public function setProvidedBy($providedBy)
+    public function setProvidedBy($value)
     {
-        $this->_provided_by = $providedBy;
+        $this->_provided_by = $value;
     }
 
     public function getProvidedBy()
@@ -89,9 +89,9 @@ class Application_Model_CignaClaim
         return $this->_for;
     }
     
-    public function setStatus($status)
+    public function setStatus($value)
     {
-        $this->_status = $status;
+        $this->_status = $value;
     }
 
     public function getStatus()
@@ -99,9 +99,9 @@ class Application_Model_CignaClaim
         return $this->_status;
     }
     
-    public function setAmountBilled($amountBilled)
+    public function setAmountBilled($value)
     {
-        $this->_amount_billed = $amountBilled;
+        $this->_amount_billed = $value;
     }
 
     public function getAmountBilled()
@@ -109,9 +109,9 @@ class Application_Model_CignaClaim
         return $this->_amount_billed;
     }
     
-    public function setWhatYourPlanPaid($whatYourPlanPaid)
+    public function setWhatYourPlanPaid($value)
     {
-        $this->_what_your_plan_paid = $whatYourPlanPaid;
+        $this->_what_your_plan_paid = $value;
     }
 
     public function getWhatYourPlanPaid()
@@ -119,9 +119,9 @@ class Application_Model_CignaClaim
         return $this->_what_your_plan_paid;
     }
     
-    public function setMyAccountPaid($myAccountPaid)
+    public function setMyAccountPaid($value)
     {
-        $this->_my_account_paid = $myAccountPaid;
+        $this->_my_account_paid = $value;
     }
 
     public function getMyAccountPaid()
@@ -129,9 +129,9 @@ class Application_Model_CignaClaim
         return $this->_my_account_paid;
     }
     
-    public function setWhatIOwe($whatIOwe)
+    public function setWhatIOwe($value)
     {
-        $this->_what_i_owe = $whatIOwe;
+        $this->_what_i_owe = $value;
     }
 
     public function getWhatIOwe()
@@ -139,9 +139,9 @@ class Application_Model_CignaClaim
         return $this->_what_i_owe;
     }
     
-    public function setClaimNumber($claimNumber)
+    public function setClaimNumber($value)
     {
-        $this->_claim_number = $claimNumber;
+        $this->_claim_number = $value;
     }
 
     public function getClaimNumber()

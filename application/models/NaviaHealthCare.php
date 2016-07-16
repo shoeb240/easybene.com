@@ -1,6 +1,6 @@
 <?php
 /**
- * Application_Model_NaviaHealthSavings class
+ * Application_Model_NaviaHealthCare class
  * 
  * @category   Application
  * @package    Application_Model
@@ -8,18 +8,17 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_NaviaHealthSavings
+class Application_Model_NaviaHealthCare
 {
     protected $_id;
     protected $_user_id;
     protected $_balance;
-    protected $_portfolio_balance;
-    protected $_total_balance;
-    protected $_contributions_YTD;
-    protected $_employer_contributions_YTD;
-    protected $_total_contributions_YTD;    
-    protected $_employer_per_pay_amount;
-    protected $_employee_per_pay_amount;
+    protected $_annual_election;
+    protected $_reimbursed_to_date;
+    protected $_date_posted;    
+    protected $_transaction_type;
+    protected $_claim_amount;
+    protected $_amount;
     
     public function setOption($field, $value)
     {
