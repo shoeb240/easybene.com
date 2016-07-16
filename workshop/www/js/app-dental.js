@@ -60,7 +60,6 @@
         window.localStorage.removeItem('username');
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('token_expire');
-        window.localStorage.removeItem('cigna_exists');
         window.localStorage.removeItem('medical_site');
         window.localStorage.removeItem('dental_site');
         window.localStorage.removeItem('vision_site');

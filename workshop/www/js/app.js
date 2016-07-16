@@ -9,6 +9,7 @@
     $(window).load(function(){
         if (username && token) {
             welcomeSelection();
+            //ShowMedicalSiteLinks(); // remove
         } else {
             ShowReg(null);
         }
@@ -42,6 +43,10 @@
     
     $('#login').on('click', function() {
         ShowLogin();
+    });
+    
+    $('#cigna_medical_search').on('change', function() {
+        //ShowSiteReg('Medical', 'Cigna', 'cigna_logo.jpg');
     });
     
     $('#cigna_medical').on('click', function() {
@@ -84,6 +89,14 @@
         RegisterSite();
     });
     
+    $('#skip_dental').on('click', function() {
+        ShowVisionSiteLinks();
+    });
+    
+    $('#skip_vision').on('click', function() {
+        ShowWelcome();
+    });
+    
     function hideAll() {
         $('#login_div_step1').css('display', 'none');
         $('#login_div_step2').css('display', 'none');
@@ -104,7 +117,7 @@
         $('#site_reg_fail_div').css('display', 'none');   
         
         $('#reg_div_success').css('display', 'none');
-        $('#reg_span_succ').css('display', 'none');
+        //$('#reg_span_succ').css('display', 'none');
         $('#reg_span_fail').css('display', 'none');
         $('#login_span_fail').html('');   
     }
@@ -117,12 +130,12 @@
         var vision_site = window.localStorage.getItem('vision_site');
         var unix = Math.round(+new Date()/1000);
         if (token_expire > unix) {
-            if (typeof(medical_site) === 'undefined' || !medical_site) {
+            if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
                 ShowMedicalSiteLinks();
-            } else if (typeof(dental_site) === 'undefined' || !dental_site) {
-                ShowDentalSiteLinks();
-            } else if (typeof(vision_site) === 'undefined' || !vision_site) {
-                ShowVisionSiteLinks();
+            //} else if (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site) {
+            //    ShowDentalSiteLinks();
+            //} else if (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site) {
+            //    ShowVisionSiteLinks();
             } else {
                 ShowWelcome();
             }
@@ -167,11 +180,11 @@
         $('#login_span_fail').html(msg);
     }
 
-    function ShowLoginRegSucc() {
-        hideAll(); 
-        $('#reg_span_succ').css('display', 'block');
-        $('#login_div_step1').css('display', 'block');
-    }
+    //function ShowLoginRegSucc() {
+    //    hideAll(); 
+    //    $('#reg_span_succ').css('display', 'block');
+    //    $('#login_div_step1').css('display', 'block');
+    //}
 
     function ShowLoginStep2() {
         hideAll(); 
@@ -228,7 +241,12 @@
             dataType: 'json',
             success: function(result) {
                     //console.log(result);
-                    ShowLoginRegSucc();
+                    //ShowLoginRegSucc();
+                    window.localStorage.setItem("username", email);
+                    window.localStorage.setItem("token", result.token);
+                    window.localStorage.setItem("token_expire", result.token_expire);
+
+                    welcomeSelection();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     ShowRegFail(xhr.responseJSON);
@@ -266,7 +284,6 @@
         window.localStorage.removeItem('username');
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('token_expire');
-        window.localStorage.removeItem('cigna_exists');
         window.localStorage.removeItem('medical_site');
         window.localStorage.removeItem('dental_site');
         window.localStorage.removeItem('vision_site');
@@ -315,10 +332,25 @@
             success: function(result) {
                 //console.log(result.guardian_percent);
                 $("#abc1").data('easyPieChart').update(result.cigna_percent);
-                $("#abc1 span").html(result.cigna_percent);
+                if (result.cigna_percent > 0) {
+                    $("#abc1 span").html(result.cigna_percent+'%');
+                } else {
+                    $("#abc1 span").html('Pending');
+                }
                 
                 $("#abc2").data('easyPieChart').update(result.guardian_percent);
-                $("#abc2 span").html(result.guardian_percent);
+                if (result.guardian_percent > 0) {
+                    $("#abc2 span").html(result.guardian_percent+'%');
+                } else {
+                    $("#abc2 span").html('Pending');
+                }
+                
+                $("#abc3").data('easyPieChart').update(0);
+                if (!1) { // TODO
+                    $("#abc3 span").html(result.guardian_percent+'%');
+                } else {
+                    $("#abc3 span").html('Pending');
+                }
 
                 //ShowWelcome();
                 },

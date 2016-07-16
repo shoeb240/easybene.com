@@ -24,14 +24,22 @@
             async: false,
             success: function(result) {
                     //console.log(result.claim[0]);
-                    
+
                     $("#abc1").data('easyPieChart').update(result.cigna_deductible_percent);
-                    $("#abc1 span").html(result.cigna_deductible_percent);
-                    $("#abc1_dollar").html(result.cigna_deductible_met);
+                    $("#abc1 span").html(result.cigna_deductible_percent+'%');
+                    if (result.cigna_deductible_percent > 0) {
+                        $("#abc1_dollar").html('$'+result.cigna_deductible_met);
+                    } else {
+                        $("#abc1_dollar").html('Pending');
+                    }
 
                     $("#abc2").data('easyPieChart').update(result.cigna_out_of_pocket_percent);
-                    $("#abc2 span").html(result.cigna_out_of_pocket_percent);
-                    $("#abc2_dollar").html(result.cigna_out_of_pocket_met);
+                    $("#abc2 span").html(result.cigna_out_of_pocket_percent+'%');
+                    if (result.cigna_out_of_pocket_percent) {
+                        $("#abc2_dollar").html('$'+result.cigna_out_of_pocket_met);
+                    } else {
+                        $("#abc2_dollar").html('Pending');
+                    }
 
                     if (result.claim[0]) {
                         $.each(result.claim, function (key, row){
@@ -43,6 +51,7 @@
                     }
                     
                     showClaimDiv();
+                    //showDeductibleDiv(); // remove
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -87,7 +96,6 @@
         window.localStorage.removeItem('username');
         window.localStorage.removeItem('token');
         window.localStorage.removeItem('token_expire');
-        window.localStorage.removeItem('cigna_exists');
         window.localStorage.removeItem('medical_site');
         window.localStorage.removeItem('dental_site');
         window.localStorage.removeItem('vision_site');

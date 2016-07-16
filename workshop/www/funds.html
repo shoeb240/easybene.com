@@ -38,7 +38,7 @@
         =========================================== -->
         <script src="assets/js/vendor/modernizr/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <!--/ modernizr -->
-        
+
         <style>
         .col-md-1 {width: 8.33%;}
         .col-md-2 {width: 16.66%;}
@@ -97,17 +97,18 @@
             }
         }
         </style>
-        
+
     </head>
-    
+
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-    <!-- ====================================================
+        <!-- ====================================================
         ================= Application Content ===================
         ===================================================== -->
         <div>
+
             <div class="page page-core"  style="padding-top:0px;">
 
                 <header class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></header>
@@ -115,48 +116,125 @@
                 <div class="col-md-12 bg-white text-center">
                     <div  class="form-group text-left mt-10 pull-right">
                             <a href="javascript:void(0);" class="logout">Logout</a>
+                    </div>
+                    <div  class="form-group text-right mt-10 pull-left">
+                        <a href="javascript:history.go(-1);">Back</a>
+                    </div>
+                    <div style="clear:both;"></div>
+                    
+                    <div id="hsa_summary_div" style="display: block;">
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: center;">
+                                <p style="font-size: 14px;">YOUR HSA ACCOUNT BALANCES</p>
+                            </div>
                         </div>
-                        <div  class="form-group text-right mt-10 pull-left">
-                            <a href="javascript:history.go(-1);">Back</a>
+                        <div class="row" style="border-top: 3px solid #559955; border-bottom: 3px solid #559955;">
+                            <div class="col-md-6" style="border-right: 3px solid #559955; text-align: center; float:left;">
+                                <!--<p style="font-size: 12px;">Updated 12/16/ 4:30m</p>-->
+                                <p id="hsa_checking_value" style="font-size: 20px;">-</p>
+                                <p style="font-size: 12px;">Checking</p>
+                            </div>
+                            <div class="col-md-6" style="float:left;">
+                                <!-- <p style="font-size: 12px;">Updated 12/16/ 4:30m</p> -->
+                                <p id="hsa_investment_value" style="font-size: 20px;">-</p>
+                                <p style="font-size: 12px;">Investments</p>
+                            </div>
                         </div>
-                        <div style="clear:both;"></div>
-                    <div class="btn-group mb-10">
-                        <button class="btn btn-default" type="button" onclick="javascript: location.href='medical.html'">Medical</button>
-                        <button class="btn btn-default" style="background-color: #ccccff" type="button" onclick="javascript: location.href='dental.html'">Dental</button>
-                        <button class="btn btn-default" type="button" onclick="javascript: location.href='#'">Vision</button>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="javascript:void(0);" id="hsa_details_link">HSA transaction details ></a>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div style="clear:both;"></div>
-
-                    <div id="claim_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                        <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
-                        <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
-                        <span style="font-size:16px; font-weight:bold;">Dental Claims</span>
-                        <table id="guardian-claim" class="table table-custom dataTable no-footer text-left" role="grid">
-                        <thead>
-                        <tr role="row">
-                            <th>Date</th>
-                            <th>For</th>
-                            <th>Total</th>
-                            <th>I&nbsp;owe</th>
-                            <th>Status</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </table>
-                        <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
+                    <div id="hsa_transaction_activity_div" style="display: none;">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>Reimbursements</h4>
+                            </div>
+                        </div>
+                        <div  class="row" style="clear:both;">
+                            <div class="col-md-4  text-left" style="float:left; font-weight: bold;">
+                                        Transaction Date
+                            </div>
+                            <div class="col-md-4  text-left" style="float:left;  font-weight: bold;">
+                                        Transaction Type
+                            </div>
+                            <div class="col-md-4"  style="float:left;  font-weight: bold;">
+                                        Transaction Amt
+                            </div> 
+                        </div>
+                        
+                        <div id="hsa_transaction_activity_loop">
+                        <!--<div class="row">
+                            <div class="col-md-8  text-left" style="float:left;">
+                                Qualified Expenses
+                            </div>
+                            <div class="col-md-4"  style="float:left;">
+                                <h4>$81.84</h4>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8  text-left" style="float:left;">
+                                Paid with HSA funds
+                            </div>
+                            <div class="col-md-4"  style="float:left; border-bottom: 2px solid black;">
+                                <h4>$81.84</h4>
+                            </div>
+                        </div>-->
+                        </div>    
+                        <!--<div class="row" style="border-bottom: 3px solid #559955; padding-bottom: 15px;">
+                            <div class="col-md-8  text-left" style="float:left;">
+                                Eligible for withdrawal<br />
+                                (from HSA funds)
+                            </div>
+                            <div class="col-md-4"  style="float:left;">
+                                <h4>$81.84</h4>
+                            </div>
+                        </div>-->
+                        
+                        <!--<div class="row" style="background-color: #cccccc; padding: 10px;">
+                            <div class="col-md-3 text-left" style="float:left;">
+                                2015
+                            </div>
+                            <div class="col-md-9 text-right"  style="float:left;">
+                                <div>Total Expenses Reimbursed:<span>$12.36</span></div>
+                                <div>Actual Distributions:<span>$12.36</span></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 text-left" style="float:left;">
+                                <div>Doctor Visit</div>
+                                <div style="font-size: 10px;">Rod June 5, 2016</div>
+                            </div>
+                            <div class="col-md-4 text-right"  style="float:left;">
+                                <h4>$81.84&nbsp;></h4>
+                            </div>
+                        </div>
+                        <div class="row" style="background-color: #cccccc; padding: 10px;">
+                            <div class="col-md-3 text-left" style="float:left;">
+                                2014
+                            </div>
+                            <div class="col-md-9 text-right"  style="float:left;">
+                                <div>Total Expenses Reimbursed:<span>$12.36</span></div>
+                                <div>Actual Distributions:<span>$12.36</span></div>
+                            </div>
+                        </div>-->
+                        
                     </div>
                     
                     <div style="clear:both;"></div>
                     <footer style="margin-top:30px; margin-bottom:5px; text-align: center;">
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="index.html"><img src="assets/images/home-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html"><img src="assets/images/medical-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html" style="border-color: #8888ff"><img src="assets/images/dental-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="funds.html"><img src="assets/images/funds-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" style="border-color: #8888ff"  href="funds.html"><img src="assets/images/funds-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="settings.html"><img width="32" src="assets/images/Settings-icon.png" /></a>
                     </footer>
             </div>
+
+
 
         </div>
         <!--/ Application Content -->
@@ -165,7 +243,7 @@
 
 
         <script src="lib/jquery.js"></script>
-        <script src="js/app-dental.js"></script>
+        <script src="js/app-funds.js"></script>
 
 
         <!-- ============================================
