@@ -140,7 +140,7 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                    console.log(result);
+                    //console.log(result);
                     select_code = '<select id="dental_selected_name" class="form-control underline-input">' +
                                         '<option>--Select Provider--</option>';
                     if (result.dental_site == 'Cigna') {

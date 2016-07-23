@@ -45,10 +45,22 @@
         ShowLogin();
     });
     
-    $('#do_search_link').on('click', function() {
-        var name = $(".search-choice span").html();
+    $('#do_search_link_medical').on('click', function() {
+        var name = $("#medical_search_chosen .search-choice span").html();
         var image_name = name.toLowerCase() + "_logo.jpg";
         ShowSiteReg('Medical', name, image_name);
+    });
+    
+    $('#do_search_link_dental').on('click', function() {
+        var name = $("#dental_search_chosen .search-choice span").html();
+        var image_name = name.toLowerCase() + "_logo.jpg";
+        ShowSiteReg('Dental', name, image_name);
+    });
+    
+    $('#do_search_link_vision').on('click', function() {
+        var name = $("#vision_search_chosen .search-choice span").html();
+        var image_name = name.toLowerCase() + "_logo.jpg";
+        ShowSiteReg('Vision', name, image_name);
     });
     
     $('#cigna_medical').on('click', function() {
@@ -167,6 +179,9 @@
     
     function ShowRegFail(msg) {
         hideAll();
+        if (msg != '') {
+            $('#reg_span_fail').html(msg);
+        }
         $('#reg_div_step1').css('display', 'block');
         $('#reg_span_fail').css('display', 'block');
     }
