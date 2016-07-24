@@ -347,26 +347,38 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                //console.log(result.guardian_percent);
-                $("#abc1").data('easyPieChart').update(result.cigna_percent);
-                if (result.cigna_percent > 0) {
-                    $("#abc1 span").html(result.cigna_percent+'%');
+                //console.log(result);
+                var medical_image_name = result.medical_site.toLowerCase() + "_logo.jpg";
+                var dental_image_name = result.dental_site.toLowerCase() + "_logo.jpg";
+                var vision_image_name = result.vision_site.toLowerCase() + "_logo.jpg";
+                $("#medical_image").attr("src", "assets/images/" + medical_image_name);
+                $("#dental_image").attr("src", "assets/images/" + dental_image_name);
+                $("#vision_image").attr("src", "assets/images/" + vision_image_name);
+                $("#medical_chart").data('easyPieChart').update(result.medical_percent);
+                if (result.medical_percent > 0) {
+                    $("#medical_chart span").html(result.medical_percent+'%');
+                } else if (!result.medical_site) {
+                    $("#medical_chart span").html('No Provider');
                 } else {
-                    $("#abc1 span").html('Pending');
+                    $("#medical_chart span").html('Pending');
                 }
                 
-                $("#abc2").data('easyPieChart').update(result.guardian_percent);
-                if (result.guardian_percent > 0) {
-                    $("#abc2 span").html(result.guardian_percent+'%');
+                $("#dental_chart").data('easyPieChart').update(result.dental_percent);
+                if (result.dental_percent > 0) {
+                    $("#dental_chart span").html(result.dental_percent+'%');
+                } else if (!result.dental_site) {
+                    $("#dental_chart span").html('No Provider');
                 } else {
-                    $("#abc2 span").html('Pending');
+                    $("#dental_chart span").html('Pending');
                 }
                 
-                $("#abc3").data('easyPieChart').update(0);
+                $("#vision_chart").data('easyPieChart').update(0);
                 if (!1) { // TODO
-                    $("#abc3 span").html(result.guardian_percent+'%');
+                    $("#vision_chart span").html(result.dental_percent+'%');
+                } else if (!result.vision_site) {
+                    $("#vision_chart span").html('No Provider');
                 } else {
-                    $("#abc3 span").html('Pending');
+                    $("#vision_chart span").html('Pending');
                 }
 
                 //ShowWelcome();

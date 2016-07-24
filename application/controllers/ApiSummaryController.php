@@ -30,33 +30,51 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
     {
         try{
             $userId = $this->_getParam('user_id', null);
+            
+            $userMapper = new Application_Model_UserMapper();
+            $userInfo = $userMapper->getUserArrForClient($userId);
+            
             $arr = array();
             $deductibleMapper = new Application_Model_CignaDeductibleMapper();
-            $arr['cigna_deductible'] = $deductibleMapper->getCignaDeductible($userId);
+            $cignaDeductible = $deductibleMapper->getCignaDeductible($userId);
             
-            $deductibleAmt = str_replace(array('$', ','), '', $arr['cigna_deductible']['deductible_amt']);
-            $deductibleMet = str_replace(array('$', ','), '', $arr['cigna_deductible']['deductible_met']);
-            $arr['cigna_percent'] = round($deductibleMet / $deductibleAmt * 100);
+            $deductibleAmt = str_replace(array('$', ','), '', $cignaDeductible['deductible_amt']);
+            $deductibleMet = str_replace(array('$', ','), '', $cignaDeductible['deductible_met']);
+            $cignaPercent = round($deductibleMet / $deductibleAmt * 100);
             
             // guardian_claim
             $claimMapper = new Application_Model_GuardianClaimMapper();
-            $arr['guardian_claim'] = $claimMapper->getGuardianClaim($userId);
+            $guardianClaim = $claimMapper->getGuardianClaim($userId);
             
-            $count = count($arr['guardian_claim']);
+            $count = count($guardianClaim);
             $submittedCharges = 0;
             $amountPaid = 0;
             for($i=0; $i < $count; $i++) {
-                $submittedCharges += str_replace(array('$', ','), '', $arr['guardian_claim'][$i]['submitted_charges']);
-                $amountPaid += str_replace(array('$', ','), '', $arr['guardian_claim'][$i]['amount_paid']);;
+                $submittedCharges += str_replace(array('$', ','), '', $guardianClaim[$i]['submitted_charges']);
+                $amountPaid += str_replace(array('$', ','), '', $guardianClaim[$i]['amount_paid']);;
             }
-            $arr['guardian_percent'] = round((($amountPaid / $submittedCharges))*100);
+            $guardianPercent = round((($amountPaid / $submittedCharges))*100);
             
-            //echo '<pre>';
-            //print_r($arr['guardian_percent']);
-            //echo '</pre>';
-            //die();
+            
+            $result['medical_site'] = $userInfo['medical_site'];
+            $result['dental_site'] = $userInfo['dental_site'];
+            $result['vision_site'] = $userInfo['vision_site'];
+            
+            if ($userInfo['medical_site'] == 'Cigna') {
+                $result['medical_percent'] = $cignaPercent;
+            }
+            if ($userInfo['medical_site'] == 'Guardian') {
+                $result['medical_percent'] = $guardianPercent;
+            }
+            if ($userInfo['dental_site'] == 'Cigna') {
+                $result['dental_percent'] = $cignaPercent;
+            }
+            if ($userInfo['dental_site'] == 'Guardian') {
+                $result['dental_percent'] = $guardianPercent;
+            }
+            
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
-            $this->getHelper('json')->sendJson($arr);
+            $this->getHelper('json')->sendJson($result);
             
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();

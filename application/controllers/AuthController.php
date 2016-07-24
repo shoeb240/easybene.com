@@ -192,7 +192,7 @@ class AuthController extends My_Controller_ApiAbstract
                 exit;
             }
         } catch(Exception $e) {
-            $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, $e->getMessage());
+            $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'Registration failed.'); // $e->getMessage()
             exit;
         }
     }
