@@ -41,8 +41,19 @@ class ScrapeCignaController extends Zend_Controller_Action
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
-        curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);                                                                                                                   
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);     
+        
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLOPT_HEADER, 1);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+                    
         $result = curl_exec($ch);
+        
+        $getinfo = curl_getinfo($ch);
+        
+        echo '<pre>';
+        print_r($getinfo);
+        echo '</pre>';
 
         return $result;
     }
@@ -140,26 +151,28 @@ class ScrapeCignaController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
+            if ( $userObj->getUserId() != 1 ) continue;
             $headerArray = $this->getHeaderArr();
             try {
                 $resultCignaMedical = $this->myExecutionResult($userObj->getCignaMedicalExeid(), $headerArray);
                 $arr['cigna_medical'] = json_decode($resultCignaMedical, true);
+                /*echo $userObj->getCignaDeductibleClaimExeid() . '==';
                 $resultCignaMedicalDeductibleClaim = $this->myExecutionResult($userObj->getCignaDeductibleClaimExeid(), $headerArray);
-                $arr['cigna_deductible_claim'] = json_decode($resultCignaMedicalDeductibleClaim, true);
-                $resultCignaMedicalDetails = $this->myExecutionResult($userObj->getCignaClaimDetailsExeid(), $headerArray);
-                $arr['cigna_medical_details'] = json_decode($resultCignaMedicalDetails, true);
+                $arr['cigna_deductible_claim'] = json_decode($resultCignaMedicalDeductibleClaim, true);*/
+                /*$resultCignaMedicalDetails = $this->myExecutionResult($userObj->getCignaClaimDetailsExeid(), $headerArray);
+                $arr['cigna_medical_details'] = json_decode($resultCignaMedicalDetails, true);*/
             } catch (Exception $e) {
                 echo $e->getMessage();
                 die('catch');
             }
+            $arr = array();
             echo '<pre>';
             print_r($arr);
             echo '</pre>';
-            //die('here');
+            die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
             
-            break;  // remove
+            break;
         }
         
     }
@@ -167,7 +180,7 @@ class ScrapeCignaController extends Zend_Controller_Action
     private function storeScrape($userId, $arr)
     {
         try{
-            // cingna_deductible - ok
+            // cingna_deductible
             $deductibleMapper = new Application_Model_CignaDeductibleMapper();
             $deductibleMapper->deleteCignaDeductible($userId);
             
@@ -225,17 +238,13 @@ class ScrapeCignaController extends Zend_Controller_Action
 
                 echo 'insert...<br/>';
                 $claimId = $claimMapper->saveCignaClaim($claim);
-            }*/
+            }
             
-            // cingna_claim_details - ok
+            // cingna_claim_details
             $claimDetailsMapper = new Application_Model_CignaClaimDetailsMapper();
-            $claimDetailsId = $claimDetailsMapper->deleteCignaClaimDetails($userId);
+            $claimDetailsId = $claimDetailsMapper->deleteCignaClaimDetails($this->cignaClaimDetailsUserAll);
             
             foreach($arr['cigna_medical_details']['rows'] as $k => $eachRow) {
-                $claimNumber = $eachRow[array_search('claim_number', $arr['cigna_medical_details']['headers'])];
-                $providedByDetails = $eachRow[array_search('provided_by_details', $arr['cigna_medical_details']['headers'])];
-                $for = $eachRow[array_search('for', $arr['cigna_medical_details']['headers'])];
-                $claimProcessedOn = $eachRow[array_search('claim_processed_on', $arr['cigna_medical_details']['headers'])];
                 $serviceDateType = $eachRow[array_search('service_date_type', $arr['cigna_medical_details']['headers'])];
                 $serviceAmountBilled = $eachRow[array_search('service_amount_billed', $arr['cigna_medical_details']['headers'])];
                 $serviceDiscount = $eachRow[array_search('service_discount', $arr['cigna_medical_details']['headers'])];
@@ -248,10 +257,6 @@ class ScrapeCignaController extends Zend_Controller_Action
 
                 $claimDetails = new Application_Model_CignaClaimDetails;
                 $claimDetails->setUserId($userId);
-                $claimDetails->setClaimNumber($claimNumber);
-                $claimDetails->setProvidedByDetails($providedByDetails);
-                $claimDetails->setFor($for);
-                $claimDetails->setClaimProcessedOn($claimProcessedOn);
                 $claimDetails->setServiceDateType($serviceDateType);
                 $claimDetails->setServiceAmountBilled($serviceAmountBilled);
                 $claimDetails->setServiceDiscount($serviceDiscount);
@@ -264,10 +269,10 @@ class ScrapeCignaController extends Zend_Controller_Action
                 
                 $claimDetailsId = $claimDetailsMapper->saveCignaClaimDetails($claimDetails);
                 echo 'insert...<br/>';
-            }
+            }*/
             
             // cingna_medical - ok
-            $medicalMapper = new Application_Model_CignaMedicalMapper();
+            /*$medicalMapper = new Application_Model_CignaMedicalMapper();
             $medicalId = $medicalMapper->deleteCignaMedical($this->cignaClaimDetailsUserAll);
              
             foreach($arr['cigna_medical']['rows'] as $k => $eachRow) {
@@ -287,7 +292,7 @@ class ScrapeCignaController extends Zend_Controller_Action
                 
                 $medicalId = $medicalMapper->saveCignaMedical($medical);
                 echo 'insert...<br/>';
-            }
+            }*/
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();
         }

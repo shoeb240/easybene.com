@@ -221,20 +221,26 @@
 
                         <div>
                             <div class="col-md-6 text-center"  style="float:left;">
-                                <div id="abc1" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px; clear: both;">
-                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                                <div id="medical_chart" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px; clear: both;">
+                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 20px;"></span></div>
+                                </div>
+                                <div>
+                                   <img id="medical_image" alt=" " style="height: 50px;" src="" />
                                 </div>
                                 <div class="form-group">
-                                    <a href="medical.html">Medical ></a>
+                                    <a  id="summary_link_medical" href="javascript: void(0);">Medical ></a>
                                 </div>
                             </div>
 
                             <div class="col-md-6 text-center" style="float:left;">
-                                <div id="abc2" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                                <div id="dental_chart" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
+                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 20px;"></span></div>
+                                </div>
+                                <div>
+                                    <img id="dental_image" alt=" " style="height: 50px;" src="" />
                                 </div>
                                 <div class="form-group">
-                                    <a href="dental.html">Dental ></a>
+                                    <a  id="summary_link_dental" href="javascript: void(0);">Dental ></a>
                                 </div>
                             </div>
                         </div> 
@@ -242,11 +248,14 @@
 
                         <div>
                             <div class="col-md-6 text-center" style="float:left;">
-                                <div id="abc3" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
+                                <div id="vision_chart" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
+                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 20px;"></span></div>
+                                </div>
+                                <div>
+                                   <img id="vision_image" alt=" " style="height: 50px;" src="" />
                                 </div>
                                 <div class="form-group">
-                                    <a href="javascript: void(0);">vision ></a>
+                                    <a  id="summary_link_vision" href="javascript: void(0);">vision ></a>
                                 </div>
                             </div>
 
@@ -279,9 +288,9 @@
                             <div class="col-md-12 text-center">
                                 <p  style="margin-top:10px;">
                                     <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="index.html" style="border-color: #8888ff"><img src="assets/images/home-icon.png" /></a>
-                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html"><img src="assets/images/medical-icon.png" /></a>
-                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
-                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_medical"><img src="assets/images/medical-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_dental"><img src="assets/images/dental-icon.png" /></a>
+                                    <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_vision"><img src="assets/images/vision-icon.png" /></a>
                                     <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="funds.html"><img src="assets/images/funds-icon.png" /></a>
                                     <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="settings.html"><img width="32" src="assets/images/Settings-icon.png" /></a>
                                 </p>
@@ -306,12 +315,12 @@
                             </div>
                             <div style="clear:both;"></div>
                             <div class="form-group text-center">
-                                <select id="cigna_medical_search" data-placeholder="Select Medical Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                <select id="medical_search" data-placeholder="Select Medical Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
                                         <option value="Cigna">Cigna</option>
                                         <option value="Guardian">Guardian</option>
                                         <option value="Anthem">Anthem</option>
                                     </select>
-                                <a id="do_search_link" href="javascript: void();"><img style="width: 20px;" src="assets/images/search.png" /></a>
+                                <a id="do_search_link_medical" href="javascript: void();"><img style="width: 20px;" src="assets/images/search.png" /></a>
                             </div>
                             <div style="clear:both;"></div>
                             
@@ -339,6 +348,16 @@
                             <div class="form-group">
                                 See all your benefits in one place. Add your medical, dental or vision provider.
                             </div>
+                            <div style="clear:both;"></div>
+                            <div class="form-group text-center">
+                                <select id="dental_search" data-placeholder="Select Dental Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                        <option value="Cigna">Cigna</option>
+                                        <option value="Guardian">Guardian</option>
+                                        <option value="Anthem">Anthem</option>
+                                    </select>
+                                <a id="do_search_link_dental" href="javascript: void();"><img style="width: 20px;" src="assets/images/search.png" /></a>
+                            </div>
+                            <div style="clear:both;"></div>
                             <div class="form-group">
                                 Choose from one of these popular EasyBenefits choices.
                             </div>
@@ -366,6 +385,16 @@
                             <div class="form-group">
                                 See all your benefits in one place. Add your medical, dental or vision provider.
                             </div>
+                            <div style="clear:both;"></div>
+                            <div class="form-group text-center">
+                                <select id="vision_search" data-placeholder="Select Vision Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                        <option value="Cigna">Cigna</option>
+                                        <option value="Guardian">Guardian</option>
+                                        <option value="Anthem">Anthem</option>
+                                    </select>
+                                <a id="do_search_link_vision" href="javascript: void();"><img style="width: 20px;" src="assets/images/search.png" /></a>
+                            </div>
+                            <div style="clear:both;"></div>
                             <div class="form-group">
                                 Choose from one of these popular EasyBenefits choices.
                             </div>
@@ -440,7 +469,8 @@
 
         <script src="lib/jquery.js"></script>
         <script src="js/app.js"></script>
-
+        <script src="js/common.js"></script>        
+        
 
         <!-- ============================================
         ============== Vendor JavaScripts ===============

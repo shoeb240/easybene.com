@@ -23,28 +23,28 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                    //console.log(result.claim[0]);
+                    //console.log(result);
 
-                    $("#abc1").data('easyPieChart').update(result.cigna_deductible_percent);
-                    $("#abc1 span").html(result.cigna_deductible_percent+'%');
-                    if (result.cigna_deductible_percent > 0) {
-                        $("#abc1_dollar").html('$'+result.cigna_deductible_met);
+                    $("#abc1").data('easyPieChart').update(result.deductible_percent);
+                    $("#abc1 span").html(result.deductible_percent+'%');
+                    if (result.deductible_percent > 0) {
+                        $("#abc1_dollar").html('$'+result.CD_deductible_in_net_family_accumulate);
                     } else {
                         $("#abc1_dollar").html('Pending');
                     }
 
-                    $("#abc2").data('easyPieChart').update(result.cigna_out_of_pocket_percent);
-                    $("#abc2 span").html(result.cigna_out_of_pocket_percent+'%');
-                    if (result.cigna_out_of_pocket_percent) {
-                        $("#abc2_dollar").html('$'+result.cigna_out_of_pocket_met);
+                    $("#abc2").data('easyPieChart').update(result.out_of_pocket_percent);
+                    $("#abc2 span").html(result.out_of_pocket_percent+'%');
+                    if (result.out_of_pocket_percent) {out_of_pocket_percent
+                        $("#abc2_dollar").html('$'+result.CD_out_pocket_in_net_family_accumulate);
                     } else {
                         $("#abc2_dollar").html('Pending');
                     }
 
-                    if (result.claim[0]) {
-                        $.each(result.claim, function (key, row){
+                    if (result.claim_details[0]) {
+                        $.each(result.claim_details, function (key, row){
                             odd_even = key % 2 ? 'odd' : 'even';
-                            $('#cigna-claim').append('<tr role="row" class="'+odd_even+'"><td>'+row.service_date+'</td><td>'+row.for+'</td><td>'+row.amount_billed+'</td><td>'+row.what_i_owe+'</td><td>'+row.status+'</td></tr>');
+                            $('#cigna-claim').append('<tr role="row" class="'+odd_even+'"><td>'+row.date+'</td><td>'+row.for+'</td><td>'+row.total+'</td><td>'+row.member_responsibility+'</td><!--<td>'+row.status+'</td>--></tr>');
                         });
                     } else {
                         $('#cigna-claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
@@ -116,6 +116,32 @@
     
     $(window).load(function(){
         GetMedicalData();
+        topTabLinks();
     });
+    
+    function topTabLinks()
+    {
+        medical_site = window.localStorage.getItem('medical_site').toLowerCase();
+        dental_site= window.localStorage.getItem('dental_site').toLowerCase();
+        vision_site = window.localStorage.getItem('vision_site').toLowerCase();
+        
+        if (medical_site && medical_site != 'null' && medical_site != 'undefined') {
+            $("#top_tab_link_medical").on("click", function() {
+                location.href = medical_site + "-medical.html";
+            });
+        }
+        
+        if (dental_site && dental_site != 'null' && dental_site != 'undefined') {
+            $("#top_tab_link_dental").on("click", function() {
+                location.href = dental_site + "-dental.html"
+            });
+        }
+        
+        if (vision_site && vision_site != 'null' && vision_site != 'undefined') {
+            $("#top_tab_link_vision").on("click", function() {
+                location.href = vision_site + "-vision.html"
+            });
+        }
+    }
     
 }());

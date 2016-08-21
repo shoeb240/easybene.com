@@ -73,7 +73,7 @@
     
     $('#funds_register').on('click', function() {
         var site_type = 'Funds';
-        var site_name = $('#funds_selected_name').val();
+        var site_name = 'Navia'; //$('#funds_selected_name').val();
         var site_user_id = $('#funds_selected_user_id').val();
         var site_password = $('#funds_selected_password').val();
 
@@ -113,13 +113,6 @@
         $('#site_selected_type_image').attr("src", "assets/images/" + image);
     }
     
-    function ShowSitelRegFail() {
-        hideAll();
-        $('#site_reg_fail_div').css('display', 'block');
-        $('#site_failed_type_name').html($('#site_selected_type_name').html());
-        $('#site_failed_type_image').attr("src", $('#site_selected_type_image').attr("src"));
-    }
-    
      function ProcessLogout() {
         window.localStorage.removeItem('username');
         window.localStorage.removeItem('token');
@@ -141,6 +134,38 @@
             async: false,
             success: function(result) {
                     //console.log(result);
+                    select_code = '<select id="medical_selected_name" class="form-control underline-input">' +
+                                        '<option>--Select Provider--</option>';
+                    if (result.medical_site == 'Cigna') {
+                            medical_user_id = result.cigna_user_id;
+                            medical_password = result.cigna_password;
+                            select_code += '<option selected>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    } else if (result.medical_site == 'Anthem') {
+                            medical_user_id = result.anthem_user_id;
+                            medical_password = result.anthem_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option selected>Anthem</option>';
+                    } else if (result.medical_site == 'Guardian') {
+                            medical_user_id = result.guardian_user_id;
+                            medical_password = result.guardian_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option selected>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    } else {
+                        select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    }
+                    select_code += '</select>';
+                    
+                    $('#medical_provider_div').html(select_code);
+                    $('#medical_selected_user_id').val(medical_user_id);
+                    $('#medical_selected_password').val(medical_password);
+                    
+                    
                     select_code = '<select id="dental_selected_name" class="form-control underline-input">' +
                                         '<option>--Select Provider--</option>';
                     if (result.dental_site == 'Cigna') {
@@ -161,6 +186,10 @@
                             select_code += '<option>Cigna</option>' +
                                            '<option selected>Guardian</option>' +
                                            '<option>Anthem</option>';
+                    } else {
+                        select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>';
                     }
                     select_code += '</select>';
                     
@@ -168,6 +197,44 @@
                     $('#dental_selected_user_id').val(dental_user_id);
                     $('#dental_selected_password').val(dental_password);
                     
+                    
+                    select_code = '<select id="vision_selected_name" class="form-control underline-input">' +
+                                        '<option>--Select Provider--</option>';
+                    if (result.vision_site == 'Cigna') {
+                            vision_user_id = result.cigna_user_id;
+                            vision_password = result.cigna_password;
+                            select_code += '<option selected>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    } else if (result.vision_site == 'Anthem') {
+                            vision_user_id = result.anthem_user_id;
+                            vision_password = result.anthem_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option selected>Anthem</option>';
+                    } else if (result.vision_site == 'Guardian') {
+                            vision_user_id = result.guardian_user_id;
+                            vision_password = result.guardian_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option selected>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    } else {
+                            select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                        
+                    }
+                    select_code += '</select>';
+                    
+                    $('#vision_provider_div').html(select_code);
+                    $('#vision_selected_user_id').val(vision_user_id);
+                    $('#vision_selected_password').val(vision_password);
+                    
+                    funds_user_id = result.navia_user_id;
+                    funds_password = result.navia_password;
+                    //$('#funds_provider_div').html(select_code);
+                    $('#funds_selected_user_id').val(funds_user_id);
+                    $('#funds_selected_password').val(funds_password);
                     //welcomeSelection();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -194,13 +261,18 @@
                     window.localStorage.setItem('medical_site', result.medical_site);
                     window.localStorage.setItem('dental_site', result.dental_site);
                     window.localStorage.setItem('vision_site', result.vision_site);
+                    
+                    $("#" + site_type.toLowerCase() + "_success").css('color', 'blue');
+                    $("#" + site_type.toLowerCase() + "_success").html('Successfully Updated');
+                    
                     ShowWelcome();
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
                     //console.log(ajaxOptions);
                     //console.log(thrownError);
-                    ShowSitelRegFail();
+                    $("#" + site_type.toLowerCase() + "_success").css('color', 'red');
+                    $("#" + site_type.toLowerCase() + "_success").html('Update Failed');
                 },
         });
     }

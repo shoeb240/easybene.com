@@ -40,20 +40,25 @@ class Application_Model_AnthemClaimOverviewMapper
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
-        $row = $this->getTable()->fetchRow($select);
+        $rowSets = $this->getTable()->fetchAll($select);
+
+        $info = array();
+        foreach($rowSets as $k => $row) {
+            $claim = array();
+            $claim['user_id'] = $row->user_id;
+            $claim['number'] = $row->number;
+            $claim['date'] = $row->date;
+            $claim['for'] = $row->for;
+            $claim['type'] = $row->type;
+            $claim['doctor_facility'] = $row->doctor_facility;
+            $claim['total'] = $row->total;
+            $claim['member_responsibility'] = $row->member_responsibility;
+            $claim['status'] = $row->status;
+
+            $info[] = $claim;
+        }
         
-        $claim = array();
-        $claim['user_id'] = $row->user_id;
-        $claim['number'] = $row->number;
-        $claim['date'] = $row->date;
-        $claim['for'] = $row->for;
-        $claim['type'] = $row->type;
-        $claim['doctor_facility'] = $row->doctor_facility;
-        $claim['total'] = $row->total;
-        $claim['member_responsibility'] = $row->member_responsibility;
-        $claim['status'] = $row->status;
-            
-        return $claim;
+        return $info;
     }
 
     /**

@@ -31,12 +31,23 @@ class ApiDentalController extends My_Controller_ApiAbstract //Zend_Controller_Ac
         try{
             $userId = $this->_getParam('user_id', null);
             $arr = array();
-            $benefitMapper = new Application_Model_GuardianBenefitMapper();
-            $arr['benefit'] = $benefitMapper->getGuardianBenefit($userId);
             
-            // guardian_claim
-            $claimMapper = new Application_Model_GuardianClaimMapper();
-            $arr['claim'] = $claimMapper->getGuardianClaim($userId);
+            $userMapper = new Application_Model_UserMapper();
+            $userInfo = $userMapper->getUserArrForClient($userId);
+            
+            if ($userInfo['dental_site'] == 'Cigna') {
+                $arr['benefit'] = array();
+                $arr['claim'] = array();
+            }
+            
+            if ($userInfo['dental_site'] == 'Guardian') {
+                $benefitMapper = new Application_Model_GuardianBenefitMapper();
+                $arr['benefit'] = $benefitMapper->getGuardianBenefit($userId);
+
+                // guardian_claim
+                $claimMapper = new Application_Model_GuardianClaimMapper();
+                $arr['claim'] = $claimMapper->getGuardianClaim($userId);
+            }
 
 //            echo '<pre>';
 //            print_r($arr);

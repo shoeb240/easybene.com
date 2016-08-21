@@ -56,18 +56,18 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             $guardianPercent = round((($amountPaid / $submittedCharges))*100);
             
             
-            $result['medical_site'] = $userInfo['medical_site'];
-            $result['dental_site'] = $userInfo['dental_site'];
-            $result['vision_site'] = $userInfo['vision_site'];
+            //$result['medical_site'] = $userInfo['medical_site'];
+            //$result['dental_site'] = $userInfo['dental_site'];
+            //$result['vision_site'] = $userInfo['vision_site'];
             
             if ($userInfo['medical_site'] == 'Cigna') {
                 $result['medical_percent'] = $cignaPercent;
             }
             if ($userInfo['medical_site'] == 'Guardian') {
-                $result['medical_percent'] = $guardianPercent;
+                $result['medical_percent'] = '';//$guardianPercent;
             }
             if ($userInfo['dental_site'] == 'Cigna') {
-                $result['dental_percent'] = $cignaPercent;
+                $result['dental_percent'] = '';//$cignaPercent;
             }
             if ($userInfo['dental_site'] == 'Guardian') {
                 $result['dental_percent'] = $guardianPercent;

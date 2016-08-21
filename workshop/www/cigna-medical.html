@@ -144,9 +144,9 @@
                         <div style="clear:both;"></div>
             
                         <div class="btn-group mb-10">
-                            <button class="btn  btn-default" style="background-color: #ccccff" type="button" onclick="javascript: location.href='medical.html'">Medical</button>
-                            <button class="btn btn-default" type="button" onclick="javascript: location.href='dental.html'">Dental</button>
-                            <button class="btn btn-default" type="button">Vision</button>
+                            <button class="btn  btn-default" style="background-color: #ccccff" type="button" id="top_tab_link_medical">Medical</button>
+                            <button class="btn btn-default" type="button" id="top_tab_link_dental">Dental</button>
+                            <button class="btn btn-default" type="button" id="top_tab_link_vision">Vision</button>
                         </div>
                         <div style="clear:both;"></div>
                     </div>
@@ -199,7 +199,7 @@
                             <th>For</th>
                             <th>Total</th>
                             <th>You Pay</th>
-                            <th>Status</th>
+                            <!-- <th>Status</th> -->
                         </tr>
                         </thead>
                         <tbody>
@@ -212,9 +212,9 @@
                     <div style="clear:both;"></div>
                     <footer style="margin-top:30px; margin-bottom:5px; text-align: center;">
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="index.html"><img src="assets/images/home-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html" style="border-color: #8888ff"><img src="assets/images/medical-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_medical" style="border-color: #8888ff"><img src="assets/images/medical-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_dental"><img src="assets/images/dental-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_vision"><img src="assets/images/vision-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="funds.html"><img src="assets/images/funds-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="settings.html"><img width="32" src="assets/images/Settings-icon.png" /></a>
                     </footer>
@@ -228,7 +228,8 @@
 
 
         <script src="lib/jquery.js"></script>
-        <script src="js/app-medical.js"></script>
+        <script src="js/cigna-medical.js"></script>
+        <script src="js/common.js"></script>
 
 
         <!-- ============================================

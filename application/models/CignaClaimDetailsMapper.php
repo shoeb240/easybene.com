@@ -46,6 +46,10 @@ class Application_Model_CignaClaimDetailsMapper
         foreach($rowSets as $k => $row) {
             $claimDetails = array();
             $claimDetails['user_id'] = $row->user_id;
+            $claimDetails['claim_number'] = $row->claim_number;
+            $claimDetails['provided_by_details'] = $row->provided_by_details;
+            $claimDetails['for'] = $row->for;
+            $claimDetails['claim_processed_on'] = $row->claim_processed_on;
             $claimDetails['service_date_type'] = $row->service_date_type;
             $claimDetails['service_amount_billed'] = $row->service_amount_billed;
             $claimDetails['service_discount'] = $row->service_discount;
@@ -72,6 +76,10 @@ class Application_Model_CignaClaimDetailsMapper
     {
         $data = array(
             'user_id' => $claimDetails->getUserId(),
+            'claim_number' => $claimDetails->getClaimNumber(),
+            'provided_by_details' => $claimDetails->getProvidedByDetails(),
+            'for' => $claimDetails->getFor(),
+            'claim_processed_on' => $claimDetails->getClaimProcessedOn(),
             'service_date_type' => $claimDetails->getServiceDateType(),
             'service_amount_billed' => $claimDetails->getServiceAmountBilled(),
             'service_discount' => $claimDetails->getServiceDiscount(),

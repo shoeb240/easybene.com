@@ -38,13 +38,8 @@
         =========================================== -->
         <script src="assets/js/vendor/modernizr/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <!--/ modernizr -->
-
-
-        <style>
-        .easypiechart .pie-percent::after {
-            content: "";
-        }
         
+        <style>
         .col-md-1 {width: 8.33%;}
         .col-md-2 {width: 16.66%;}
         .col-md-3 {width: 25%;}
@@ -102,23 +97,17 @@
             }
         }
         </style>
-
+        
     </head>
-
-
-
-
-
+    
     <body>
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <!-- ====================================================
+    <!-- ====================================================
         ================= Application Content ===================
         ===================================================== -->
         <div>
-
             <div class="page page-core"  style="padding-top:0px;">
 
                 <header class="text-center"><h3 class="text-light text-white"><span class="text-lightred">Easy</span>Bene</h3></header>
@@ -126,101 +115,49 @@
                 <div class="col-md-12 bg-white text-center">
                     <div  class="form-group text-left mt-10 pull-right">
                             <a href="javascript:void(0);" class="logout">Logout</a>
+                        </div>
+                        <div  class="form-group text-right mt-10 pull-left">
+                            <a href="javascript:history.go(-1);">Back</a>
+                        </div>
+                        <div style="clear:both;"></div>
+                    <div class="btn-group mb-10">
+                        <button class="btn btn-default" type="button" id="top_tab_link_medical">Medical</button>
+                        <button class="btn btn-default" style="background-color: #ccccff" type="button" id="top_tab_link_dental">Dental</button>
+                        <button class="btn btn-default" type="button" id="top_tab_link_vision">Vision</button>
                     </div>
-                    <div  class="form-group text-right mt-10 pull-left">
-                        <a href="javascript:history.go(-1);">Back</a>
-                    </div>
-                    <div style="clear:both;"></div>
                     
-                    <div class="dataTables_length" id="basic-usage_length" style="text-align: center;">
-                        <div class="btn-group" style="float:left;">
-                            <img data-toggle="dropdown" class="dropdown-toggle" src="assets/images/List-icon.png" style="margin-bottom:5px;" />
-                            <ul class="dropdown-menu">
-                                <li><a>MEDICAL</a></li>
-                                <li><a id="deductible_link" href="javascript: void(0);">-Deductible</a></li>
-                                <li><a id="claim_link" href="javascript: void(0);">-Claims</a></li>
-                            </ul>
-                        </div>
-                        <div style="clear:both;"></div>
-            
-                        <div class="btn-group mb-10">
-                            <button class="btn  btn-default" style="background-color: #ccccff" type="button" onclick="javascript: location.href='medical.html'">Medical</button>
-                            <button class="btn btn-default" type="button" onclick="javascript: location.href='dental.html'">Dental</button>
-                            <button class="btn btn-default" type="button">Vision</button>
-                        </div>
-                        <div style="clear:both;"></div>
-                    </div>
-
-                    <div id="summary_div">
-                        <table id="cigna-summary" class="table table-custom dataTable no-footer" role="grid">
-                        <thead>
-                        <tr role="row">
-                            <th>Who's covered</th>
-                            <th>Date of Birth</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </table>
-                        <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
-                    </div>
-
-                    <div id="deductible_div">
-                        <div class="col-md-6 text-center" style="float:left;">
-                            <div class="text-center" style="background-color: #eeeeee;">
-                                <div id="abc1" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                                    <div id="center_data" class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
-                                    <div id="abc1_dollar" style="font-size: 18px;"></div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 form-group">
-                                Plan Deductible
-                            </div>
-                        </div>
-                        <div class="col-md-6 text-center" style="float:left;">
-                            <div class="text-center" style="background-color: #eeeeee;">
-                                <div id="abc2" class="easypiechart" data-percent="" data-size="120" data-bar-color="#1693A5" data-line-cap="round" data-line-width="5" style="width:130px;">
-                                    <div class="pie-percent custom-font" style="line-height: 110px;"><span style="font-size: 26px;"></span></div>
-                                    <div id="abc2_dollar" style="font-size: 18px;">$0</div>
-                                </div>
-                            </div>
-                            <div class="col-md-12 form-group">
-                                Out of Pocket<br/> Maximum
-                            </div>
-                        </div>
-                    </div>
                     <div style="clear:both;"></div>
 
                     <div id="claim_div" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
-                        <span style="font-size:16px; font-weight:bold;">Medical Claims</span>
-                        <table id="cigna-claim" class="table table-custom dataTable no-footer" role="grid">
+                        <!--<div class="dataTables_length" id="basic-usage_length"><label>Show <select name="basic-usage_length" aria-controls="basic-usage" class="form-control input-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div>
+                        <div id="basic-usage_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control input-sm" placeholder="" aria-controls="basic-usage"></label></div>-->
+                        <span style="font-size:16px; font-weight:bold;">Dental Claims</span>
+                        <table id="guardian-claim" class="table table-custom dataTable no-footer text-left" role="grid">
                         <thead>
                         <tr role="row">
                             <th>Date</th>
                             <th>For</th>
                             <th>Total</th>
-                            <th>You Pay</th>
+                            <th>I&nbsp;owe</th>
                             <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-
-                        </tbody>
                         </table>
                         <!-- <div class="dataTables_info" id="basic-usage_info" role="status" aria-live="polite">Showing 1 to 10 of 300 entries</div><div class="dataTables_paginate paging_simple_numbers" id="basic-usage_paginate"><ul class="pagination"><li class="paginate_button previous disabled" id="basic-usage_previous"><a href="#" aria-controls="basic-usage" data-dt-idx="0" tabindex="0">Previous</a></li><li class="paginate_button active"><a href="#" aria-controls="basic-usage" data-dt-idx="1" tabindex="0">1</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="2" tabindex="0">2</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="3" tabindex="0">3</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="4" tabindex="0">4</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="5" tabindex="0">5</a></li><li class="paginate_button disabled" id="basic-usage_ellipsis"><a href="#" aria-controls="basic-usage" data-dt-idx="6" tabindex="0">…</a></li><li class="paginate_button "><a href="#" aria-controls="basic-usage" data-dt-idx="7" tabindex="0">30</a></li><li class="paginate_button next" id="basic-usage_next"><a href="#" aria-controls="basic-usage" data-dt-idx="8" tabindex="0">Next</a></li></ul></div></div> -->
                     </div>
-
+                    
                     <div style="clear:both;"></div>
                     <footer style="margin-top:30px; margin-bottom:5px; text-align: center;">
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="index.html"><img src="assets/images/home-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="medical.html" style="border-color: #8888ff"><img src="assets/images/medical-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="dental.html"><img src="assets/images/dental-icon.png" /></a>
-                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);"><img src="assets/images/vision-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_medical"><img src="assets/images/medical-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_dental" style="border-color: #8888ff"><img src="assets/images/dental-icon.png" /></a>
+                        <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="javascript: void(0);" id="bottom_link_vision"><img src="assets/images/vision-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="funds.html"><img src="assets/images/funds-icon.png" /></a>
                         <a class="btn btn-default btn-sm br-2 w-50   btn-ef btn-ef-1" href="settings.html"><img width="32" src="assets/images/Settings-icon.png" /></a>
                     </footer>
-                    
-                </div>
             </div>
+
         </div>
         <!--/ Application Content -->
 
@@ -228,7 +165,8 @@
 
 
         <script src="lib/jquery.js"></script>
-        <script src="js/app-medical.js"></script>
+        <script src="js/cigna-dental.js"></script>
+        <script src="js/common.js"></script>
 
 
         <!-- ============================================
@@ -248,10 +186,6 @@
         <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
 
         <script src="assets/js/vendor/screenfull/screenfull.min.js"></script>
-        
-        <script src="assets/js/vendor/easypiechart/jquery.easypiechart.min.js"></script>
-        
-        <script src="assets/js/vendor/countTo/jquery.countTo.js"></script>
         <!--/ vendor javascripts -->
 
 

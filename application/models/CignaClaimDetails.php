@@ -12,6 +12,10 @@ class Application_Model_CignaClaimDetails
 {
     protected $_id;
     protected $_userId;
+    protected $_claim_number;
+    protected $_provided_by;
+    protected $_for;
+    protected $_claim_processed_on;
     protected $_service_date_type;
     protected $_service_amount_billed;
     protected $_service_discount;
@@ -57,6 +61,46 @@ class Application_Model_CignaClaimDetails
     public function getUserId()
     {
         return $this->_userId;
+    }
+    
+    public function setClaimNumber($value)
+    {
+        $this->_claim_number = $value;
+    }
+    
+    public function getClaimNumber()
+    {
+        return $this->_claim_number;
+    }
+    
+    public function setProvidedByDetails($value)
+    {
+        $this->_provided_by = $value;
+    }
+    
+    public function getProvidedByDetails()
+    {
+        return $this->_provided_by;
+    }
+    
+    public function setFor($value)
+    {
+        $this->_for = $value;
+    }
+    
+    public function getFor()
+    {
+        return $this->_for;
+    }
+    
+    public function setClaimProcessedOn($value)
+    {
+        $this->_claim_processed_on = $value;
+    }
+    
+    public function getClaimProcessedOn()
+    {
+        return $this->_claim_processed_on;
     }
     
     public function setServiceDateType($value)

@@ -380,6 +380,10 @@ class Application_Model_UserMapper
                     $row->guardian_user_id = $siteUserId;
                     $row->guardian_password = $sitePassword;
                     break;
+                case 'Navia':
+                    $row->navia_user_id = $siteUserId;
+                    $row->navia_password = $sitePassword;
+                    break;
             }
             switch ($siteType) {
                 case 'Medical':
@@ -390,6 +394,9 @@ class Application_Model_UserMapper
                     break;
                 case 'Vision':
                     $row->vision_site = $siteName;
+                    break;
+                case 'Funds':
+                    //$row->funds_site = $siteName;
                     break;
             }
             $row->save();

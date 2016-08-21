@@ -82,7 +82,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 84 ) continue; // remove
+            if ( $userObj->getUserId() != 1 ) continue; // remove
             
             $u = $userObj->getAnthemUserId();
             $p = $userObj->getAnthemPassword();
@@ -94,15 +94,15 @@ class ScrapeAnthemController extends Zend_Controller_Action
                     case 0:
                         $data['user_id'] = $userObj->getAnthemUserId();
                         $data['password'] = $userObj->getAnthemPassword();
-                        $data['claims_benefit_coverage'] = '2015-01-01_2015-12-31';
+                        $data['claims_benefit_coverage'] = '2016-01-01_0001-01-01';
                         $data['claims_deductible_for'] = 10;
-                        $runId = 'ec26174d-8550-4f07-8474-746a95275127';
+                        $runId = 'c6e8ec2a-466e-4a72-a269-c6586a3c25c6';
                         $exeFieldName = 'anthem_exeid';
                         break;
                     case 1:
                         $data['user_id'] = $userObj->getAnthemUserId();
                         $data['password'] = $userObj->getAnthemPassword();
-                        $runId = 'e4104e5c-9a46-445a-ae63-81f55a5966a2';
+                        $runId = 'b34f0574-bb01-44bf-9adb-8ca5ea962610';
                         $exeFieldName = 'anthem_claim_overview_exeid';
                         break;
                 }
@@ -140,7 +140,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
         $usersAll = $userMapper->getUserAll();
 
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 84 ) continue; // remove
+            if ( $userObj->getUserId() != 1 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 $resultAnthem = $this->myExecutionResult($userObj->getAnthemExeid(), $headerArray);
@@ -173,53 +173,53 @@ class ScrapeAnthemController extends Zend_Controller_Action
             foreach($arr['anthem']['rows'] as $k => $eachRow) {
                 $claims_benefit_coverage = $eachRow[array_search('claims_benefit_coverage', $arr['anthem']['headers'])];
                 $claims_deductible_for = $eachRow[array_search('claims_deductible_for', $arr['anthem']['headers'])];
-                $benefit_coverage = $eachRow[array_search('benefit_coverage', $arr['anthem']['headers'])];
-                $benefit_deductible_for = $eachRow[array_search('benefit_deductible_for', $arr['anthem']['headers'])];
-                $plan = $eachRow[array_search('plan', $arr['anthem']['headers'])];
-                $primary_care_physian = $eachRow[array_search('primary_care_physian', $arr['anthem']['headers'])];
-                $member_id = $eachRow[array_search('member_id', $arr['anthem']['headers'])];
-                $group_name = $eachRow[array_search('group_name', $arr['anthem']['headers'])];
-                $deductible_in_net_family_limit = $eachRow[array_search('deductible_in_net_family_limit', $arr['anthem']['headers'])];
-                $deductible_in_net_family_accumulate = $eachRow[array_search('deductible_in_net_family_accumulate', $arr['anthem']['headers'])];
-                $deductible_in_net_remaining = $eachRow[array_search('deductible_in_net_remaining', $arr['anthem']['headers'])];
-                $deductible_out_net_family_limit = $eachRow[array_search('deductible_out_net_family_limit', $arr['anthem']['headers'])];
-                $deductible_out_net_family_accumulate = $eachRow[array_search('deductible_out_net_family_accumulate', $arr['anthem']['headers'])];
-                $deductible_out_net_family_remaining = $eachRow[array_search('deductible_out_net_family_remaining', $arr['anthem']['headers'])];
-                $out_pocket_in_net_family_limit = $eachRow[array_search('out_pocket_in_net_family_limit', $arr['anthem']['headers'])];
-                $out_pocket_out_net_family_accumulate = $eachRow[array_search('out_pocket_out_net_family_accumulate', $arr['anthem']['headers'])];
-                $out_pocket_out_net_family_remaining = $eachRow[array_search('out_pocket_out_net_family_remaining', $arr['anthem']['headers'])];
-                $primary_care_physician = $eachRow[array_search('primary_care_physician', $arr['anthem']['headers'])];
-                $plan_name = $eachRow[array_search('plan_name', $arr['anthem']['headers'])];
-                $eligibility_benefit_for = $eachRow[array_search('eligibility_benefit_for', $arr['anthem']['headers'])];
-                $vision_member_id = $eachRow[array_search('vision_member_id', $arr['anthem']['headers'])];
-                $claims_benefit_coverage1 = $eachRow[array_search('claims_benefit_coverage1', $arr['anthem']['headers'])];
-                $claims_benefit_deductible_for = $eachRow[array_search('claims_benefit_deductible_for', $arr['anthem']['headers'])];
+                $benefit_coverage = $eachRow[array_search('BM_benefit_coverage_period', $arr['anthem']['headers'])];
+                $benefit_deductible_for = $eachRow[array_search('BM_benefit_deductible_for', $arr['anthem']['headers'])];
+                $plan = $eachRow[array_search('BM_plan', $arr['anthem']['headers'])];
+                $primary_care_physian = $eachRow[array_search('BM_primary_care_physian', $arr['anthem']['headers'])];
+                $member_id = $eachRow[array_search('BM_member_id', $arr['anthem']['headers'])];
+                $group_name = $eachRow[array_search('BM_group_name', $arr['anthem']['headers'])];
+                $deductible_in_net_family_limit = $eachRow[array_search('CD_deductible_in_net_family_limit', $arr['anthem']['headers'])];
+                $deductible_in_net_family_accumulate = $eachRow[array_search('CD_deductible_in_net_family_accumulate', $arr['anthem']['headers'])];
+                $deductible_in_net_remaining = $eachRow[array_search('CD_deductible_in_net_remaining', $arr['anthem']['headers'])];
+                $deductible_out_net_family_limit = $eachRow[array_search('CD_deductible_out_net_family_limit', $arr['anthem']['headers'])];
+                $deductible_out_net_family_accumulate = $eachRow[array_search('CD_deductible_out_net_family_accumulate', $arr['anthem']['headers'])];
+                $deductible_out_net_family_remaining = $eachRow[array_search('CD_deductible_out_net_family_remaining', $arr['anthem']['headers'])];
+                $out_pocket_in_net_family_limit = $eachRow[array_search('CD_out_pocket_in_net_family_limit', $arr['anthem']['headers'])];
+                $out_pocket_out_net_family_accumulate = $eachRow[array_search('CD_out_pocket_out_net_family_accumulate', $arr['anthem']['headers'])];
+                $out_pocket_out_net_family_remaining = $eachRow[array_search('CD_out_pocket_out_net_family_remaining', $arr['anthem']['headers'])];
+                $primary_care_physician = $eachRow[array_search('HP_primary_care_physician', $arr['anthem']['headers'])];
+                $plan_name = $eachRow[array_search('BV_plan_name', $arr['anthem']['headers'])];
+                $eligibility_benefit_for = $eachRow[array_search('BV_eligibility_benefit_for', $arr['anthem']['headers'])];
+                $vision_member_id = $eachRow[array_search('BV_vision_member_id', $arr['anthem']['headers'])];
+                $claims_benefit_coverage1 = $eachRow[array_search('CD_claims_benefit_coverage', $arr['anthem']['headers'])];
+                $claims_benefit_deductible_for = $eachRow[array_search('CD_claims_benefit_deductible_for', $arr['anthem']['headers'])];
 
                 $anthem = new Application_Model_Anthem();
                 $anthem->setOption('user_id', $userId);
                 $anthem->setOption('claims_benefit_coverage', $claims_benefit_coverage);
                 $anthem->setOption('claims_deductible_for', $claims_deductible_for);
-                $anthem->setOption('benefit_coverage', $benefit_coverage);
-                $anthem->setOption('benefit_deductible_for', $benefit_deductible_for);
-                $anthem->setOption('plan', $plan);
-                $anthem->setOption('primary_care_physian', $primary_care_physian);
-                $anthem->setOption('member_id', $member_id);
-                $anthem->setOption('group_name', $group_name);
-                $anthem->setOption('deductible_in_net_family_limit', $deductible_in_net_family_limit);
-                $anthem->setOption('deductible_in_net_family_accumulate', $deductible_in_net_family_accumulate);
-                $anthem->setOption('deductible_in_net_remaining', $deductible_in_net_remaining);
-                $anthem->setOption('deductible_out_net_family_limit', $deductible_out_net_family_limit);
-                $anthem->setOption('deductible_out_net_family_accumulate', $deductible_out_net_family_accumulate);
-                $anthem->setOption('deductible_out_net_family_remaining', $deductible_out_net_family_remaining);
-                $anthem->setOption('out_pocket_in_net_family_limit', $out_pocket_in_net_family_limit);
-                $anthem->setOption('out_pocket_out_net_family_accumulate', $out_pocket_out_net_family_accumulate);
-                $anthem->setOption('out_pocket_out_net_family_remaining', $out_pocket_out_net_family_remaining);
-                $anthem->setOption('primary_care_physician', $primary_care_physician);
-                $anthem->setOption('plan_name', $plan_name);
-                $anthem->setOption('eligibility_benefit_for', $eligibility_benefit_for);
-                $anthem->setOption('vision_member_id', $vision_member_id);
-                $anthem->setOption('claims_benefit_coverage1', $claims_benefit_coverage1);
-                $anthem->setOption('claims_benefit_deductible_for', $claims_benefit_deductible_for);
+                $anthem->setOption('BM_benefit_coverage_period', $benefit_coverage);
+                $anthem->setOption('BM_benefit_deductible_for', $benefit_deductible_for);
+                $anthem->setOption('BM_plan', $plan);
+                $anthem->setOption('BM_primary_care_physian', $primary_care_physian);
+                $anthem->setOption('BM_member_id', $member_id);
+                $anthem->setOption('BM_group_name', $group_name);
+                $anthem->setOption('CD_deductible_in_net_family_limit', $deductible_in_net_family_limit);
+                $anthem->setOption('CD_deductible_in_net_family_accumulate', $deductible_in_net_family_accumulate);
+                $anthem->setOption('CD_deductible_in_net_remaining', $deductible_in_net_remaining);
+                $anthem->setOption('CD_deductible_out_net_family_limit', $deductible_out_net_family_limit);
+                $anthem->setOption('CD_deductible_out_net_family_accumulate', $deductible_out_net_family_accumulate);
+                $anthem->setOption('CD_deductible_out_net_family_remaining', $deductible_out_net_family_remaining);
+                $anthem->setOption('CD_out_pocket_in_net_family_limit', $out_pocket_in_net_family_limit);
+                $anthem->setOption('CD_out_pocket_out_net_family_accumulate', $out_pocket_out_net_family_accumulate);
+                $anthem->setOption('CD_out_pocket_out_net_family_remaining', $out_pocket_out_net_family_remaining);
+                $anthem->setOption('HP_primary_care_physician', $primary_care_physician);
+                $anthem->setOption('BV_plan_name', $plan_name);
+                $anthem->setOption('BV_eligibility_benefit_for', $eligibility_benefit_for);
+                $anthem->setOption('BV_vision_member_id', $vision_member_id);
+                $anthem->setOption('CD_claims_benefit_coverage', $claims_benefit_coverage1);
+                $anthem->setOption('CD_claims_benefit_deductible_for', $claims_benefit_deductible_for);
                 
                 echo 'insert1...<br/>';
                 try {
@@ -243,7 +243,8 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $member_responsibility = $eachRow[array_search('member_responsibility', $arr['anthem_claim_overview']['headers'])];
                 $status = $eachRow[array_search('status', $arr['anthem_claim_overview']['headers'])];
                 $status = $eachRow[array_search('status', $arr['anthem_claim_overview']['headers'])];
-
+                if (empty($number)) continue;
+                
                 $claim = new Application_Model_AnthemClaimOverview;
                 $claim->setOption('user_id', $userId);
                 $claim->setOption('number', $number);
