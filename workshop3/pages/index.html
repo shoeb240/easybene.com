@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+       <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/my-app.css">
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+    </head>
+    <body>
+        <!-- Status bar overlay for fullscreen mode-->
+        <div class="statusbar-overlay"></div>
+        <!-- Views-->
+        <div class="views">
+            <!-- Put panels-overlay and left-panel with view inside of views-->
+            <!-- Panels overlay-->
+            <div class="panel-overlay"></div>
+            <!-- Left panel with reveal effect-->
+            <div class="panel panel-left panel-cover">
+                <!-- Left view-->
+                <div class="view view-left navbar-through">
+                    <div class="navbar">
+                        <div class="navbar-inner">
+                            <div class="left"></div>
+                            <div class="center sliding">Main Menu</div>
+                            <div class="right"></div>
+                        </div>
+                    </div>
+                    <div class="pages">
+                        <div data-page="index-left" class="page">
+                            <div class="page-content">
+
+
+                                <div class="list-block">
+                                    <ul>
+                                        <li><a href="welcome.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Welcome</div>
+                                                    </div>
+                                                </div></a></li>
+                                        <li><a href="search-provider.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Search Provider</div>
+                                                    </div>
+                                                </div></a></li>
+                                        <li><a href="provider-login.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Provider login</div>
+                                                    </div>
+                                                </div></a></li>
+                                        <li><a href="linking.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Linking Account</div>
+                                                    </div>
+                                                </div></a></li>
+                                        <li><a href="complete-linking.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Complete Linking</div>
+                                                    </div>
+                                                </div></a></li>
+
+                                        <li><a href="test.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Graph</div>
+                                                    </div>
+                                                </div></a></li>
+                                        <li><a href="test-2.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">Table</div>
+                                                    </div>
+                                                </div></a></li>
+                                        <li><a href="test-3.html" data-view=".view-main" class="item-link close-panel">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title">ID Card</div>
+                                                    </div>
+                                                </div></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Right view, it is main view-->
+            <div class="view view-main navbar-through">
+                <div class="navbar">
+                    <div class="navbar-inner">
+                        <div class="left"><a href="#" class="back link"> <i class="icon-angle-left"></i></a></div>
+                        <div class="center sliding">Login</div>
+                        <div class="right"><a href="#" data-panel="left" class="link open-panel icon-only"><i class="icon-menu"></i></a></div>
+                    </div>
+                </div>
+                <!-- Pages-->
+                <div class="pages">
+                    <!-- Page, data-page contains page name-->
+                    <div data-page="index-1" class="page">
+                        <!-- Scrollable page content-->
+                        <div class="page-content login-page-content">            
+                            <div class="content-block">
+                                <div class="content-block-inner">
+                                    <div class="logo-wrapper">
+                                        <img src="images/logo.png" alt="logo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="list-block login-list">
+                                <ul>
+                                    <!-- Text inputs -->
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="icon-envelope"></i></div>
+                                            <div class="item-inner">                                               
+                                                <div class="item-input">
+                                                    <input type="email" placeholder="E-mail">
+                                                    <i class="valid-field"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!--added this class(.error-found) for error massage-->
+                                    <li>
+                                        <div class="item-content">
+                                            <div class="item-media"><i class="icon-lock"></i></div>
+                                            <div class="item-inner">
+                                                <div class="item-input">
+                                                    <input type="password" placeholder="Password">
+                                                    <!--                                                    <i class="inValid-field"></i>  -->
+                                                </div>
+                                            </div>                                            
+                                        </div>                                       
+                                    </li>
+                                    <li class="btn-wrapper">
+                                        <a href="welcome.html"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
+                                    </li>
+                                </ul>
+
+                                <p class="forgot-pass"><a href="#">forgot password ?</a></p>
+                                <div class="privacy-text">
+                                    <p>By tapping Sign in you agree to our  <a href="">License Agreement</a> and <a href="#">Privacy Statement</a> </p>
+                                    <a class="free-sign-up" href="sign-up-free.html">Sign Up For Free</a>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Path to Framework7 Library JS-->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript" src="js/framework7.min.js"></script>
+
+<!--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+        <script type="text/javascript" src="js/jquery.circliful.js"></script>
+      
+  
+          <!-- Path to your app js-->
+        <script type="text/javascript" src="js/my-app.js"></script>
+    </body>
+</html>
