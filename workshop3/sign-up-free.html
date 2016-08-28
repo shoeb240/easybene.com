@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,13 +25,12 @@
             <a class="back-btn" href="#"><i class="icon-angle-left"></i></a>  
             <!-- Left Slidebar control -->
             <div class="sb-toggle-left">
-              
+
                 <div class="navicon-line"></div>
                 <div class="navicon-line"></div>
                 <div class="navicon-line"></div>
             </div>
             <div class="clearfix"></div>
-            <h2 class="page-title">Login</h2>
 
         </div>
 
@@ -40,7 +40,7 @@
 
             <div class="page-content login-page-content">            
                 <div class="content-block">
-                    <div class="content-block-inner">
+                    <div class="content-block-inner signUp">
                         <div class="logo-wrapper">
                             <img src="images/logo.png" alt="logo" />
                         </div>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="list-block login-list">
                     <ul>
-<!--                        Text inputs -->
+                        <!-- Text inputs -->
                         <li>
                             <div class="item-content">
                                 <div class="item-media"><i class="icon-envelope"></i></div>
@@ -60,29 +60,84 @@
                                 </div>
                             </div>
                         </li>
-<!--                        added this class(.error-found) for error massage-->
                         <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon-envelope"></i></div>
+                                <div class="item-inner">                                               
+                                    <div class="item-input">
+                                        <input type="email" placeholder="Confrim E-mail">
+                                        <i class="valid-field"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="pass-field-wrapper">
                             <div class="item-content">
                                 <div class="item-media"><i class="icon-lock"></i></div>
                                 <div class="item-inner">
                                     <div class="item-input">
-                                        <input type="password" placeholder="Password">
-                                        <i class="inValid-field"></i>  
+                                        <input  type="password"  placeholder="Password">
+
                                     </div>
-                                </div>                                            
-                            </div>                                       
+                                </div>
+                            </div>
+                            <ul class="pass-condition">
+                                <li class="condition-reached">use 8 or more characters</li>
+                                <li>use upper and lower case litters(Aa)</li>
+                                <li>use a number and symbole (!@#$)</li>
+                            </ul>
+                        </li>
+                        <li class="error-found">
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon-unlock-alt"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-input">
+                                        <input type="password" placeholder="Confirm Password">
+                                        <i class="inValid-field"></i> 
+                                    </div>
+                                </div>
+                            </div>
+                            <!--error massage-->
+                            <div class="inValidText"><i class="icon-caret-up"></i>Confirm Password don't match</div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-media"><i class="icon-location2"></i></div>
+                                <div class="item-inner">
+                                    <div class="item-input">
+
+                                        <select name="country">
+                                            <option value="United states" selected>United states</option>
+                                            <option value="United Kingdom">United Kingdom</option>
+                                            <option value="Cambodia">Cambodia</option>
+                                            <option value="Denmark">Denmark</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Barbados">Barbados</option>
+                                            <option value="Andorra">Andorra</option>
+                                            <option value="Cambodia">Cambodia</option>
+                                            <option value="Denmark">Denmark</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Barbados">Barbados</option>
+                                            <option value="Andorra">Andorra</option>
+                                            <option value="Cambodia">Cambodia</option>
+                                            <option value="Denmark">Denmark</option>
+                                            <option value="Canada">Canada</option>
+                                            <option value="Barbados">Barbados</option>
+                                            <option value="Andorra">Andorra</option>
+                                        </select>                                                       
+                                    </div>
+                                </div>
+                            </div>
                         </li>
                         <li class="btn-wrapper">
-                            <a href="welcome.html"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
+                            <a href="index.html"><button type="submit"><i class=' icon-cloud-check'></i> Sign Up</button></a>
                         </li>
-                    </ul>
-
-                    <p class="forgot-pass"><a href="#">forgot password ?</a></p>
+                    </ul>                      
                     <div class="privacy-text">
                         <p>By tapping Sign in you agree to our  <a href="">License Agreement</a> and <a href="#">Privacy Statement</a> </p>
-                        <a class="free-sign-up" href="sign-up-free.html">Sign Up For Free</a>
-                    </div>
 
+                        <p class="forgot-pass">Already have an account? <a class="login-text" href="index.html">Login In</a></p>
+                    </div>
 
                 </div>
             </div>
@@ -95,6 +150,7 @@
             <!-- Lists in Slidebars -->
             <ul class="sb-menu">
                 <li><a href="welcome.html">Welcome</a></li>
+                <!--                <li><a  href="search-provider.html">Search Provider</a></li>-->
                 <li><a href="provider-login.html">Provider login</a></li>
                 <li><a href="linking.html">Linking Account</a></li>
                 <li><a href="complete-linking.html">Complete Linking</a></li>

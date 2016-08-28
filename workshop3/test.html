@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,13 +25,12 @@
             <a class="back-btn" href="#"><i class="icon-angle-left"></i></a>  
             <!-- Left Slidebar control -->
             <div class="sb-toggle-left">
-              
+
                 <div class="navicon-line"></div>
                 <div class="navicon-line"></div>
                 <div class="navicon-line"></div>
             </div>
             <div class="clearfix"></div>
-            <h2 class="page-title">Login</h2>
 
         </div>
 
@@ -38,55 +38,41 @@
         <!-- Your main site content in here -->
         <div id="main-content">
 
-            <div class="page-content login-page-content">            
+            <div class="page-content medical-grap">
                 <div class="content-block">
-                    <div class="content-block-inner">
-                        <div class="logo-wrapper">
-                            <img src="images/logo.png" alt="logo" />
+
+                    <div class="medical-grap-text">
+
+                        <h3>medical deductibles</h3>
+                        <div class="">
+
+                            <div class="circle-wrapper saperator">
+                                <div id="test-circle1"></div>
+                                <p>Plan deductibles</p>
+                                <p class="status-text">You have Spent <span>$800</span></p>
+                            </div>
+                            <div class="circle-wrapper orange-graph">
+                                <div id="test-circle2"></div>
+                                <p>Out of packet maximum</p>
+                                <p class="status-text">You are in pending</p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="circle-wrapper saperator">
+                                <div id="test-circle3"></div>
+                                <p>Plan deductibles</p>
+                                <p class="status-text">You have Spent <span>$800</span></p>
+                            </div>
+                            <div class="circle-wrapper">
+                                <div id="test-circle4"></div>
+                                <p>Plan deductibles</p>
+                                <p class="status-text">You have Spent <span>$800</span></p>
+                            </div>
+                            <div class="clearfix"></div>
+
                         </div>
                     </div>
                 </div>
-                <div class="list-block login-list">
-                    <ul>
-<!--                        Text inputs -->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon-envelope"></i></div>
-                                <div class="item-inner">                                               
-                                    <div class="item-input">
-                                        <input type="email" placeholder="E-mail">
-                                        <i class="valid-field"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-<!--                        added this class(.error-found) for error massage-->
-                        <li>
-                            <div class="item-content">
-                                <div class="item-media"><i class="icon-lock"></i></div>
-                                <div class="item-inner">
-                                    <div class="item-input">
-                                        <input type="password" placeholder="Password">
-                                        <i class="inValid-field"></i>  
-                                    </div>
-                                </div>                                            
-                            </div>                                       
-                        </li>
-                        <li class="btn-wrapper">
-                            <a href="welcome.html"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
-                        </li>
-                    </ul>
-
-                    <p class="forgot-pass"><a href="#">forgot password ?</a></p>
-                    <div class="privacy-text">
-                        <p>By tapping Sign in you agree to our  <a href="">License Agreement</a> and <a href="#">Privacy Statement</a> </p>
-                        <a class="free-sign-up" href="sign-up-free.html">Sign Up For Free</a>
-                    </div>
-
-
-                </div>
             </div>
-
         </div>
 
         <!-- Left Slidebar -->
@@ -95,6 +81,7 @@
             <!-- Lists in Slidebars -->
             <ul class="sb-menu">
                 <li><a href="welcome.html">Welcome</a></li>
+                <!--                <li><a  href="search-provider.html">Search Provider</a></li>-->
                 <li><a href="provider-login.html">Provider login</a></li>
                 <li><a href="linking.html">Linking Account</a></li>
                 <li><a href="complete-linking.html">Complete Linking</a></li>
@@ -152,7 +139,64 @@
             })(jQuery);
         </script>
         <script type="text/javascript" src="js/slidebars-theme.js"></script>
+        <script type="text/javascript" src="js/jquery.circliful.js"></script>
 
+<script>
+    $( document ).ready(function() { // 6,32 5,38 2,34
+      $("#test-circle1").circliful({
+        animation: 0,
+        animationStep: 6,
+        foregroundBorderWidth: 2,
+        backgroundBorderWidth: 2,
+        backgroundColor: "#3c4447",
+        foregroundColor: '#14efef',
+        fillColor: '#262e31',
+        percent: 70,
+        fontColor: '#14efef',
+        percentageTextSize: 30
 
+    });
+    $("#test-circle2").circliful({
+        animation: 0,
+        animationStep: 6,
+        foregroundBorderWidth: 2,
+        backgroundBorderWidth: 2,
+        backgroundColor: "#3c4447",
+        foregroundColor: '#f8c572',
+        fillColor: '#262e31',
+        percent: 0,
+        fontColor: '#14efef',
+        percentageTextSize: 30
+
+    });
+    $("#test-circle3").circliful({
+        animation: 0,
+        animationStep: 6,
+        foregroundBorderWidth: 2,
+        backgroundBorderWidth: 2,
+        backgroundColor: "#3c4447",
+        foregroundColor: '#14efef',
+        fillColor: '#262e31',
+        percent: 50,
+        fontColor: '#14efef',
+        percentageTextSize: 30
+    });
+    $("#test-circle4").circliful({
+        animation: 0,
+        animationStep: 6,
+        foregroundBorderWidth: 2,
+        backgroundBorderWidth: 2,
+        backgroundColor: "#3c4447",
+        foregroundColor: '#14efef',
+        fillColor: '#262e31',
+        percent: 50,
+        fontColor: '#14efef',
+        percentageTextSize: 30
+
+    });
+
+    });
+
+</script>
     </body>
 </html>

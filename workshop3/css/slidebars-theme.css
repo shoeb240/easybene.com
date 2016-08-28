@@ -1,0 +1,316 @@
+/* ---------------
+ * Slidebars Theme
+ *
+ * ---------
+ * CSS Index
+ *
+ * 001 - Box Model
+ * 002 - Site
+ * 003 - Slidebars
+ * 004 - Slidebar Menus
+ * 005 - Slidebar Widgets
+ * 006 - Top Navigation Bar
+ * 007 - Slidebar Controls
+ *
+ * ---------------
+ * 001 - Box Model
+ */
+
+* {
+    /* Highly recommended to avoid any width alterations in the Slidebars or Site, which may cause horizontal scrolling. */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* ----------
+ * 002 - Site
+ */
+
+#main-content {
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+.page-content {
+    padding: 10% 15px;
+}
+
+/* ---------------
+ * 003 - Slidebars
+ */
+
+.sb-slidebar {
+    background-color: #002d4c ; /* Background colour. */
+    color: #e8e8e8; /* Text colour. */
+}
+
+.sb-slidebar a {
+    color: #222; /* Link colour. */
+    text-decoration: none;
+    transition-duration: 0.3s;
+}
+
+.sb-slidebar a:hover {
+    background: #002d4c none repeat scroll 0 0;
+    color: #ffffff;
+}
+.sb-navbar.sb-slide {
+    transform: translate(0) !important;
+    position: relative;
+}
+
+/* --------------------
+ * 004 - Slidebar Menus
+ */
+
+/* Main Menu */
+.sb-menu { /* Apply to <ul> or <ol>. */
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background: #fff;
+}
+
+.sb-menu li {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Will lighten any background colour you set. */
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Will darken any background colour you set. */
+}
+
+.sb-menu > li:first-child {
+    border-top: none; /* Removes top border from first list item.. */
+}
+
+.sb-menu > li:last-child {
+    border-bottom: none; /* Removed bottom border from last list item. */
+}
+
+.sb-menu li a {
+    width: 100%; /* Makes links full width. */
+    display: inline-block;
+    padding: .5em 1em; /* Creates an even padding the same size as your font. */
+}
+
+.sb-menu li a:hover {
+    text-decoration: none;
+   
+}
+.sb-menu li a:after {
+        content: "\f105";
+    font-family: "apps-font";
+    font-size: 18px;
+    margin-right: 5px;
+    vertical-align: middle;
+    color: #222;
+    clear: both;
+    float: right;
+}
+.sb-menu li a:hover:after {
+    color: #fff;
+}
+
+/* Borders */
+.sb-left .sb-menu li a {
+    border-left: 3px solid transparent;
+    font-size: 17px;
+}
+
+.sb-left .sb-menu li a:hover {
+    border-left: 3px solid #00a3c8; /* Removes transparent colour, so border colour will be the same as link hover colour. */
+}
+
+.sb-right .sb-menu li a {
+    border-right: 3px solid transparent;
+}
+
+.sb-right .sb-menu li a:hover {
+    border-right: 3px solid; /* Removes transparent colour, so border colour will be the same as link hover colour. */
+}
+
+/* Submenus */
+.sb-submenu {
+    display: none;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    background-color: rgba(255, 255, 255, 0.05); /* Submenu background colour. */
+}
+
+/* Caret */
+span.sb-caret {
+    width: 0;
+    height: 0;
+    display: inline-block;
+    margin: 0 5px;
+    border: 5px solid transparent;
+}
+
+span.sb-caret { /* Caret Down */
+    border-top: 5px solid;
+    border-bottom: 0px solid transparent;
+}
+
+.sb-submenu-active > span.sb-caret { /* Caret Up */
+    border-top: 0px solid transparent;
+    border-bottom: 5px solid;
+}
+
+/* ----------------------
+ * 005 - Slidebar Widgets
+ */
+
+.sb-widget {
+    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Will lighten any background colour you set. */
+    margin: 14px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25); /* Slight shadow. */
+}
+
+.sb-widget-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* Will darken any background colour you set. */
+    padding: 14px;
+    background-color: #292929; /* Widget title background colour. */
+}
+
+.sb-widget-title {
+    margin: 0; /* Removes browser default margins for heading tags. */ 
+}
+
+.sb-widget-content {
+    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Will lighten any background colour you set. */
+    padding: 14px;
+    background-color: #262626; /* Widget content background colour. */
+}
+
+/* ------------------------
+ * 006 - Top Navigation Bar
+ */
+
+.sb-navbar {
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    top: 0;
+    left: auto;
+    right: auto;
+    z-index: 1000;
+    background-color: #00a3c8 ; /* Bar colour. */
+
+
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+html.sb-android .sb-navbar {
+    position: absolute; /* Fix navbar to top for old versions of Android Browser. */
+}
+
+/* Navbar Menu Items */
+.sb-navbar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sb-navbar-menu-left {
+    float: left;
+}
+
+.sb-navbar-menu-right{
+    float: right;
+}
+
+.sb-navbar-menu li {
+    padding: 0;
+    margin: 0;
+    display: block;
+    float: left;
+}
+
+.sb-navbar-menu li a {
+    display: inline-block;
+    color: #f2f2f2; /* Navbar link colour */
+    padding: 14px;
+    text-decoration: none;
+}
+.page-title {
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: normal;
+  left: 0;
+  margin: 9px 0 0;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  top: 0;
+  z-index: -10;
+}
+.sb-navbar-menu li a:hover {
+    color: #f2f2f2; /* Navbar link hover colour */
+    background-color: rgba(0, 0, 0, 0.05); /* Will lighten any background colour you set. */
+}
+
+/* -----------------------
+ * 007 - Slidebar Controls
+ */
+
+.sb-toggle-left, .sb-toggle-right, .sb-open-left, .sb-open-right, .sb-close {
+    cursor: pointer; /* Help desktop users with Slidebar controls. */
+}
+
+/* Navicons */
+/* These are prefixed with .sb-navbar to avoid styling other Slidebar toggles you may be using. */
+.sb-navbar .sb-toggle-left {
+    width: 52px;
+    float: right;
+    padding: 14px;
+}
+.sb-navbar .back-btn {
+  color: #ffffff;
+  display: inline-block;
+  float: left;
+  font-size: 31px;
+  left: 35px;
+  margin-left: 10px;
+  margin-top: 4px;
+  text-decoration: none;
+}
+
+.sb-navbar .sb-toggle-right {
+    width: 52px;
+    float: right;
+    padding: 14px;
+}
+
+.navicon-line {
+  background-color: #ffffff;
+  border-radius: 1px;
+  height: 3px;
+  margin-bottom: 4px;
+  width: 20px;
+}
+/* Hover states to match navbar menu item hover. */
+.sb-navbar .sb-toggle-left:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Will lighten any background colour you set. */
+}
+
+.sb-navbar .sb-toggle-right:hover {
+    background-color: rgba(0, 0, 0, 0.05); /* Will lighten any background colour you set. */
+}
+
+/* -------------------
+ * 006 - Media Queries
+ */
+
+@media (max-width: 767px) {
+    /* This is entirely optional, it hides the navbar menu items when device width is under 768px. */
+    .sb-navbar-menu {
+        display: none;
+    }
+}

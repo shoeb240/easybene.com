@@ -444,6 +444,10 @@ button, .see-more{
     margin: 0;
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
     background: #fff;
+    margin-top: 20%;
+}
+.content-block {
+    padding: 0;
 }
 .provider-login-wrapper h2 {
     text-align: center;
@@ -452,8 +456,10 @@ button, .see-more{
     margin: 0;
     margin-bottom: 10px;
     font-weight: normal;
-
 }   
+.less-padding {
+    padding: 0;
+}
 
 .provider-login-wrapper input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: #b4aeae;
@@ -481,31 +487,41 @@ button, .see-more{
 }
 
 .circle-wrapper {
-    position: relative;
+  float: left;
+  margin-bottom: 20px;
+  min-height: 192px;
+  padding: 10% 0 0;
+  position: relative;
+  width: 50%;
+}
+.saperator {
+    border-right: 1px solid #3c4447;
 }
 .circle-wrapper .status-text {
     position: absolute;
-    top: 20px;
-    left: 5px;
+    top: 15px;
+    left: 0;
+    right: 0;
     z-index: 10;
     text-transform: capitalize;
     font-size: 13px;
     color: #fff;
+    margin: 0;
 }
 .circle-wrapper .status-text span {
     font-size: 18px;
     font-weight: bold;
     color: #6ec0cb;
 }
-.circle-wrapper {
+/*.circle-wrapper {
     border-top: 1px solid #6ec0cb;
-}
+}*/
 .circle-wrapper:first-child {
     border-top: none;
 }
-.orange-graph {
+/*.orange-graph {
     border-top: 1px solid #f8c572
-}
+}*/
 .medical-grap-text .orange-graph > p {
     color: #f8c572;
 }
@@ -911,6 +927,20 @@ table tr td p {
 }
 .id-card.content-block {
   margin: 35px 0 10px;
+  padding: 0;
+}
+.id-card.content-block .btn.btn-default {
+    border-radius: 0;
+    color: #fff;
+    border: 1px solid #fff;
+    background: transparent;
+}
+.id-card.content-block .btn.btn-default span {
+    margin-left: 8px;
+}
+.id-card.content-block .btn.btn-default:hover, .id-card.content-block .btn.btn-default:focus, .id-card.content-block .btn.btn-default:active {
+        color: #00a3c8;
+    border: 1px solid #00a3c8;
 }
 .tabs .tbl-header-wrapper {
    margin-bottom: 0; 
