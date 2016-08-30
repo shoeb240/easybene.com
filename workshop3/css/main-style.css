@@ -270,21 +270,66 @@ button, .see-more{
     color: #fff;
 }
 
+.tab-bottom-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9;
+    border-top: 1px solid #f2f2f2;
+    text-align: center;
+}
+.nav-tabs.tab-bottom-fixed > li {
+    border: none;  
+    float: none;
+    display: inline-block;
+}
+.nav-tabs > li > a {
+    border: none;
+    border-radius: 0;
+    color: #00a5ff;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 5px 12px;
+    position: relative;
+    margin: 0;
+    transition: all 0.5s ease-out 0s;
+}
+.nav-tabs > li > a i {
+    display: block;
+    text-align: center;
+    font-size: 18px;
+}
+
+.nav-tabs.tab-bottom-fixed  > li.active > a, 
+.nav-tabs.tab-bottom-fixed  > li.active > a:focus,
+.nav-tabs.tab-bottom-fixed  > li.active > a:hover, .nav-tabs.tab-bottom-fixed > li > a:hover {
+    background: #00a5ff ;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    border-top: 1px solid #00a5ff;
+}
+.content-block.less-margin {
+    margin-top: 35px;
+}
 .navbar, .toolbar {
     height: 52px;
 }
-.toolbar-inner .tab-link .badge {
+.nav-tabs.tab-bottom-fixed .badge {
     background: #ff0000 none repeat scroll 0 0;
     font-size: 12px;
     font-weight: bold;
-    height: 17px;
-    line-height: 15px;
+    height: 19px;
+    line-height: 14px;
     position: absolute;
-    right: -8px;
+    right: 14px;
     text-align: center;
     top: -4px;
-    width: 17px;
+    width: 19px;
 }
+
 .search-prvider-page .content-block {
     margin-bottom: 57px;
 }
@@ -298,24 +343,23 @@ button, .see-more{
     text-align: center;
     font-weight: 500;
     line-height: normal;
-    margin-bottom: 15px;
+    margin-bottom: 11px;
 }
 .search-btn-wrapper {
-    height: 32px;
-    background-color: rgba(0, 165, 255, 0.988);
-    box-shadow: 3px 5.196px 10px 0px rgba(0, 0, 0, 0.125);
-    width: 180px;
+    background-color: rgba(0, 165, 255, 0.99);
+    box-shadow: 3px 5.196px 10px 0 rgba(0, 0, 0, 0.125);
+    height: 35px;
     margin: 0 auto;
     padding: 2%;
     position: relative;
+    text-align: center;
+    width: 187px;
 }
 .search-btn-wrapper input {
     border: medium none;
     height: 91%;
     margin: 0 auto;
-    text-align: center;
-    width: 87%;
-    padding-left: 12%;
+    padding-left: 14%;
     text-align: left;
 }
 .search-btn-wrapper input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -335,11 +379,11 @@ button, .see-more{
     font-size: 16px;
 }
 .search-btn-wrapper .icon-search {
-    position: absolute;
-    left: 5%;
-    top: 33%;
-    font-size: 15px;
     color: #acb4b8;
+    font-size: 15px;
+    left: 8%;
+    position: absolute;
+    top: 29%;
 }
 
 .search-result-wrapper ul {
@@ -487,12 +531,12 @@ button, .see-more{
 }
 
 .circle-wrapper {
-  float: left;
-  margin-bottom: 20px;
-  min-height: 192px;
-  padding: 10% 0 0;
-  position: relative;
-  width: 50%;
+    float: left;
+    margin-bottom: 20px;
+    min-height: 192px;
+    padding: 10% 0 0;
+    position: relative;
+    width: 50%;
 }
 .saperator {
     border-right: 1px solid #3c4447;
@@ -895,7 +939,7 @@ table tr td p {
     color: #fff!important;
     margin: 0;
     padding: 0;
-    
+
 }
 /*css for id card info*/
 .id-info li::before {
@@ -926,8 +970,8 @@ table tr td p {
     margin-top: 10px;
 }
 .id-card.content-block {
-  margin: 35px 0 10px;
-  padding: 0;
+    margin: 35px 0 10px;
+    padding: 0;
 }
 .id-card.content-block .btn.btn-default {
     border-radius: 0;
@@ -939,11 +983,20 @@ table tr td p {
     margin-left: 8px;
 }
 .id-card.content-block .btn.btn-default:hover, .id-card.content-block .btn.btn-default:focus, .id-card.content-block .btn.btn-default:active {
-        color: #00a3c8;
+    color: #00a3c8;
     border: 1px solid #00a3c8;
 }
+.id-card .dropdown-menu {
+    min-width: 130px;
+    border-radius: 0;
+}
+.id-card .dropdown-menu > li > a:focus, .id-card .dropdown-menu > li > a:hover {
+    background-color: #002d4c;
+    color: #fff;
+    text-decoration: none;
+}
 .tabs .tbl-header-wrapper {
-   margin-bottom: 0; 
+    margin-bottom: 0; 
 }
 .tabs .content-block h3 {
     margin-top: 5px;

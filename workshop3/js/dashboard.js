@@ -1,7 +1,5 @@
 (function () {
 
-    hideAll(); 
-    
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
     
@@ -31,49 +29,10 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                //console.log(result);
-                $("#medical_chart").data('easyPieChart').update(result.medical_percent);
-                
-                if (!medical_site || medical_site == 'null' || medical_site == 'undefined') {
-                //if (!result.medical_site) {
-                    $("#medical_chart span").html('No Provider');
-                } else {
-                    var medical_image_name = medical_site.toLowerCase() + "_logo.jpg";
-                    $("#medical_image").attr("src", "assets/images/" + medical_image_name);
-                    if (result.medical_percent > 0) {
-                        $("#medical_chart span").html(result.medical_percent+'%');
-                    } else {
-                        $("#medical_chart span").html('Pending');
-                    }
-                }
-                
-                $("#dental_chart").data('easyPieChart').update(result.dental_percent);
-                if (!dental_site || dental_site == 'null' || dental_site == 'undefined') {
-                //if (!result.dental_site) {
-                    $("#dental_chart span").html('No Provider');
-                } else {
-                    var dental_image_name = dental_site.toLowerCase() + "_logo.jpg";
-                    $("#dental_image").attr("src", "assets/images/" + dental_image_name);
-                    if (result.dental_percent > 0) {
-                        $("#dental_chart span").html(result.dental_percent+'%');
-                    } else {
-                        $("#dental_chart span").html('Pending');
-                    }
-                }
-                
-                $("#vision_chart").data('easyPieChart').update(0);
-                if (!vision_site || vision_site == 'null' || vision_site == 'undefined') {
-                //if (!result.vision_site) {
-                    $("#vision_chart span").html('No Provider');
-                } else {
-                    var vision_image_name = vision_site.toLowerCase() + "_logo.jpg";
-                    $("#vision_image").attr("src", "assets/images/" + vision_image_name);
-                    if (!1) { // TODO
-                        $("#vision_chart span").html(result.dental_percent+'%');
-                    } else {
-                        $("#vision_chart span").html('Pending');
-                    }
-                }
+                console.log(result);
+                graph(result.medical_percent, result.medical_amount, medical_site, 'medical');
+                graph(result.dental_percent, result.dental_amount, dental_site, 'dental');
+                graph(result.vision_percent, result.vision_amount, vision_site, 'vision');
                 
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -84,5 +43,49 @@
         });
     }
     
+    function graph(percent, amount, site, site_type)
+    {
+        var site_lower = site.toLowerCase();
+        var graph_id = "#"+site_type+"-circle";
+        var image_id = "#"+site_type+"_image";
+        var fontColor = "#14efef";
+        var foregroundColor = "#14efef";
+        
+        if (!site || site == 'null' || site == 'undefined') {
+            $(graph_id).parent().children("p.status-text").html("No Provider");
+            $(graph_id).parent().addClass("orange-graph");
+            fontColor = "#f8c572";
+            foregroundColor = "#f8c572";
+            percent = 0;
+        } else {
+            var image_name = site_lower + "_logo.jpg";
+            $(image_id).attr("src", "images/" + image_name);
+            if (percent > 0) {
+                $(graph_id).parent().children("p.status-text").html("Total Spent <span>$" + amount + "</span>");
+                $(graph_id).parent().removeClass("orange-graph");
+                $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
+            } else {
+                $(graph_id).parent().children("p.status-text").html("Provider Pending");
+                $(graph_id).parent().addClass("orange-graph");
+                fontColor = "#f8c572";
+                foregroundColor = "#f8c572";
+            }
+        }
+
+        $(graph_id).circliful({
+            animation: 0,
+            animationStep: 6,
+            foregroundBorderWidth: 2,
+            backgroundBorderWidth: 2,
+            backgroundColor: "#3c4447",
+            foregroundColor: foregroundColor,
+            fillColor: '#262e31',
+            percent: percent,
+            fontColor: fontColor,
+            percentageTextSize: 30
+
+        });
+    }
     
+
 }());

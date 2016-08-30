@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -10,9 +9,9 @@
         <!-- Path to Framework7 Library CSS-->
         <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
-        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">
+        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
         <!-- Path to your custom app styles-->
-        <link rel="stylesheet" href="css/slidebars.min.css">
+        <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/slidebars-theme.css">
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
@@ -23,114 +22,75 @@
         <!-- Top Navigation Bar -->
         <div class="sb-navbar sb-slide">
             <a class="back-btn" href="#"><i class="icon-angle-left"></i></a>  
-            <!-- Left Slidebar control -->
+            <!--             Left Slidebar control -->
             <div class="sb-toggle-left">
-
-                <div class="navicon-line"></div>
-                <div class="navicon-line"></div>
-                <div class="navicon-line"></div>
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
             </div>
             <div class="clearfix"></div>
+            <h2 class="page-title">Login</h2>
 
         </div>
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
 
-
-        <!-- Your main site content in here -->
-        <div id="main-content">
-
-            <div class="page-content after-login-screen">
-                <div class="content-block">
-
-                    <div class="after-login-screen-text">
-                        <p>Linking Your account, this may take a minute or two.</p>
-                        <ul>
-                            <li class="active">Securing connection</li>
-                            <li>logging in</li>
-                            <li>Retrieving Your info</li>
-                        </ul>
-                    </div>
-                    <div class="lodder">
-                        <div id="floatingBarsG">
-                            <div class="blockG" id="rotateG_01"></div>
-                            <div class="blockG" id="rotateG_02"></div>
-                            <div class="blockG" id="rotateG_03"></div>
-                            <div class="blockG" id="rotateG_04"></div>
-                            <div class="blockG" id="rotateG_05"></div>
-                            <div class="blockG" id="rotateG_06"></div>
-                            <div class="blockG" id="rotateG_07"></div>
-                            <div class="blockG" id="rotateG_08"></div>
-                        </div>
-                    </div>
-
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                        <li><a href="welcome.html">Welcome</a></li>
+                        <li><a href="provider-login.html">Provider login</a></li>
+                        <li><a href="search-provider.html">Search Provider</a></li>
+                        <li><a href="linking.html">Linking Account</a></li>
+                        <li><a href="complete-linking.html">Complete Linking</a></li>
+                        <li><a href="complete-linking.html">Complete Linking</a></li>
+                        <li><a href="test.html">Graph</a></li>
+                        <li><a href="test-2.html">Table</a></li>
+                        <li><a href="test-3.html">ID Card</a></li>
+                    </ul>
                 </div>
             </div>
-        </div>
+        </aside>
 
-        <!-- Left Slidebar -->
-        <div class="sb-slidebar sb-left">	
-
-            <!-- Lists in Slidebars -->
-            <ul class="sb-menu">
-                <li><a href="welcome.html">Welcome</a></li>
-                <!--                <li><a  href="search-provider.html">Search Provider</a></li>-->
-                <li><a href="provider-login.html">Provider login</a></li>
-                <li><a href="linking.html">Linking Account</a></li>
-                <li><a href="complete-linking.html">Complete Linking</a></li>
-                <li><a href="complete-linking.html">Complete Linking</a></li>
-                <li><a href="test.html">Graph</a></li>
-                <li><a href="test-2.html">Table</a></li>
-                <li><a href="test-3.html">ID Card</a></li>
-
-                <!-- First Dropdown Menu -->
-                <!--                <li><a class="sb-toggle-submenu" href="#">Submenu<span class="sb-caret"></span></a>
-                                    <ul class="sb-submenu">
-                                        <li><a href="#">Second Level Menu Item</a></li>
-                                        <li><a href="#">Second Level Menu Item</a></li>
-                
-                                         Second Dropdown Menu 
-                                        <li><a  class="sb-toggle-submenu" href="#">Second Level Submenu<span class="sb-caret"></span></a>
-                                            <ul class="sb-submenu">
-                                                <li><a href="#">Third Level Menu Item</a></li>
-                                                <li><a href="#">Third Level Menu Item</a></li>
-                                            </ul>
-                                        </li>
-                                                       
-                                    </ul>
-                                </li>-->
-            </ul>
-
-        </div><!-- /.sb-slidebar .sb-left -->
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
 
 
-        <!-- Right Slidebars -->
-        <div class="sb-slidebar sb-right">		
-        </div><!-- /.sb-slidebar .sb-right -->
+                <div class="page-content after-login-screen">
+                    <div class="content-block">
 
+                        <div class="after-login-screen-text">
+                            <p>Linking Your account, this may take a minute or two.</p>
+                            <ul>
+                                <li class="active">Securing connection</li>
+                                <li>logging in</li>
+                                <li>Retrieving Your info</li>
+                            </ul>
+                        </div>
+                        <div class="lodder">
+                            <div id="floatingBarsG">
+                                <div class="blockG" id="rotateG_01"></div>
+                                <div class="blockG" id="rotateG_02"></div>
+                                <div class="blockG" id="rotateG_03"></div>
+                                <div class="blockG" id="rotateG_04"></div>
+                                <div class="blockG" id="rotateG_05"></div>
+                                <div class="blockG" id="rotateG_06"></div>
+                                <div class="blockG" id="rotateG_07"></div>
+                                <div class="blockG" id="rotateG_08"></div>
+                            </div>
+                        </div>
 
+                    </div>
+                </div>
 
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
 
-
-
-
-
-
-        <!-- Path to Framework7 Library JS-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        <!--        <script type="text/javascript" src="js/framework7.min.js"></script>-->
-
-        <!--        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
-        <!--        <script type="text/javascript" src="js/jquery.circliful.js"></script>-->
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
-        <script type="text/javascript" src="js/slidebars.min.js"></script>
-        <script>
-            (function ($) {
-                $(document).ready(function () {
-                    $.slidebars();
-                });
-            })(jQuery);
-        </script>
-        <script type="text/javascript" src="js/slidebars-theme.js"></script>
-
-
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
     </body>
 </html>
