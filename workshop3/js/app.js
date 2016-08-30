@@ -23,6 +23,7 @@
     });
     
     $('#login_next2').on('click', function() {
+        alert('sdfsdf');
         ProcessLogin();
     });
     
@@ -144,16 +145,18 @@
         var dental_site = window.localStorage.getItem('dental_site');
         var vision_site = window.localStorage.getItem('vision_site');
         var unix = Math.round(+new Date()/1000);
+        alert('logged in');
         if (token_expire > unix) {
             if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
-                //ShowMedicalSiteLinks();
-                ShowWelcome(); // remove
+                ShowMedicalSiteLinks();
+                //ShowWelcome(); // remove
             } else if (showDentalVisionSites && (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site)) {
                 ShowDentalSiteLinks();
             } else if (showDentalVisionSites && (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site)) {
                 ShowVisionSiteLinks();
             } else {
-                ShowWelcome();
+                //ShowWelcome();
+                ShowDashboard();
             }
         } else {
             ShowLogin();
@@ -189,8 +192,7 @@
     }
     
     function ShowLogin() {
-        hideAll(); 
-        $('#login_div_step1').css('display', 'block');
+        location.hrf = 'provider-login.html';
     }
     
     function ShowLoginFail(msg) {
@@ -217,6 +219,11 @@
         hideAll(); 
         PrepareWelcomeData();
         $('#welcome_div').css('display', 'block');
+    }
+    
+    function ShowDashboard() {
+        //PrepareWelcomeData();
+        location.href = "dashboard.html";
     }
     
     function ShowMedicalSiteLinks() {

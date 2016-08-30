@@ -54,7 +54,7 @@
                                 <div class="item-media"><i class="icon-envelope"></i></div>
                                 <div class="item-inner">                                               
                                     <div class="item-input">
-                                        <input type="email" placeholder="E-mail">
+                                        <input id="login_email" type="email" placeholder="E-mail">
                                         <i class="valid-field"></i>
                                     </div>
                                 </div>
@@ -66,15 +66,15 @@
                                 <div class="item-media"><i class="icon-lock"></i></div>
                                 <div class="item-inner">
                                     <div class="item-input">
-                                        <input type="password" placeholder="Password">
+                                        <input id="login_password" type="password" placeholder="Password">
                                         <i class="inValid-field"></i>  
                                     </div>
                                 </div>                                            
                             </div>                                       
                         </li>
                         <li class="btn-wrapper">
-                            <a href="welcome.html"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
-                        </li>
+                            <a href="javascript:void(0);" id="login_next2"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
+                        </li><!-- href="welcome.html" -->
                     </ul>
 
                     <p class="forgot-pass"><a href="#">forgot password ?</a></p>
@@ -152,6 +152,8 @@
             })(jQuery);
         </script>
         <script type="text/javascript" src="js/slidebars-theme.js"></script>
+        
+        <script src="js/app.js"></script>
 
 
     </body>

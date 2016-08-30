@@ -38,47 +38,44 @@
         <!-- Your main site content in here -->
         <div id="main-content">
 
-            <div class="page-content provider-login-page">
-                <div class="content-block less-padding">
+            <div class="page-content medical-grap">
+                <div class="content-block">
 
-                    <div class="provider-login-wrapper">
-                        <h2>Linking your medical/dental/vision account to Bene Fits.</h2>
+                    <div class="medical-grap-text">
 
-                        <p class="provider-login-info-text"><a href="why-important.html">Why it is important?</a></p>
-                        <div class="list-block login-list">
-                            <ul>
-                                <!-- Text inputs -->
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-media"><i class="icon-user"></i></div>
-                                        <div class="item-inner">                                               
-                                            <div class="item-input">
-                                                <input id="login_email"  type="email" placeholder="User Name">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="item-content">
-                                        <div class="item-media"><i class="icon-lock"></i></div>
-                                        <div class="item-inner">
-                                            <div class="item-input">
-                                                <input id="login_password" type="password" placeholder="Password">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li class="btn-wrapper">
-                                    <a href="javascript:void(0);" id="login_next2"><button type="submit">Login In</button></a>
-                                </li>
-                            </ul>
-                            <p class="forgot-pass"><a href="#">forgot password ?</a></p>
+                        <h3>Insurance summary</h3>
+                        <div class="">
+
+                            <div class="circle-wrapper saperator">
+                                <div id="test-circle1"></div>
+                                <p><img style="height: 30px;" id="medical_image" src="" alt="" /></p>
+                                <p id="summary_link_medical">Medical</p>
+                                <p class="status-text"></p>
+                            </div>
+                            <div class="circle-wrapper">
+                                <div id="test-circle2"></div>
+                                <p><img style="height: 30px;" id="dental_image" src="" alt="" /></p>
+                                <p id="summary_link_dental">Dental</p>
+                                <p class="status-text"></p>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="circle-wrapper saperator">
+                                <div id="test-circle3"></div>
+                                <p><img style="height: 30px;" id="vision_image" src="" alt="" /></p>
+                                <p id="summary_link_vision">Vision</p>
+                                <p class="status-text"></p>
+                            </div>
+                            <!--<div class="circle-wrapper">
+                                <div id="test-circle4"></div>
+                                <p>Plan deductibles</p>
+                                <p class="status-text">You have Spent <span>$800</span></p>
+                            </div>-->
+                            <div class="clearfix"></div>
+
                         </div>
                     </div>
-
                 </div>
             </div>
-
         </div>
 
         <!-- Left Slidebar -->
@@ -145,9 +142,8 @@
             })(jQuery);
         </script>
         <script type="text/javascript" src="js/slidebars-theme.js"></script>
-        
-        <script type="text/javascript" src="js/provider-login.js"></script>
+        <script type="text/javascript" src="js/jquery.circliful.js"></script>
+        <script type="text/javascript" src="js/dashboard.js"></script>
 
     </body>
 </html>
-
