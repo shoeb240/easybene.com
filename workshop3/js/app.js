@@ -192,7 +192,7 @@
     }
     
     function ShowLogin() {
-        location.hrf = 'provider-login.html';
+        location.href = 'provider-login.html';
     }
     
     function ShowLoginFail(msg) {

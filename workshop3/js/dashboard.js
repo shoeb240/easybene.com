@@ -12,7 +12,7 @@
     });
 
     function ShowLogin() {
-        location.hrf = 'provider-login.html';
+        location.href = 'provider-login.html';
     }
     
     function PrepareWelcomeData() {
@@ -60,6 +60,8 @@
         } else {
             var image_name = site_lower + "_logo.jpg";
             $(image_id).attr("src", "images/" + image_name);
+            $(image_id).css("border", "1px solid grey");
+            $(image_id).css("padding", "2px");
             if (percent > 0) {
                 $(graph_id).parent().children("p.status-text").html("Total Spent <span>$" + amount + "</span>");
                 $(graph_id).parent().removeClass("orange-graph");

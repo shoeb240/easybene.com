@@ -64,26 +64,59 @@
                         <div class="table-text">
 
                             <div class="tbl-header-wrapper">
-                                <h3>Dental Claims</h3>
-                                <p class="sub-info">Guardian</p>
+                                <h3>HSA Funds</h3>
+                                <p class="sub-info"></p>
                             </div>
                             <div class="">
 
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>For</th>
-                                            <th>Total</th>
-                                            <th>You Pay</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
+                                <div id="hsa_summary_div" style="display: block;">
+                                    <div class="row">
+                                            <p>YOUR HSA ACCOUNT BALANCES</p>
+                                    </div>
+                                    <div class="row" style="border-top: 2px solid black; border-bottom: 2px solid black;">
+                                        <div style="width: 50%; border-right: 2px solid black; text-align: center; float:left;">
+                                            <!--<p style="font-size: 12px;">Updated 12/16/ 4:30m</p>-->
+                                            <p id="hsa_checking_value" style="font-size: 20px;">-</p>
+                                            <p>Checking</p>
+                                        </div>
+                                        <div style="width: 50%; float:left;">
+                                            <!-- <p style="font-size: 12px;">Updated 12/16/ 4:30m</p> -->
+                                            <p id="hsa_investment_value" style="font-size: 20px;">-</p>
+                                            <p>Investments</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a style="color: #14efef" href="javascript:void(0);" id="hsa_details_link">HSA Transaction Details ></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                <div id="hsa_transaction_activity_div" style="display: none;">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <a style="color: #14efef" href="javascript:void(0);" id="hsa_summary_link">< HSA Account Balances</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                            <p>REIMBURSEMENTS</p>
+                                    </div>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Transaction Date </th>
+                                                <th>Transaction Type </th>
+                                                <th>Transaction Amt </th>
+                                            </tr>
+                                        </thead>
 
-                                <tbody id="claim">
-                                        
-                                    </tbody>
-                                </table> 
+                                        <tbody id="hsa_transaction_activity_loop">
+
+                                        </tbody>
+                                    </table> 
+
+                                </div>
 
 
                             </div>
@@ -96,6 +129,6 @@
 
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
-        <script type="text/javascript" src="js/guardian-dental.js"></script>
+        <script type="text/javascript" src="js/funds.js"></script>
     </body>
 </html>

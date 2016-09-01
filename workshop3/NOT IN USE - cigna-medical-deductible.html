@@ -6,6 +6,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <title>My App</title>
+        <!-- <link rel="stylesheet" href="css/bootstrap.min.css"> -->
         <!-- Path to Framework7 Library CSS-->
         <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
@@ -44,9 +45,8 @@
                         <li><a href="provider-login.html">Provider login</a></li>
                         <li><a href="linking.html">Linking Account</a></li>
                         <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <!--<li><a href="test.html">Graph</a></li>
-                        <li><a href="test-2.html">Table</a></li>-->
+                        <li><a href="test.html">Graph</a></li>
+                        <li><a href="test-2.html">Table</a></li>
                         <li><a href="test-3.html">ID Card</a></li>
                     </ul>
                 </div>
@@ -61,30 +61,40 @@
                 <div class="page-content medical-grap">
                     <div class="content-block less-padding">
 
+                        <!-- <div class="dropdown">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                Others ID Card
+                                <span class="icon-navicon"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                <li><a href="Cigna-medical.html">Claim</a></li>
+                                <li><a href="Cigna-medical-deductible.html">Deductible</a></li>
+                            </ul>
+                        </div> -->
+                        
                         <div class="table-text">
 
                             <div class="tbl-header-wrapper">
-                                <h3>Dental Claims</h3>
-                                <p class="sub-info">Guardian</p>
+                                <h3>Medical Deductible</h3>
+                                <p class="sub-info">Cigna</p>
                             </div>
                             <div class="">
 
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Date</th>
-                                            <th>For</th>
-                                            <th>Total</th>
-                                            <th>You Pay</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-
-                                <tbody id="claim">
-                                        
-                                    </tbody>
-                                </table> 
-
+                                <div class="circle-wrapper saperator">
+                                    <div id="plan-deductible-circle"></div>
+                                    <p><img style="height: 30px;" id="medical_image" src="" alt="" /></p>
+                                    <p>Plan Deductible </p>
+                                    <p class="status-text"></p>
+                                </div>
+                                
+                                <div class="circle-wrapper">
+                                    <div id="out-of-pocket-circle"></div>
+                                    <p><img style="height: 30px;" id="dental_image" src="" alt="" /></p>
+                                    <p>Out of Pocket Maximum </p>
+                                    <p class="status-text"></p>
+                                </div>
+                                
+                                <div class="clearfix"></div>
 
                             </div>
                         </div>
@@ -96,6 +106,7 @@
 
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
-        <script type="text/javascript" src="js/guardian-dental.js"></script>
+        <script type="text/javascript" src="js/jquery.circliful.js"></script>
+        <script type="text/javascript" src="js/cigna-medical-deductible.js"></script>
     </body>
 </html>

@@ -22,25 +22,17 @@
         var status = '';
         var cssclass = '';
         $.ajax({
-            url: 'http://www.easybene.com/index.php/api-dental/'+username+'/'+token,
+            url: 'http://www.easybene.com/index.php/api-medical/'+username+'/'+token,
             type: "GET",
             dataType: 'json',
             async: false,
             success: function(result) {
-                    //console.log(result.claim);
-                    if (result.claim[0]) {
-                        $.each(result.claim, function(key, row) {
-                            status = 'Pending';
-                            cssclass = 'pending';
-                            if (row.status.search("Processed") >= 0) {
-                                status = 'Processed';
-                                cssclass = 'processed';
-                            }
-                            $('#claim').append('<tr><td>'+row.paid_date+'</td><td><p>'+row.patient_name+'</p></td><td>'+row.submitted_charges+'</td><td>'+row.i_owe+'</td><td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></tr>');
-                        });
-                    } else {
-                        $('#claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
-                    }
+                    console.log(result.cigna_deductible_percent);
+                    console.log(result.cigna_deductible_met);
+                    console.log(result.cigna_out_of_pocket_percent);
+                    console.log(result.cigna_out_of_pocket_met);
+                    graph(result.cigna_deductible_percent, result.cigna_deductible_met, 'plan-deductible');
+                    graph(result.cigna_out_of_pocket_percent, result.cigna_out_of_pocket_met, 'out-of-pocket');
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -49,6 +41,38 @@
                 },
         });
     }
+    
+    function graph(percent, amount, graph_name)
+    {
+        var graph_id = "#"+graph_name+"-circle";
+        var fontColor = "#14efef";
+        var foregroundColor = "#14efef";
+        
+        if (percent > 0) {
+            $(graph_id).parent().children("p.status-text").html("Total Spent <span>" + amount + "</span>");
+            $(graph_id).parent().removeClass("orange-graph");
+        } else {
+            $(graph_id).parent().children("p.status-text").html("Provider Pending");
+            $(graph_id).parent().addClass("orange-graph");
+            fontColor = "#f8c572";
+            foregroundColor = "#f8c572";
+        }
+
+        $(graph_id).circliful({
+            animation: 0,
+            animationStep: 6,
+            foregroundBorderWidth: 2,
+            backgroundBorderWidth: 2,
+            backgroundColor: "#3c4447",
+            foregroundColor: foregroundColor,
+            fillColor: '#262e31',
+            percent: percent,
+            fontColor: fontColor,
+            percentageTextSize: 30
+
+        });
+    }
+    
     
     $('#benefit_link').on('click', function() {
         showBenfitDiv();
