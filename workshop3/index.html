@@ -21,7 +21,7 @@
 
         <!-- Top Navigation Bar -->
         <div class="sb-navbar sb-slide">
-            <a class="back-btn" href="#"><i class="icon-angle-left"></i></a>  
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
             <!--             Left Slidebar control -->
             <div class="sb-toggle-left">
                 <a href="#" data-sidebar-button>
@@ -40,16 +40,6 @@
 
                     <!--                     Lists in Slidebars -->
                     <ul class="sb-menu">
-                        <li><a href="welcome.html">Welcome</a></li>
-                        <li><a href="provider-login.html">Provider login</a></li>
-                        <li><a href="search-provider.html">Search Provider</a></li>
-                        <li><a href="linking.html">Linking Account</a></li>
-                        <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <!--<li><a href="test.html">Graph</a></li>
-                        <li><a href="test-2.html">Table</a></li>-->
-                        <li><a href="test-3.html">ID Card</a></li>
                     </ul>
                 </div>
             </div>
@@ -71,16 +61,19 @@
                     <div class="list-block login-list">
                         <ul>
                             <!--                        Text inputs -->
+                            <li><div id="error_after_submit" style="display: none; position: static;" class="inValidText">Email and/or Password did not match</div></li>
                             <li>
                                 <div class="item-content">
                                     <div class="item-media"><i class="icon-envelope"></i></div>
                                     <div class="item-inner">                                               
                                         <div class="item-input">
                                         <input id="login_email" type="email" placeholder="E-mail">
-                                            <i class="valid-field"></i>
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
                                         </div>
                                     </div>
                                 </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Email</div>
                             </li>
                             <!--                        added this class(.error-found) for error massage-->
                             <li>
@@ -89,10 +82,12 @@
                                     <div class="item-inner">
                                         <div class="item-input">
                                         <input id="login_password" type="password" placeholder="Password">
-                                            <i class="inValid-field"></i>  
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i>  
                                         </div>
                                     </div>                                            
-                                </div>                                       
+                                </div>       
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password</div>
                             </li>
                             <li class="btn-wrapper">
                             <a href="javascript:void(0);" id="login_next2"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
@@ -114,5 +109,115 @@
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        
+        <script>
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        function show_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "block");
+            $(ths).closest("li").addClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "block");
+        }
+        
+        function remove_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        function show_ok(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "block");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        $('#login_email').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if (!isEmail($(this).val())) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+        
+        $('#login_password').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 8) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+    
+        $('#reg_next2').on('click', function() {
+            if (validation_check()) {
+                ProcessReg();
+            }
+        });
+
+        function validation_check(msg) {
+            var valid = true;
+            
+            if (!isEmail($('#login_email').val())) {
+                show_error($('#login_email'));
+                valid = false;
+            } else {
+                remove_error($('#login_email'));
+            }
+
+            if ($('#login_password').val().length < 8) {
+                show_error($('#login_password'));
+                valid = false;
+            } else {
+                remove_error($('#login_password'));
+            }
+
+            return valid;
+        }
+        
+        $('#login_next2').on('click', function() {
+            ProcessLogin();
+        });
+
+        function ProcessLogin() {
+            var email = $('#login_email').val();
+            var password = $('#login_password').val();
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/auth',
+                type: "POST",
+                data: 'username='+email+'&password='+password,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        window.localStorage.setItem("username", email);
+                        window.localStorage.setItem("token", result.token);
+                        window.localStorage.setItem("token_expire", result.token_expire);
+                        window.localStorage.setItem('medical_site', result.medical_site);
+                        window.localStorage.setItem('dental_site', result.dental_site);
+                        window.localStorage.setItem('vision_site', result.vision_site);
+
+                        location.href = "index.html";
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //ShowLoginFail(xhr.responseJSON);
+                        //alert(xhr.responseJSON);
+                        $("#error_after_submit").css("display", "block");
+                    },
+            });
+        }
+
+
+        </script>
     </body>
 </html>

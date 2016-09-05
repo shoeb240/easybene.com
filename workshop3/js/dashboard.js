@@ -12,7 +12,7 @@
     });
 
     function ShowLogin() {
-        location.href = 'provider-login.html';
+        location.href = 'index.html';
     }
     
     function PrepareWelcomeData() {

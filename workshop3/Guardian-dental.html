@@ -21,7 +21,7 @@
 
         <!-- Top Navigation Bar -->
         <div class="sb-navbar sb-slide">
-            <a class="back-btn" href="#"><i class="icon-angle-left"></i></a>  
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
             <!--             Left Slidebar control -->
             <div class="sb-toggle-left">
                 <a href="#" data-sidebar-button>
@@ -40,14 +40,6 @@
 
                     <!--                     Lists in Slidebars -->
                     <ul class="sb-menu">
-                        <li><a href="welcome.html">Welcome</a></li>
-                        <li><a href="provider-login.html">Provider login</a></li>
-                        <li><a href="linking.html">Linking Account</a></li>
-                        <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <!--<li><a href="test.html">Graph</a></li>
-                        <li><a href="test-2.html">Table</a></li>-->
-                        <li><a href="test-3.html">ID Card</a></li>
                     </ul>
                 </div>
             </div>
@@ -59,6 +51,19 @@
 
 
                 <div class="page-content medical-grap">
+                    
+                    <div class="id-card content-block">
+                        <!-- Buttons row as tabs controller -->
+                        <div class="buttons-row id-card-tab">
+                            <!-- Link to 1st tab, active -->
+                            <a id="top_tab_link_medical" class="tab-link active button" href="javascript: void(0);">Medical</a>
+                            <!-- Link to 2nd tab -->
+                            <a id="top_tab_link_dental" class="tab-link button" href="javascript: void(0);">Dental</a>
+                            <!-- Link to 3rd tab -->
+                            <a id="top_tab_link_vision" class="tab-link button" href="javascript: void(0);">Vision</a>
+                        </div>
+                    </div>
+                    
                     <div class="content-block less-padding">
 
                         <div class="table-text">
@@ -96,6 +101,8 @@
 
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
         <script type="text/javascript" src="js/guardian-dental.js"></script>
+        <script type="text/javascript" src="js/common-details.js"></script>
     </body>
 </html>

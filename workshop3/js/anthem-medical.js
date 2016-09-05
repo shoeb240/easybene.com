@@ -36,7 +36,10 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                    console.log(result.claim_details);
+                    console.log(result.deductible_percent);
+                    console.log(result.deductible_met);
+                    console.log(result.out_of_pocket_percent);
+                    console.log(result.out_of_pocket_met);
                     if (result.claim_details[0]) {
                         $.each(result.claim_details, function(key, row) {
                             status = 'Pending';
@@ -45,7 +48,7 @@
 //                                status = 'Processed';
 //                                cssclass = 'processed';
 //                            }
-                            $('#claim').append('<tr><td><p>'+row.claim_processed_on+'</p></td><td>'+row.for+'</td><td>'+row.service_amount_billed+'</td><td>'+row.service_what_i_owe+'</td><!--<td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></td>--></tr>');
+                            $('#claim').append('<tr><td><p>'+row.date+'</p></td><td>'+row.for+'</td><td>'+row.total+'</td><td>'+row.member_responsibility+'</td><!--<td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></td>--></tr>');
                         });
                     } else {
                         $('#guardian-claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');

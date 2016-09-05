@@ -1,9 +1,19 @@
 // We use an "Immediate Function" to initialize the application to avoid leaving anything behind in the global scope
 (function () {
 
-    $('.logout').on('click', function() {
-        ProcessLogout();
+    $(window).load(function(){
+        if (username && token) {
+            GetFundsData();
+        } else {
+            ShowLogin();
+        }
     });
+
+    hideAll();
+
+    function ShowLogin() {
+        location.href = 'index.html';
+    }
     
     $('#hsa_details_link').on('click', function() {
         showTransactionActivityDiv();
@@ -15,8 +25,6 @@
         $('#hsa_transaction_activity_div').css('display', 'none');
     }
 
-    hideAll();
-    
     function GetFundsData() {
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
@@ -76,9 +84,5 @@
     $('#hsa_summary_link').on('click', function() {
         showHSASummaryDiv();
     });
-    
-    GetFundsData();
-    
-    
     
 }());

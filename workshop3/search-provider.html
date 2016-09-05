@@ -22,7 +22,7 @@
 
         <!-- Top Navigation Bar -->
         <div class="sb-navbar sb-slide">
-            <a class="back-btn" href="#"><i class="icon-angle-left"></i></a>  
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
             <!--             Left Slidebar control -->
             <div class="sb-toggle-left">
                 <a href="#" data-sidebar-button>
@@ -41,13 +41,6 @@
 
                     <!--                     Lists in Slidebars -->
                     <ul class="sb-menu">
-                        <li><a href="welcome.html">Welcome</a></li>
-                        <li><a href="provider-login.html">Provider login</a></li>
-                        <li><a href="linking.html">Linking Account</a></li>
-                        <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="test.html">Graph</a></li>
-                        <li><a href="test-2.html">Table</a></li>
-                        <li><a href="test-3.html">ID Card</a></li>
                     </ul>
                 </div>
             </div>
@@ -74,216 +67,226 @@
                                 <a href="#vision" aria-controls="vision" role="tab" data-toggle="tab"><i class="icon-heart36"></i>Vision</a>
                             </li>
                             <li role="presentation">
-                                <a href="#insurance" aria-controls="insurance" role="tab" data-toggle="tab"><i class="icon-medicine"></i>insurance</a>
+                                <a href="#funds" aria-controls="funds" role="tab" data-toggle="tab"><i class="icon-medicine"></i>Funds</a>
                             </li>
                         </ul>
 
                         <!-- Tab panes -->
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="medical">
-                                <h3 class="search-text">See all your benefits in one place. Add 
-                                    your medical, Dental  or Vision Provider.</h3>
-                                <div class="search-btn-wrapper">
-                                    <i class="icon-search"></i>
-                                    <input type="text" placeholder="Search Your Provider"/>
-                                </div>
+                                
+                                <div id="site_choice_medical_div">
+                                    <h3 class="search-text">Add 
+                                        your medical Provider.</h3>
+                                    <div class="search-btn-wrapper">
+                                        <i class="icon-search"></i>
+                                        <input type="text" placeholder="Search Your Provider"/>
+                                    </div>
 
-                                <div class="search-result-wrapper">
-                                    <ul>
-                                        <li>
-                                            <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-1.png')"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>Cigna</h2>
-                                                <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <a href="provider-login.html">
-                                                    <i class="icon-angle-double-right"></i>
-                                                </a>
-                                            </div>
+                                    <div class="search-result-wrapper">
+                                        <ul>
+                                            <li>
+                                                <div class="provider-logo-wrapper pull-left" style="background: url('images/cigna_logo.jpg')"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Cigna</h2>
+                                                    <p>Cigna Health Insurance</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="cigna_medical" href="javascript: void(0);">
+                                                        <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
 
-                                        </li>
-                                        <li>
-                                            <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-2.png')"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>HUMANA</h2>
-                                                <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <a href="provider-login.html">
-                                                    <i class="icon-angle-double-right"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-1.png')"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>ASSURANT</h2>
-                                                <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <a href="provider-login.html">
-                                                    <i class="icon-angle-double-right"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <a href="#" class="see-more">See More <i class="icon-plus"></i></a>
+                                            </li>
+                                            <li>
+                                                <div class="provider-logo-wrapper pull-left" style="background: url('images/anthem_logo.jpg')"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Anthem</h2>
+                                                    <p>Anthem Health Insurance</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="anthem_medical" href="javascript: void(0);">
+                                                        <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <a href="#" class="see-more">See More <i class="icon-plus"></i></a>
+                                    </div>
                                 </div>
+                                
                             </div>
                             <div role="tabpanel" class="tab-pane" id="dental">
-                                <h3 class="search-text">See all your benefits in one place. Add 
-                                    your medical, Dental  or Vision Provider.</h3>
-                                <div class="search-btn-wrapper">
-                                    <i class="icon-search"></i>
-                                    <input type="text" placeholder="Search Your Provider"/>
-                                </div>
+                                <div id="site_choice_dental_div">
+                                    <h3 class="search-text">Add 
+                                        your Dental Provider.</h3>
+                                    <div class="search-btn-wrapper">
+                                        <i class="icon-search"></i>
+                                        <input type="text" placeholder="Search Your Provider"/>
+                                    </div>
 
-                                <div class="search-result-wrapper">
-                                    <ul>
-                                        <li class="">
-                                            <div style="background: url('images/provider-log-3.png')" class="provider-logo-wrapper pull-left"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>Guardian</h2>
-                                                <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <i class="icon-angle-double-right"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div style="background: url('images/provider-log-4.png')" class="provider-logo-wrapper pull-left"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>navia</h2>
-                                                <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <i class="icon-angle-double-right"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div style="background: url('images/provider-log-1.png')" class="provider-logo-wrapper pull-left"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>ASSURANT</h2>
-                                                <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <i class="icon-angle-double-right"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <div class="search-result-wrapper">
+                                        <ul>
+                                            <li class="">
+                                                <div style="background: url('images/guardian_logo.jpg')" class="provider-logo-wrapper pull-left"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Guardian</h2>
+                                                    <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="guardian_dental" href="javascript: void(0);">
+                                                    <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div style="background: url('images/cigna_logo.jpg')" class="provider-logo-wrapper pull-left"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Cigna</h2>
+                                                    <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="cigna_dental" href="javascript: void(0);">
+                                                    <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
 
-                                    <a class="see-more" href="#">See More <i class="icon-plus"></i></a>
+                                        <a class="see-more" href="#">See More <i class="icon-plus"></i></a>
+                                    </div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="vision">
-                                <h3 class="search-text">See all your benefits in one place. Add 
-                                    your medical, Dental  or Vision Provider.</h3>
-                                <div class="search-btn-wrapper">
-                                    <i class="icon-search"></i>
-                                    <input type="text" placeholder="Search Your Provider"/>
-                                </div>
+                                <div id="site_choice_vision_div">
+                                    <h3 class="search-text">Add 
+                                        your Vision Provider.</h3>
+                                    <div class="search-btn-wrapper">
+                                        <i class="icon-search"></i>
+                                        <input type="text" placeholder="Search Your Provider"/>
+                                    </div>
 
-                                <div class="search-result-wrapper">
-                                    <ul>
-                                        <li>
-                                            <div style="background: url('images/provider-log-1.png')" class="provider-logo-wrapper pull-left"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>Cigna</h2>
-                                                <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <i class="icon-angle-double-right"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div style="background: url('images/provider-log-2.png')" class="provider-logo-wrapper pull-left"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>HUMANA</h2>
-                                                <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <i class="icon-angle-double-right"></i>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div style="background: url('images/provider-log-1.png')" class="provider-logo-wrapper pull-left"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>ASSURANT</h2>
-                                                <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <i class="icon-angle-double-right"></i>
-                                            </div>
-                                        </li>
-                                    </ul>
+                                    <div class="search-result-wrapper">
+                                        <ul>
+                                            <li>
+                                                <div style="background: url('images/cigna_logo.jpg')" class="provider-logo-wrapper pull-left"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Cigna</h2>
+                                                    <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="cigna_vision" href="javascript: void(0);">
+                                                    <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div style="background: url('images/navia_logo.png')" class="provider-logo-wrapper pull-left"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Navia</h2>
+                                                    <p>350 m123 Address Rd, City <br>+1 (416) 421-3000</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="navia_vision" href="javascript: void(0);">
+                                                    <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
 
-                                    <a class="see-more" href="#">See More <i class="icon-plus"></i></a>
+                                        <a class="see-more" href="#">See More <i class="icon-plus"></i></a>
+                                    </div>
                                 </div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="insurance">
-                                <h3 class="search-text">See all your benefits in one place. Add 
-                                    your medical, Dental  or Vision Provider.</h3>
-                                <div class="search-btn-wrapper">
-                                    <i class="icon-search"></i>
-                                    <input type="text" placeholder="Search Your Provider"/>
-                                </div>
+                            <div role="tabpanel" class="tab-pane" id="funds">
+                                <div id="site_choice_funds_div">
+                                    <h3 class="search-text">Add 
+                                        your Funds Provider.</h3>
+                                    <div class="search-btn-wrapper">
+                                        <i class="icon-search"></i>
+                                        <input type="text" placeholder="Search Your Provider"/>
+                                    </div>
 
-                                <div class="search-result-wrapper">
-                                    <ul>
-                                        <li>
-                                            <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-1.png')"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>Cigna</h2>
-                                                <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <a href="provider-login.html">
-                                                    <i class="icon-angle-double-right"></i>
-                                                </a>
-                                            </div>
+                                    <div class="search-result-wrapper">
+                                        <ul>
+                                            <li>
+                                                <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-1.png')"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Cigna</h2>
+                                                    <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="cigna_funds" href="javascript: void(0);">
+                                                        <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
 
-                                        </li>
-                                        <li>
-                                            <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-2.png')"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>HUMANA</h2>
-                                                <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <a href="provider-login.html">
-                                                    <i class="icon-angle-double-right"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-1.png')"></div>
-                                            <div class="provider-text-wrapperr pull-right">
-                                                <h2>ASSURANT</h2>
-                                                <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
-                                            </div>
-                                            <div class="clearfix"></div>
-                                            <div class="arrow-wrapper">
-                                                <a href="provider-login.html">
-                                                    <i class="icon-angle-double-right"></i>
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <a href="#" class="see-more">See More <i class="icon-plus"></i></a>
+                                            </li>
+                                            <li>
+                                                <div class="provider-logo-wrapper pull-left" style="background: url('images/navia_logo.png')"></div>
+                                                <div class="provider-text-wrapperr pull-right">
+                                                    <h2>Navia</h2>
+                                                    <p>350 m123 Address Rd, City <br />+1 (416) 421-3000</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="arrow-wrapper">
+                                                    <a id="navia_funds" href="javascript: void(0);">
+                                                        <i class="icon-angle-double-right"></i>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <a href="#" class="see-more">See More <i class="icon-plus"></i></a>
+                                    </div>
                                 </div>
                             </div>
+                            
+                            <div id="site_reg_div" class="provider-login-wrapper" style="display: none; box-shadow: none; margin: 0;">
+                                <h2>Linking your <span id="site_selected_type_name"></span> account to Bene Fits.</h2>
+                                <p class="provider-login-info-text">
+                                    <a href="why-important.html">Why it is important?</a>
+                                    <br />
+                                    <img id="site_selected_type_image" style="width: 100px;" src="" />
+                                </p>
+                                <div class="list-block login-list">
+                                    <ul>
+                                        <!-- Text inputs -->
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon-user"></i></div>
+                                                <div class="item-inner">                                               
+                                                    <div class="item-input">
+                                                    <input id="site_selected_user_id"  type="email" placeholder="User Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon-lock"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                    <input id="site_selected_password" type="password" placeholder="Password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="btn-wrapper">
+                                        <input type="hidden" id="site_selected_name" value="">
+                                        <a href="javascript:void(0);" id="site_register"><button type="submit">Register Provider</button></a>
+                                        </li>
+                                    </ul>
+                                    <!-- <p class="forgot-pass"><a href="#">forgot password ?</a></p> -->
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -294,5 +297,151 @@
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        <script>
+      /*$('#do_search_link_medical').on('click', function() {
+            var name = $("#medical_search_chosen .search-choice span").html();
+            var image_name = name.toLowerCase() + "_logo.jpg";
+            ShowSiteReg('Medical', name, image_name);
+        });
+
+        $('#do_search_link_dental').on('click', function() {
+            var name = $("#dental_search_chosen .search-choice span").html();
+            var image_name = name.toLowerCase() + "_logo.jpg";
+            ShowSiteReg('Dental', name, image_name);
+        });
+
+        $('#do_search_link_vision').on('click', function() {
+            var name = $("#vision_search_chosen .search-choice span").html();
+            var image_name = name.toLowerCase() + "_logo.jpg";
+            ShowSiteReg('Vision', name, image_name);
+        }); */
+
+        $('#cigna_medical').on('click', function() {
+            ShowSiteReg('Medical', 'Cigna', 'cigna_logo.jpg');
+        });
+
+        $('#anthem_medical').on('click', function() {
+            ShowSiteReg('Medical', 'Anthem', 'anthem_logo.jpg');
+        });
+
+        $('#guardian_medical').on('click', function() {
+            ShowSiteReg('Medical', 'Guardian', 'guardian_logo.jpg');
+        });
+
+        $('#cigna_dental').on('click', function() {
+            ShowSiteReg('Dental', 'Cigna', 'cigna_logo.jpg');
+        });
+
+        $('#anthem_dental').on('click', function() {
+            ShowSiteReg('Dental', 'Anthem', 'anthem_logo.jpg');
+        });
+
+        $('#guardian_dental').on('click', function() {
+            ShowSiteReg('Dental', 'Guardian', 'guardian_logo.jpg');
+        });
+
+        $('#cigna_vision').on('click', function() {
+            ShowSiteReg('Vision', 'Cigna', 'cigna_logo.jpg');
+        });
+
+        $('#anthem_vision').on('click', function() {
+            ShowSiteReg('Vision', 'Anthem', 'anthem_logo.jpg');
+        });
+
+        $('#guardian_vision').on('click', function() {
+            ShowSiteReg('Vision', 'Guardian', 'guardian_logo.jpg');
+        });
+        
+        $('#navia_vision').on('click', function() {
+            ShowSiteReg('Vision', 'Navia', 'navia_logo.png');
+        });
+        
+        $('#cigna_funds').on('click', function() {
+            ShowSiteReg('Funds', 'Cigna', 'cigna_logo.jpg');
+        });
+
+        $('#navia_funds').on('click', function() {
+            ShowSiteReg('Funds', 'Navia', 'navia_logo.png');
+        });
+
+        $('#site_register').on('click', function() {
+            RegisterSite();
+        });
+
+        $('#skip_dental').on('click', function() {
+            ShowVisionSiteLinks();
+        });
+
+        $('#skip_vision').on('click', function() {
+            ShowWelcome();
+        });
+        
+        $('.nav-tabs li a').on("click", function(){
+            display_refresh();
+        });
+        
+        function display_refresh() {
+            $('#site_choice_medical_div').css('display', 'block');   
+            $('#site_choice_dental_div').css('display', 'block');   
+            $('#site_choice_vision_div').css('display', 'block');   
+            $('#site_choice_funds_div').css('display', 'block');   
+
+            $('#site_reg_div').css('display', 'none');   
+            
+            //$('#site_reg_fail_div').css('display', 'none');   
+
+            //$('#reg_div_success').css('display', 'none');
+            //$('#reg_span_fail').css('display', 'none');
+            //$('#login_span_fail').html('');   
+        }
+        
+        function ShowSiteReg(type, site, image) {
+            $('#site_reg_div').css('display', 'block');
+            $('#site_selected_type_name').html(type);
+            $('#site_selected_name').val(site);
+            $('#site_selected_type_image').attr("src", "images/" + image);
+            
+            $('#site_choice_'+type.toLowerCase()+'_div').css('display', 'none');
+        }
+
+        function ShowSitelRegFail() {
+            //hideAll();
+            $('#site_reg_fail_div').css('display', 'block');
+            $('#site_failed_type_name').html($('#site_selected_type_name').html());
+            $('#site_failed_type_image').attr("src", $('#site_selected_type_image').attr("src"));
+        }
+        
+        function RegisterSite() {
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+            var site_type = $('#site_selected_type_name').html();
+            var site_name = $('#site_selected_name').val();
+            var site_user_id = $('#site_selected_user_id').val();
+            var site_password = $('#site_selected_password').val();
+
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                type: "POST",
+                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        window.localStorage.setItem('medical_site', result.medical_site);
+                        window.localStorage.setItem('dental_site', result.dental_site);
+                        window.localStorage.setItem('vision_site', result.vision_site);
+                        //welcomeSelection(true);
+                        alert("Provider Registered Successfully");
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        console.log(xhr);
+                        console.log(ajaxOptions);
+                        console.log(thrownError);
+                        //ShowSitelRegFail();
+                    },
+            });
+        }
+        </script>
     </body>
 </html>
