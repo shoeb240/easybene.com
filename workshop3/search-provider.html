@@ -113,15 +113,14 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <a href="#" class="see-more">See More <i class="icon-plus"></i></a>
+                                        <!-- <a href="#" class="see-more">See More <i class="icon-plus"></i></a> -->
                                     </div>
                                 </div>
                                 
                             </div>
                             <div role="tabpanel" class="tab-pane" id="dental">
                                 <div id="site_choice_dental_div">
-                                    <h3 class="search-text">Add 
-                                        your Dental Provider.</h3>
+                                    <h3 class="search-text">Add your Dental Provider.</h3>
                                     <div class="search-btn-wrapper">
                                         <i class="icon-search"></i>
                                         <input type="text" placeholder="Search Your Provider"/>
@@ -142,7 +141,7 @@
                                                     </a>
                                                 </div>
                                             </li>
-                                            <li>
+                                            <!--<li>
                                                 <div style="background: url('images/cigna_logo.jpg')" class="provider-logo-wrapper pull-left"></div>
                                                 <div class="provider-text-wrapperr pull-right">
                                                     <h2>Cigna</h2>
@@ -155,16 +154,15 @@
                                                     </a>
                                                 </div>
                                             </li>
-                                        </ul>
+                                        </ul>-->
 
-                                        <a class="see-more" href="#">See More <i class="icon-plus"></i></a>
+                                        <!-- <a class="see-more" href="#">See More <i class="icon-plus"></i></a> -->
                                     </div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="vision">
                                 <div id="site_choice_vision_div">
-                                    <h3 class="search-text">Add 
-                                        your Vision Provider.</h3>
+                                    <h3 class="search-text">Add your Vision Provider.</h3>
                                     <div class="search-btn-wrapper">
                                         <i class="icon-search"></i>
                                         <input type="text" placeholder="Search Your Provider"/>
@@ -200,14 +198,13 @@
                                             </li>
                                         </ul>
 
-                                        <a class="see-more" href="#">See More <i class="icon-plus"></i></a>
+                                        <!-- <a class="see-more" href="#">See More <i class="icon-plus"></i></a> -->
                                     </div>
                                 </div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="funds">
                                 <div id="site_choice_funds_div">
-                                    <h3 class="search-text">Add 
-                                        your Funds Provider.</h3>
+                                    <h3 class="search-text">Add your Funds Provider.</h3>
                                     <div class="search-btn-wrapper">
                                         <i class="icon-search"></i>
                                         <input type="text" placeholder="Search Your Provider"/>
@@ -215,7 +212,7 @@
 
                                     <div class="search-result-wrapper">
                                         <ul>
-                                            <li>
+                                            <!-- <li>
                                                 <div class="provider-logo-wrapper pull-left" style="background: url('images/provider-log-1.png')"></div>
                                                 <div class="provider-text-wrapperr pull-right">
                                                     <h2>Cigna</h2>
@@ -228,7 +225,7 @@
                                                     </a>
                                                 </div>
 
-                                            </li>
+                                            </li> -->
                                             <li>
                                                 <div class="provider-logo-wrapper pull-left" style="background: url('images/navia_logo.png')"></div>
                                                 <div class="provider-text-wrapperr pull-right">
@@ -243,18 +240,14 @@
                                                 </div>
                                             </li>
                                         </ul>
-                                        <a href="#" class="see-more">See More <i class="icon-plus"></i></a>
+                                        <!-- <a href="#" class="see-more">See More <i class="icon-plus"></i></a> -->
                                     </div>
                                 </div>
                             </div>
                             
                             <div id="site_reg_div" class="provider-login-wrapper" style="display: none; box-shadow: none; margin: 0;">
                                 <h2>Linking your <span id="site_selected_type_name"></span> account to Bene Fits.</h2>
-                                <p class="provider-login-info-text">
-                                    <a href="why-important.html">Why it is important?</a>
-                                    <br />
-                                    <img id="site_selected_type_image" style="width: 100px;" src="" />
-                                </p>
+                                <p class="provider-login-info-text"><a href="#Why-imp-Modal" data-toggle="modal">Why it is important?</a></p>
                                 <div class="list-block login-list">
                                     <ul>
                                         <!-- Text inputs -->
@@ -294,6 +287,24 @@
             <div class="overlay" data-sidebar-overlay></div>
         </main>
 
+        <!-- Modal HTML -->
+        <div id="Why-imp-Modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <div class="why-important-text-wrapper">
+                            <div class="why-important-text-wrapper-text">
+                                <h3>Linking is how the magic Happens</h3>
+                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
+                                <a href="javascript: void(0);">Got it</a>
+                            </div>
+
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>

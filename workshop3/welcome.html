@@ -16,6 +16,15 @@
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
+        <script>
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem("token");
+            if (username && token) {
+
+            } else {
+                location.href = 'index.html';
+            }
+        </script>
     </head>
     <body>
 

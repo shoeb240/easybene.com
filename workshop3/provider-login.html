@@ -8,8 +8,9 @@
         <title>My App</title>
         <!-- Path to Framework7 Library CSS-->
         <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
-        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+
         <!-- Path to your custom app styles-->
         <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/slidebars-theme.css">
@@ -40,15 +41,6 @@
 
                     <!--                     Lists in Slidebars -->
                     <ul class="sb-menu">
-                        <li><a href="welcome.html">Welcome</a></li>
-                        <li><a href="provider-login.html">Provider login</a></li>
-                        <li><a href="linking.html">Linking Account</a></li>
-                        <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="complete-linking.html">Complete Linking</a></li>
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <!--<li><a href="test.html">Graph</a></li>
-                        <li><a href="test-2.html">Table</a></li>-->
-                        <li><a href="test-3.html">ID Card</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,7 +57,8 @@
                         <div class="provider-login-wrapper">
                             <h2>Linking your medical/dental/vision account to Bene Fits.</h2>
 
-                            <p class="provider-login-info-text"><a href="why-important.html">Why it is important?</a></p>
+                            <p class="provider-login-info-text"><a href="#Why-imp-Modal" data-toggle="modal">Why it is important?</a></p>
+
                             <div class="list-block login-list">
                                 <ul>
                                     <!-- Text inputs -->
@@ -74,7 +67,7 @@
                                             <div class="item-media"><i class="icon-user"></i></div>
                                             <div class="item-inner">                                               
                                                 <div class="item-input">
-                                                <input id="login_email"  type="email" placeholder="User Name">
+                                                    <input id="login_email"  type="email" placeholder="User Name">
                                                 </div>
                                             </div>
                                         </div>
@@ -84,13 +77,13 @@
                                             <div class="item-media"><i class="icon-lock"></i></div>
                                             <div class="item-inner">
                                                 <div class="item-input">
-                                                <input id="login_password" type="password" placeholder="Password">
+                                                    <input id="login_password" type="password" placeholder="Password">
                                                 </div>
                                             </div>
                                         </div>
                                     </li>
                                     <li class="btn-wrapper">
-                                    <a href="javascript:void(0);" id="login_next2"><button type="submit">Login In</button></a>
+                                        <a href="javascript:void(0);" id="login_next2"><button type="submit">Login In</button></a>
                                     </li>
                                 </ul>
                                 <p class="forgot-pass"><a href="#">forgot password ?</a></p>
@@ -104,7 +97,26 @@
             <div class="overlay" data-sidebar-overlay></div>
         </main>
 
+        <!-- Modal HTML -->
+        <div id="Why-imp-Modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <div class="why-important-text-wrapper">
+                            <div class="why-important-text-wrapper-text">
+                                <h3>Linking is how the magic Happens</h3>
+                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
+                                <a href="javascript: void(0);">Got it</a>
+                            </div>
+
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
         <script type="text/javascript" src="js/provider-login.js"></script>

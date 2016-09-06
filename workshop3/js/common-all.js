@@ -13,10 +13,12 @@
         var medical_site = window.localStorage.getItem('medical_site');
         var dental_site= window.localStorage.getItem('dental_site');
         var vision_site = window.localStorage.getItem('vision_site');
+        var funds_site = window.localStorage.getItem('funds_site');
 
-        var li_html = '<li><a href="welcome.html">Welcome</a></li>';
-        li_html += '<li><a href="provider-login.html">Provider login</a></li>';
-        li_html += '<li><a href="search-provider.html">Search Provider</a></li>';
+        var li_html = '';
+        //li_html += '<li><a href="welcome.html">Welcome</a></li>';
+        //li_html += '<li><a href="provider-login.html">Provider login</a></li>';
+        //li_html += '<li><a href="search-provider.html">Search Provider</a></li>';
         //li_html += '<li><a href="linking.html">Linking Account</a></li>';
         //li_html += '<li><a href="complete-linking.html">Complete Linking</a></li>';
         li_html += '<li><a href="dashboard.html">Dashboard</a></li>';
@@ -26,15 +28,18 @@
         if (dental_site && dental_site != 'null' && dental_site != 'undefined') {
             li_html += '<li><a href="' + dental_site.toLowerCase() + '-dental.html">Dental</a></li>';
         }
-
         if (vision_site && vision_site != 'null' && vision_site != 'undefined') {
             li_html += '<li><a href="' + vision_site.toLowerCase() + '-vision.html">Vision</a></li>';
         }
-        li_html += '<li><a href="funds.html">Funds</a></li>';
-        li_html += '<!--<li><a href="test.html">Graph</a></li>';
-        li_html += '<li><a href="test-2.html">Table</a></li>-->';
-        li_html += '<li><a href="test-3.html">ID Card</a></li>';
-        li_html += '<li><a class="logout" href="logout.html">Logout</a></li>';
+        if (funds_site && funds_site != 'null' && funds_site != 'undefined') {
+            li_html += '<li><a href="funds.html">Funds</a></li>';
+        }
+        //li_html += '<li><a href="test.html">Graph</a></li>';
+        //li_html += '<li><a href="test-2.html">Table</a></li>';
+        //li_html += '<li><a href="test-3.html">ID Card</a></li>';
+        if (username && token) {
+            li_html += '<li><a class="logout" href="logout.html">Logout</a></li>';
+        }
 
         $(".sb-menu").html(li_html);
     }

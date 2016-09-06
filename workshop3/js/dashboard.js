@@ -30,9 +30,9 @@
             async: false,
             success: function(result) {
                 console.log(result);
-                graph(result.medical_percent, result.medical_amount, medical_site, 'medical');
-                graph(result.dental_percent, result.dental_amount, dental_site, 'dental');
-                graph(result.vision_percent, result.vision_amount, vision_site, 'vision');
+                graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible);
+                graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible);
+                graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible);
                 
             },
             error: function(xhr, ajaxOptions, thrownError) {
@@ -43,7 +43,7 @@
         });
     }
     
-    function graph(percent, amount, site, site_type)
+    function graph(percent, deductible_met, site, site_type, deductible)
     {
         var site_lower = site.toLowerCase();
         var graph_id = "#"+site_type+"-circle";
@@ -63,7 +63,7 @@
             $(image_id).css("border", "1px solid grey");
             $(image_id).css("padding", "2px");
             if (percent > 0) {
-                $(graph_id).parent().children("p.status-text").html("Total Spent <span>$" + amount + "</span>");
+                $(graph_id).parent().children("p.status-text").html("Deductible <span>$" + deductible + "</span><br />Total Spent <span>$" + deductible_met + "</span>");
                 $(graph_id).parent().removeClass("orange-graph");
                 $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
             } else {

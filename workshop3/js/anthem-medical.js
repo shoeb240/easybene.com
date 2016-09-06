@@ -37,8 +37,10 @@
             async: false,
             success: function(result) {
                     console.log(result.deductible_percent);
+                    console.log(result.deductible_amt);
                     console.log(result.deductible_met);
                     console.log(result.out_of_pocket_percent);
+                    console.log(result.out_of_pocket_amt);
                     console.log(result.out_of_pocket_met);
                     if (result.claim_details[0]) {
                         $.each(result.claim_details, function(key, row) {
@@ -54,8 +56,8 @@
                         $('#guardian-claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
                     }
                     
-                    graph(result.deductible_percent, result.deductible_met, 'plan-deductible');
-                    graph(result.out_of_pocket_percent, result.out_of_pocket_met, 'out-of-pocket');
+                    graph(result.deductible_percent, result.deductible_met, 'plan-deductible', result.deductible_amt);
+                    graph(result.out_of_pocket_percent, result.out_of_pocket_met, 'out-of-pocket', result.out_of_pocket_amt);
                 },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -97,14 +99,14 @@
         showClaimDiv();
     });
 
-    function graph(percent, amount, graph_name)
+    function graph(percent, deductible_met, graph_name, deductible_amt)
     {
         var graph_id = "#"+graph_name+"-circle";
         var fontColor = "#14efef";
         var foregroundColor = "#14efef";
         
         if (percent > 0) {
-            $(graph_id).parent().children("p.status-text").html("Total Spent <span>" + amount + "</span>");
+            $(graph_id).parent().children("p.status-text").html("Deductible <span>" + deductible_amt + "</span><br />Total Spent <span>" + deductible_met + "</span>");
             $(graph_id).parent().removeClass("orange-graph");
         } else {
             $(graph_id).parent().children("p.status-text").html("Provider Pending");

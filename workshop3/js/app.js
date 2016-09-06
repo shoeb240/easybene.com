@@ -3,14 +3,11 @@
 
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
-    alert(username+'=='+token);
+    //alert(username+'=='+token);
     $(window).load(function(){
         if (username && token) {
             welcomeSelection(false);
         } 
-//        else {
-//            ShowReg(null);
-//        }
     });
             
     $('#do_search_link_medical').on('click', function() {
@@ -104,15 +101,21 @@
         alert('logged in');
         if (token_expire > unix) {
             if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
+                alert('1');
                 ShowMedicalSiteLinks();
             } else if (showDentalVisionSites && (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site)) {
+                alert('2');
                 ShowDentalSiteLinks();
             } else if (showDentalVisionSites && (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site)) {
+                alert('3');
                 ShowVisionSiteLinks();
             } else {
+                alert('4');
                 ShowDashboard();
             }
-        } 
+        } else {
+            
+        }
     }
     
     function ShowWelcome() {
