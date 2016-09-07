@@ -37,17 +37,15 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
             
             if ($userInfo['medical_site'] == 'Cigna') {
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
-                $arr['deductible'] = $deductibleMapper->getCignaDeductible($userId);
+                $deductible = $deductibleMapper->getCignaDeductible($userId);
 
-                $deductibleAmt = str_replace(array('$', ','), '', $arr['deductible']['deductible_amt']);
-                $deductibleMet = str_replace(array('$', ','), '', $arr['deductible']['deductible_met']);
-                $arr['cigna_deductible_met'] = $arr['deductible']['deductible_met'];
-                $arr['cigna_deductible_percent'] = round($deductibleMet / $deductibleAmt * 100);
+                $arr['deductible_amt'] = str_replace(array('$', ','), '', $deductible['deductible_amt']);
+                $arr['deductible_met'] = str_replace(array('$', ','), '', $deductible['deductible_met']);
+                $arr['deductible_percent'] = round($arr['deductible_met'] / $arr['deductible_amt'] * 100);
 
-                $outOfPocketAmt = str_replace(array('$', ','), '', $arr['deductible']['out_of_pocket_amt']);
-                $outOfPocketMet = str_replace(array('$', ','), '', $arr['deductible']['out_of_pocket_met']);
-                $arr['cigna_out_of_pocket_met'] = $arr['deductible']['out_of_pocket_met'];
-                $arr['cigna_out_of_pocket_percent'] = round($outOfPocketMet / $outOfPocketAmt * 100);
+                $arr['out_of_pocket_amt'] = str_replace(array('$', ','), '', $deductible['out_of_pocket_amt']);
+                $arr['out_of_pocket_met'] = str_replace(array('$', ','), '', $deductible['out_of_pocket_met']);
+                $arr['out_of_pocket_percent'] = round($arr['out_of_pocket_met'] / $arr['out_of_pocket_amt'] * 100);
 
                 // cingna_claim
                 /*$claimMapper = new Application_Model_CignaClaimMapper();
@@ -63,11 +61,13 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
             }
             
             if ($userInfo['medical_site'] == 'Guardian') {
-                $arr['cigna_deductible_met'] = '';
-                $arr['cigna_deductible_percent'] = '';
+                $arr['deductible_amt'] = '';
+                $arr['deductible_met'] = '';
+                $arr['deductible_percent'] = '';
                 
-                $arr['cigna_out_of_pocket_met'] = '';
-                $arr['cigna_out_of_pocket_percent'] = '';
+                $arr['out_of_pocket_amt'] = '';
+                $arr['out_of_pocket_met'] = '';
+                $arr['out_of_pocket_percent'] = '';
                 
                 $arr['claim'] = array();
                 
@@ -80,17 +80,15 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
 
                 // cingna_medical
                 $medicalMapper = new Application_Model_AnthemMapper();
-                $arr['anthem'] = $medicalMapper->getAnthem($userId);
+                $deductible = $medicalMapper->getAnthem($userId);
                 
-                $deductibleAmt = str_replace(array('$', ','), '', $arr['anthem']['CD_deductible_in_net_family_limit']);
-                $deductibleMet = str_replace(array('$', ','), '', $arr['anthem']['CD_deductible_in_net_family_accumulate']);
-                $arr['CD_deductible_in_net_family_accumulate'] = $arr['anthem']['CD_deductible_in_net_family_accumulate'];
-                $arr['deductible_percent'] = round($deductibleMet / $deductibleAmt * 100);
+                $arr['deductible_amt'] = str_replace(array('$', ','), '', $deductible['CD_deductible_in_net_family_limit']);
+                $arr['deductible_met'] = str_replace(array('$', ','), '', $deductible['CD_deductible_in_net_family_accumulate']);
+                $arr['deductible_percent'] = round($arr['deductible_met'] / $arr['deductible_amt'] * 100);
 
-                $outOfPocketAmt = str_replace(array('$', ','), '', $arr['anthem']['CD_out_pocket_in_net_family_limit']);
-                $outOfPocketMet = str_replace(array('$', ','), '', $arr['anthem']['CD_out_pocket_in_net_family_accumulate']);
-                $arr['CD_out_pocket_in_net_family_accumulate'] = $arr['anthem']['CD_out_pocket_in_net_family_accumulate'];
-                $arr['out_of_pocket_percent'] = round($outOfPocketMet / $outOfPocketAmt * 100);
+                $arr['out_of_pocket_amt'] = str_replace(array('$', ','), '', $deductible['CD_out_pocket_in_net_family_limit']);
+                $arr['out_of_pocket_met'] = str_replace(array('$', ','), '', $deductible['CD_out_pocket_in_net_family_accumulate']);
+                $arr['out_of_pocket_percent'] = round($arr['out_of_pocket_met'] / $arr['out_of_pocket_amt'] * 100);
                 
             }
 //            echo '<pre>';

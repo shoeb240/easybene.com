@@ -2,7 +2,7 @@
 abstract class My_Controller_ApiAbstract extends Zend_Rest_Controller
 {
 
-    const API_TOKEN_LIFE_TIME = 86400;
+    const API_TOKEN_LIFE_TIME = 31536000; // one year
 
     const BAD_REQUEST = 400;
     const ERROR_NOTFOUND = 404;

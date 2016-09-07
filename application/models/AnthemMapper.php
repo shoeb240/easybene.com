@@ -59,6 +59,9 @@ class Application_Model_AnthemMapper
         $benefit['CD_deductible_out_net_family_accumulate'] = $row->CD_deductible_out_net_family_accumulate;
         $benefit['CD_deductible_out_net_family_remaining'] = $row->CD_deductible_out_net_family_remaining;
         $benefit['CD_out_pocket_in_net_family_limit'] = $row->CD_out_pocket_in_net_family_limit;
+        $benefit['CD_out_pocket_in_net_family_accumulate'] = $row->CD_out_pocket_in_net_family_accumulate;
+        $benefit['CD_out_pocket_out_net_family_remaining'] = $row->CD_out_pocket_out_net_family_remaining;
+        $benefit['CD_out_pocket_out_net_family_limit'] = $row->CD_out_pocket_out_net_family_limit;
         $benefit['CD_out_pocket_out_net_family_accumulate'] = $row->CD_out_pocket_out_net_family_accumulate;
         $benefit['CD_out_pocket_out_net_family_remaining'] = $row->CD_out_pocket_out_net_family_remaining;
         $benefit['HP_primary_care_physician'] = $row->HP_primary_care_physician;

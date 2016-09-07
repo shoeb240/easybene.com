@@ -36,37 +36,39 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             
             $arr = array();
             if ($userInfo['medical_site'] == 'Cigna') {
+                
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
                 $cignaDeductible = $deductibleMapper->getCignaDeductible($userId);
 
-                $deductibleAmt = str_replace(array('$', ','), '', $cignaDeductible['deductible_amt']);
-                $deductibleMet = str_replace(array('$', ','), '', $cignaDeductible['deductible_met']);
-                $cignaPercent = round($deductibleMet / $deductibleAmt * 100);
-            
-                $result['medical_percent'] = $cignaPercent;
-                $result['medical_amount'] = $deductibleAmt;
+                $result['medical_deductible'] = str_replace(array('$', ','), '', $cignaDeductible['deductible_amt']);
+                $result['medical_deductible_met'] = str_replace(array('$', ','), '', $cignaDeductible['deductible_met']);
+                $result['medical_percent'] = round($result['medical_deductible_met'] / $result['medical_deductible'] * 100);
+                
             } else if ($userInfo['medical_site'] == 'Guardian') {
+                
                 $result['medical_percent'] = '';
+                $result['medical_deductible'] = '';
+                $result['medical_deductible_met'] = '';
+                
             } else if ($userInfo['medical_site'] == 'Anthem') {
-                $claimDetailsMapper = new Application_Model_AnthemClaimOverviewMapper();
-                $arr['claim_details'] = $claimDetailsMapper->getAnthemClaim($userId);
-
+                
                 // cingna_medical
                 $medicalMapper = new Application_Model_AnthemMapper();
-                $arr['anthem'] = $medicalMapper->getAnthem($userId);
+                $anthemDeductible = $medicalMapper->getAnthem($userId);
                 
-                $deductibleAmt = str_replace(array('$', ','), '', $arr['anthem']['CD_deductible_in_net_family_limit']);
-                $deductibleMet = str_replace(array('$', ','), '', $arr['anthem']['CD_deductible_in_net_family_accumulate']);
-                $arr['CD_deductible_in_net_family_accumulate'] = $arr['anthem']['CD_deductible_in_net_family_accumulate'];
-                $anthemPercent = round($deductibleMet / $deductibleAmt * 100);
-
-                $result['medical_percent'] = $anthemPercent;
-                $result['medical_amount'] = $deductibleAmt;
+                $result['medical_deductible'] = str_replace(array('$', ','), '', $anthemDeductible['CD_deductible_in_net_family_limit']);
+                $result['medical_deductible_met'] = str_replace(array('$', ','), '', $anthemDeductible['CD_deductible_in_net_family_accumulate']);
+                $result['medical_percent'] = round($result['medical_deductible_met'] / $result['medical_deductible'] * 100);
             }
             
             if ($userInfo['dental_site'] == 'Cigna') {
+                
                 $result['dental_percent'] = '';
+                $result['dental_deductible'] = '';
+                $result['dental_deductible_met'] = '';
+                
             } else if ($userInfo['dental_site'] == 'Guardian') {
+                
                 // guardian_claim
                 $claimMapper = new Application_Model_GuardianClaimMapper();
                 $guardianClaim = $claimMapper->getGuardianClaim($userId);
@@ -78,12 +80,37 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                     $submittedCharges += str_replace(array('$', ','), '', $guardianClaim[$i]['submitted_charges']);
                     $amountPaid += str_replace(array('$', ','), '', $guardianClaim[$i]['amount_paid']);;
                 }
-                $guardianPercent = round((($amountPaid / $submittedCharges))*100);
                 
-                $result['dental_percent'] = $guardianPercent;
-                $result['dental_amount'] = $submittedCharges;
+                $result['dental_deductible'] = $submittedCharges;
+                $result['dental_deductible_met'] = $amountPaid;
+                $result['dental_percent'] = round((($amountPaid / $submittedCharges))*100);
+                
+            } else if ($userInfo['dental_site'] == 'Anthem') {
+                
+                $result['dental_percent'] = '';
+                $result['dental_deductible'] = '';
+                $result['dental_deductible_met'] = '';
+                
+            }
+            
+            if ($userInfo['dental_site'] == 'Cigna') {
+                
+                $result['vision_percent'] = '';
+                $result['vision_deductible'] = '';
+                $result['vision_deductible_met'] = '';
+                
             } else if ($userInfo['dental_site'] == 'Guardian') {
-                $result['anthem_percent'] = '';
+                
+                $result['vision_percent'] = '';
+                $result['vision_deductible'] = '';
+                $result['vision_deductible_met'] = '';
+                
+            } else if ($userInfo['dental_site'] == 'Anthem') {
+                
+                $result['vision_percent'] = '';
+                $result['vision_deductible'] = '';
+                $result['vision_deductible_met'] = '';
+                
             }
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);

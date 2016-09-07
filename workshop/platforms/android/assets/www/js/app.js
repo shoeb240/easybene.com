@@ -7,9 +7,11 @@
     var token = window.localStorage.getItem("token");
     
     $(window).load(function(){
+        alert("cxvx");
         if (username && token) {
             welcomeSelection(false);
-            summaryLinks();
+            alert("dsf");
+            //summaryLinks();
             //ShowMedicalSiteLinks(); // remove
         } else {
             ShowReg(null);

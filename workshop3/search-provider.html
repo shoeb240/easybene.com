@@ -57,17 +57,17 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs tab-bottom-fixed" role="tablist">
                             <li role="presentation" class="active">
-                                <a href="#medical" aria-controls="medical" role="tab" data-toggle="tab"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
+                                <a id="medical_bottom_link" href="#medical" aria-controls="medical" role="tab" data-toggle="tab"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
                                 </a>
                             </li>
                             <li role="presentation">
-                                <a href="#dental" aria-controls="dental" role="tab" data-toggle="tab"><i class="icon-dentist"></i>Dental</a>
+                                <a id="dental_bottom_link" href="#dental" aria-controls="dental" role="tab" data-toggle="tab"><i class="icon-dentist"></i>Dental</a>
                             </li>
                             <li role="presentation">
-                                <a href="#vision" aria-controls="vision" role="tab" data-toggle="tab"><i class="icon-heart36"></i>Vision</a>
+                                <a id="vision_bottom_link" href="#vision" aria-controls="vision" role="tab" data-toggle="tab"><i class="icon-heart36"></i>Vision</a>
                             </li>
                             <li role="presentation">
-                                <a href="#funds" aria-controls="funds" role="tab" data-toggle="tab"><i class="icon-medicine"></i>Funds</a>
+                                <a id="funds_bottom_link" href="#funds" aria-controls="funds" role="tab" data-toggle="tab"><i class="icon-medicine"></i>Funds</a>
                             </li>
                         </ul>
 
@@ -252,9 +252,10 @@
                                     <br />
                                     <img id="site_selected_type_image" style="width: 100px;" src="" />
                                 </p>
-                                
-                                <div class="list-block login-list">
+
+                                <div id="reg_fields_div" style="display: none;" class="list-block login-list">
                                     <ul>
+                                        <li><div id="reg_fail_div" style="display: none; position: static; width: 100%;" class="inValidText">Provider Registration Failed</div></li>
                                         <!-- Text inputs -->
                                         <li>
                                             <div class="item-content">
@@ -283,6 +284,18 @@
                                     </ul>
                                     <!-- <p class="forgot-pass"><a href="#">forgot password ?</a></p> -->
                                 </div>
+                                
+                                <div id="reg_success_div" style="display: block;" class="list-block login-list">
+                                    <ul>
+                                        <li><div class="inValidText" style="display: block; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Provider Registered Successfully</div></li>
+                                        <li class="btn-wrapper">
+                                        <input type="hidden" id="next_provider_name" value="">
+                                        <a id="next_provider" href="javascript:void(0);"><button type="submit">Next Provider</button></a>
+                                        <a id="show_dashboard" href="index.html" style="display: none;"><button type="submit">Show Dashboard</button></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
                             </div>
 
                         </div>
@@ -318,68 +331,69 @@
       /*$('#do_search_link_medical').on('click', function() {
             var name = $("#medical_search_chosen .search-choice span").html();
             var image_name = name.toLowerCase() + "_logo.jpg";
-            ShowSiteReg('Medical', name, image_name);
+            ShowRegFields('Medical', name, image_name);
         });
 
         $('#do_search_link_dental').on('click', function() {
             var name = $("#dental_search_chosen .search-choice span").html();
             var image_name = name.toLowerCase() + "_logo.jpg";
-            ShowSiteReg('Dental', name, image_name);
+            ShowRegFields('Dental', name, image_name);
         });
 
         $('#do_search_link_vision').on('click', function() {
             var name = $("#vision_search_chosen .search-choice span").html();
             var image_name = name.toLowerCase() + "_logo.jpg";
-            ShowSiteReg('Vision', name, image_name);
+            ShowRegFields('Vision', name, image_name);
         }); */
 
         $('#cigna_medical').on('click', function() {
-            ShowSiteReg('Medical', 'Cigna', 'cigna_logo.jpg');
+            ShowRegFields('Medical', 'Cigna', 'cigna_logo.jpg');
         });
 
         $('#anthem_medical').on('click', function() {
-            ShowSiteReg('Medical', 'Anthem', 'anthem_logo.jpg');
+            ShowRegFields('Medical', 'Anthem', 'anthem_logo.jpg');
         });
 
         $('#guardian_medical').on('click', function() {
-            ShowSiteReg('Medical', 'Guardian', 'guardian_logo.jpg');
+            ShowRegFields('Medical', 'Guardian', 'guardian_logo.jpg');
         });
 
         $('#cigna_dental').on('click', function() {
-            ShowSiteReg('Dental', 'Cigna', 'cigna_logo.jpg');
+            ShowRegFields('Dental', 'Cigna', 'cigna_logo.jpg');
         });
 
         $('#anthem_dental').on('click', function() {
-            ShowSiteReg('Dental', 'Anthem', 'anthem_logo.jpg');
+            ShowRegFields('Dental', 'Anthem', 'anthem_logo.jpg');
         });
 
         $('#guardian_dental').on('click', function() {
-            ShowSiteReg('Dental', 'Guardian', 'guardian_logo.jpg');
+            ShowRegFields('Dental', 'Guardian', 'guardian_logo.jpg');
         });
 
         $('#cigna_vision').on('click', function() {
-            ShowSiteReg('Vision', 'Cigna', 'cigna_logo.jpg');
+            ShowRegFields('Vision', 'Cigna', 'cigna_logo.jpg');
         });
 
         $('#anthem_vision').on('click', function() {
-            ShowSiteReg('Vision', 'Anthem', 'anthem_logo.jpg');
+            ShowRegFields('Vision', 'Anthem', 'anthem_logo.jpg');
         });
 
         $('#guardian_vision').on('click', function() {
-            ShowSiteReg('Vision', 'Guardian', 'guardian_logo.jpg');
+            ShowRegFields('Vision', 'Guardian', 'guardian_logo.jpg');
         });
         
         $('#navia_vision').on('click', function() {
-            ShowSiteReg('Vision', 'Navia', 'navia_logo.png');
+            ShowRegFields('Vision', 'Navia', 'navia_logo.png');
         });
         
         $('#cigna_funds').on('click', function() {
-            ShowSiteReg('Funds', 'Cigna', 'cigna_logo.jpg');
+            ShowRegFields('Funds', 'Cigna', 'cigna_logo.jpg');
         });
 
         $('#navia_funds').on('click', function() {
-            ShowSiteReg('Funds', 'Navia', 'navia_logo.png');
+            ShowRegFields('Funds', 'Navia', 'navia_logo.png');
         });
+
 
         $('#site_register').on('click', function() {
             RegisterSite();
@@ -397,6 +411,13 @@
             display_refresh();
         });
         
+        $('#next_provider').on("click", function(){
+            var next_provider = $("#next_provider_name").val();
+            $("#"+next_provider+"_bottom_link").click();
+        });
+        
+        
+        
         function display_refresh() {
             $('#site_choice_medical_div').css('display', 'block');   
             $('#site_choice_dental_div').css('display', 'block');   
@@ -404,30 +425,49 @@
             $('#site_choice_funds_div').css('display', 'block');   
 
             $('#site_reg_div').css('display', 'none');   
-            
-            //$('#site_reg_fail_div').css('display', 'none');   
-
-            //$('#reg_div_success').css('display', 'none');
-            //$('#reg_span_fail').css('display', 'none');
-            //$('#login_span_fail').html('');   
         }
         
-        function ShowSiteReg(type, site, image) {
+        function ShowRegFields(type, site, image) {
             $('#site_reg_div').css('display', 'block');
             $('#site_selected_type_name').html(type);
             $('#site_selected_name').val(site);
             $('#site_selected_type_image').attr("src", "images/" + image);
             
             $('#site_choice_'+type.toLowerCase()+'_div').css('display', 'none');
-        }
-
-        function ShowSitelRegFail() {
-            //hideAll();
-            $('#site_reg_fail_div').css('display', 'block');
-            $('#site_failed_type_name').html($('#site_selected_type_name').html());
-            $('#site_failed_type_image').attr("src", $('#site_selected_type_image').attr("src"));
+            
+            $("#reg_fields_div").css("display", "block");
+            $("#reg_success_div").css("display", "none");
+            $("#reg_fail_div").css("display", "none");
         }
         
+        function ShowRegSuccess(site_type) {
+            $('#next_provider').css("display", "block");
+            $('#show_dashboard').css("display", "none");
+            
+            if (site_type == 'Medical') {
+                next_site = 'dental';
+            } else if (site_type == 'Dental') {
+                next_site = 'vision';
+            } else if (site_type == 'Vision') {
+                next_site = 'funds';
+            } else {
+                $('#next_provider').css("display", "none");
+                $('#show_dashboard').css("display", "block");
+            }
+            
+            $("#next_provider_name").val(next_site);
+            
+            $("#reg_fields_div").css("display", "none");
+            $("#reg_success_div").css("display", "block");
+            $("#reg_fail_div").css("display", "none");
+        }
+        
+        function ShowRegFail() {
+            //$("#reg_fields_div").css("display", "block");
+            $("#reg_success_div").css("display", "none");
+            $("#reg_fail_div").css("display", "block");
+        }
+
         function RegisterSite() {
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
@@ -435,8 +475,11 @@
             var site_name = $('#site_selected_name').val();
             var site_user_id = $('#site_selected_user_id').val();
             var site_password = $('#site_selected_password').val();
-
-            $.ajax({
+            var next_site = 'dental';
+            
+            ShowRegFail();
+            
+            /*$.ajax({
                 url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "POST",
                 data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
@@ -447,16 +490,16 @@
                         window.localStorage.setItem('medical_site', result.medical_site);
                         window.localStorage.setItem('dental_site', result.dental_site);
                         window.localStorage.setItem('vision_site', result.vision_site);
-                        //welcomeSelection(true);
-                        alert("Provider Registered Successfully");
+                        
+                        ShowRegSuccess(site_type);                     
                     },
                 error: function(xhr, ajaxOptions, thrownError) {
                         console.log(xhr);
                         console.log(ajaxOptions);
                         console.log(thrownError);
-                        //ShowSitelRegFail();
+                        ShowRegFail();
                     },
-            });
+            });*/
         }
         </script>
     </body>
