@@ -28,7 +28,7 @@
 
         if (vision_site && vision_site != 'null' && vision_site != 'undefined') {
             $("#top_tab_link_vision").on("click", function() {
-                location.href = vision_site + "-vision.html"
+                //location.href = vision_site + "-vision.html"
             });
         }
     }

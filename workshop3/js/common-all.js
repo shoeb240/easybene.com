@@ -29,7 +29,7 @@
             li_html += '<li><a href="' + dental_site.toLowerCase() + '-dental.html">Dental</a></li>';
         }
         if (vision_site && vision_site != 'null' && vision_site != 'undefined') {
-            li_html += '<li><a href="' + vision_site.toLowerCase() + '-vision.html">Vision</a></li>';
+            //li_html += '<li><a href="' + vision_site.toLowerCase() + '-vision.html">Vision</a></li>';
         }
         if (funds_site && funds_site != 'null' && funds_site != 'undefined') {
             li_html += '<li><a href="funds.html">Funds</a></li>';

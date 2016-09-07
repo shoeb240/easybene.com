@@ -35,6 +35,15 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             $userInfo = $userMapper->getUserArrForClient($userId);
             
             $arr = array();
+            $result['medical_percent'] = '';
+            $result['medical_deductible'] = '';
+            $result['medical_deductible_met'] = '';
+            $result['dental_percent'] = '';
+            $result['dental_deductible'] = '';
+            $result['dental_deductible_met'] = '';
+            $result['vision_percent'] = '';
+            $result['vision_deductible'] = '';
+            $result['vision_deductible_met'] = '';
             if ($userInfo['medical_site'] == 'Cigna') {
                 
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
@@ -45,10 +54,6 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['medical_percent'] = round($result['medical_deductible_met'] / $result['medical_deductible'] * 100);
                 
             } else if ($userInfo['medical_site'] == 'Guardian') {
-                
-                $result['medical_percent'] = '';
-                $result['medical_deductible'] = '';
-                $result['medical_deductible_met'] = '';
                 
             } else if ($userInfo['medical_site'] == 'Anthem') {
                 
@@ -62,10 +67,6 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             }
             
             if ($userInfo['dental_site'] == 'Cigna') {
-                
-                $result['dental_percent'] = '';
-                $result['dental_deductible'] = '';
-                $result['dental_deductible_met'] = '';
                 
             } else if ($userInfo['dental_site'] == 'Guardian') {
                 
@@ -87,29 +88,13 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 
             } else if ($userInfo['dental_site'] == 'Anthem') {
                 
-                $result['dental_percent'] = '';
-                $result['dental_deductible'] = '';
-                $result['dental_deductible_met'] = '';
-                
             }
             
             if ($userInfo['dental_site'] == 'Cigna') {
                 
-                $result['vision_percent'] = '';
-                $result['vision_deductible'] = '';
-                $result['vision_deductible_met'] = '';
-                
             } else if ($userInfo['dental_site'] == 'Guardian') {
                 
-                $result['vision_percent'] = '';
-                $result['vision_deductible'] = '';
-                $result['vision_deductible_met'] = '';
-                
             } else if ($userInfo['dental_site'] == 'Anthem') {
-                
-                $result['vision_percent'] = '';
-                $result['vision_deductible'] = '';
-                $result['vision_deductible_met'] = '';
                 
             }
             

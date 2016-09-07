@@ -477,9 +477,7 @@
             var site_password = $('#site_selected_password').val();
             var next_site = 'dental';
             
-            ShowRegFail();
-            
-            /*$.ajax({
+            $.ajax({
                 url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "POST",
                 data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
@@ -497,9 +495,10 @@
                         console.log(xhr);
                         console.log(ajaxOptions);
                         console.log(thrownError);
+        
                         ShowRegFail();
                     },
-            });*/
+            });
         }
         </script>
     </body>
