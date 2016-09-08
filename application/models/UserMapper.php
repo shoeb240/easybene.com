@@ -148,6 +148,7 @@ class Application_Model_UserMapper
         $userInfo['medical_site'] = $row->medical_site;
         $userInfo['dental_site'] = $row->dental_site;
         $userInfo['vision_site'] = $row->vision_site;
+        $userInfo['funds_site'] = $row->funds_site;
         $userInfo['cigna_user_id'] = $row->cigna_user_id;
         $userInfo['cigna_password'] = $row->cigna_password;
         $userInfo['guardian_user_id'] = $row->guardian_user_id;
@@ -396,7 +397,7 @@ class Application_Model_UserMapper
                     $row->vision_site = $siteName;
                     break;
                 case 'Funds':
-                    //$row->funds_site = $siteName;
+                    $row->funds_site = $siteName;
                     break;
             }
             $row->save();
@@ -409,6 +410,7 @@ class Application_Model_UserMapper
             $userInfo['medical_site'] = $row->medical_site;
             $userInfo['dental_site'] = $row->dental_site;
             $userInfo['vision_site'] = $row->vision_site;
+            $userInfo['funds_site'] = $row->funds_site;
             
             return $userInfo;
         }

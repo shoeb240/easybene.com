@@ -53,7 +53,7 @@
                             $('#claim').append('<tr><td><p>'+row.date+'</p></td><td>'+row.for+'</td><td>'+row.total+'</td><td>'+row.member_responsibility+'</td><!--<td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></td>--></tr>');
                         });
                     } else {
-                        $('#guardian-claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+                        $('#claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
                     }
                     
                     graph(result.deductible_percent, result.deductible_met, 'plan-deductible', result.deductible_amt);
@@ -111,6 +111,7 @@
         } else {
             $(graph_id).parent().children("p.status-text").html("Provider Pending");
             $(graph_id).parent().addClass("orange-graph");
+            $(graph_id).parent().children("p").css("color", "#f8c572");
             fontColor = "#f8c572";
             foregroundColor = "#f8c572";
         }

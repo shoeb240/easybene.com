@@ -22,6 +22,7 @@ class Application_Model_User
     protected $_medical_site;
     protected $_dental_site;
     protected $_vision_site;
+    protected $_funds_site;
     protected $_cigna_user_id;
     protected $_cigna_password;
     protected $_cigna_medical_exeid;

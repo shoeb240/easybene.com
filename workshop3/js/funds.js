@@ -35,6 +35,15 @@
             async: false,
             success: function(result) {
                     //console.log(result);
+                    if (result.HS_balance === '' || result.HS_balance === null) {
+                        result.HS_balance = 'Pending';
+                        $('#hsa_checking_value').css('color', '#f8c572');
+                        
+                    }
+                    if (result.portfolio_balance === '' || result.portfolio_balance === null) {
+                        result.portfolio_balance = 'Pending';
+                        $('#hsa_investment_value').css('color', '#f8c572');
+                    }
                     $('#hsa_checking_value').html(result.HS_balance);
                     $('#hsa_investment_value').html(result.portfolio_balance);
                     

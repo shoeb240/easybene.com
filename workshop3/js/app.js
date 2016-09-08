@@ -97,20 +97,24 @@
         var medical_site = window.localStorage.getItem('medical_site');
         var dental_site = window.localStorage.getItem('dental_site');
         var vision_site = window.localStorage.getItem('vision_site');
+        var funds_site = window.localStorage.getItem('funds_site');
         var unix = Math.round(+new Date()/1000);
-        alert('logged in');
+
         if (token_expire > unix) {
-            if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
-                alert('1');
+            /*if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
                 ShowMedicalSiteLinks();
             } else if (showDentalVisionSites && (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site)) {
-                alert('2');
                 ShowDentalSiteLinks();
             } else if (showDentalVisionSites && (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site)) {
-                alert('3');
                 ShowVisionSiteLinks();
+            } else if (showDentalVisionSites && (typeof(funds_site) === 'undefined' || funds_site == 'null' || !funds_site)) {
+                ShowFundsSiteLinks();
             } else {
-                alert('4');
+                ShowDashboard();
+            }*/
+            if (!medical_site && !dental_site && !vision_site && !funds_site) {
+                ShowMedicalSiteLinks();
+            } else {
                 ShowDashboard();
             }
         } else {
@@ -138,6 +142,10 @@
     }
     
     function ShowVisionSiteLinks() {
+        location.href = "welcome.html";
+    }
+    
+    function ShowFundsSiteLinks() {
         location.href = "welcome.html";
     }
     
@@ -175,6 +183,7 @@
                     window.localStorage.setItem('medical_site', result.medical_site);
                     window.localStorage.setItem('dental_site', result.dental_site);
                     window.localStorage.setItem('vision_site', result.vision_site);
+                    window.localStorage.setItem('funds_site', result.funds_site);
                     welcomeSelection(true);
                 },
             error: function(xhr, ajaxOptions, thrownError) {

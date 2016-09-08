@@ -389,6 +389,14 @@
         $('#cigna_funds').on('click', function() {
             ShowRegFields('Funds', 'Cigna', 'cigna_logo.jpg');
         });
+        
+        $('#anthem_funds').on('click', function() {
+            ShowRegFields('Funds', 'Anthem', 'anthem_logo.jpg');
+        });
+        
+        $('#guardian_funds').on('click', function() {
+            ShowRegFields('Funds', 'Guardian', 'guardian_logo.jpg');
+        });
 
         $('#navia_funds').on('click', function() {
             ShowRegFields('Funds', 'Navia', 'navia_logo.png');
@@ -443,6 +451,7 @@
         function ShowRegSuccess(site_type) {
             $('#next_provider').css("display", "block");
             $('#show_dashboard').css("display", "none");
+            next_site = '';
             
             if (site_type == 'Medical') {
                 next_site = 'dental';
@@ -450,7 +459,7 @@
                 next_site = 'vision';
             } else if (site_type == 'Vision') {
                 next_site = 'funds';
-            } else {
+            } else if (site_type == 'Funds') {
                 $('#next_provider').css("display", "none");
                 $('#show_dashboard').css("display", "block");
             }
@@ -488,6 +497,7 @@
                         window.localStorage.setItem('medical_site', result.medical_site);
                         window.localStorage.setItem('dental_site', result.dental_site);
                         window.localStorage.setItem('vision_site', result.vision_site);
+                        window.localStorage.setItem('funds_site', result.funds_site);
                         
                         ShowRegSuccess(site_type);                     
                     },

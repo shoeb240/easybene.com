@@ -98,6 +98,10 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 
             }
             
+            if ($userInfo['funds_site'] == 'navia') {
+                
+            } 
+            
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
             $this->getHelper('json')->sendJson($result);
             

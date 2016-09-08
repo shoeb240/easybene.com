@@ -120,6 +120,7 @@
         window.localStorage.removeItem('medical_site');
         window.localStorage.removeItem('dental_site');
         window.localStorage.removeItem('vision_site');
+        window.localStorage.removeItem('funds_site');
         location.href = "index.html";
     }
     
@@ -230,9 +231,43 @@
                     $('#vision_selected_user_id').val(vision_user_id);
                     $('#vision_selected_password').val(vision_password);
                     
-                    funds_user_id = result.navia_user_id;
-                    funds_password = result.navia_password;
-                    //$('#funds_provider_div').html(select_code);
+                    
+                    select_code = '<select id="funds_selected_name" class="form-control underline-input">' +
+                                        '<option>--Select Provider--</option>';
+                    if (result.funds_site == 'Cigna') {
+                            funds_user_id = result.cigna_user_id;
+                            funds_password = result.cigna_password;
+                            select_code += '<option selected>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    } else if (result.funds_site == 'Anthem') {
+                            funds_user_id = result.anthem_user_id;
+                            funds_password = result.anthem_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option selected>Anthem</option>';
+                    } else if (result.funds_site == 'Guardian') {
+                            funds_user_id = result.guardian_user_id;
+                            funds_password = result.guardian_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option selected>Guardian</option>' +
+                                           '<option>Anthem</option>';
+                    } else if (result.funds_site == 'Navia') {
+                            funds_user_id = result.navia_user_id;
+                            funds_password = result.navia_password;
+                            select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>' +
+                                           '<option selected>Navia</option>';
+                    } else {
+                        select_code += '<option>Cigna</option>' +
+                                           '<option>Guardian</option>' +
+                                           '<option>Anthem</option>' +
+                                           '<option>Navia</option>';
+                    }
+                    select_code += '</select>';
+                    
+                    $('#funds_provider_div').html(select_code);
                     $('#funds_selected_user_id').val(funds_user_id);
                     $('#funds_selected_password').val(funds_password);
                     //welcomeSelection();

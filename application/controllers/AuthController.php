@@ -38,6 +38,7 @@ class AuthController extends My_Controller_ApiAbstract
                     $result['medical_site'] = $user->medical_site;
                     $result['dental_site'] = $user->dental_site;
                     $result['vision_site'] = $user->vision_site;
+                    $result['funds_site'] = $user->funds_site;
                 } else if ($act == 'register') {
                     $data = $this->_register($username, $password);
                     $exp = strtotime($data['api_updated']) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;
