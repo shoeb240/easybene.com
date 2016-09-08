@@ -17,6 +17,13 @@
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
+        
+        <!-- ============================================
+        ================= Stylesheets ===================
+        ============================================= -->
+        <!-- vendor css files -->
+        <link rel="stylesheet" href="assets/js/vendor/chosen/chosen.css">
+
     </head>
     <body>
 
@@ -76,12 +83,17 @@
                             <div role="tabpanel" class="tab-pane active" id="medical">
                                 
                                 <div id="site_choice_medical_div">
-                                    <h3 class="search-text">Add 
-                                        your medical Provider.</h3>
-                                    <div class="search-btn-wrapper">
-                                        <i class="icon-search"></i>
-                                        <input type="text" placeholder="Search Your Provider"/>
+                                    <h3 class="search-text">Add your medical Provider.</h3>
+                                    
+                                    <div style="clear:both;"></div>
+                                    <div class="form-group text-center">
+                                        <select id="medical_search" data-placeholder="Select Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                                <option value="Cigna">Cigna</option>
+                                                <option value="Anthem">Anthem</option>
+                                            </select>
+                                        <a id="do_search_link_medical" href="javascript: void();"><img style="width: 20px;" src="images/search.png" /></a>
                                     </div>
+                                    <div style="clear:both;"></div>
 
                                     <div class="search-result-wrapper">
                                         <ul>
@@ -121,10 +133,15 @@
                             <div role="tabpanel" class="tab-pane" id="dental">
                                 <div id="site_choice_dental_div">
                                     <h3 class="search-text">Add your Dental Provider.</h3>
-                                    <div class="search-btn-wrapper">
-                                        <i class="icon-search"></i>
-                                        <input type="text" placeholder="Search Your Provider"/>
+                                    
+                                    <div style="clear:both;"></div>
+                                    <div class="form-group text-center">
+                                        <select id="dental_search" data-placeholder="Select Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                                <option value="Guardian">Guardian</option>
+                                            </select>
+                                        <a id="do_search_link_dental" href="javascript: void();"><img style="width: 20px;" src="images/search.png" /></a>
                                     </div>
+                                    <div style="clear:both;"></div>
 
                                     <div class="search-result-wrapper">
                                         <ul>
@@ -163,10 +180,16 @@
                             <div role="tabpanel" class="tab-pane" id="vision">
                                 <div id="site_choice_vision_div">
                                     <h3 class="search-text">Add your Vision Provider.</h3>
-                                    <div class="search-btn-wrapper">
-                                        <i class="icon-search"></i>
-                                        <input type="text" placeholder="Search Your Provider"/>
+                                    
+                                    <div style="clear:both;"></div>
+                                    <div class="form-group text-center">
+                                        <select id="vision_search" data-placeholder="Select Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                                <option value="Cigna">Cigna</option>
+                                                <option value="Navia">Navia</option>
+                                            </select>
+                                        <a id="do_search_link_vision" href="javascript: void();"><img style="width: 20px;" src="images/search.png" /></a>
                                     </div>
+                                    <div style="clear:both;"></div>
 
                                     <div class="search-result-wrapper">
                                         <ul>
@@ -205,10 +228,15 @@
                             <div role="tabpanel" class="tab-pane" id="funds">
                                 <div id="site_choice_funds_div">
                                     <h3 class="search-text">Add your Funds Provider.</h3>
-                                    <div class="search-btn-wrapper">
-                                        <i class="icon-search"></i>
-                                        <input type="text" placeholder="Search Your Provider"/>
+                                    
+                                    <div style="clear:both;"></div>
+                                    <div class="form-group text-center">
+                                        <select id="funds_search" data-placeholder="Select Provider" multiple="" tabindex="3" class="chosen-select" style="width: 50%;">
+                                                <option value="Navia">Navia</option>
+                                            </select>
+                                        <a id="do_search_link_funds" href="javascript: void();"><img style="width: 20px;" src="images/search.png" /></a>
                                     </div>
+                                    <div style="clear:both;"></div>
 
                                     <div class="search-result-wrapper">
                                         <ul>
@@ -327,8 +355,28 @@
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
+        
+        
+         <!-- ============================================
+        ============== Vendor JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/vendor/jRespond/jRespond.min.js"></script>
+
+        <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
+
+        <script src="assets/js/vendor/chosen/chosen.jquery.js"></script>
+
+        <!--/ vendor javascripts -->
+
+        <!-- ============================================
+        ============== Custom JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/main.js"></script>
+        <!--/ custom javascripts -->
+        
+        
         <script>
-      /*$('#do_search_link_medical').on('click', function() {
+        $('#do_search_link_medical').on('click', function() {
             var name = $("#medical_search_chosen .search-choice span").html();
             var image_name = name.toLowerCase() + "_logo.jpg";
             ShowRegFields('Medical', name, image_name);
@@ -344,7 +392,13 @@
             var name = $("#vision_search_chosen .search-choice span").html();
             var image_name = name.toLowerCase() + "_logo.jpg";
             ShowRegFields('Vision', name, image_name);
-        }); */
+        });
+        
+        $('#do_search_link_funds').on('click', function() {
+            var name = $("#funds_search_chosen .search-choice span").html();
+            var image_name = name.toLowerCase() + "_logo.jpg";
+            ShowRegFields('Funds', name, image_name);
+        });
 
         $('#cigna_medical').on('click', function() {
             ShowRegFields('Medical', 'Cigna', 'cigna_logo.jpg');

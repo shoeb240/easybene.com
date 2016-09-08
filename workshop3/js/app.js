@@ -101,18 +101,8 @@
         var unix = Math.round(+new Date()/1000);
 
         if (token_expire > unix) {
-            /*if (typeof(medical_site) === 'undefined' || medical_site == 'null' || !medical_site) {
-                ShowMedicalSiteLinks();
-            } else if (showDentalVisionSites && (typeof(dental_site) === 'undefined' || dental_site == 'null' || !dental_site)) {
-                ShowDentalSiteLinks();
-            } else if (showDentalVisionSites && (typeof(vision_site) === 'undefined' || vision_site == 'null' || !vision_site)) {
-                ShowVisionSiteLinks();
-            } else if (showDentalVisionSites && (typeof(funds_site) === 'undefined' || funds_site == 'null' || !funds_site)) {
-                ShowFundsSiteLinks();
-            } else {
-                ShowDashboard();
-            }*/
-            if (!medical_site && !dental_site && !vision_site && !funds_site) {
+            if ((!medical_site || medical_site == 'null') && (!dental_site || dental_site == 'null') 
+                    && (!vision_site || vision_site == 'null') && (!funds_site || funds_site == 'null')) {
                 ShowMedicalSiteLinks();
             } else {
                 ShowDashboard();
