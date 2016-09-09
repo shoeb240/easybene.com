@@ -631,6 +631,15 @@
         function GetUserData() {
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
+            
+            medical_user_id = '';
+            medical_password = '';
+            dental_user_id = '';
+            dental_password = '';
+            vision_user_id = '';
+            vision_password = '';
+            funds_user_id = '';
+            funds_password = '';
 
             $.ajax({
                 url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
@@ -645,23 +654,23 @@
                                 medical_user_id = result.cigna_user_id;
                                 medical_password = result.cigna_password;
                                 select_code += '<option selected>Cigna</option>' +
-                                               '<option>Guardian</option>' +
+                                               //'<option>Guardian</option>' +
                                                '<option>Anthem</option>';
                         } else if (result.medical_site == 'Anthem') {
                                 medical_user_id = result.anthem_user_id;
                                 medical_password = result.anthem_password;
                                 select_code += '<option>Cigna</option>' +
-                                               '<option>Guardian</option>' +
+                                               //'<option>Guardian</option>' +
                                                '<option selected>Anthem</option>';
-                        } else if (result.medical_site == 'Guardian') {
+                        } /*else if (result.medical_site == 'Guardian') {
                                 medical_user_id = result.guardian_user_id;
                                 medical_password = result.guardian_password;
                                 select_code += '<option>Cigna</option>' +
                                                '<option selected>Guardian</option>' +
                                                '<option>Anthem</option>';
-                        } else {
+                        }*/ else {
                             select_code += '<option>Cigna</option>' +
-                                               '<option>Guardian</option>' +
+                                               //'<option>Guardian</option>' +
                                                '<option>Anthem</option>';
                         }
                         select_code += '</select>';
@@ -673,7 +682,7 @@
 
                         select_code = '<select id="dental_selected_name" class="form-control underline-input">' +
                                             '<option>--Select Provider--</option>';
-                        if (result.dental_site == 'Cigna') {
+                        /*if (result.dental_site == 'Cigna') {
                                 dental_user_id = result.cigna_user_id;
                                 dental_password = result.cigna_password;
                                 select_code += '<option selected>Cigna</option>' +
@@ -685,16 +694,16 @@
                                 select_code += '<option>Cigna</option>' +
                                                '<option>Guardian</option>' +
                                                '<option selected>Anthem</option>';
-                        } else if (result.dental_site == 'Guardian') {
+                        } else*/ if (result.dental_site == 'Guardian') {
                                 dental_user_id = result.guardian_user_id;
                                 dental_password = result.guardian_password;
-                                select_code += '<option>Cigna</option>' +
-                                               '<option selected>Guardian</option>' +
-                                               '<option>Anthem</option>';
+                                select_code += //'<option>Cigna</option>' +
+                                               '<option selected>Guardian</option>'; // +
+                                               //'<option>Anthem</option>';
                         } else {
-                            select_code += '<option>Cigna</option>' +
-                                               '<option>Guardian</option>' +
-                                               '<option>Anthem</option>';
+                            select_code += //'<option>Cigna</option>' +
+                                               '<option>Guardian</option>'; // +
+                                               //'<option>Anthem</option>';
                         }
                         select_code += '</select>';
 
@@ -709,24 +718,35 @@
                                 vision_user_id = result.cigna_user_id;
                                 vision_password = result.cigna_password;
                                 select_code += '<option selected>Cigna</option>' +
-                                               '<option>Guardian</option>' +
-                                               '<option>Anthem</option>';
-                        } else if (result.vision_site == 'Anthem') {
+                                               //'<option>Guardian</option>' +
+                                               '<option>Navia</option>'; // +
+                                               //'<option>Anthem</option>';
+                        } /*else if (result.vision_site == 'Anthem') {
                                 vision_user_id = result.anthem_user_id;
                                 vision_password = result.anthem_password;
                                 select_code += '<option>Cigna</option>' +
                                                '<option>Guardian</option>' +
+                                               '<option>Navia</option>' +
                                                '<option selected>Anthem</option>';
                         } else if (result.vision_site == 'Guardian') {
                                 vision_user_id = result.guardian_user_id;
                                 vision_password = result.guardian_password;
                                 select_code += '<option>Cigna</option>' +
                                                '<option selected>Guardian</option>' +
+                                               '<option>Navia</option>' +
                                                '<option>Anthem</option>';
+                        }*/ else if (result.vision_site == 'Navia') {
+                                vision_user_id = result.navia_user_id;
+                                vision_password = result.navia_password;
+                                select_code += '<option>Cigna</option>' +
+                                               //'<option>Guardian</option>' +
+                                               '<option selected>Navia</option>'; // +
+                                               //'<option>Anthem</option>';
                         } else {
                                 select_code += '<option>Cigna</option>' +
-                                               '<option>Guardian</option>' +
-                                               '<option>Anthem</option>';
+                                               //'<option>Guardian</option>' +
+                                               '<option>Navia</option>';// +
+                                               //'<option>Anthem</option>';
 
                         }
                         select_code += '</select>';
@@ -735,9 +755,47 @@
                         $('#vision_selected_user_id').val(vision_user_id);
                         $('#vision_selected_password').val(vision_password);
 
-                        funds_user_id = result.navia_user_id;
-                        funds_password = result.navia_password;
-                        //$('#funds_provider_div').html(select_code);
+
+                        select_code = '<select id="funds_selected_name" class="form-control underline-input">' +
+                                            '<option>--Select Provider--</option>';
+                        /*if (result.funds_site == 'Cigna') {
+                                funds_user_id = result.cigna_user_id;
+                                funds_password = result.cigna_password;
+                                select_code += '<option selected>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Navia</option>' +
+                                               '<option>Anthem</option>';
+                        } else if (result.funds_site == 'Anthem') {
+                                funds_user_id = result.anthem_user_id;
+                                funds_password = result.anthem_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Navia</option>' +
+                                               '<option selected>Anthem</option>';
+                        } else if (result.funds_site == 'Guardian') {
+                                funds_user_id = result.guardian_user_id;
+                                funds_password = result.guardian_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option selected>Guardian</option>' +
+                                               '<option>Navia</option>' +
+                                               '<option>Anthem</option>';
+                        } else*/ if (result.funds_site == 'Navia') {
+                                funds_user_id = result.navia_user_id;
+                                funds_password = result.navia_password;
+                                select_code += //'<option>Cigna</option>' +
+                                               //'<option>Guardian</option>' +
+                                               '<option selected>Navia</option>'; // +
+                                               //'<option>Anthem</option>';
+                        } else {
+                                select_code += //'<option>Cigna</option>' +
+                                               //'<option>Guardian</option>' +
+                                               '<option>Navia</option>'; // +
+                                               //'<option>Anthem</option>';
+
+                        }
+                        select_code += '</select>';
+                        
+                        $('#funds_provider_div').html(select_code);
                         $('#funds_selected_user_id').val(funds_user_id);
                         $('#funds_selected_password').val(funds_password);
                         //welcomeSelection();
@@ -766,6 +824,7 @@
                         window.localStorage.setItem('medical_site', result.medical_site);
                         window.localStorage.setItem('dental_site', result.dental_site);
                         window.localStorage.setItem('vision_site', result.vision_site);
+                        window.localStorage.setItem('funds_site', result.funds_site);
 
                         $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
 
