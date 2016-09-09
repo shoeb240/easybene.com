@@ -38,6 +38,7 @@
         //li_html += '<li><a href="test-2.html">Table</a></li>';
         //li_html += '<li><a href="test-3.html">ID Card</a></li>';
         if (username && token) {
+            li_html += '<li><a class="logout" href="provider-settings.html">Provider Settings</a></li>';
             li_html += '<li><a class="logout" href="logout.html">Logout</a></li>';
         }
 

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/slidebars-theme.css">
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+        
+        <!-- ============================================
+        ================= Stylesheets ===================
+        ============================================= -->
+        <!-- vendor css files -->
+        <link rel="stylesheet" href="assets/js/vendor/chosen/chosen.css">
+        
+        <style>
+            .login-list li {
+                margin: 0 auto 3px;
+                width: 85%;
+            }
+            
+            .btn-wrapper {
+                border: medium none !important;
+                margin-top: 5px !important;
+            }
+            
+            .provider-login-wrapper .login-list {
+                margin-top: 10px;
+            }
+            
+            .btn-wrapper button {
+                font-size: 16px;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <!-- Top Navigation Bar -->
+        <div class="sb-navbar sb-slide">
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
+            <!--             Left Slidebar control -->
+            <div class="sb-toggle-left">
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="page-title">Login</h2>
+
+        </div>
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
+
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
+
+
+                <div class="page-content search-prvider-page">
+
+                    <div class="content-block less-margin">
+                        <!-- Nav tabs -->
+                        <!--<ul class="nav nav-tabs tab-bottom-fixed" role="tablist">
+                            <li role="presentation" class="active">
+                                <a id="medical_bottom_link" href="#medical" aria-controls="medical" role="tab" data-toggle="tab"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="dental_bottom_link" href="#dental" aria-controls="dental" role="tab" data-toggle="tab"><i class="icon-dentist"></i>Dental</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="vision_bottom_link" href="#vision" aria-controls="vision" role="tab" data-toggle="tab"><i class="icon-heart36"></i>Vision</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="funds_bottom_link" href="#funds" aria-controls="funds" role="tab" data-toggle="tab"><i class="icon-medicine"></i>Funds</a>
+                            </li>
+                        </ul>-->
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <!--<div role="tabpanel" class="tab-pane active" id="medical">
+                                
+                                
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="dental">
+                                
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="vision">
+                                
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="funds">
+                                
+                            </div>-->
+                            
+                            <div id="site_reg_div" class="provider-login-wrapper" style="display: block; box-shadow: none; margin: 0;">
+                                <h2>Linking your <span id="site_selected_type_name"></span> account to Bene Fits.</h2>
+                                <p class="provider-login-info-text">
+                                    <a href="#Why-imp-Modal" data-toggle="modal">Why it is important?</a>
+                                </p>
+
+                                <!--<div id="reg_fields_div" style="display: none;" class="list-block login-list">
+                                    <ul>
+                                        <li><div id="reg_fail_div" style="display: none; position: static; width: 100%;" class="inValidText">Provider Registration Failed</div></li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon-user"></i></div>
+                                                <div class="item-inner">                                               
+                                                    <div class="item-input">
+                                                    <input id="site_selected_user_id"  type="email" placeholder="User Name">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="item-content">
+                                                <div class="item-media"><i class="icon-lock"></i></div>
+                                                <div class="item-inner">
+                                                    <div class="item-input">
+                                                    <input id="site_selected_password" type="password" placeholder="Password">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="btn-wrapper">
+                                        <input type="hidden" id="site_selected_name" value="">
+                                        <a href="javascript:void(0);" id="site_register"><button type="submit">Register Provider</button></a>
+                                        </li>
+                                    </ul>
+                                </div>-->
+                                
+                                
+                                
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <ul>
+                                            <li>Medical Provider</li>
+                                            <li>
+                                                <div id="medical_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Medical Provider Registered Successfully</div>
+                                                <div id="medical_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <!--<div id="medical_provider_div" class="form-group">
+                                                <select id="medical_selected_name" class="form-control underline-input">
+                                                    <option>--Select Provider--</option>
+                                                    <option>Cigna</option>
+                                                    <option>Guardian</option>
+                                                    <option>Anthem</option>
+                                                </select>
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div id="medical_provider_div" class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <!--<input id="medical_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="medical_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                            <option>Cigna</option>
+                                                            <option>Guardian</option>
+                                                            <option>Anthem</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--<div class="form-group">
+                                                <input type="text" id="medical_selected_user_id" placeholder="Username" class="form-control underline-input" value="">
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="medical_selected_user_id"  type="email" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--
+                                            <div class="form-group">
+                                                <input type="password" id="medical_selected_password" placeholder="Password" class="form-control underline-input">
+                                            </div>
+                                            -->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="medical_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="medical_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        <!--
+                                        <div style="clear: both;"></div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px; float: right;">
+                                            <a href="javascript:void(0);" id="medical_register" class="btn btn-greensea pull-right">Save</a>
+                                        </div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px;  float: right; margin-right: 5px;">
+                                            <a href="javascript:void(0);" onclick="javascript: location.href='index.html'" id="medical_register" class="btn btn-greensea pull-right">Cancel</a>
+                                        </div>-->
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                                
+                                
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <ul>
+                                            <li>Dental Provider</li>
+                                            <li>
+                                                <div id="dental_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Dental Provider Registered Successfully</div>
+                                                <div id="dental_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <!--<div id="dental_provider_div" class="form-group">
+                                                <select id="dental_selected_name" class="form-control underline-input">
+                                                    <option>--Select Provider--</option>
+                                                    <option>Cigna</option>
+                                                    <option>Guardian</option>
+                                                    <option>Anthem</option>
+                                                </select>
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div id="dental_provider_div" class="item-input">
+                                                        <!--<input id="dental_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="dental_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                            <option>Cigna</option>
+                                                            <option>Guardian</option>
+                                                            <option>Anthem</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--<div class="form-group">
+                                                <input type="text" id="dental_selected_user_id" placeholder="Username" class="form-control underline-input" value="">
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="dental_selected_user_id"  type="email" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--
+                                            <div class="form-group">
+                                                <input type="password" id="dental_selected_password" placeholder="Password" class="form-control underline-input">
+                                            </div>
+                                            -->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="dental_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="dental_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        <!--
+                                        <div style="clear: both;"></div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px; float: right;">
+                                            <a href="javascript:void(0);" id="dental_register" class="btn btn-greensea pull-right">Save</a>
+                                        </div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px;  float: right; margin-right: 5px;">
+                                            <a href="javascript:void(0);" onclick="javascript: location.href='index.html'" id="dental_register" class="btn btn-greensea pull-right">Cancel</a>
+                                        </div>-->
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                                
+                                
+                                
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <ul>
+                                            <li>Vision Provider</li>
+                                            <li>
+                                                <div id="vision_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Vision Provider Registered Successfully</div>
+                                                <div id="vision_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <!--<div id="vision_provider_div" class="form-group">
+                                                <select id="vision_selected_name" class="form-control underline-input">
+                                                    <option>--Select Provider--</option>
+                                                    <option>Cigna</option>
+                                                    <option>Guardian</option>
+                                                    <option>Anthem</option>
+                                                </select>
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div id="vision_provider_div" class="item-input">
+                                                        <!--<input id="vision_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="vision_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                            <option>Cigna</option>
+                                                            <option>Guardian</option>
+                                                            <option>Anthem</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--<div class="form-group">
+                                                <input type="text" id="vision_selected_user_id" placeholder="Username" class="form-control underline-input" value="">
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="vision_selected_user_id"  type="email" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--
+                                            <div class="form-group">
+                                                <input type="password" id="vision_selected_password" placeholder="Password" class="form-control underline-input">
+                                            </div>
+                                            -->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="vision_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="vision_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        <!--
+                                        <div style="clear: both;"></div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px; float: right;">
+                                            <a href="javascript:void(0);" id="vision_register" class="btn btn-greensea pull-right">Save</a>
+                                        </div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px;  float: right; margin-right: 5px;">
+                                            <a href="javascript:void(0);" onclick="javascript: location.href='index.html'" id="vision_register" class="btn btn-greensea pull-right">Cancel</a>
+                                        </div>-->
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <ul>
+                                            <li>Funds Provider</li>
+                                            <li>
+                                                <div id="funds_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Funds Provider Registered Successfully</div>
+                                                <div id="funds_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <!--<div id="funds_provider_div" class="form-group">
+                                                <select id="funds_selected_name" class="form-control underline-input">
+                                                    <option>--Select Provider--</option>
+                                                    <option>Cigna</option>
+                                                    <option>Guardian</option>
+                                                    <option>Anthem</option>
+                                                </select>
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div id="funds_provider_div" class="item-input">
+                                                        <!--<input id="funds_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="funds_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                            <option>Cigna</option>
+                                                            <option>Guardian</option>
+                                                            <option>Anthem</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--<div class="form-group">
+                                                <input type="text" id="funds_selected_user_id" placeholder="Username" class="form-control underline-input" value="">
+                                            </div>-->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="funds_selected_user_id"  type="email" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            
+                                            <!--
+                                            <div class="form-group">
+                                                <input type="password" id="funds_selected_password" placeholder="Password" class="form-control underline-input">
+                                            </div>
+                                            -->
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="funds_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="funds_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        <!--
+                                        <div style="clear: both;"></div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px; float: right;">
+                                            <a href="javascript:void(0);" id="funds_register" class="btn btn-greensea pull-right">Save</a>
+                                        </div>
+                                        <div class="form-group text-left mt-20" style="margin-bottom:55px;  float: right; margin-right: 5px;">
+                                            <a href="javascript:void(0);" onclick="javascript: location.href='index.html'" id="funds_register" class="btn btn-greensea pull-right">Cancel</a>
+                                        </div>-->
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                        
+                        
+                        
+                                
+                                <!--<div id="reg_success_div" style="display: block;" class="list-block login-list">
+                                    <ul>
+                                        <li class="btn-wrapper">
+                                        <input type="hidden" id="next_provider_name" value="">
+                                        <a id="next_provider" href="javascript:void(0);"><button type="submit">Next Provider</button></a>
+                                        <a id="show_dashboard" href="index.html" style="display: none;"><button type="submit">Show Dashboard</button></a>
+                                        </li>
+                                    </ul>
+                                </div>-->
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
+
+        <!-- Modal HTML -->
+        <div id="Why-imp-Modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <div class="why-important-text-wrapper">
+                            <div class="why-important-text-wrapper-text">
+                                <h3>Linking is how the magic Happens</h3>
+                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
+                                <a data-dismiss="modal" style="cursor: pointer">Got it</a>
+                            </div>
+
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        
+        
+         <!-- ============================================
+        ============== Vendor JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/vendor/jRespond/jRespond.min.js"></script>
+
+        <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
+
+        <script src="assets/js/vendor/chosen/chosen.jquery.js"></script>
+
+        <!--/ vendor javascripts -->
+
+        <!-- ============================================
+        ============== Custom JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/main.js"></script>
+        <!--/ custom javascripts -->
+        
+        
+        <script>
+        $('#medical_register').on('click', function() {
+            var site_type = 'Medical';
+            var site_name = $('#medical_selected_name').val();
+            var site_user_id = $('#medical_selected_user_id').val();
+            var site_password = $('#medical_selected_password').val();
+
+            RegisterSite(site_type, site_name, site_user_id, site_password);
+        });
+
+        $('#dental_register').on('click', function() {
+            var site_type = 'Dental';
+            var site_name = $('#dental_selected_name').val();
+            var site_user_id = $('#dental_selected_user_id').val();
+            var site_password = $('#dental_selected_password').val();
+
+            RegisterSite(site_type, site_name, site_user_id, site_password);
+        });
+
+        $('#vision_register').on('click', function() {
+            var site_type = 'Vision';
+            var site_name = $('#vision_selected_name').val();
+            var site_user_id = $('#vision_selected_user_id').val();
+            var site_password = $('#vision_selected_password').val();
+
+            RegisterSite(site_type, site_name, site_user_id, site_password);
+        });
+
+        $('#funds_register').on('click', function() {
+            var site_type = 'Funds';
+            var site_name = 'Navia'; //$('#funds_selected_name').val();
+            var site_user_id = $('#funds_selected_user_id').val();
+            var site_password = $('#funds_selected_password').val();
+
+            RegisterSite(site_type, site_name, site_user_id, site_password);
+        });
+
+        function hideAll() {
+            $('#welcome_div').css('display', 'none');
+            $('#site_choice_dental_div').css('display', 'none');   
+            $('#site_choice_vision_div').css('display', 'none');   
+
+            $('#site_reg_div').css('display', 'none');   
+            $('#site_reg_fail_div').css('display', 'none');   
+        }
+
+        function ShowDentalSiteLinks() {
+            hideAll(); 
+            $('#site_choice_dental_div').css('display', 'block');
+        }
+
+        function ShowVisionSiteLinks() {
+            hideAll(); 
+            $('#site_choice_vision_div').css('display', 'block');
+        }
+
+        function ShowSiteReg(type, site, image) {
+            hideAll();
+            $('#site_reg_div').css('display', 'block');
+            $('#site_selected_type_name').html(type);
+            $('#site_selected_name').val(site);
+            $('#site_selected_type_image').attr("src", "assets/images/" + image);
+        }
+
+         function ProcessLogout() {
+            window.localStorage.removeItem('username');
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('token_expire');
+            window.localStorage.removeItem('medical_site');
+            window.localStorage.removeItem('dental_site');
+            window.localStorage.removeItem('vision_site');
+            location.href = "index.html";
+        }
+
+        function GetUserData() {
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                type: "GET",
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        select_code = '<select id="medical_selected_name" class="form-control underline-input">' +
+                                            '<option>--Select Provider--</option>';
+                        if (result.medical_site == 'Cigna') {
+                                medical_user_id = result.cigna_user_id;
+                                medical_password = result.cigna_password;
+                                select_code += '<option selected>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        } else if (result.medical_site == 'Anthem') {
+                                medical_user_id = result.anthem_user_id;
+                                medical_password = result.anthem_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option selected>Anthem</option>';
+                        } else if (result.medical_site == 'Guardian') {
+                                medical_user_id = result.guardian_user_id;
+                                medical_password = result.guardian_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option selected>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        } else {
+                            select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        }
+                        select_code += '</select>';
+
+                        $('#medical_provider_div').html(select_code);
+                        $('#medical_selected_user_id').val(medical_user_id);
+                        $('#medical_selected_password').val(medical_password);
+
+
+                        select_code = '<select id="dental_selected_name" class="form-control underline-input">' +
+                                            '<option>--Select Provider--</option>';
+                        if (result.dental_site == 'Cigna') {
+                                dental_user_id = result.cigna_user_id;
+                                dental_password = result.cigna_password;
+                                select_code += '<option selected>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        } else if (result.dental_site == 'Anthem') {
+                                dental_user_id = result.anthem_user_id;
+                                dental_password = result.anthem_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option selected>Anthem</option>';
+                        } else if (result.dental_site == 'Guardian') {
+                                dental_user_id = result.guardian_user_id;
+                                dental_password = result.guardian_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option selected>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        } else {
+                            select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        }
+                        select_code += '</select>';
+
+                        $('#dental_provider_div').html(select_code);
+                        $('#dental_selected_user_id').val(dental_user_id);
+                        $('#dental_selected_password').val(dental_password);
+
+
+                        select_code = '<select id="vision_selected_name" class="form-control underline-input">' +
+                                            '<option>--Select Provider--</option>';
+                        if (result.vision_site == 'Cigna') {
+                                vision_user_id = result.cigna_user_id;
+                                vision_password = result.cigna_password;
+                                select_code += '<option selected>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        } else if (result.vision_site == 'Anthem') {
+                                vision_user_id = result.anthem_user_id;
+                                vision_password = result.anthem_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option selected>Anthem</option>';
+                        } else if (result.vision_site == 'Guardian') {
+                                vision_user_id = result.guardian_user_id;
+                                vision_password = result.guardian_password;
+                                select_code += '<option>Cigna</option>' +
+                                               '<option selected>Guardian</option>' +
+                                               '<option>Anthem</option>';
+                        } else {
+                                select_code += '<option>Cigna</option>' +
+                                               '<option>Guardian</option>' +
+                                               '<option>Anthem</option>';
+
+                        }
+                        select_code += '</select>';
+
+                        $('#vision_provider_div').html(select_code);
+                        $('#vision_selected_user_id').val(vision_user_id);
+                        $('#vision_selected_password').val(vision_password);
+
+                        funds_user_id = result.navia_user_id;
+                        funds_password = result.navia_password;
+                        //$('#funds_provider_div').html(select_code);
+                        $('#funds_selected_user_id').val(funds_user_id);
+                        $('#funds_selected_password').val(funds_password);
+                        //welcomeSelection();
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //console.log(xhr);
+                        //console.log(ajaxOptions);
+                        //console.log(thrownError);
+                        ShowSitelRegFail();
+                    },
+            });
+        }
+
+        function RegisterSite(site_type, site_name, site_user_id, site_password) {
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                type: "POST",
+                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        window.localStorage.setItem('medical_site', result.medical_site);
+                        window.localStorage.setItem('dental_site', result.dental_site);
+                        window.localStorage.setItem('vision_site', result.vision_site);
+
+                        $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
+
+                        GetUserData();
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //console.log(xhr);
+                        //console.log(ajaxOptions);
+                        //console.log(thrownError);
+                        $("#" + site_type.toLowerCase() + "_error").css('display', 'block');
+                    },
+            });
+        }
+        
+        GetUserData();
+        </script>
+    </body>
+</html>
