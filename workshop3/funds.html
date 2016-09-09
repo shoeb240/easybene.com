@@ -8,6 +8,7 @@
         <title>My App</title>
         <!-- Path to Framework7 Library CSS-->
         <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
         <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
         <!-- Path to your custom app styles-->
@@ -60,6 +61,26 @@
 
 
                 <div class="page-content medical-grap">
+                    
+                    <div class="content-block less-margin">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
+                            <li role="presentation">
+                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
+                            </li>
+                            <li role="presentation" class="active">
+                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
+                            </li>
+                        </ul>
+                    </div>
+                    
                     <div class="content-block less-padding">
 
                         <div class="table-text">
@@ -132,5 +153,6 @@
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
         <script type="text/javascript" src="js/funds.js"></script>
+        <script type="text/javascript" src="js/common-details.js"></script>
     </body>
 </html>
