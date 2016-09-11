@@ -159,12 +159,6 @@
             }
         });
     
-        $('#reg_next2').on('click', function() {
-            if (validation_check()) {
-                ProcessReg();
-            }
-        });
-
         function validation_check(msg) {
             var valid = true;
             
@@ -186,7 +180,9 @@
         }
         
         $('#login_next2').on('click', function() {
-            ProcessLogin();
+            if (validation_check()) {
+                ProcessLogin();
+            }
         });
 
         function ProcessLogin() {

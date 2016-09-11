@@ -10,7 +10,7 @@
         } 
     });
             
-    $('#do_search_link_medical').on('click', function() {
+    /*$('#do_search_link_medical').on('click', function() {
         var name = $("#medical_search_chosen .search-choice span").html();
         var image_name = name.toLowerCase() + "_logo.jpg";
         ShowSiteReg('Medical', name, image_name);
@@ -26,9 +26,9 @@
         var name = $("#vision_search_chosen .search-choice span").html();
         var image_name = name.toLowerCase() + "_logo.jpg";
         ShowSiteReg('Vision', name, image_name);
-    });
+    });*/
     
-    $('#cigna_medical').on('click', function() {
+    /*$('#cigna_medical').on('click', function() {
         ShowSiteReg('Medical', 'Cigna', 'cigna_logo.jpg');
     });
     
@@ -66,17 +66,17 @@
     
     $('#site_register').on('click', function() {
         RegisterSite();
-    });
+    });*/
     
-    $('#skip_dental').on('click', function() {
+    /*$('#skip_dental').on('click', function() {
         ShowVisionSiteLinks();
     });
     
     $('#skip_vision').on('click', function() {
         ShowWelcome();
-    });
+    });*/
     
-    function hideAll() {
+    /*function hideAll() {
         $('#welcome_div').css('display', 'none');
         $('#site_choice_medical_div').css('display', 'none');   
         $('#site_choice_dental_div').css('display', 'none');   
@@ -89,7 +89,7 @@
         //$('#reg_span_succ').css('display', 'none');
         $('#reg_span_fail').css('display', 'none');
         $('#login_span_fail').html('');   
-    }
+    }*/
     
     function welcomeSelection(showDentalVisionSites) {
         var token = window.localStorage.getItem('token');
@@ -139,7 +139,7 @@
         location.href = "welcome.html";
     }
     
-    function ShowSiteReg(type, site, image) {
+    /*function ShowSiteReg(type, site, image) {
         hideAll();
         $('#site_reg_div').css('display', 'block');
         $('#site_selected_type_name').html(type);
@@ -152,9 +152,9 @@
         $('#site_reg_fail_div').css('display', 'block');
         $('#site_failed_type_name').html($('#site_selected_type_name').html());
         $('#site_failed_type_image').attr("src", $('#site_selected_type_image').attr("src"));
-    }
+    }*/
     
-    function RegisterSite() {
+    /*function RegisterSite() {
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
         var site_type = $('#site_selected_type_name').html();
@@ -183,6 +183,6 @@
                     ShowSitelRegFail();
                 },
         });
-    }
+    }*/
     
 }());

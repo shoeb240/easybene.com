@@ -124,6 +124,9 @@
                                                     </a>
                                                 </div>
                                             </li>
+                                            <li class="btn-wrapper">
+                                                <a href="javascript:void(0);" id="skip_medical"><button type="submit">Skip This Provider</button></a>
+                                            </li>
                                         </ul>
                                         <!-- <a href="#" class="see-more">See More <i class="icon-plus"></i></a> -->
                                     </div>
@@ -157,6 +160,9 @@
                                                     <i class="icon-angle-double-right"></i>
                                                     </a>
                                                 </div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a href="javascript:void(0);" id="skip_dental"><button type="submit">Skip This Provider</button></a>
                                             </li>
                                             <!--<li>
                                                 <div style="background: url('images/cigna_logo.jpg')" class="provider-logo-wrapper pull-left"></div>
@@ -219,6 +225,9 @@
                                                     </a>
                                                 </div>
                                             </li>
+                                            <li class="btn-wrapper">
+                                                <a href="javascript:void(0);" id="skip_vision"><button type="submit">Skip This Provider</button></a>
+                                            </li>
                                         </ul>
 
                                         <!-- <a class="see-more" href="#">See More <i class="icon-plus"></i></a> -->
@@ -267,6 +276,9 @@
                                                     </a>
                                                 </div>
                                             </li>
+                                            <li class="btn-wrapper">
+                                                <a href="javascript:void(0);" id="skip_funds"><button type="submit">Skip This Provider</button></a>
+                                            </li>
                                         </ul>
                                         <!-- <a href="#" class="see-more">See More <i class="icon-plus"></i></a> -->
                                     </div>
@@ -290,10 +302,11 @@
                                                 <div class="item-media"><i class="icon-user"></i></div>
                                                 <div class="item-inner">                                               
                                                     <div class="item-input">
-                                                    <input id="site_selected_user_id"  type="email" placeholder="User Name">
+                                                    <input id="site_selected_user_id"  type="text" placeholder="User Name">
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
                                         </li>
                                         <li>
                                             <div class="item-content">
@@ -304,6 +317,7 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                         </li>
                                         <li class="btn-wrapper">
                                         <input type="hidden" id="site_selected_name" value="">
@@ -458,17 +472,90 @@
 
 
         $('#site_register').on('click', function() {
-            RegisterSite();
+            if (validation_check()) {
+                RegisterSite();
+            }
         });
 
-        $('#skip_dental').on('click', function() {
-            ShowVisionSiteLinks();
-        });
 
-        $('#skip_vision').on('click', function() {
-            ShowWelcome();
+        function show_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "block");
+            $(ths).closest("li").addClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "block");
+        }
+        
+        function remove_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        function show_ok(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "block");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        $('#site_selected_user_id').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 2) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
         });
         
+        $('#site_selected_password').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 6) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+    
+        function validation_check() {
+            var valid = true;
+            
+            if ($('#site_selected_user_id').val().length < 2) {
+                show_error($('#site_selected_user_id'));
+                valid = false;
+            } else {
+                remove_error($('#site_selected_user_id'));
+            }
+
+            if ($('#site_selected_password').val().length < 6) {
+                show_error($('#site_selected_password'));
+                valid = false;
+            } else {
+                remove_error($('#site_selected_password'));
+            }
+
+            return valid;
+        }
+        
+        $('#skip_medical').on('click', function() {
+            $("#dental_bottom_link").click();
+        });
+        
+        $('#skip_dental').on('click', function() {
+            $("#vision_bottom_link").click();
+        });
+        
+        $('#skip_vision').on('click', function() {
+            $("#funds_bottom_link").click();
+        });
+        
+        $('#skip_funds').on('click', function() {
+            location.href = "index.html";
+        });
+
         $('.nav-tabs li a').on("click", function(){
             display_refresh();
         });

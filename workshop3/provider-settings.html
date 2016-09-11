@@ -184,6 +184,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
                                             </li>
                                             
                                             <!--<div class="form-group">
@@ -194,10 +195,11 @@
                                                     <div class="item-media"><i class="icon-user"></i></div>
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <input id="medical_selected_user_id"  type="email" placeholder="User Name">
+                                                        <input id="medical_selected_user_id"  type="text" placeholder="User Name">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
                                             </li>
                                             
                                             <!--
@@ -214,6 +216,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                             </li>
                                             <li class="btn-wrapper">
                                                 <a id="medical_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
@@ -268,6 +271,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
                                             </li>
                                             
                                             <!--<div class="form-group">
@@ -278,10 +282,11 @@
                                                     <div class="item-media"><i class="icon-user"></i></div>
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <input id="dental_selected_user_id"  type="email" placeholder="User Name">
+                                                        <input id="dental_selected_user_id"  type="text" placeholder="User Name">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
                                             </li>
                                             
                                             <!--
@@ -298,6 +303,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                 <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                             </li>
                                             <li class="btn-wrapper">
                                                 <a id="dental_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
@@ -353,6 +359,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
                                             </li>
                                             
                                             <!--<div class="form-group">
@@ -363,10 +370,11 @@
                                                     <div class="item-media"><i class="icon-user"></i></div>
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <input id="vision_selected_user_id"  type="email" placeholder="User Name">
+                                                        <input id="vision_selected_user_id"  type="text" placeholder="User Name">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
                                             </li>
                                             
                                             <!--
@@ -383,6 +391,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                             </li>
                                             <li class="btn-wrapper">
                                                 <a id="vision_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
@@ -440,6 +449,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
                                             </li>
                                             
                                             <!--<div class="form-group">
@@ -450,10 +460,11 @@
                                                     <div class="item-media"><i class="icon-user"></i></div>
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <input id="funds_selected_user_id"  type="email" placeholder="User Name">
+                                                        <input id="funds_selected_user_id"  type="text" placeholder="User Name">
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
                                             </li>
                                             
                                             <!--
@@ -470,6 +481,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                             </li>
                                             <li class="btn-wrapper">
                                                 <a id="funds_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
@@ -555,13 +567,87 @@
         
         
         <script>
+        function show_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "block");
+            $(ths).closest("li").addClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "block");
+        }
+        
+        function remove_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        function show_ok(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "block");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        //$('#funds_selected_user_id').on("change", function(){
+        $('input:text').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 2) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+        
+        //$('#funds_selected_password').on("change", function(){
+        $('input:password').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 6) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+    
+        function validation_check(site_name) {
+            var valid = true;
+            site_name = site_name.toLowerCase();
+            if ($('#'+site_name+'_selected_name').val() === '--Select Provider--') {
+                show_error($('#'+site_name+'_selected_name'));
+                valid = false;
+            } else {
+                remove_error($('#'+site_name+'_selected_name'));
+            }
+            
+            if ($('#'+site_name+'_selected_user_id').val().length < 2) {
+                show_error($('#'+site_name+'_selected_user_id'));
+                valid = false;
+            } else {
+                remove_error($('#'+site_name+'_selected_user_id'));
+            }
+
+            if ($('#'+site_name+'_selected_password').val().length < 6) {
+                show_error($('#'+site_name+'_selected_password'));
+                valid = false;
+            } else {
+                remove_error($('#'+site_name+'_selected_password'));
+            }
+
+            return valid;
+        }
+        
+        
         $('#medical_register').on('click', function() {
             var site_type = 'Medical';
             var site_name = $('#medical_selected_name').val();
             var site_user_id = $('#medical_selected_user_id').val();
             var site_password = $('#medical_selected_password').val();
-
-            RegisterSite(site_type, site_name, site_user_id, site_password);
+            
+            if (validation_check(site_type)) {
+                RegisterSite(site_type, site_name, site_user_id, site_password);
+            }
         });
 
         $('#dental_register').on('click', function() {
@@ -570,7 +656,9 @@
             var site_user_id = $('#dental_selected_user_id').val();
             var site_password = $('#dental_selected_password').val();
 
-            RegisterSite(site_type, site_name, site_user_id, site_password);
+            if (validation_check(site_type)) {
+                RegisterSite(site_type, site_name, site_user_id, site_password);
+            }
         });
 
         $('#vision_register').on('click', function() {
@@ -579,7 +667,9 @@
             var site_user_id = $('#vision_selected_user_id').val();
             var site_password = $('#vision_selected_password').val();
 
-            RegisterSite(site_type, site_name, site_user_id, site_password);
+            if (validation_check(site_type)) {
+                RegisterSite(site_type, site_name, site_user_id, site_password);
+            }
         });
 
         $('#funds_register').on('click', function() {
@@ -587,8 +677,10 @@
             var site_name = 'Navia'; //$('#funds_selected_name').val();
             var site_user_id = $('#funds_selected_user_id').val();
             var site_password = $('#funds_selected_password').val();
-
-            RegisterSite(site_type, site_name, site_user_id, site_password);
+            
+            if (validation_check(site_type)) {
+                RegisterSite(site_type, site_name, site_user_id, site_password);
+            }
         });
 
         function hideAll() {
