@@ -41,12 +41,9 @@
             $("#summary_link_funds").css("color", "#f8c572");
         } else {
             var image_name = funds_site.toLowerCase() + "_logo.jpg";
-            $("#funds_image").attr("src", "images/" + image_name);
-            $("#funds_image").css("border", "1px solid grey");
-            $("#funds_image").css("padding", "2px");
-            
             //$("#summary_link_funds").html('<a style="color: #14efef" href="' + funds_site + '-funds.html">HSA Funds</a>');
             $("#summary_link_funds").html('<a  style="color: #14efef;" href="funds.html">HSA Funds</a>');
+            $("#funds_image").html('<a style="color: #14efef" href="funds.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
         }
         
         
@@ -76,13 +73,11 @@
             percent = 0;
         } else {
             var image_name = site_lower + "_logo.jpg";
-            $(image_id).attr("src", "images/" + image_name);
-            $(image_id).css("border", "1px solid grey");
-            $(image_id).css("padding", "2px");
             if (percent > 0) {
                 $(graph_id).parent().children("p.status-text").html("Deductible <span>$" + deductible + "</span><br />Total Spent <span>$" + deductible_met + "</span>");
                 $(graph_id).parent().removeClass("orange-graph");
                 $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
+                $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
             } else {
                 $(graph_id).parent().children("p.status-text").html("Provider Pending");
                 $(graph_id).parent().addClass("orange-graph");
