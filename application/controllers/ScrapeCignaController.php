@@ -17,6 +17,8 @@ class ScrapeCignaController extends Zend_Controller_Action
 
     private $apiEndPoint = "https://api.dexi.io/";
     
+    private $cronKey = 'aG$s6&*H';
+    
     /**
      * Initialize object
      *
@@ -37,7 +39,7 @@ class ScrapeCignaController extends Zend_Controller_Action
     private function myExecutionResult($executionId, $headerArray) 
     {
         $url = $this->apiEndPoint . "executions/{$executionId}/result";
-        echo $url;
+        //echo $url;
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -77,12 +79,17 @@ class ScrapeCignaController extends Zend_Controller_Action
         
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            
-            if ( $userObj->getUserId() != 1 ) continue; // remove
-            
             $data['user_id'] = $userObj->getCignaUserId();
             $data['password'] = $userObj->getCignaPassword();
             if (empty($data['user_id']) || empty($data['password'])) continue;
@@ -109,19 +116,24 @@ class ScrapeCignaController extends Zend_Controller_Action
                 try {
                     $result = $this->myRunWithInput($data_string, $headerArray, $runId);
                 } catch (Exception $e) {
-                    echo $e->getMessage();
-                    die('catch');
+                    //echo $e->getMessage();
+                    //die('catch');
                 }
+                
                 $arr = json_decode($result, true);
-                echo '<pre>';
-                print_r($arr);
-                echo '</pre>';
                 $exeId = $arr['_id'];
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                if (empty($exeId)) {
+                    $ret_res = false;
+                }
             }
-            break; // remove
-            echo 'Done';
+        }
+        
+        if ($ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
         }
         
     }
@@ -137,10 +149,17 @@ class ScrapeCignaController extends Zend_Controller_Action
        
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 $resultCignaMedical = $this->myExecutionResult($userObj->getCignaMedicalExeid(), $headerArray);
@@ -150,16 +169,15 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $resultCignaMedicalDetails = $this->myExecutionResult($userObj->getCignaClaimDetailsExeid(), $headerArray);
                 $arr['cigna_medical_details'] = json_decode($resultCignaMedicalDetails, true);
             } catch (Exception $e) {
-                echo $e->getMessage();
-                die('catch');
+                //echo $e->getMessage();
+                //die('catch');
             }
-            echo '<pre>';
+            /*echo '<pre>';
             print_r($arr);
-            echo '</pre>';
+            echo '</pre>';*/
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
             
-            break;  // remove
         }
         
     }
@@ -188,13 +206,13 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $deductible->setOutOfPocketMet($outOfPocketMet);
                 $deductible->setOutOfPocketRemaining($outOfPocketRemaining);
 
-                echo 'insert...<br/>';
+                //echo 'insert...<br/>';
                 $deductibleId = $deductibleMapper->saveCignaDeductible($deductible);
             }
 
-            echo '<pre>';
-            print_r($arr['cigna_deductible_claim']);
-            echo '</pre>';
+//            echo '<pre>';
+//            print_r($arr['cigna_deductible_claim']);
+//            echo '</pre>';
             
             // cingna_claim
             /*$claimMapper = new Application_Model_CignaClaimMapper();
@@ -263,7 +281,7 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $claimDetails->setServiceSeeNotes($serviceSeeNotes);
                 
                 $claimDetailsId = $claimDetailsMapper->saveCignaClaimDetails($claimDetails);
-                echo 'insert...<br/>';
+                //echo 'insert...<br/>';
             }
             
             // cingna_medical - ok
@@ -286,10 +304,10 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $medical->setTo($to);
                 
                 $medicalId = $medicalMapper->saveCignaMedical($medical);
-                echo 'insert...<br/>';
+                //echo 'insert...<br/>';
             }
         } catch (Exception $ex) {
-            echo "Failed" . $ex->getMessage();
+            //echo "Failed" . $ex->getMessage();
         }
         
     }

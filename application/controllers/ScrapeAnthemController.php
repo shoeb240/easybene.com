@@ -20,6 +20,8 @@ class ScrapeAnthemController extends Zend_Controller_Action
 
     private $apiEndPoint = "https://api.dexi.io/";
     
+    private $cronKey = 'aG$s6&*H';
+    
     /**
      * Initialize object
      *
@@ -79,11 +81,17 @@ class ScrapeAnthemController extends Zend_Controller_Action
         
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
-            
             $u = $userObj->getAnthemUserId();
             $p = $userObj->getAnthemPassword();
             if (empty($u) || empty($p)) continue;
@@ -111,18 +119,25 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 try {
                     $result = $this->myRunWithInput($data_string, $headerArray, $runId);
                 } catch (Exception $e) {
-                    echo $e->getMessage();
-                    die('catch');
+                    //echo $e->getMessage();
+                    //die('catch');
                 }
+                
                 $arr = json_decode($result, true);
-                echo '<pre>';
-                print_r($arr);
-                echo '</pre>';
                 $exeId = $arr['_id'];
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                if (empty($exeId)) {
+                    $ret_res = false;
+                }
             }
-            break; // remove
+
+        }
+        
+        if ($ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
         }
     }
     
@@ -137,17 +152,22 @@ class ScrapeAnthemController extends Zend_Controller_Action
        
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 $resultAnthem = $this->myExecutionResult($userObj->getAnthemExeid(), $headerArray);
                 $resultAnthemClaimOverview = $this->myExecutionResult($userObj->getAnthemClaimOverviewExeid(), $headerArray);
             } catch (Exception $e) {
-                echo $e->getMessage();
-                die('catch');
             }
             $arr = array();
             $arr['anthem'] = json_decode($resultAnthem, true);
@@ -158,7 +178,6 @@ class ScrapeAnthemController extends Zend_Controller_Action
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
             
-            break;
         }
         
     }
@@ -221,11 +240,11 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $anthem->setOption('CD_claims_benefit_coverage', $claims_benefit_coverage1);
                 $anthem->setOption('CD_claims_benefit_deductible_for', $claims_benefit_deductible_for);
                 
-                echo 'insert1...<br/>';
+                //echo 'insert1...<br/>';
                 try {
                     $anthemId = $anthemMapper->saveAnthem($anthem);
                 } catch(Exception $e) {
-                    echo $e->getMessage();
+                    //echo $e->getMessage();
                 }
             }
 
@@ -257,11 +276,11 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $claim->setOption('status', $status);
                 $claim->setOption('status', $status);
 
-                echo 'insert2...<br/>';
+                //echo 'insert2...<br/>';
                 $claimId = $claimMapper->saveAnthemClaimOverview($claim);
             }
         } catch (Exception $ex) {
-            echo "Failed" . $ex->getMessage();
+            //echo "Failed" . $ex->getMessage();
         }
         
     }

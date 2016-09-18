@@ -234,6 +234,46 @@ class Application_Model_UserMapper
         return $info;
     }
     
+    public function getUserById($userId)
+    {
+        $select = $this->getTable()->select();
+        $select->from('job_user', array('*'))
+               ->where('user_id = ?', $userId);
+        $rowSets = $this->getTable()->fetchAll($select);
+        
+        
+        $info = array();
+        foreach($rowSets as $k => $row) {
+            $user = new Application_Model_User();
+            $user->setUserId($row->user_id);
+            $user->setUsername($row->username);
+            $user->setFullName($row->full_name);
+            $user->setEmail($row->email);
+            $user->setCignaUserId($row->cigna_user_id);
+            $user->setCignaPassword($row->cigna_password);
+            $user->setCignaMedicalExeid($row->cigna_medical_exeid);
+            $user->setCignaDeductibleClaimExeid($row->cigna_deductible_claim_exeid);
+            $user->setCignaClaimDetailsExeid($row->cigna_claim_details_exeid);
+            $user->setGuardianUserId($row->guardian_user_id);
+            $user->setGuardianPassword($row->guardian_password);
+            $user->setGuardianClaimExeid($row->guardian_claim_exeid);
+            $user->setGuardianBenefitExeid($row->guardian_benefit_exeid);
+            $user->setAnthemUserId($row->anthem_user_id);
+            $user->setAnthemPassword($row->anthem_password);
+            $user->setAnthemExeid($row->anthem_exeid);
+            $user->setAnthemClaimOverviewExeid($row->anthem_claim_overview_exeid);
+            $user->setNaviaUserId($row->navia_user_id);
+            $user->setNaviaPassword($row->navia_password);
+            $user->setNaviaStatementsExeid($row->navia_statements_exeid);
+            $user->setNaviaDayCareExeid($row->navia_day_care_exeid);
+            $user->setNaviaHealthCareExeid($row->navia_health_care_exeid);
+            $user->setNaviaHealthSavingsExeid($row->navia_health_savings_exeid);
+            $info[] = $user;
+        }
+        
+        return $info;
+    }
+    
     /**
      * Get searched members
      *

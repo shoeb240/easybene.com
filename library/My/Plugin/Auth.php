@@ -84,7 +84,8 @@ class My_Plugin_Auth
                 } else */
             
             // Token authentication
-            if (stripos($request->getControllerName(), 'api') !== false) {
+            if (stripos($request->getControllerName(), 'api') !== false ||
+                    (stripos($request->getControllerName(), 'scrape') !== false && empty($request->user_id))) {
                 if ($request->username && $request->token) {
                     $userTable = new Application_Model_DbTable_User();
                     $adapter = new Zend_Auth_Adapter_DbTable($userTable->getAdapter());

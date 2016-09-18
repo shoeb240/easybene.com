@@ -17,6 +17,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
     private $apiEndPoint = "https://api.dexi.io/";
     
+    private $cronKey = 'aG$s6&*H';
+    
     /**
      * Initialize object
      *
@@ -37,7 +39,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
     private function myExecutionResult($executionId, $headerArray) 
     {
         $url = $this->apiEndPoint . "executions/{$executionId}/result";
-        echo $url;
+        //echo $url;
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
@@ -90,11 +92,17 @@ class ScrapeGuardianController extends Zend_Controller_Action
         
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 84 ) continue; // remove
-            
             $u = $userObj->getGuardianUserId();
             $p = $userObj->getGuardianPassword();
             if (empty($u) || empty($p)) continue;
@@ -113,8 +121,6 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         try {
                             $result = $this->myRunWithInput($data_string, $headerArray, $runId);
                         } catch (Exception $e) {
-                            echo $e->getMessage();
-                            die('catch');
                         }
                         break;
                     case 1:
@@ -142,23 +148,28 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         try {
                             $result = $this->myRunWithBulk($data_string, $headerArray, $runId);
                         } catch (Exception $e) {
-                            echo $e->getMessage();
-                            die('catch');
+                            //echo $e->getMessage();
+                            //die('catch');
                         }
                         
                         break;
                 }
                 
                 $arr = json_decode($result, true);
-                echo '<pre>';
-                print_r($arr);
-                echo '</pre>';
                 $exeId = $arr['_id'];
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                if (empty($exeId)) {
+                    $ret_res = false;
+                }
             }
             
-            break; // remove
+        }
+        
+        if ($ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
         }
     }
     
@@ -173,29 +184,34 @@ class ScrapeGuardianController extends Zend_Controller_Action
        
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 84 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
                 $resultGuardianBenefit = $this->myExecutionResult($userObj->getGuardianBenefitExeid(), $headerArray);
                 $resultGuardianClaim = $this->myExecutionResult($userObj->getGuardianClaimExeid(), $headerArray);
             } catch (Exception $e) {
-                echo $e->getMessage();
-                die('catch');
+                //echo $e->getMessage() . '<br />';
+                //die('catch');
             }
             $arr = array();
             $arr['guardian_benefit'] = json_decode($resultGuardianBenefit, true);
             $arr['guardian_claim'] = json_decode($resultGuardianClaim, true);
-            echo '<pre>';
+            /*echo '<pre>';
             print_r($arr);
-            echo '</pre>';
+            echo '</pre>';*/
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
-            
-            break;
         }
         
     }
@@ -230,11 +246,11 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $benefit->setAmounts($amounts);
                 $benefit->setMonthlyCost($monthlyCost);
 
-                echo 'insert...<br/>';
+                //echo 'insert...<br/>';
                 try {
                     $benefitId = $benefitMapper->saveGuardianBenefit($benefit);
                 } catch(Exception $e) {
-                    echo $e->getMessage();
+                    //echo $e->getMessage();
                 }
             }
 
@@ -269,11 +285,11 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $claim->setSubmittedCharges($submittedCharges);
                 $claim->setAmountPaid($amountPaid);
 
-                echo 'insert...<br/>';
+                //echo 'insert...<br/>';
                 $claimId = $claimMapper->saveGuardianClaim($claim);
             }
         } catch (Exception $ex) {
-            echo "Failed" . $ex->getMessage();
+            //echo "Failed" . $ex->getMessage();
         }
         
     }

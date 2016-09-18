@@ -390,6 +390,9 @@
         
         
         <script>
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+
         $('#do_search_link_medical').on('click', function() {
             var name = $("#medical_search_chosen .search-choice span").html();
             var image_name = name.toLowerCase() + "_logo.jpg";
@@ -555,7 +558,7 @@
         $('#skip_funds').on('click', function() {
             location.href = "index.html";
         });
-
+        
         $('.nav-tabs li a').on("click", function(){
             display_refresh();
         });
@@ -618,6 +621,26 @@
             $("#reg_fail_div").css("display", "block");
         }
 
+        function provider_run(provider_name, username, token)
+        {
+            var response = false;
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/scrape-'+provider_name+'/run/'+username+'/'+token,
+                type: "GET",
+                dataType: 'json',
+                async: false,
+                success: function(result){
+                    //console.log(result);
+                    response = result.response;
+                },
+                error: function(a, b, c){
+                    response = false; 
+                }
+            });
+            
+            return response;
+        }
+
         function RegisterSite() {
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
@@ -625,7 +648,6 @@
             var site_name = $('#site_selected_name').val();
             var site_user_id = $('#site_selected_user_id').val();
             var site_password = $('#site_selected_password').val();
-            var next_site = 'dental';
             
             $.ajax({
                 url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
@@ -634,19 +656,27 @@
                 dataType: 'json',
                 async: false,
                 success: function(result) {
-                        //console.log(result);
+                        console.log(result);
                         window.localStorage.setItem('medical_site', result.medical_site);
                         window.localStorage.setItem('dental_site', result.dental_site);
                         window.localStorage.setItem('vision_site', result.vision_site);
                         window.localStorage.setItem('funds_site', result.funds_site);
+                        window.localStorage.setItem('provider_execution', 'yes');
                         
-                        ShowRegSuccess(site_type);                     
+                        var success_count = 0;
+                        var res = provider_run(site_name.toLowerCase(), username, token);
+                        if (res === true) {
+                            success_count += 1;
+                        }
+                        console.log(success_count);
+
+                        ShowRegSuccess(site_type); 
                     },
                 error: function(xhr, ajaxOptions, thrownError) {
                         console.log(xhr);
                         console.log(ajaxOptions);
                         console.log(thrownError);
-        
+                        
                         ShowRegFail();
                     },
             });

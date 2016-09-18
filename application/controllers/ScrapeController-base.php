@@ -86,7 +86,14 @@ class ScrapeController extends Zend_Controller_Action
         
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
+        $userId = $this->_getParam('user_id', null);
+        //$userId = 1;
+        $usersAll = array();
+        if ($userId) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else {
+            $usersAll = $userMapper->getUserAll();
+        }
 
         foreach($usersAll as $k => $userObj) {
             $data['username'] = $userObj->getCignaUserId(); // 'rbrathwaite29'
@@ -124,7 +131,14 @@ class ScrapeController extends Zend_Controller_Action
         
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
+        $userId = $this->_getParam('user_id', null);
+        //$userId = 1;
+        $usersAll = array();
+        if ($userId) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else {
+            $usersAll = $userMapper->getUserAll();
+        }
 
         $deductibleMapper = new Application_Model_CignaDeductibleMapper();
         $this->cignaDeductibleUserAll = $deductibleMapper->getDeductibleUserAll();

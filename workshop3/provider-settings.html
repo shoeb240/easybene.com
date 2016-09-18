@@ -901,6 +901,26 @@
             });
         }
 
+        function provider_run(provider_name, username, token)
+        {
+            var response = false;
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/scrape-'+provider_name+'/run/'+username+'/'+token,
+                type: "GET",
+                dataType: 'json',
+                async: false,
+                success: function(result){
+                    //console.log(result);
+                    response = result.response;
+                },
+                error: function(a, b, c){
+                    response = false; 
+                }
+            });
+            
+            return response;
+        }
+        
         function RegisterSite(site_type, site_name, site_user_id, site_password) {
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
@@ -917,7 +937,15 @@
                         window.localStorage.setItem('dental_site', result.dental_site);
                         window.localStorage.setItem('vision_site', result.vision_site);
                         window.localStorage.setItem('funds_site', result.funds_site);
-
+                        window.localStorage.setItem('provider_execution', 'yes');
+                        
+                        var success_count = 0;
+                        var res = provider_run(site_name.toLowerCase(), username, token);
+                        if (res === true) {
+                            success_count += 1;
+                        }
+                        console.log(success_count);
+                        
                         $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
 
                         GetUserData();

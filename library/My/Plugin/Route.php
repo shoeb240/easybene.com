@@ -35,27 +35,47 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                   array('controller' => 'api-funds', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiFunds', $route);
         
-        $route = new Zend_Controller_Router_Route('scrape-cigna/:action',
+        
+        $route = new Zend_Controller_Router_Route('scrape-cigna/:action/:username/:token',
                                                   array('controller' => 'scrape-cigna',
                                                         'action' => 'execute'));
         $router->addRoute('indexCignaScrape', $route);
+        $route = new Zend_Controller_Router_Route('scrape-cigna/:action/:user_id',
+                                                  array('controller' => 'scrape-cigna',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexCignaScrapeCron', $route);
         
-        $route = new Zend_Controller_Router_Route('scrape-guardian/:action',
+        
+        $route = new Zend_Controller_Router_Route('scrape-guardian/:action/:username/:token',
                                                   array('controller' => 'scrape-guardian',
                                                         'action' => 'execute'));
         $router->addRoute('indexGuardianScrape', $route);
+        $route = new Zend_Controller_Router_Route('scrape-guardian/:action/:user_id',
+                                                  array('controller' => 'scrape-guardian',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexGuardianScrapeCron', $route);
         
-        $route = new Zend_Controller_Router_Route('scrape-anthem/:action',
+        
+        $route = new Zend_Controller_Router_Route('scrape-anthem/:action/:username/:token',
                                                   array('controller' => 'scrape-anthem',
                                                         'action' => 'execute'));
         $router->addRoute('indexAnthemScrape', $route);
+        $route = new Zend_Controller_Router_Route('scrape-anthem/:action/:user_id',
+                                                  array('controller' => 'scrape-anthem',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexAnthemScrapeCron', $route);
         
-        $route = new Zend_Controller_Router_Route('scrape-navia/:action',
+        
+        $route = new Zend_Controller_Router_Route('scrape-navia/:action/:username/:token',
                                                   array('controller' => 'scrape-navia',
                                                         'action' => 'execute'));
         $router->addRoute('indexNaviaScrape', $route);
+        $route = new Zend_Controller_Router_Route('scrape-navia/:action/:user_id',
+                                                  array('controller' => 'scrape-navia',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexNaviaScrapeCron', $route);
         
-        
+
         
         $route = new Zend_Controller_Router_Route('index/paypal-payment/:userId',
                                                   array('controller' => 'index',

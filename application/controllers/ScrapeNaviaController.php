@@ -20,6 +20,8 @@ class ScrapeNaviaController extends Zend_Controller_Action
 
     private $apiEndPoint = "https://api.dexi.io/";
     
+    private $cronKey = 'aG$s6&*H';
+    
     /**
      * Initialize object
      *
@@ -80,11 +82,17 @@ class ScrapeNaviaController extends Zend_Controller_Action
         
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
-            
             $u = $userObj->getNaviaUserId();
             $p = $userObj->getNaviaPassword();
             if (empty($u) || empty($p)) continue;
@@ -122,18 +130,24 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 try {
                     $result = $this->myRunWithInput($data_string, $headerArray, $runId);
                 } catch (Exception $e) {
-                    echo $e->getMessage();
-                    die('catch');
+                    //echo $e->getMessage();
+                    //die('catch');
                 }
+                
                 $arr = json_decode($result, true);
-                echo '<pre>';
-                print_r($arr);
-                echo '</pre>';
                 $exeId = $arr['_id'];
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                if (empty($exeId)) {
+                    $ret_res = false;
+                }
             }
-            break; // remove
+        }
+        
+        if ($ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
         }
     }
     
@@ -148,10 +162,17 @@ class ScrapeNaviaController extends Zend_Controller_Action
        
         // Get user info
         $userMapper = new Application_Model_UserMapper();
-        $usersAll = $userMapper->getUserAll();
-
+        $userId = $this->_getParam('user_id', null);
+        
+        $usersAll = array();
+        if (is_numeric($userId)) {
+            $usersAll = $userMapper->getUserById($userId);
+        } else if ($this->cronKey === $userId) {
+            $usersAll = $userMapper->getUserAll();
+        }
+        
+        $ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            if ( $userObj->getUserId() != 1 ) continue; // remove
             $headerArray = $this->getHeaderArr();
             try {
                 $resultNaviaStatements = $this->myExecutionResult($userObj->getNaviaStatementsExeid(), $headerArray);
@@ -159,21 +180,20 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $resultNaviaHealthCare = $this->myExecutionResult($userObj->getNaviaHealthCareExeid(), $headerArray);
                 $resultNaviaHealthSavings = $this->myExecutionResult($userObj->getNaviaHealthSavingsExeid(), $headerArray);
             } catch (Exception $e) {
-                echo $e->getMessage();
-                die('catch');
+                //echo $e->getMessage();
+                //die('catch');
             }
             $arr = array();
             $arr['navia_statements'] = json_decode($resultNaviaStatements, true);
             $arr['navia_day_care'] = json_decode($resultNaviaDayCare, true);
             $arr['navia_health_care'] = json_decode($resultNaviaHealthCare, true);
             $arr['navia_health_savings'] = json_decode($resultNaviaHealthSavings, true);
-            echo '<pre>';
+            /*echo '<pre>';
             print_r($arr);
-            echo '</pre>';
+            echo '</pre>';*/
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
             
-            break;
         }
         
     }
@@ -209,11 +229,11 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $naviaStatements->setOption('PB_balance', $eachRow[array_search('PB_balance', $arr['navia_statements']['headers'])]);
                 $naviaStatements->setOption('PB_last_day_submit', date("Y-m-d", strtotime($eachRow[array_search('PB_last_day_submit', $arr['navia_statements']['headers'])])));
                 
-                echo 'insert1...<br/>';
+                //echo 'insert1...<br/>';
                 try {
                     $naviaId = $naviaMapper->saveNaviaStatements($naviaStatements);
                 } catch(Exception $e) {
-                    echo $e->getMessage();
+                    //echo $e->getMessage();
                 }
             }
             
@@ -233,7 +253,7 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $dayCare->setOption('claim_amount', $eachRow[array_search('claim_amount', $arr['navia_day_care']['headers'])]);
                 $dayCare->setOption('amount', $eachRow[array_search('amount', $arr['navia_day_care']['headers'])]);
 
-                echo 'insert2...<br/>';
+                //echo 'insert2...<br/>';
                 $id = $dayCareMapper->saveNaviaDayCare($dayCare);
             }
             
@@ -253,7 +273,7 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $healthCare->setOption('claim_amount', $eachRow[array_search('claim_amount', $arr['navia_health_care']['headers'])]);
                 $healthCare->setOption('amount', $eachRow[array_search('amount', $arr['navia_health_care']['headers'])]);
 
-                echo 'insert3...<br/>';
+                //echo 'insert3...<br/>';
                 $id = $healthCareMapper->saveNaviaHealthCare($healthCare);
             }
             
@@ -278,11 +298,11 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $healthSavings->setOption('transaction_amt', $eachRow[array_search('transaction_amt', $arr['navia_health_savings']['headers'])]);
                 $healthSavings->setOption('HSA_transaction_type', $eachRow[array_search('HSA_transaction_type', $arr['navia_health_savings']['headers'])]);
 
-                echo 'insert4...<br/>';
+                //echo 'insert4...<br/>';
                 $id = $healthSavingsMapper->saveNaviaHealthSavings($healthSavings);
             }
         } catch (Exception $ex) {
-            echo "Failed" . $ex->getMessage();
+            //echo "Failed" . $ex->getMessage();
         }
         
     }

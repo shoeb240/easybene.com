@@ -2,10 +2,23 @@
 
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
+    var provider_execution = window.localStorage.getItem('provider_execution');
     
     $(window).load(function(){
         if (username && token) {
-           PrepareWelcomeData();
+            if (provider_execution === 'yes') {
+                var medical_site = window.localStorage.getItem('medical_site');
+                var dental_site= window.localStorage.getItem('dental_site');
+                var vision_site = window.localStorage.getItem('vision_site');
+                var funds_site = window.localStorage.getItem('funds_site');
+                
+                provider_execute(medical_site.toLowerCase());
+                provider_execute(dental_site.toLowerCase());
+                //provider_execute(vision_site.toLowerCase());
+                provider_execute(funds_site.toLowerCase());
+                window.localStorage.setItem('provider_execution', '');
+            }
+            PrepareWelcomeData();
         } else {
             ShowLogin();
         }
@@ -15,6 +28,26 @@
         location.href = 'index.html';
     }
     
+    function provider_execute(provider_name)
+    {
+        var response = false;
+        $.ajax({
+            url: 'http://www.easybene.com/index.php/scrape-'+provider_name+'/execute/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result){
+                //console.log(result);
+                response = result.response;
+            },
+            error: function(a, b, c){
+                response = false; 
+            }
+        });
+
+        return response;
+    }
+        
     function PrepareWelcomeData() {
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
