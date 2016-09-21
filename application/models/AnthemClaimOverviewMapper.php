@@ -80,9 +80,9 @@ class Application_Model_AnthemClaimOverviewMapper
             'member_responsibility' => trim($claim->getOption('member_responsibility')),
             'status' => trim($claim->getOption('status')),
         );
-        echo '<pre>';
-        print_r($data);
-        echo '<pre>';
+//        echo '<pre>';
+//        print_r($data);
+//        echo '<pre>';
         
         return $this->getTable()->insert($data);
     }

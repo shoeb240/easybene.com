@@ -644,6 +644,7 @@
         function RegisterSite() {
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
+            var provider_execution = window.localStorage.getItem('provider_execution');
             var site_type = $('#site_selected_type_name').html();
             var site_name = $('#site_selected_name').val();
             var site_user_id = $('#site_selected_user_id').val();
@@ -661,14 +662,20 @@
                         window.localStorage.setItem('dental_site', result.dental_site);
                         window.localStorage.setItem('vision_site', result.vision_site);
                         window.localStorage.setItem('funds_site', result.funds_site);
-                        window.localStorage.setItem('provider_execution', 'yes');
                         
                         var success_count = 0;
-                        var res = provider_run(site_name.toLowerCase(), username, token);
-                        if (res === true) {
+                        var response = provider_run(site_name.toLowerCase(), username, token);
+                        if (response === true) {
+                            if (typeof provider_execution !== 'undefined' && provider_execution) {
+                                var new_provider_execution = provider_execution + site_name.toLowerCase() + '==';
+                            } else {
+                                var new_provider_execution = site_name.toLowerCase() + '==';
+                            }
+                            window.localStorage.setItem('provider_execution', new_provider_execution);
+                        
                             success_count += 1;
                         }
-                        console.log(success_count);
+                        console.log(new_provider_execution);
 
                         ShowRegSuccess(site_type); 
                     },

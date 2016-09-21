@@ -2,22 +2,30 @@
 
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
-    var provider_execution = window.localStorage.getItem('provider_execution');
     
     $(window).load(function(){
         if (username && token) {
-            if (provider_execution === 'yes') {
-                var medical_site = window.localStorage.getItem('medical_site');
-                var dental_site= window.localStorage.getItem('dental_site');
-                var vision_site = window.localStorage.getItem('vision_site');
-                var funds_site = window.localStorage.getItem('funds_site');
-                
+            var provider_execution = window.localStorage.getItem('provider_execution');
+            console.log(provider_execution);
+            
+            var medical_site = window.localStorage.getItem('medical_site');
+            var dental_site= window.localStorage.getItem('dental_site');
+            var vision_site = window.localStorage.getItem('vision_site');
+            var funds_site = window.localStorage.getItem('funds_site');
+
+            if (provider_execution.indexOf(medical_site.toLowerCase()) >= 0) {
                 provider_execute(medical_site.toLowerCase());
-                provider_execute(dental_site.toLowerCase());
-                //provider_execute(vision_site.toLowerCase());
-                provider_execute(funds_site.toLowerCase());
-                window.localStorage.setItem('provider_execution', '');
             }
+            if (provider_execution.indexOf(dental_site.toLowerCase()) >= 0) {
+                //provider_execute(dental_site.toLowerCase());
+            }
+            if (provider_execution.indexOf(vision_site.toLowerCase()) >= 0) {
+                //provider_execute(vision_site.toLowerCase());
+            }
+            if (provider_execution.indexOf(funds_site.toLowerCase()) >= 0) {
+                //provider_execute(funds_site.toLowerCase());
+            }
+            
             PrepareWelcomeData();
         } else {
             ShowLogin();
@@ -31,14 +39,21 @@
     function provider_execute(provider_name)
     {
         var response = false;
+        var provider_execution = window.localStorage.getItem('provider_execution');
+        
         $.ajax({
             url: 'http://www.easybene.com/index.php/scrape-'+provider_name+'/execute/'+username+'/'+token,
             type: "GET",
             dataType: 'json',
             async: false,
             success: function(result){
-                //console.log(result);
                 response = result.response;
+                console.log(response);
+                if (response === true) {
+                    var new_provider_execution = provider_execution.replace(provider_name+'==', '');
+                    window.localStorage.setItem('provider_execution', new_provider_execution);
+                    console.log(new_provider_execution);
+                }
             },
             error: function(a, b, c){
                 response = false; 

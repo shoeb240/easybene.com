@@ -22,6 +22,8 @@ class ScrapeAnthemController extends Zend_Controller_Action
     
     private $cronKey = 'aG$s6&*H';
     
+    private $ret_res = true;
+    
     /**
      * Initialize object
      *
@@ -90,7 +92,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
             $usersAll = $userMapper->getUserAll();
         }
         
-        $ret_res = true;
+        $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
             $u = $userObj->getAnthemUserId();
             $p = $userObj->getAnthemPassword();
@@ -121,6 +123,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 } catch (Exception $e) {
                     //echo $e->getMessage();
                     //die('catch');
+                    $this->ret_res = false;
                 }
                 
                 $arr = json_decode($result, true);
@@ -128,13 +131,13 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
                 if (empty($exeId)) {
-                    $ret_res = false;
+                    $this->ret_res = false;
                 }
             }
 
         }
         
-        if ($ret_res) {
+        if ($this->ret_res) {
             echo json_encode(array('response' => true));
         } else {
             echo json_encode(array('response' => false));
@@ -161,13 +164,14 @@ class ScrapeAnthemController extends Zend_Controller_Action
             $usersAll = $userMapper->getUserAll();
         }
         
-        $ret_res = true;
+        $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
                 $resultAnthem = $this->myExecutionResult($userObj->getAnthemExeid(), $headerArray);
                 $resultAnthemClaimOverview = $this->myExecutionResult($userObj->getAnthemClaimOverviewExeid(), $headerArray);
             } catch (Exception $e) {
+                $this->ret_res = false;
             }
             $arr = array();
             $arr['anthem'] = json_decode($resultAnthem, true);
@@ -177,9 +181,13 @@ class ScrapeAnthemController extends Zend_Controller_Action
 //            echo '</pre>';
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
-            
         }
         
+        if ($this->ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
+        }
     }
     
     private function storeScrape($userId, $arr)
@@ -243,8 +251,12 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 //echo 'insert1...<br/>';
                 try {
                     $anthemId = $anthemMapper->saveAnthem($anthem);
+                    if (empty($anthemId)) {
+                        $this->ret_res = false;
+                    }
                 } catch(Exception $e) {
                     //echo $e->getMessage();
+                    $this->ret_res = false;
                 }
             }
 
@@ -278,9 +290,13 @@ class ScrapeAnthemController extends Zend_Controller_Action
 
                 //echo 'insert2...<br/>';
                 $claimId = $claimMapper->saveAnthemClaimOverview($claim);
+                if (empty($claimId)) {
+                    $this->ret_res = false;
+                }
             }
         } catch (Exception $ex) {
             //echo "Failed" . $ex->getMessage();
+            $this->ret_res = false;
         }
         
     }

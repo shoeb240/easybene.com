@@ -19,6 +19,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
     
     private $cronKey = 'aG$s6&*H';
     
+    private $ret_res = true;
+    
     /**
      * Initialize object
      *
@@ -101,7 +103,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
             $usersAll = $userMapper->getUserAll();
         }
         
-        $ret_res = true;
+        $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
             $u = $userObj->getGuardianUserId();
             $p = $userObj->getGuardianPassword();
@@ -121,6 +123,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         try {
                             $result = $this->myRunWithInput($data_string, $headerArray, $runId);
                         } catch (Exception $e) {
+                            $this->ret_res = false;
                         }
                         break;
                     case 1:
@@ -150,6 +153,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         } catch (Exception $e) {
                             //echo $e->getMessage();
                             //die('catch');
+                            $this->ret_res = false;
                         }
                         
                         break;
@@ -160,13 +164,13 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
                 if (empty($exeId)) {
-                    $ret_res = false;
+                    $this->ret_res = false;
                 }
             }
             
         }
         
-        if ($ret_res) {
+        if ($this->ret_res) {
             echo json_encode(array('response' => true));
         } else {
             echo json_encode(array('response' => false));
@@ -193,7 +197,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
             $usersAll = $userMapper->getUserAll();
         }
         
-        $ret_res = true;
+        $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
@@ -203,6 +207,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
             } catch (Exception $e) {
                 //echo $e->getMessage() . '<br />';
                 //die('catch');
+                $this->ret_res = false;
             }
             $arr = array();
             $arr['guardian_benefit'] = json_decode($resultGuardianBenefit, true);
@@ -214,6 +219,11 @@ class ScrapeGuardianController extends Zend_Controller_Action
             $this->storeScrape($userObj->getUserId(), $arr);
         }
         
+        if ($this->ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
+        }
     }
     
     private function storeScrape($userId, $arr)
@@ -249,8 +259,12 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 //echo 'insert...<br/>';
                 try {
                     $benefitId = $benefitMapper->saveGuardianBenefit($benefit);
+                    if (empty($benefitId)) {
+                        $this->ret_res = false;
+                    }
                 } catch(Exception $e) {
                     //echo $e->getMessage();
+                    $this->ret_res = false;
                 }
             }
 
@@ -287,9 +301,13 @@ class ScrapeGuardianController extends Zend_Controller_Action
 
                 //echo 'insert...<br/>';
                 $claimId = $claimMapper->saveGuardianClaim($claim);
+                if (empty($claimId)) {
+                    $this->ret_res = false;
+                }
             }
         } catch (Exception $ex) {
             //echo "Failed" . $ex->getMessage();
+            $this->ret_res = false;
         }
         
     }

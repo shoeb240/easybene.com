@@ -19,6 +19,8 @@ class ScrapeCignaController extends Zend_Controller_Action
     
     private $cronKey = 'aG$s6&*H';
     
+    private $ret_res = true;
+    
     /**
      * Initialize object
      *
@@ -88,7 +90,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             $usersAll = $userMapper->getUserAll();
         }
         
-        $ret_res = true;
+        $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
             $data['user_id'] = $userObj->getCignaUserId();
             $data['password'] = $userObj->getCignaPassword();
@@ -118,6 +120,7 @@ class ScrapeCignaController extends Zend_Controller_Action
                 } catch (Exception $e) {
                     //echo $e->getMessage();
                     //die('catch');
+                    $this->ret_res = false;
                 }
                 
                 $arr = json_decode($result, true);
@@ -125,12 +128,12 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $userMapper = new Application_Model_UserMapper();
                 $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
                 if (empty($exeId)) {
-                    $ret_res = false;
+                    $this->ret_res = false;
                 }
             }
         }
         
-        if ($ret_res) {
+        if ($this->ret_res) {
             echo json_encode(array('response' => true));
         } else {
             echo json_encode(array('response' => false));
@@ -158,7 +161,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             $usersAll = $userMapper->getUserAll();
         }
         
-        $ret_res = true;
+        $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
@@ -171,15 +174,20 @@ class ScrapeCignaController extends Zend_Controller_Action
             } catch (Exception $e) {
                 //echo $e->getMessage();
                 //die('catch');
+                $this->ret_res = false;
             }
             /*echo '<pre>';
             print_r($arr);
             echo '</pre>';*/
             //die('here');
             $this->storeScrape($userObj->getUserId(), $arr);
-            
         }
         
+        if ($this->ret_res) {
+            echo json_encode(array('response' => true));
+        } else {
+            echo json_encode(array('response' => false));
+        }        
     }
     
     private function storeScrape($userId, $arr)
@@ -208,6 +216,9 @@ class ScrapeCignaController extends Zend_Controller_Action
 
                 //echo 'insert...<br/>';
                 $deductibleId = $deductibleMapper->saveCignaDeductible($deductible);
+                if (empty($deductibleId)) {
+                    $this->ret_res = false;
+                }
             }
 
 //            echo '<pre>';
@@ -281,6 +292,9 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $claimDetails->setServiceSeeNotes($serviceSeeNotes);
                 
                 $claimDetailsId = $claimDetailsMapper->saveCignaClaimDetails($claimDetails);
+                if (empty($claimDetailsId)) {
+                    $this->ret_res = false;
+                }
                 //echo 'insert...<br/>';
             }
             
@@ -304,10 +318,14 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $medical->setTo($to);
                 
                 $medicalId = $medicalMapper->saveCignaMedical($medical);
+                if (empty($medicalId)) {
+                    $this->ret_res = false;
+                }
                 //echo 'insert...<br/>';
             }
         } catch (Exception $ex) {
             //echo "Failed" . $ex->getMessage();
+            $this->ret_res = false;
         }
         
     }
