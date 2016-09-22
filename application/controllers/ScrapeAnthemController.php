@@ -248,8 +248,8 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $anthem->setOption('CD_claims_benefit_coverage', $claims_benefit_coverage1);
                 $anthem->setOption('CD_claims_benefit_deductible_for', $claims_benefit_deductible_for);
                 
-                if (!empty($anthem->getOption('claims_benefit_coverage')) || !empty($anthem->getOption('BM_plan'))
-                        || !empty($anthem->getOption('BM_member_id'))) {
+                if ($anthem->getOption('claims_benefit_coverage') || $anthem->getOption('BM_plan')
+                        || $anthem->getOption('BM_member_id')) {
                     //echo 'insert1...<br/>';
                     try {
                         $anthemId = $anthemMapper->saveAnthem($anthem);
@@ -276,7 +276,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $total = $eachRow[array_search('total', $arr['anthem_claim_overview']['headers'])];
                 $member_responsibility = $eachRow[array_search('member_responsibility', $arr['anthem_claim_overview']['headers'])];
                 $status = $eachRow[array_search('status', $arr['anthem_claim_overview']['headers'])];
-                $status = $eachRow[array_search('status', $arr['anthem_claim_overview']['headers'])];
+                //$status = $eachRow[array_search('status', $arr['anthem_claim_overview']['headers'])];
                 if (empty($number)) continue;
                 
                 $claim = new Application_Model_AnthemClaimOverview;
@@ -289,9 +289,9 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $claim->setOption('total', $total);
                 $claim->setOption('member_responsibility', $member_responsibility);
                 $claim->setOption('status', $status);
-                $claim->setOption('status', $status);
+                //$claim->setOption('status', $status);
 
-                if (!empty($claim->getOption('number')) || !empty($claim->getOption('for'))) {
+                if ($claim->getOption('number') || $claim->getOption('for')) {
                     //echo 'insert2...<br/>';
                     $claimId = $claimMapper->saveAnthemClaimOverview($claim);
                 }

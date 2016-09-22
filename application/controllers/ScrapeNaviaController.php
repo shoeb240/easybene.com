@@ -237,8 +237,8 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $naviaStatements->setOption('PB_balance', $eachRow[array_search('PB_balance', $arr['navia_statements']['headers'])]);
                 $naviaStatements->setOption('PB_last_day_submit', date("Y-m-d", strtotime($eachRow[array_search('PB_last_day_submit', $arr['navia_statements']['headers'])])));
                 
-                if (!empty($naviaStatements->getOption('DC_from_date')) || !empty($naviaStatements->getOption('DC_to_date'))
-                        || !empty($naviaStatements->getOption('DC_claim'))) {
+                if ($naviaStatements->getOption('DC_from_date') || $naviaStatements->getOption('DC_to_date')
+                        || $naviaStatements->getOption('DC_claim')) {
                     //echo 'insert1...<br/>';
                     try {
                         $naviaId = $naviaMapper->saveNaviaStatements($naviaStatements);
@@ -268,8 +268,8 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $dayCare->setOption('claim_amount', $eachRow[array_search('claim_amount', $arr['navia_day_care']['headers'])]);
                 $dayCare->setOption('amount', $eachRow[array_search('amount', $arr['navia_day_care']['headers'])]);
 
-                if (!empty($dayCare->getOption('claim')) || !empty($dayCare->getOption('annual_election'))
-                        || !empty($dayCare->getOption('reimbursed_to_date'))) {
+                if ($dayCare->getOption('claim') || $dayCare->getOption('annual_election')
+                        || $dayCare->getOption('reimbursed_to_date')) {
                     //echo 'insert2...<br/>';
                     $id = $dayCareMapper->saveNaviaDayCare($dayCare);
                 }
@@ -294,8 +294,8 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $healthCare->setOption('claim_amount', $eachRow[array_search('claim_amount', $arr['navia_health_care']['headers'])]);
                 $healthCare->setOption('amount', $eachRow[array_search('amount', $arr['navia_health_care']['headers'])]);
 
-                if (!empty($healthCare->getOption('balance')) || !empty($healthCare->getOption('annual_election'))
-                        || !empty($healthCare->getOption('reimbursed_to_date'))) {
+                if ($healthCare->getOption('balance') || $healthCare->getOption('annual_election')
+                        || $healthCare->getOption('reimbursed_to_date')) {
                     //echo 'insert3...<br/>';
                     $id = $healthCareMapper->saveNaviaHealthCare($healthCare);
                 }
@@ -325,8 +325,8 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 $healthSavings->setOption('transaction_amt', $eachRow[array_search('transaction_amt', $arr['navia_health_savings']['headers'])]);
                 $healthSavings->setOption('HSA_transaction_type', $eachRow[array_search('HSA_transaction_type', $arr['navia_health_savings']['headers'])]);
 
-                if (!empty($healthSavings->getOption('balance')) || !empty($healthSavings->getOption('portfolio_balance'))
-                        || !empty($healthSavings->getOption('total_balance'))) {
+                if ($healthSavings->getOption('balance') || $healthSavings->getOption('portfolio_balance')
+                        || $healthSavings->getOption('total_balance')) {
                     //echo 'insert4...<br/>';
                     $id = $healthSavingsMapper->saveNaviaHealthSavings($healthSavings);
                 }
