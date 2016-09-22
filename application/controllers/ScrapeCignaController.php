@@ -205,17 +205,19 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $outOfPocketMet = $eachRow[array_search('out_of_pocket_met', $arr['cigna_deductible_claim']['headers'])];
                 $outOfPocketRemaining = $eachRow[array_search('out_of_pocket_remaining', $arr['cigna_deductible_claim']['headers'])];
 
-                $deductible = new Application_Model_CignaDeductible;
-                $deductible->setUserId($userId);
-                $deductible->setDeductibleAmt($deductibleAmt);
-                $deductible->setDeductibleMet($deductibleMet);
-                $deductible->setDeductibleRemaining($deductibleRemaining);
-                $deductible->setOutOfPocketAmt($outOfPocketAmt);
-                $deductible->setOutOfPocketMet($outOfPocketMet);
-                $deductible->setOutOfPocketRemaining($outOfPocketRemaining);
+                if (!empty($deductibleAmt) || !empty($deductibleMet) || !empty($deductibleRemaining)) {
+                    $deductible = new Application_Model_CignaDeductible;
+                    $deductible->setUserId($userId);
+                    $deductible->setDeductibleAmt($deductibleAmt);
+                    $deductible->setDeductibleMet($deductibleMet);
+                    $deductible->setDeductibleRemaining($deductibleRemaining);
+                    $deductible->setOutOfPocketAmt($outOfPocketAmt);
+                    $deductible->setOutOfPocketMet($outOfPocketMet);
+                    $deductible->setOutOfPocketRemaining($outOfPocketRemaining);
 
-                //echo 'insert...<br/>';
-                $deductibleId = $deductibleMapper->saveCignaDeductible($deductible);
+                    //echo 'insert...<br/>';
+                    $deductibleId = $deductibleMapper->saveCignaDeductible($deductible);
+                }
                 if (empty($deductibleId)) {
                     $this->ret_res = false;
                 }
@@ -227,7 +229,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             
             // cingna_claim
             /*$claimMapper = new Application_Model_CignaClaimMapper();
-            $claimMapper->deleteCignaClaim($this->cignaClaimUserAll);
+            $claimMapper->deleteCignaClaim($userId);
             
             foreach($arr['cigna_deductible_claim']['rows'] as $k => $eachRow) {
                 $serviceDate = $eachRow[array_search('service_date', $arr['cigna_deductible_claim']['headers'])];
@@ -275,23 +277,25 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $serviceWhatIOwe = $eachRow[array_search('service_what_i_owe', $arr['cigna_medical_details']['headers'])];
                 $serviceSeeNotes = $eachRow[array_search('service_see_notes', $arr['cigna_medical_details']['headers'])];
 
-                $claimDetails = new Application_Model_CignaClaimDetails;
-                $claimDetails->setUserId($userId);
-                $claimDetails->setClaimNumber($claimNumber);
-                $claimDetails->setProvidedByDetails($providedByDetails);
-                $claimDetails->setFor($for);
-                $claimDetails->setClaimProcessedOn($claimProcessedOn);
-                $claimDetails->setServiceDateType($serviceDateType);
-                $claimDetails->setServiceAmountBilled($serviceAmountBilled);
-                $claimDetails->setServiceDiscount($serviceDiscount);
-                $claimDetails->setServiceCoveredAmount($serviceCoveredAmount);
-                $claimDetails->setServiceCopayDeductible($serviceCopayDeductible);
-                $claimDetails->setServiceWhatYourPlanPaid($serviceWhatYourPlanPaid);
-                $claimDetails->setServiceCoinsurance($serviceCoinsurance);
-                $claimDetails->setServiceWhatIOwe($serviceWhatIOwe);
-                $claimDetails->setServiceSeeNotes($serviceSeeNotes);
-                
-                $claimDetailsId = $claimDetailsMapper->saveCignaClaimDetails($claimDetails);
+                if (!empty($claimNumber) || !empty($for)) {
+                    $claimDetails = new Application_Model_CignaClaimDetails;
+                    $claimDetails->setUserId($userId);
+                    $claimDetails->setClaimNumber($claimNumber);
+                    $claimDetails->setProvidedByDetails($providedByDetails);
+                    $claimDetails->setFor($for);
+                    $claimDetails->setClaimProcessedOn($claimProcessedOn);
+                    $claimDetails->setServiceDateType($serviceDateType);
+                    $claimDetails->setServiceAmountBilled($serviceAmountBilled);
+                    $claimDetails->setServiceDiscount($serviceDiscount);
+                    $claimDetails->setServiceCoveredAmount($serviceCoveredAmount);
+                    $claimDetails->setServiceCopayDeductible($serviceCopayDeductible);
+                    $claimDetails->setServiceWhatYourPlanPaid($serviceWhatYourPlanPaid);
+                    $claimDetails->setServiceCoinsurance($serviceCoinsurance);
+                    $claimDetails->setServiceWhatIOwe($serviceWhatIOwe);
+                    $claimDetails->setServiceSeeNotes($serviceSeeNotes);
+
+                    $claimDetailsId = $claimDetailsMapper->saveCignaClaimDetails($claimDetails);
+                }
                 if (empty($claimDetailsId)) {
                     $this->ret_res = false;
                 }
@@ -300,7 +304,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             
             // cingna_medical - ok
             $medicalMapper = new Application_Model_CignaMedicalMapper();
-            $medicalId = $medicalMapper->deleteCignaMedical($this->cignaClaimDetailsUserAll);
+            $medicalId = $medicalMapper->deleteCignaMedical($userId);
              
             foreach($arr['cigna_medical']['rows'] as $k => $eachRow) {
                 $whosCovered = $eachRow[array_search('whos_covered', $arr['cigna_medical']['headers'])];
@@ -309,15 +313,17 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $coverageFrom = $eachRow[array_search('coverage_from', $arr['cigna_medical']['headers'])];
                 $to = $eachRow[array_search('to', $arr['cigna_medical']['headers'])];
 
-                $medical = new Application_Model_CignaMedical;
-                $medical->setUserId($userId);
-                $medical->setWhosCovered($whosCovered);
-                $medical->setDateOfBirth($dateOfBirth);
-                $medical->setRelationship($relationship);
-                $medical->setCoverageFrom($coverageFrom);
-                $medical->setTo($to);
-                
-                $medicalId = $medicalMapper->saveCignaMedical($medical);
+                if (!empty($whosCovered)) {
+                    $medical = new Application_Model_CignaMedical;
+                    $medical->setUserId($userId);
+                    $medical->setWhosCovered($whosCovered);
+                    $medical->setDateOfBirth($dateOfBirth);
+                    $medical->setRelationship($relationship);
+                    $medical->setCoverageFrom($coverageFrom);
+                    $medical->setTo($to);
+
+                    $medicalId = $medicalMapper->saveCignaMedical($medical);
+                }
                 if (empty($medicalId)) {
                     $this->ret_res = false;
                 }

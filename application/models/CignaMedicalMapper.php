@@ -85,9 +85,9 @@ class Application_Model_CignaMedicalMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteCignaMedical($userArr)
+    public function deleteCignaMedical($userId)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('user_id IN (?)', $userArr);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
         
     }

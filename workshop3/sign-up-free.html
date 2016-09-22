@@ -63,6 +63,7 @@
                     <div class="list-block login-list">
                         <ul>
                             <!-- Text inputs -->
+                            <li><div id="error_after_submit" style="display: none; position: static;" class="inValidText">Email and/or Password did not match</div></li>
                             <li>
                                 <div class="item-content">
                                     <div class="item-media"><i class="icon-envelope"></i></div>
@@ -197,6 +198,7 @@
             }
 
             $('#reg_email').on("change", function () {
+                $("#error_after_submit").css("display", "none");
                 if (!isEmail($(this).val())) {
                     show_error(this);
                 } else {
@@ -278,7 +280,7 @@
                     dataType: 'json',
                     async: false,
                     success: function (result) {
-                        //console.log(result);
+                        console.log(result);
                         //ShowLoginRegSucc();
                         window.localStorage.setItem("username", email);
                         window.localStorage.setItem("token", result.token);
@@ -288,6 +290,9 @@
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         //ShowRegFail(xhr.responseJSON);
+                        console.log(xhr.responseJSON);
+                        $("#error_after_submit").html(xhr.responseJSON);
+                        $("#error_after_submit").css("display", "block");
                     },
                 });
             }

@@ -244,26 +244,28 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $amounts = $eachRow[array_search('amounts', $arr['guardian_benefit']['headers'])];
                 $monthlyCost = $eachRow[array_search('monthly_cost', $arr['guardian_benefit']['headers'])];
 
-                $benefit = new Application_Model_GuardianBenefit;
-                $benefit->setUserId($userId);
-                $benefit->setGroupId ($groupId);
-                $benefit->setCompanyName($companyName);
-                $benefit->setMemberName($memberName);
-                $benefit->setName($name);
-                $benefit->setRelationship($relationship);
-                $benefit->setCoverage($coverage);
-                $benefit->setOriginalEffectiveDate($originalEffectiveDate);
-                $benefit->setAmounts($amounts);
-                $benefit->setMonthlyCost($monthlyCost);
+                if (!empty($companyName) || !empty($memberName) || !empty($name)) {
+                    $benefit = new Application_Model_GuardianBenefit;
+                    $benefit->setUserId($userId);
+                    $benefit->setGroupId ($groupId);
+                    $benefit->setCompanyName($companyName);
+                    $benefit->setMemberName($memberName);
+                    $benefit->setName($name);
+                    $benefit->setRelationship($relationship);
+                    $benefit->setCoverage($coverage);
+                    $benefit->setOriginalEffectiveDate($originalEffectiveDate);
+                    $benefit->setAmounts($amounts);
+                    $benefit->setMonthlyCost($monthlyCost);
 
-                //echo 'insert...<br/>';
-                try {
-                    $benefitId = $benefitMapper->saveGuardianBenefit($benefit);
-                    if (empty($benefitId)) {
+                    //echo 'insert...<br/>';
+                    try {
+                        $benefitId = $benefitMapper->saveGuardianBenefit($benefit);
+                    } catch(Exception $e) {
+                        //echo $e->getMessage();
                         $this->ret_res = false;
                     }
-                } catch(Exception $e) {
-                    //echo $e->getMessage();
+                }
+                if (empty($benefitId)) {
                     $this->ret_res = false;
                 }
             }
@@ -285,22 +287,24 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 $submittedCharges = $eachRow[array_search('submitted_charges', $arr['guardian_claim']['headers'])];
                 $amountPaid = $eachRow[array_search('amount_paid', $arr['guardian_claim']['headers'])];
 
-                $claim = new Application_Model_GuardianClaim;
-                $claim->setUserId($userId);
-                $claim->setPatient($patient);
-                $claim->setCoverageType($coverageType);
-                $claim->setClaimNumber($claimNumber);
-                $claim->setPatientName($patientName);
-                $claim->setDateOfService($dateOfService);
-                $claim->setPaidDate($paidDate);
-                $claim->setCheckNumber($checkNumber);
-                $claim->setProviderNumber($providerNumber);
-                $claim->setStatus($status);
-                $claim->setSubmittedCharges($submittedCharges);
-                $claim->setAmountPaid($amountPaid);
+                if (!empty($claimNumber) || !empty($patientName)) {
+                    $claim = new Application_Model_GuardianClaim;
+                    $claim->setUserId($userId);
+                    $claim->setPatient($patient);
+                    $claim->setCoverageType($coverageType);
+                    $claim->setClaimNumber($claimNumber);
+                    $claim->setPatientName($patientName);
+                    $claim->setDateOfService($dateOfService);
+                    $claim->setPaidDate($paidDate);
+                    $claim->setCheckNumber($checkNumber);
+                    $claim->setProviderNumber($providerNumber);
+                    $claim->setStatus($status);
+                    $claim->setSubmittedCharges($submittedCharges);
+                    $claim->setAmountPaid($amountPaid);
 
-                //echo 'insert...<br/>';
-                $claimId = $claimMapper->saveGuardianClaim($claim);
+                    //echo 'insert...<br/>';
+                    $claimId = $claimMapper->saveGuardianClaim($claim);
+                }
                 if (empty($claimId)) {
                     $this->ret_res = false;
                 }

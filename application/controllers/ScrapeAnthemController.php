@@ -248,14 +248,17 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $anthem->setOption('CD_claims_benefit_coverage', $claims_benefit_coverage1);
                 $anthem->setOption('CD_claims_benefit_deductible_for', $claims_benefit_deductible_for);
                 
-                //echo 'insert1...<br/>';
-                try {
-                    $anthemId = $anthemMapper->saveAnthem($anthem);
-                    if (empty($anthemId)) {
+                if (!empty($anthem->getOption('claims_benefit_coverage')) || !empty($anthem->getOption('BM_plan'))
+                        || !empty($anthem->getOption('BM_member_id'))) {
+                    //echo 'insert1...<br/>';
+                    try {
+                        $anthemId = $anthemMapper->saveAnthem($anthem);
+                    } catch(Exception $e) {
+                        //echo $e->getMessage();
                         $this->ret_res = false;
                     }
-                } catch(Exception $e) {
-                    //echo $e->getMessage();
+                }
+                if (empty($anthemId)) {
                     $this->ret_res = false;
                 }
             }
@@ -288,8 +291,10 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 $claim->setOption('status', $status);
                 $claim->setOption('status', $status);
 
-                //echo 'insert2...<br/>';
-                $claimId = $claimMapper->saveAnthemClaimOverview($claim);
+                if (!empty($claim->getOption('number')) || !empty($claim->getOption('for'))) {
+                    //echo 'insert2...<br/>';
+                    $claimId = $claimMapper->saveAnthemClaimOverview($claim);
+                }
                 if (empty($claimId)) {
                     $this->ret_res = false;
                 }

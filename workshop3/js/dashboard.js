@@ -17,13 +17,13 @@
                 provider_execute(medical_site.toLowerCase());
             }
             if (provider_execution.indexOf(dental_site.toLowerCase()) >= 0) {
-                //provider_execute(dental_site.toLowerCase());
+                provider_execute(dental_site.toLowerCase());
             }
             if (provider_execution.indexOf(vision_site.toLowerCase()) >= 0) {
-                //provider_execute(vision_site.toLowerCase());
+                provider_execute(vision_site.toLowerCase());
             }
             if (provider_execution.indexOf(funds_site.toLowerCase()) >= 0) {
-                //provider_execute(funds_site.toLowerCase());
+                provider_execute(funds_site.toLowerCase());
             }
             
             PrepareWelcomeData();
@@ -129,6 +129,8 @@
             } else {
                 $(graph_id).parent().children("p.status-text").html("Provider Pending");
                 $(graph_id).parent().addClass("orange-graph");
+                $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
+                $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
                 fontColor = "#f8c572";
                 foregroundColor = "#f8c572";
                 percent = 0;
