@@ -155,6 +155,16 @@
                                 <div>
                                     <!--<div class="col-md-12 text-center"  style="float:left;">-->
                                     <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_medical" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
                                         <ul>
                                             <li>Medical Provider</li>
                                             <li>
@@ -242,6 +252,16 @@
                                 <div>
                                     <!--<div class="col-md-12 text-center"  style="float:left;">-->
                                     <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_dental" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
                                         <ul>
                                             <li>Dental Provider</li>
                                             <li>
@@ -330,6 +350,16 @@
                                 <div>
                                     <!--<div class="col-md-12 text-center"  style="float:left;">-->
                                     <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_vision" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
                                         <ul>
                                             <li>Vision Provider</li>
                                             <li>
@@ -420,6 +450,16 @@
                                 <div>
                                     <!--<div class="col-md-12 text-center"  style="float:left;">-->
                                     <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_funds" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
                                         <ul>
                                             <li>Funds Provider</li>
                                             <li>
@@ -925,6 +965,8 @@
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
             var provider_execution = window.localStorage.getItem('provider_execution');
+            
+            $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'block');
 
             $.ajax({
                 url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
@@ -953,14 +995,16 @@
                         }
                         console.log(new_provider_execution);
                         
+                        $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'none');
                         $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
-
+                        
                         GetUserData();
                     },
                 error: function(xhr, ajaxOptions, thrownError) {
                         //console.log(xhr);
                         //console.log(ajaxOptions);
                         //console.log(thrownError);
+                        $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'none');
                         $("#" + site_type.toLowerCase() + "_error").css('display', 'block');
                     },
             });

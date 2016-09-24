@@ -292,7 +292,16 @@
                                     <br />
                                     <img id="site_selected_type_image" style="width: 100px;" src="" />
                                 </p>
-
+                                <div id="floatingBarsG" style="display: none;">
+                                    <div class="blockG" id="rotateG_01"></div>
+                                    <div class="blockG" id="rotateG_02"></div>
+                                    <div class="blockG" id="rotateG_03"></div>
+                                    <div class="blockG" id="rotateG_04"></div>
+                                    <div class="blockG" id="rotateG_05"></div>
+                                    <div class="blockG" id="rotateG_06"></div>
+                                    <div class="blockG" id="rotateG_07"></div>
+                                    <div class="blockG" id="rotateG_08"></div>
+                                </div>
                                 <div id="reg_fields_div" style="display: none;" class="list-block login-list">
                                     <ul>
                                         <li><div id="reg_fail_div" style="display: none; position: static; width: 100%;" class="inValidText">Provider Registration Failed</div></li>
@@ -650,6 +659,8 @@
             var site_user_id = $('#site_selected_user_id').val();
             var site_password = $('#site_selected_password').val();
             
+            $("#floatingBarsG").css('display', 'block');
+            
             $.ajax({
                 url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "POST",
@@ -687,6 +698,8 @@
                         ShowRegFail();
                     },
             });
+            
+            $("#floatingBarsG").css('display', 'none');
         }
         </script>
     </body>

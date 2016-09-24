@@ -41,6 +41,10 @@
         var response = false;
         var provider_execution = window.localStorage.getItem('provider_execution');
         
+        $(".medical-grap").css('display', 'none');
+        $(".after-login-screen").css('display', 'block');
+        $("#bz_text").html('Linking your providers, this may take a minute or two.');
+        
         $.ajax({
             url: 'http://www.easybene.com/index.php/scrape-'+provider_name+'/execute/'+username+'/'+token,
             type: "GET",
@@ -60,10 +64,18 @@
             }
         });
 
+        $(".medical-grap").css('display', 'block');
+        $(".after-login-screen").css('display', 'none');
+        
         return response;
     }
         
     function PrepareWelcomeData() {
+        
+        $(".medical-grap").css('display', 'none');
+        $(".after-login-screen").css('display', 'block');
+        $("#bz_text").html('Loading your dashboard information, this may take few seconds.');
+
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
         var medical_site = window.localStorage.getItem('medical_site');
@@ -103,6 +115,10 @@
                     //console.log(thrownError);
             },
         });
+        
+        $(".medical-grap").css('display', 'block');
+        $(".after-login-screen").css('display', 'none');
+
     }
     
     function graph(percent, deductible_met, site, site_type, deductible)
