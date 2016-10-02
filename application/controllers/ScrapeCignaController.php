@@ -312,6 +312,7 @@ class ScrapeCignaController extends Zend_Controller_Action
                 $relationship = $eachRow[array_search('relationship', $arr['cigna_medical']['headers'])];
                 $coverageFrom = $eachRow[array_search('coverage_from', $arr['cigna_medical']['headers'])];
                 $to = $eachRow[array_search('to', $arr['cigna_medical']['headers'])];
+                $primaryCarePhysician = $eachRow[array_search('primary_care_physician', $arr['cigna_medical']['headers'])];
 
                 if (!empty($whosCovered)) {
                     $medical = new Application_Model_CignaMedical;
@@ -321,6 +322,7 @@ class ScrapeCignaController extends Zend_Controller_Action
                     $medical->setRelationship($relationship);
                     $medical->setCoverageFrom($coverageFrom);
                     $medical->setTo($to);
+                    $medical->setPrimaryCarePhysician($primaryCarePhysician);
 
                     $medicalId = $medicalMapper->saveCignaMedical($medical);
                 }

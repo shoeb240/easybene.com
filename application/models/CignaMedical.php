@@ -17,6 +17,7 @@ class Application_Model_CignaMedical
     protected $_relationship;
     protected $_coverage_from;
     protected $_to;
+    protected $_primary_care_physician;
     
     public function __construct($options = null)
     {
@@ -103,5 +104,15 @@ class Application_Model_CignaMedical
     public function getTo()
     {
         return $this->_to;
+    }
+    
+    public function setPrimaryCarePhysician($primary_care_physician)
+    {
+        $this->_primary_care_physician = $primary_care_physician;
+    }
+
+    public function getPrimaryCarePhysician()
+    {
+        return $this->_primary_care_physician;
     }
 }

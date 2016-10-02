@@ -51,6 +51,7 @@ class Application_Model_CignaMedicalMapper
             $medical['relationship'] = $row->relationship;
             $medical['coverage_from'] = $row->coverage_from;
             $medical['to'] = $row->to;
+            $medical['primary_care_physician'] = $row->primary_care_physician;
             
             $info[] = $medical;
         }
@@ -72,7 +73,8 @@ class Application_Model_CignaMedicalMapper
             'date_of_birth' => $medical->getDateOfBirth(),
             'relationship' => $medical->getRelationship(),
             'coverage_from' =>$medical->getCoverageFrom(),
-            'to' => $medical->getTo()
+            'to' => $medical->getTo(),
+            'primary_care_physician' => mysql_escape_string($medical->getPrimaryCarePhysician()),
         );
         
         return $this->getTable()->insert($data);
