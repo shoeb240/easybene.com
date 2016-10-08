@@ -222,9 +222,6 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
                 $resultGuardianBenefit = $this->myExecutionResult($userObj['guardian_benefit_exeid']->exe_id, $headerArray);
                 $resultGuardianClaim = $this->myExecutionResult($userObj['guardian_claim_exeid']->exe_id, $headerArray);
-                echo '<pre>';
-                print_r($resultGuardianClaim);
-                echo '</pre>';
             } catch (Exception $e) {
                 //echo $e->getMessage() . '<br />';
                 //die('catch');
