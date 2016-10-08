@@ -31,8 +31,10 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
         try{
             $userId = $this->_getParam('user_id', null);
             
-            $userMapper = new Application_Model_UserMapper();
-            $userInfo = $userMapper->getUserArrForClient($userId);
+            //$userMapper = new Application_Model_UserMapper();
+            //$userInfo = $userMapper->getUserArrForClient($userId);
+            $userProviderMapper = new Application_Model_UserProviderMapper();
+            $userInfo = $userProviderMapper->getUserProviderArrForClient($userId);
             
             $arr = array();
             $result['medical_percent'] = '';
@@ -44,7 +46,7 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             $result['vision_percent'] = '';
             $result['vision_deductible'] = '';
             $result['vision_deductible_met'] = '';
-            if ($userInfo['medical_site'] == 'Cigna') {
+            if ($userInfo['medical']->provider_name == 'cigna') {
                 
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
                 $cignaDeductible = $deductibleMapper->getCignaDeductible($userId);
@@ -53,9 +55,9 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['medical_deductible_met'] = str_replace(array('$', ','), '', $cignaDeductible['deductible_met']);
                 $result['medical_percent'] = round($result['medical_deductible_met'] / $result['medical_deductible'] * 100);
                 
-            } else if ($userInfo['medical_site'] == 'Guardian') {
+            } else if ($userInfo['medical']->provider_name == 'guardian') {
                 
-            } else if ($userInfo['medical_site'] == 'Anthem') {
+            } else if ($userInfo['medical']->provider_name == 'anthem') {
                 
                 // cingna_medical
                 $medicalMapper = new Application_Model_AnthemMapper();

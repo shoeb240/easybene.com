@@ -10,10 +10,10 @@
     
     function topTabLinks()
     {
-        medical_site = window.localStorage.getItem('medical_site').toLowerCase();
-        dental_site= window.localStorage.getItem('dental_site').toLowerCase();
-        vision_site = window.localStorage.getItem('vision_site').toLowerCase();
-        funds_site = window.localStorage.getItem('funds_site').toLowerCase();
+        medical_site = window.localStorage.getItem('medical_site');
+        dental_site= window.localStorage.getItem('dental_site');
+        vision_site = window.localStorage.getItem('vision_site');
+        funds_site = window.localStorage.getItem('funds_site');
 
         if (medical_site && medical_site != 'null' && medical_site != 'undefined') {
             $("#top_tab_link_medical, #medical_bottom_link").on("click", function() {

@@ -29,6 +29,26 @@ class Application_Model_ProviderListMapper
         return $this->_dbTable;
     }
     
+    public function getProviderByNameType($providerName, $providerType)
+    {
+        $select = $this->getTable()->select();
+        $select->from('provider_list', array('*'))
+               ->where('provider_type = ?', $providerType)
+               ->where('name = ?', $providerName);
+        $row = $this->getTable()->fetchRow($select);
+        
+        return $row;
+    }
+    
+    public function getProvider($providerId)
+    {
+        $select = $this->getTable()->select();
+        $select->from('provider_list', array('*'))
+               ->where('id = ?', $providerId);
+        $row = $this->getTable()->fetchRow($select);
+        
+        return $row;
+    }
     
     /**
      * Get username by userId
@@ -50,14 +70,15 @@ class Application_Model_ProviderListMapper
             $provider['id'] = $row->id;
             $provider['provider_type'] = $row->provider_type;
             $provider['label'] = $row->label;
-            $provider['name'] = $row->name;
+            $provider['name'] = $row->name; //str_replace(array(',', '&', '-', ' '), array('', '', '_', '_'), $row->name);
+            $provider['description'] = $row->description;
             $provider['url'] = $row->url;
             $provider['image'] = $row->image;
             $provider['status'] = $row->status;
             
-            $info[] = $provider;
+            $info[$row->provider_type][] = $provider;
         }
-        
+
         return $info;
     }
 
@@ -74,6 +95,7 @@ class Application_Model_ProviderListMapper
             'provider_type' => $providerList->getOption('provider_type'),
             'label' => $providerList->getOption('label'),
             'name' => $providerList->getOption('name'),
+            'description' => trim($providerList->getOption('description')),
             'url' => trim($providerList->getOption('url')),
             'image' => trim($providerList->getOption('image')),
             'status' => trim($providerList->getOption('status')),

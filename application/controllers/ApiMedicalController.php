@@ -32,10 +32,12 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
             $userId = $this->_getParam('user_id', null);
             $arr = array();
             
-            $userMapper = new Application_Model_UserMapper();
-            $userInfo = $userMapper->getUserArrForClient($userId);
-            
-            if ($userInfo['medical_site'] == 'Cigna') {
+            //$userMapper = new Application_Model_UserMapper();
+            //$userInfo = $userMapper->getUserArrForClient($userId);
+            $userProviderMapper = new Application_Model_UserProviderMapper();
+            $userInfo = $userProviderMapper->getUserProviderArrForClient($userId);
+
+            if ($userInfo['medical']->provider_name == 'cigna') {
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
                 $deductible = $deductibleMapper->getCignaDeductible($userId);
 
@@ -60,7 +62,7 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $arr['medical_summary'] = $medicalMapper->getCignaMedical($userId);
             }
             
-            if ($userInfo['medical_site'] == 'Guardian') {
+            if ($userInfo['medical']->provider_name == 'guardian') {
                 $arr['deductible_amt'] = '';
                 $arr['deductible_met'] = '';
                 $arr['deductible_percent'] = '';
@@ -73,7 +75,7 @@ class ApiMedicalController extends My_Controller_ApiAbstract //Zend_Controller_A
                 
             }
             
-            if ($userInfo['medical_site'] == 'Anthem') {
+            if ($userInfo['medical']->provider_name == 'anthem') {
                 // cingna_claim_details
                 $claimDetailsMapper = new Application_Model_AnthemClaimOverviewMapper();
                 $arr['claim_details'] = $claimDetailsMapper->getAnthemClaim($userId);

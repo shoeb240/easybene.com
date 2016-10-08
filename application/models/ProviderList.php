@@ -14,6 +14,7 @@ class Application_Model_ProviderList
     public $_provider_type;
     public $_label;
     public $_name;
+    public $_description;
     public $_url;
     public $_image;
     public $_status;

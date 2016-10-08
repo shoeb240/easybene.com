@@ -1,4 +1,5 @@
 <?php
+error_reporting(9);
 /**
  * All account management actions
  * 
@@ -80,20 +81,27 @@ class ScrapeCignaController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        $userProviderMapper = new Application_Model_UserProviderMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $providerId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userId) && is_numeric($providerId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderMapper->getUserProvider($providerId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderMapper->getAllUserProviders('cigna', 'medical');
         }
         
         $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            $data['user_id'] = $userObj->getCignaUserId();
-            $data['password'] = $userObj->getCignaPassword();
+            $data['user_id'] = $userObj->provider_user_id;
+            $data['password'] = $userObj->provider_password;
+            $userProviderTableId = $userObj->id;
             if (empty($data['user_id']) || empty($data['password'])) continue;
             
             for($i = 0; $i < 3; $i++) {
@@ -125,8 +133,10 @@ class ScrapeCignaController extends Zend_Controller_Action
                 
                 $arr = json_decode($result, true);
                 $exeId = $arr['_id'];
-                $userMapper = new Application_Model_UserMapper();
-                $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                
+                $userProviderExeMapper->updateSiteCredentials($userProviderTableId, $exeFieldName, $exeId);
+                //echo $userObj->provider_user_id.', '.$exeId.', '.$exeFieldName.'==';
+                
                 if (empty($exeId)) {
                     $this->ret_res = false;
                 }
@@ -151,25 +161,31 @@ class ScrapeCignaController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
        
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        //$userProviderMapper = new Application_Model_UserProviderMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $userProviderTableId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userProviderTableId) && is_numeric($userId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderExeMapper->getAllUserProvidersExe('cigna', 'medical');
         }
         
         $this->ret_res = true;
-        foreach($usersAll as $k => $userObj) {
+        foreach($usersAll as $userId => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
-                $resultCignaMedical = $this->myExecutionResult($userObj->getCignaMedicalExeid(), $headerArray);
+                $resultCignaMedical = $this->myExecutionResult($userObj['cigna_medical_exeid']->exe_id, $headerArray);
                 $arr['cigna_medical'] = json_decode($resultCignaMedical, true);
-                $resultCignaMedicalDeductibleClaim = $this->myExecutionResult($userObj->getCignaDeductibleClaimExeid(), $headerArray);
+                $resultCignaMedicalDeductibleClaim = $this->myExecutionResult($userObj['cigna_deductible_claim_exeid']->exe_id, $headerArray);
                 $arr['cigna_deductible_claim'] = json_decode($resultCignaMedicalDeductibleClaim, true);
-                $resultCignaMedicalDetails = $this->myExecutionResult($userObj->getCignaClaimDetailsExeid(), $headerArray);
+                $resultCignaMedicalDetails = $this->myExecutionResult($userObj['cigna_claim_details_exeid']->exe_id, $headerArray);
                 $arr['cigna_medical_details'] = json_decode($resultCignaMedicalDetails, true);
             } catch (Exception $e) {
                 //echo $e->getMessage();
@@ -180,7 +196,7 @@ class ScrapeCignaController extends Zend_Controller_Action
             print_r($arr);
             echo '</pre>';*/
             //die('here');
-            $this->storeScrape($userObj->getUserId(), $arr);
+            $this->storeScrape($userId, $arr);
         }
         
         if ($this->ret_res) {

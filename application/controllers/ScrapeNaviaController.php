@@ -1,4 +1,5 @@
 <?php
+error_reporting(9);
 /**
  * All account management actions
  * 
@@ -9,8 +10,6 @@
  * @uses       Zend_Controller_Action
  * @version    1.0
  */
-
-error_reporting(9);
 
 class ScrapeNaviaController extends Zend_Controller_Action
 {
@@ -83,46 +82,54 @@ class ScrapeNaviaController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        //$userId = $this->_getParam('user_id', null);
+        $userProviderMapper = new Application_Model_UserProviderMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $providerId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userId) && is_numeric($providerId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderMapper->getUserProvider($providerId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderMapper->getAllUserProviders('navia', 'funds');
         }
         
         $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            $u = $userObj->getNaviaUserId();
-            $p = $userObj->getNaviaPassword();
-            if (empty($u) || empty($p)) continue;
+            $data['user_id'] = $userObj->provider_user_id;
+            $data['password'] = $userObj->provider_password;
+            $userProviderTableId = $userObj->id;
+            if (empty($data['user_id']) || empty($data['password'])) continue;
             
             for($i = 0; $i < 4; $i++) {
                 $data = array();
                 switch($i) {
                     case 0:
-                        $data['user_id'] = $userObj->getNaviaUserId();
-                        $data['password'] = $userObj->getNaviaPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $runId = '32de3a3e-76f9-45e8-a37d-4ff66132f667';
                         $exeFieldName = 'navia_statements_exeid';
                         break;
                     case 1:
-                        $data['user_id'] = $userObj->getNaviaUserId();
-                        $data['password'] = $userObj->getNaviaPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $runId = 'cff9b254-a1a3-4861-97dd-5eff1000582f';
                         $exeFieldName = 'navia_day_care_exeid';
                         break;
                     case 2:
-                        $data['user_id'] = $userObj->getNaviaUserId();
-                        $data['password'] = $userObj->getNaviaPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $runId = 'b846427f-a72a-45a8-966e-990e42678bf2';
                         $exeFieldName = 'navia_health_care_exeid';
                         break;
                     case 3:
-                        $data['user_id'] = $userObj->getNaviaUserId();
-                        $data['password'] = $userObj->getNaviaPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $runId = 'e51b26e3-6aa6-44f9-b6e3-8143d02a2f98';
                         $exeFieldName = 'navia_health_savings_exeid';
                         break;
@@ -139,8 +146,10 @@ class ScrapeNaviaController extends Zend_Controller_Action
                 
                 $arr = json_decode($result, true);
                 $exeId = $arr['_id'];
-                $userMapper = new Application_Model_UserMapper();
-                $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                
+                $userProviderExeMapper->updateSiteCredentials($userProviderTableId, $exeFieldName, $exeId);
+                //echo $userObj->provider_user_id.', '.$exeId.', '.$exeFieldName.'==';
+                
                 if (empty($exeId)) {
                     $this->ret_res = false;
                 }
@@ -164,24 +173,29 @@ class ScrapeNaviaController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
        
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $userProviderTableId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userProviderTableId) && is_numeric($userId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderExeMapper->getAllUserProvidersExe('navia', 'funds');
         }
         
         $this->ret_res = true;
-        foreach($usersAll as $k => $userObj) {
+        foreach($usersAll as $userId => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
-                $resultNaviaStatements = $this->myExecutionResult($userObj->getNaviaStatementsExeid(), $headerArray);
-                $resultNaviaDayCare = $this->myExecutionResult($userObj->getNaviaDayCareExeid(), $headerArray);
-                $resultNaviaHealthCare = $this->myExecutionResult($userObj->getNaviaHealthCareExeid(), $headerArray);
-                $resultNaviaHealthSavings = $this->myExecutionResult($userObj->getNaviaHealthSavingsExeid(), $headerArray);
+                $resultNaviaStatements = $this->myExecutionResult($userObj['navia_statements_exeid']->exe_id, $headerArray);
+                $resultNaviaDayCare = $this->myExecutionResult($userObj['navia_day_care_exeid']->exe_id, $headerArray);
+                $resultNaviaHealthCare = $this->myExecutionResult($userObj['navia_health_care_exeid']->exe_id, $headerArray);
+                $resultNaviaHealthSavings = $this->myExecutionResult($userObj['navia_health_savings_exeid']->exe_id, $headerArray);
             } catch (Exception $e) {
                 //echo $e->getMessage();
                 //die('catch');
@@ -196,7 +210,7 @@ class ScrapeNaviaController extends Zend_Controller_Action
             print_r($arr);
             echo '</pre>';*/
             //die('here');
-            $this->storeScrape($userObj->getUserId(), $arr);
+            $this->storeScrape($userId, $arr);
         }
         
         if ($this->ret_res) {

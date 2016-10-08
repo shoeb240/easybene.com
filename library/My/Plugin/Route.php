@@ -36,7 +36,7 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
         $router->addRoute('indexApiFunds', $route);
         
         
-        $route = new Zend_Controller_Router_Route('scrape-cigna/:action/:username/:token',
+        $route = new Zend_Controller_Router_Route('scrape-cigna/:action/:username/:token/:id',
                                                   array('controller' => 'scrape-cigna',
                                                         'action' => 'execute'));
         $router->addRoute('indexCignaScrape', $route);
@@ -46,7 +46,7 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
         $router->addRoute('indexCignaScrapeCron', $route);
         
         
-        $route = new Zend_Controller_Router_Route('scrape-guardian/:action/:username/:token',
+        $route = new Zend_Controller_Router_Route('scrape-guardian/:action/:username/:token/:id',
                                                   array('controller' => 'scrape-guardian',
                                                         'action' => 'execute'));
         $router->addRoute('indexGuardianScrape', $route);
@@ -56,7 +56,7 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
         $router->addRoute('indexGuardianScrapeCron', $route);
         
         
-        $route = new Zend_Controller_Router_Route('scrape-anthem/:action/:username/:token',
+        $route = new Zend_Controller_Router_Route('scrape-anthem/:action/:username/:token/:id',
                                                   array('controller' => 'scrape-anthem',
                                                         'action' => 'execute'));
         $router->addRoute('indexAnthemScrape', $route);
@@ -66,7 +66,7 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
         $router->addRoute('indexAnthemScrapeCron', $route);
         
         
-        $route = new Zend_Controller_Router_Route('scrape-navia/:action/:username/:token',
+        $route = new Zend_Controller_Router_Route('scrape-navia/:action/:username/:token/:id',
                                                   array('controller' => 'scrape-navia',
                                                         'action' => 'execute'));
         $router->addRoute('indexNaviaScrape', $route);

@@ -90,9 +90,9 @@ class Application_Model_GuardianClaimMapper
             'submitted_charges' => trim($claim->getSubmittedCharges()),
             'amount_paid' => trim($claim->getAmountPaid()),
         );
-//        echo '<pre>';
-//        print_r($data);
-//        echo '<pre>';
+        echo '<pre>';
+        print_r($data);
+        echo '<pre>';
         
         return $this->getTable()->insert($data);
     }

@@ -13,17 +13,30 @@
             var vision_site = window.localStorage.getItem('vision_site');
             var funds_site = window.localStorage.getItem('funds_site');
 
-            if (provider_execution.indexOf(medical_site.toLowerCase()) >= 0) {
-                provider_execute(medical_site.toLowerCase());
+            var user_data = '';
+            if (medical_site && provider_execution.indexOf(medical_site.toLowerCase()) >= 0) {
+                if (!user_data) {
+                    user_data = GetUserData();
+                }
+                provider_execute(medical_site.toLowerCase(), 'medical', user_data);
             }
-            if (provider_execution.indexOf(dental_site.toLowerCase()) >= 0) {
-                provider_execute(dental_site.toLowerCase());
+            if (dental_site && provider_execution.indexOf(dental_site.toLowerCase()) >= 0) {
+                if (!user_data) {
+                    user_data = GetUserData();
+                }
+                provider_execute(dental_site.toLowerCase(), 'dental', user_data);
             }
-            if (provider_execution.indexOf(vision_site.toLowerCase()) >= 0) {
-                provider_execute(vision_site.toLowerCase());
+            if (vision_site && provider_execution.indexOf(vision_site.toLowerCase()) >= 0) {
+                if (!user_data) {
+                    user_data = GetUserData();
+                }
+                provider_execute(vision_site.toLowerCase(), 'vision', user_data);
             }
-            if (provider_execution.indexOf(funds_site.toLowerCase()) >= 0) {
-                provider_execute(funds_site.toLowerCase());
+            if (funds_site && provider_execution.indexOf(funds_site.toLowerCase()) >= 0) {
+                if (!user_data) {
+                    user_data = GetUserData();
+                }
+                provider_execute(funds_site.toLowerCase(), 'funds', user_data);
             }
             
             PrepareWelcomeData();
@@ -32,11 +45,36 @@
         }
     });
 
+    function GetUserData() {
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+        var result_data = '';
+
+        $.ajax({
+            url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                    console.log(result);
+                    result_data = result;
+                },
+            error: function(xhr, ajaxOptions, thrownError) {
+                    //console.log(xhr);
+                    //console.log(ajaxOptions);
+                    //console.log(thrownError);
+                    ShowSitelRegFail();
+                },
+        });
+        
+        return result_data;
+    }
+        
     function ShowLogin() {
         location.href = 'index.html';
     }
     
-    function provider_execute(provider_name)
+    function provider_execute(provider_name, provider_type, user_data)
     {
         var response = false;
         var provider_execution = window.localStorage.getItem('provider_execution');
@@ -46,7 +84,7 @@
         $("#bz_text").html('Linking your providers, this may take a minute or two.');
         
         $.ajax({
-            url: 'http://www.easybene.com/index.php/scrape-'+provider_name+'/execute/'+username+'/'+token,
+            url: 'http://www.easybene.com/index.php/'+user_data.providersSelected[provider_type]['scrapper_script_path']+'/execute/'+username+'/'+token+'/'+user_data.providersSelected[provider_type]['id'],
             type: "GET",
             dataType: 'json',
             async: false,
@@ -123,7 +161,6 @@
     
     function graph(percent, deductible_met, site, site_type, deductible)
     {
-        var site_lower = site.toLowerCase();
         var graph_id = "#"+site_type+"-circle";
         var image_id = "#"+site_type+"_image";
         var fontColor = "#14efef";
@@ -136,6 +173,7 @@
             foregroundColor = "#f8c572";
             percent = 0;
         } else {
+            var site_lower = site.toLowerCase();
             var image_name = site_lower + "_logo.jpg";
             if (percent > 0) {
                 $(graph_id).parent().children("p.status-text").html("Deductible <span>$" + deductible + "</span><br />Total Spent <span>$" + deductible_met + "</span>");

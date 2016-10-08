@@ -1,4 +1,5 @@
 <?php
+error_reporting(9);
 /**
  * All account management actions
  * 
@@ -82,36 +83,44 @@ class ScrapeAnthemController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        //$userId = $this->_getParam('user_id', null);
+        $userProviderMapper = new Application_Model_UserProviderMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $providerId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userId) && is_numeric($providerId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderMapper->getUserProvider($providerId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderMapper->getAllUserProviders('anthem', 'medical');
         }
         
         $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            $u = $userObj->getAnthemUserId();
-            $p = $userObj->getAnthemPassword();
-            if (empty($u) || empty($p)) continue;
+            $data['user_id'] = $userObj->provider_user_id;
+            $data['password'] = $userObj->provider_password;
+            $userProviderTableId = $userObj->id;
+            if (empty($data['user_id']) || empty($data['password'])) continue;
             
             for($i = 0; $i < 2; $i++) {
                 $data = array();
                 switch($i) {
                     case 0:
-                        $data['user_id'] = $userObj->getAnthemUserId();
-                        $data['password'] = $userObj->getAnthemPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $data['claims_benefit_coverage'] = '2016-01-01_0001-01-01';
                         $data['claims_deductible_for'] = 10;
                         $runId = 'c6e8ec2a-466e-4a72-a269-c6586a3c25c6';
                         $exeFieldName = 'anthem_exeid';
                         break;
                     case 1:
-                        $data['user_id'] = $userObj->getAnthemUserId();
-                        $data['password'] = $userObj->getAnthemPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $runId = 'b34f0574-bb01-44bf-9adb-8ca5ea962610';
                         $exeFieldName = 'anthem_claim_overview_exeid';
                         break;
@@ -128,8 +137,10 @@ class ScrapeAnthemController extends Zend_Controller_Action
                 
                 $arr = json_decode($result, true);
                 $exeId = $arr['_id'];
-                $userMapper = new Application_Model_UserMapper();
-                $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                
+                $userProviderExeMapper->updateSiteCredentials($userProviderTableId, $exeFieldName, $exeId);
+                //echo $userObj->provider_user_id.', '.$exeId.', '.$exeFieldName.'==';
+                
                 if (empty($exeId)) {
                     $this->ret_res = false;
                 }
@@ -154,22 +165,27 @@ class ScrapeAnthemController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
        
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $userProviderTableId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userProviderTableId) && is_numeric($userId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderExeMapper->getAllUserProvidersExe('anthem', 'medical');
         }
         
         $this->ret_res = true;
-        foreach($usersAll as $k => $userObj) {
+        foreach($usersAll as $userId => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
-                $resultAnthem = $this->myExecutionResult($userObj->getAnthemExeid(), $headerArray);
-                $resultAnthemClaimOverview = $this->myExecutionResult($userObj->getAnthemClaimOverviewExeid(), $headerArray);
+                $resultAnthem = $this->myExecutionResult($userObj['anthem_exeid']->exe_id, $headerArray);
+                $resultAnthemClaimOverview = $this->myExecutionResult($userObj['anthem_claim_overview_exeid']->exe_id, $headerArray);
             } catch (Exception $e) {
                 $this->ret_res = false;
             }
@@ -180,7 +196,7 @@ class ScrapeAnthemController extends Zend_Controller_Action
 //            print_r($arr);
 //            echo '</pre>';
             //die('here');
-            $this->storeScrape($userObj->getUserId(), $arr);
+            $this->storeScrape($userId, $arr);
         }
         
         if ($this->ret_res) {

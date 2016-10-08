@@ -31,16 +31,22 @@ class ApiFundsController extends My_Controller_ApiAbstract //Zend_Controller_Act
         try{
             $userId = $this->_getParam('user_id', null);
             $arr = array();
-            //echo $userId;
-            $statementsMapper = new Application_Model_NaviaStatementsMapper();
-            $statements = $statementsMapper->getNaviaStatements($userId);
-            //print_r($statements);
-            $arr['HS_balance'] = $statements['HS_balance'];
             
-            $hsMapper = new Application_Model_NaviaHealthSavingsMapper();
-            $hs = $hsMapper->getNaviaHealthSavings($userId);
-            $arr['portfolio_balance'] = $hs[0]['portfolio_balance'];
-            $arr['transaction_activity'] = $hs;
+            $userProviderMapper = new Application_Model_UserProviderMapper();
+            $userInfo = $userProviderMapper->getUserProviderArrForClient($userId);
+            
+            //echo $userId;
+            if ($userInfo['funds']->provider_name == 'navia') {
+                $statementsMapper = new Application_Model_NaviaStatementsMapper();
+                $statements = $statementsMapper->getNaviaStatements($userId);
+                //print_r($statements);
+                $arr['HS_balance'] = $statements['HS_balance'];
+
+                $hsMapper = new Application_Model_NaviaHealthSavingsMapper();
+                $hs = $hsMapper->getNaviaHealthSavings($userId);
+                $arr['portfolio_balance'] = $hs[0]['portfolio_balance'];
+                $arr['transaction_activity'] = $hs;
+            }
 
             /*echo '<pre>';
             print_r($hs);

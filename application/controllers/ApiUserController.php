@@ -1,4 +1,5 @@
 <?php
+error_reporting(9);
 /**
  * All account management actions
  * 
@@ -34,6 +35,12 @@ class ApiUserController extends My_Controller_ApiAbstract //Zend_Controller_Acti
             $userMapper = new Application_Model_UserMapper();
             $userInfo = $userMapper->getUserArrForClient($userId);
             
+            $userProviderMapper = new Application_Model_UserProviderMapper();
+            $userInfo['providersSelected'] = $userProviderMapper->getUserProviderArrForClient($userId);
+            
+            $providerMapper = new Application_Model_ProviderListMapper();
+            $userInfo['providerList'] = $providerMapper->getProviderList();
+            
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
             $this->getHelper('json')->sendJson($userInfo);
             
@@ -59,12 +66,12 @@ class ApiUserController extends My_Controller_ApiAbstract //Zend_Controller_Acti
             $siteType = $this->_getParam('site_type', null);
             $siteUserId = $this->_getParam('site_user_id', null);
             $sitePassword = $this->_getParam('site_password', null);
-            
-            $userMapper = new Application_Model_UserMapper();
-            $userInfo = $userMapper->updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword);
+
+            $userProviderMapper = new Application_Model_UserProviderMapper();
+            $providerInfo = $userProviderMapper->updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword);
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
-            $this->getHelper('json')->sendJson($userInfo);
+            $this->getHelper('json')->sendJson($providerInfo);
             
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();

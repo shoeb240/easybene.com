@@ -34,7 +34,7 @@ class Application_Model_UserMapper
      *
      * @return int
      */
-    public function getMembersFeaturedCount()
+    /*public function getMembersFeaturedCount()
     {
         $select = $this->getTable()->select();
         $select->setIntegrityCheck(false)
@@ -43,7 +43,7 @@ class Application_Model_UserMapper
         $row = $this->getTable()->fetchRow($select);
         
         return $row['total_rows'];
-    }    
+    }    */
     
     /**
      * Get userId by username
@@ -108,7 +108,7 @@ class Application_Model_UserMapper
      * @param  int   $userId
      * @return array $info   Array of Application_Model_User
      */
-    public function getUserArr($userId)
+    /*public function getUserArr($userId)
     {
         $select = $this->getTable()->select();
         $select->from('job_user', array('*'))
@@ -120,12 +120,9 @@ class Application_Model_UserMapper
         $userInfo['username'] = $row->username;
         $userInfo['api_token'] = $row->api_token;
         $userInfo['api_updated'] = $row->api_updated;
-        $userInfo['cigna_user_id'] = $row->cigna_user_id;
-        $userInfo['cigna_password'] = $row->cigna_password;
-        $userInfo['cigna_execution_id'] = $row->cigna_execution_id;
         
         return $userInfo;
-    }
+    }*/
     
     /**
      * Get user info
@@ -139,13 +136,13 @@ class Application_Model_UserMapper
         $select->from('job_user', array('*'))
                ->where('user_id = ?', $userId);
         $row = $this->getTable()->fetchRow($select);
-
+        
         $userInfo = array();
         $userInfo['user_id'] = $row->user_id;
         $userInfo['username'] = $row->username;
         $userInfo['api_token'] = $row->api_token;
         $userInfo['api_updated'] = $row->api_updated;
-        $userInfo['medical_site'] = $row->medical_site;
+        /*$userInfo['medical_site'] = $row->medical_site;
         $userInfo['dental_site'] = $row->dental_site;
         $userInfo['vision_site'] = $row->vision_site;
         $userInfo['funds_site'] = $row->funds_site;
@@ -156,7 +153,7 @@ class Application_Model_UserMapper
         $userInfo['anthem_user_id'] = $row->anthem_user_id;
         $userInfo['anthem_password'] = $row->anthem_password;
         $userInfo['navia_user_id'] = $row->navia_user_id;
-        $userInfo['navia_password'] = $row->navia_password;
+        $userInfo['navia_password'] = $row->navia_password;*/
         
         return $userInfo;
     }
@@ -280,7 +277,7 @@ class Application_Model_UserMapper
      * @param  int   $username
      * @return array $info      Array of Application_Model_User
      */
-    public function getSearchedMembers($username)
+    /*public function getSearchedMembers($username)
     {
         $select = $this->getTable()->select();
         $select->setIntegrityCheck(false)
@@ -323,7 +320,7 @@ class Application_Model_UserMapper
         }
         
         return $info;
-    }
+    }*/
     
     /**
      * Get searched creative members who have completed projects
@@ -331,7 +328,7 @@ class Application_Model_UserMapper
      * @param  int   $username
      * @return array $info      Array of Application_Model_User
      */
-    public function getSearchedCreatives($username)
+    /*public function getSearchedCreatives($username)
     {
         $select = $this->getTable()->select();
         $select->setIntegrityCheck(false)
@@ -371,7 +368,7 @@ class Application_Model_UserMapper
         }
         
         return $info;
-    }
+    }*/
     
     /**
      * Update user cigna_execution_id
@@ -401,7 +398,7 @@ class Application_Model_UserMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword)
+    /*public function updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword)
     {
         $select = $this->getTable()->select();
         $select->where('user_id = ?', $userId, 'INTEGER');
@@ -456,7 +453,7 @@ class Application_Model_UserMapper
         }
         
         return false;
-    }
+    }*/
     
     /**
      * Update user info
@@ -464,7 +461,7 @@ class Application_Model_UserMapper
      * @param  Application_Model_User $user
      * @return int
      */
-    public function updateUser(Application_Model_User $user)
+    /*public function updateUser(Application_Model_User $user)
     {
         $data = array(
             'full_name' => $user->getFullName(),
@@ -478,6 +475,6 @@ class Application_Model_UserMapper
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $user->getUserId(), 'INTEGER');
         
         return $this->getTable()->update($data, $where);
-    }
+    }*/
     
 }

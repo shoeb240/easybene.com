@@ -1,4 +1,5 @@
 <?php
+error_reporting(9);
 /**
  * All account management actions
  * 
@@ -93,28 +94,38 @@ class ScrapeGuardianController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
         
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        //$userId = $this->_getParam('user_id', null);
+        $userProviderMapper = new Application_Model_UserProviderMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $providerId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userId) && is_numeric($providerId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderMapper->getUserProvider($providerId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderMapper->getAllUserProviders('guardian', 'dental');
         }
+        echo $providerId.','. $userId;
+        print_r($usersAll);
         
         $this->ret_res = true;
         foreach($usersAll as $k => $userObj) {
-            $u = $userObj->getGuardianUserId();
-            $p = $userObj->getGuardianPassword();
-            if (empty($u) || empty($p)) continue;
+            $data['user_id'] = $userObj->provider_user_id;
+            $data['password'] = $userObj->provider_password;
+            $userProviderTableId = $userObj->id;
+            if (empty($data['user_id']) || empty($data['password'])) continue;
             
             for($i = 0; $i < 2; $i++) {
                 $data = array();
                 switch($i) {
                     case 0:
-                        $data['user_id'] = $userObj->getGuardianUserId();
-                        $data['password'] = $userObj->getGuardianPassword();
+                        $data['user_id'] = $userObj->provider_user_id;
+                        $data['password'] = $userObj->provider_password;
                         $runId = 'ece66e5d-c737-4136-bea7-8b2654816f4e';
                         $exeFieldName = 'guardian_benefit_exeid';
                         
@@ -127,20 +138,20 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         }
                         break;
                     case 1:
-                        $data[0]['user_id'] = $userObj->getGuardianUserId();
-                        $data[0]['password'] = $userObj->getGuardianPassword();
+                        $data[0]['user_id'] = $userObj->provider_user_id;
+                        $data[0]['password'] = $userObj->provider_password;
                         $data[0]['patient'] = 0;
                         $data[0]['coverage_type'] = 'D';
-                        $data[1]['user_id'] = $userObj->getGuardianUserId();
-                        $data[1]['password'] = $userObj->getGuardianPassword();
+                        $data[1]['user_id'] = $userObj->provider_user_id;
+                        $data[1]['password'] = $userObj->provider_password;
                         $data[1]['patient'] = 1;
                         $data[1]['coverage_type'] = 'D';
-                        $data[2]['user_id'] = $userObj->getGuardianUserId();
-                        $data[2]['password'] = $userObj->getGuardianPassword();
+                        $data[2]['user_id'] = $userObj->provider_user_id;
+                        $data[2]['password'] = $userObj->provider_password;
                         $data[2]['patient'] = 2;
                         $data[2]['coverage_type'] = 'D';
-                        $data[3]['user_id'] = $userObj->getGuardianUserId();
-                        $data[3]['password'] = $userObj->getGuardianPassword();
+                        $data[3]['user_id'] = $userObj->provider_user_id;
+                        $data[3]['password'] = $userObj->provider_password;
                         $data[3]['patient'] = 3;
                         $data[3]['coverage_type'] = 'D';
                         $runId = 'ca638336-786a-4550-b80a-4b045ba3892f';
@@ -161,8 +172,10 @@ class ScrapeGuardianController extends Zend_Controller_Action
                 
                 $arr = json_decode($result, true);
                 $exeId = $arr['_id'];
-                $userMapper = new Application_Model_UserMapper();
-                $usersAll = $userMapper->updateExecutionId($userObj->getUserId(), $exeId, $exeFieldName);
+                echo '***'.$exeId.'***';
+                $userProviderExeMapper->updateSiteCredentials($userProviderTableId, $exeFieldName, $exeId);
+                //echo $userObj->provider_user_id.', '.$exeId.', '.$exeFieldName.'==';
+                
                 if (empty($exeId)) {
                     $this->ret_res = false;
                 }
@@ -187,23 +200,31 @@ class ScrapeGuardianController extends Zend_Controller_Action
         $this->_helper->viewRenderer->setNoRender(true);
        
         // Get user info
-        $userMapper = new Application_Model_UserMapper();
+        //$userMapper = new Application_Model_UserMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        
         $userId = $this->_getParam('user_id', null);
+        $userProviderTableId = $this->_getParam('id', null);
         
         $usersAll = array();
-        if (is_numeric($userId)) {
-            $usersAll = $userMapper->getUserById($userId);
+        if (is_numeric($userProviderTableId) && is_numeric($userId)) {
+            //$usersAll = $userMapper->getUserById($userId);
+            $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
         } else if ($this->cronKey === $userId) {
-            $usersAll = $userMapper->getUserAll();
+            //$usersAll = $userMapper->getUserAll();
+            $usersAll = $userProviderExeMapper->getAllUserProvidersExe('guardian', 'dental');
         }
         
         $this->ret_res = true;
-        foreach($usersAll as $k => $userObj) {
+        foreach($usersAll as $userId => $userObj) {
             $headerArray = $this->getHeaderArr();
             try {
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
-                $resultGuardianBenefit = $this->myExecutionResult($userObj->getGuardianBenefitExeid(), $headerArray);
-                $resultGuardianClaim = $this->myExecutionResult($userObj->getGuardianClaimExeid(), $headerArray);
+                $resultGuardianBenefit = $this->myExecutionResult($userObj['guardian_benefit_exeid']->exe_id, $headerArray);
+                $resultGuardianClaim = $this->myExecutionResult($userObj['guardian_claim_exeid']->exe_id, $headerArray);
+                echo '<pre>';
+                print_r($resultGuardianClaim);
+                echo '</pre>';
             } catch (Exception $e) {
                 //echo $e->getMessage() . '<br />';
                 //die('catch');
@@ -216,7 +237,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
             print_r($arr);
             echo '</pre>';*/
             //die('here');
-            $this->storeScrape($userObj->getUserId(), $arr);
+            $this->storeScrape($userId, $arr);
         }
         
         if ($this->ret_res) {
