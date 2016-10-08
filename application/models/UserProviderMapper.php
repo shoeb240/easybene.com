@@ -147,6 +147,10 @@ class Application_Model_UserProviderMapper
             $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $row->id, 'INTEGER');
             
             $ok = $this->getTable()->update($data, $where);
+            
+            $userProviderExeTable = new Application_Model_DbTable_UserProviderExe();
+            $where = $userProviderExeTable->getAdapter()->quoteInto('user_provider_table_id = ?', $row->id);
+            $userProviderExeTable->delete($where);        
         } else {
             $data = array();
             $data['user_id'] = $userId;
@@ -158,7 +162,6 @@ class Application_Model_UserProviderMapper
         }
         
         $providerInfo = array();
-        $providerInfo['user_provider_id'] = $userProviderTableId;
         $providerInfo['provider_id'] = $providerId;
         $providerInfo['provider_type'] = $providerType;
         $providerInfo['provider_name'] = $providerName;
