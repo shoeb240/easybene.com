@@ -40,7 +40,7 @@ class Application_Model_Anthem
     public function setOption($field, $value)
     {
         $key = '_' . $field;
-        $this->$key = $value;
+            $this->$key = $value;
     }
     
     public function getOption($field)

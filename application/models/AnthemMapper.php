@@ -80,7 +80,7 @@ class Application_Model_AnthemMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveAnthem(Application_Model_Anthem $anthem)
+    public function save(Application_Model_Anthem $anthem)
     {
         $data = array(
             'user_id' => $anthem->getOption('user_id'),
@@ -142,7 +142,7 @@ class Application_Model_AnthemMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteAnthem($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

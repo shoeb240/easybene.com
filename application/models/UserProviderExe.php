@@ -12,7 +12,7 @@ class Application_Model_UserProviderExe
 {
     public $id;
     public $user_provider_table_id;
-    public $exe_field_name;
+    public $run_name;
     public $exe_id;
     public $user_id;
 }

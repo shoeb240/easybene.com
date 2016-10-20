@@ -121,8 +121,12 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
 
     public function postAction()
     {
-        $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "POST - There is no such functionality at this moment");        
-        exit;
+        $responseFailedIds = $this->_getParam('response_failed_ids', null);
+        
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        $ok = $userProviderExeMapper->updateFailed($responseFailedIds);
+        
+        echo json_encode(array('response' => $ok));
     }
 
     public function putAction()

@@ -19,7 +19,7 @@ class Application_Model_User
     protected $_status;
     protected $_api_token;
     protected $_api_updated;
-    protected $_medical_site;
+    /*protected $_medical_site;
     protected $_dental_site;
     protected $_vision_site;
     protected $_funds_site;
@@ -41,7 +41,7 @@ class Application_Model_User
     protected $_navia_statements_exeid;
     protected $_navia_day_care_exeid;
     protected $_navia_health_care_exeid;
-    protected $_navia_health_savings_exeid;
+    protected $_navia_health_savings_exeid;*/
     
     
     public function __construct($options = null)
@@ -151,7 +151,7 @@ class Application_Model_User
         return $this->_api_updated;
     }
     
-    public function setCignaUserId($cignaUserId)
+    /*public function setCignaUserId($cignaUserId)
     {
         $this->_cigna_user_id = $cignaUserId;
     }
@@ -339,7 +339,7 @@ class Application_Model_User
     public function getNaviaHealthSavingsExeid()
     {
         return $this->_navia_health_savings_exeid;
-    }
+    }*/
     
     
     

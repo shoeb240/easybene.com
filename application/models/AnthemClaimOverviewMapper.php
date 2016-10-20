@@ -67,7 +67,7 @@ class Application_Model_AnthemClaimOverviewMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveAnthemClaimOverview(Application_Model_AnthemClaimOverview $claim)
+    public function save(Application_Model_AnthemClaimOverview $claim)
     {
         $data = array(
             'user_id' => $claim->getOption('user_id'),
@@ -117,7 +117,7 @@ class Application_Model_AnthemClaimOverviewMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteAnthemClaimOverview($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

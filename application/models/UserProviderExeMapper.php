@@ -50,13 +50,13 @@ class Application_Model_UserProviderExeMapper
 
         $exeInfo = array();
         foreach($rowSets as $k => $row) {
-            $userProviderExe = new Application_Model_UserProviderExe();
-            $userProviderExe->id = $row->id;
-            $userProviderExe->user_provider_table_id = $row->user_provider_table_id;
-            $userProviderExe->exe_field_name = $row->exe_field_name;
-            $userProviderExe->exe_id = $row->exe_id;
-            $userProviderExe->user_id = $row->user_id;
-            $exeInfo[$row->user_id][$row->exe_field_name] = $userProviderExe;
+            $userProviderExeObj = new Application_Model_UserProviderExe();
+            $userProviderExeObj->id = $row->id;
+            $userProviderExeObj->user_provider_table_id = $row->user_provider_table_id;
+            $userProviderExeObj->run_name = $row->run_name;
+            $userProviderExeObj->exe_id = $row->exe_id;
+            $userProviderExeObj->user_id = $row->user_id;
+            $exeInfo[$row->user_id][$row->run_name] = $userProviderExeObj;
         }
         
         return $exeInfo;
@@ -79,24 +79,24 @@ class Application_Model_UserProviderExeMapper
 
         $exeInfo = array();
         foreach($rowSets as $k => $row) {
-            $userProviderExe = new Application_Model_UserProviderExe();
-            $userProviderExe->id = $row->id;
-            $userProviderExe->user_provider_table_id = $row->user_provider_table_id;
-            $userProviderExe->exe_field_name = $row->exe_field_name;
-            $userProviderExe->exe_id = $row->exe_id;
-            $userProviderExe->user_id = $row->user_id;
-            $exeInfo[$row->user_provider_table_id][$row->exe_field_name] = $userProviderExe;
+            $userProviderExeObj = new Application_Model_UserProviderExe();
+            $userProviderExeObj->id = $row->id;
+            $userProviderExeObj->user_provider_table_id = $row->user_provider_table_id;
+            $userProviderExeObj->run_name = $row->run_name;
+            $userProviderExeObj->exe_id = $row->exe_id;
+            $userProviderExeObj->user_id = $row->user_id;
+            $exeInfo[$row->user_id][$row->run_name] = $userProviderExeObj;
         }
         
         return $exeInfo;
     }
     
-    public function updateSiteCredentials($userProviderTableId, $exeFieldName, $exeId)
+    public function updateSiteCredentials($userProviderTableId, $runName, $exeId)
     {
         $select = $this->getTable()->select();
         $select->from(array('upe' => 'user_provider_exe'), array('upe.*'));
         $select->where('upe.user_provider_table_id = ?', $userProviderTableId, 'INTEGER');
-        $select->where('upe.exe_field_name = ?', $exeFieldName);
+        $select->where('upe.run_name = ?', $runName);
         $row = $this->getTable()->fetchRow($select);
         
         if ($row) {
@@ -106,13 +106,22 @@ class Application_Model_UserProviderExeMapper
         } else {
             $data = array();
             $data['user_provider_table_id'] = $userProviderTableId;
-            $data['exe_field_name'] = $exeFieldName;
+            $data['run_name'] = $runName;
             $data['exe_id'] = $exeId;
             
             return $this->getTable()->insert($data);
         }
         
         return false;        
+    }
+    
+    public function updateFailed($responseFailedIds)
+    {
+        $data = array(
+            'failed' => 1,
+        );
+        
+        return $this->getTable()->update($data, 'id IN ('.$responseFailedIds.')');
     }
     
 }

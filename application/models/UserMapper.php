@@ -206,7 +206,7 @@ class Application_Model_UserMapper
             $user->setUsername($row->username);
             $user->setFullName($row->full_name);
             $user->setEmail($row->email);
-            $user->setCignaUserId($row->cigna_user_id);
+            /*$user->setCignaUserId($row->cigna_user_id);
             $user->setCignaPassword($row->cigna_password);
             $user->setCignaMedicalExeid($row->cigna_medical_exeid);
             $user->setCignaDeductibleClaimExeid($row->cigna_deductible_claim_exeid);
@@ -224,7 +224,7 @@ class Application_Model_UserMapper
             $user->setNaviaStatementsExeid($row->navia_statements_exeid);
             $user->setNaviaDayCareExeid($row->navia_day_care_exeid);
             $user->setNaviaHealthCareExeid($row->navia_health_care_exeid);
-            $user->setNaviaHealthSavingsExeid($row->navia_health_savings_exeid);
+            $user->setNaviaHealthSavingsExeid($row->navia_health_savings_exeid);*/
             $info[] = $user;
         }
         
@@ -246,7 +246,7 @@ class Application_Model_UserMapper
             $user->setUsername($row->username);
             $user->setFullName($row->full_name);
             $user->setEmail($row->email);
-            $user->setCignaUserId($row->cigna_user_id);
+            /*$user->setCignaUserId($row->cigna_user_id);
             $user->setCignaPassword($row->cigna_password);
             $user->setCignaMedicalExeid($row->cigna_medical_exeid);
             $user->setCignaDeductibleClaimExeid($row->cigna_deductible_claim_exeid);
@@ -264,7 +264,7 @@ class Application_Model_UserMapper
             $user->setNaviaStatementsExeid($row->navia_statements_exeid);
             $user->setNaviaDayCareExeid($row->navia_day_care_exeid);
             $user->setNaviaHealthCareExeid($row->navia_health_care_exeid);
-            $user->setNaviaHealthSavingsExeid($row->navia_health_savings_exeid);
+            $user->setNaviaHealthSavingsExeid($row->navia_health_savings_exeid);*/
             $info[] = $user;
         }
         

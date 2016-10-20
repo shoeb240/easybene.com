@@ -18,7 +18,8 @@ class Application_Model_ProviderList
     public $_url;
     public $_image;
     public $_status;
-    
+    public $_default;
+        
     public function setOption($field, $value)
     {
         $key = '_' . $field;

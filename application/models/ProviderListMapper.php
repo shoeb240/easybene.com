@@ -75,6 +75,7 @@ class Application_Model_ProviderListMapper
             $provider['url'] = $row->url;
             $provider['image'] = $row->image;
             $provider['status'] = $row->status;
+            $provider['default'] = $row->default;
             
             $info[$row->provider_type][] = $provider;
         }

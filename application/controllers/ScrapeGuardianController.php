@@ -22,6 +22,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
     
     private $ret_res = true;
     
+    private $ret_failed = array();
+    
     /**
      * Initialize object
      *
