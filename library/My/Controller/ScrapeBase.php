@@ -226,12 +226,6 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
                 }
                 $provider->setOption('user_id', $userId);
                 
-                echo '<pre>';
-                print_r($arr[$eachRun]['headers']);
-                print_r($arr[$eachRun]['rows']);
-                print_r($provider);
-                echo '</pre>';
-            
                 try {
                     $providerId = $mapper->save($provider);
                 } catch(Exception $e) {
