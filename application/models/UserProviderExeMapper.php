@@ -45,6 +45,7 @@ class Application_Model_UserProviderExeMapper
                       'up.id = upe.user_provider_table_id',
                       array('user_id' => 'up.user_id'))
                ->where('upe.user_provider_table_id = ?', $userProviderTableId)
+               ->where('upe.failed = ?', 0)
                ->where('up.user_id = ?', $userId);
         $rowSets = $this->getTable()->fetchAll($select);
 
@@ -74,6 +75,7 @@ class Application_Model_UserProviderExeMapper
                ->join(array('up' => 'user_provider'), 
                       'up.id = upe.user_provider_table_id',
                       array('user_id' => 'up.user_id'))
+               ->where('upe.failed = ?', 0)
                ->where('up.provider_id = ?', $providerId);
         $rowSets = $this->getTable()->fetchAll($select);
 

@@ -72,23 +72,23 @@ class Application_Model_CignaClaimDetailsMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveCignaClaimDetails(Application_Model_CignaClaimDetails $claimDetails)
+    public function save(Application_Model_CignaClaimDetails $claimDetails)
     {
         $data = array(
-            'user_id' => $claimDetails->getUserId(),
-            'claim_number' => $claimDetails->getClaimNumber(),
-            'provided_by_details' => $claimDetails->getProvidedByDetails(),
-            'for' => $claimDetails->getFor(),
-            'claim_processed_on' => $claimDetails->getClaimProcessedOn(),
-            'service_date_type' => $claimDetails->getServiceDateType(),
-            'service_amount_billed' => $claimDetails->getServiceAmountBilled(),
-            'service_discount' => $claimDetails->getServiceDiscount(),
-            'service_covered_amount' =>$claimDetails->getServiceCoveredAmount(),
-            'service_copay_deductible' => $claimDetails->getServiceCopayDeductible(),
-            'service_what_your_plan_paid' => $claimDetails->getServiceWhatYourPlanPaid(),
-            'service_coinsurance' => $claimDetails->getServiceCoinsurance(),
-            'service_what_i_owe' => $claimDetails->getServiceWhatIOwe(),
-            'service_see_notes' => $claimDetails->getServiceSeeNotes()
+            'user_id' => $claimDetails->getOption('user_id'),
+            'claim_number' => $claimDetails->getOption('claim_number'),
+            'provided_by_details' => $claimDetails->getOption('provided_by_details'),
+            'for' => $claimDetails->getOption('for'),
+            'claim_processed_on' => $claimDetails->getOption('claim_processed_on'),
+            'service_date_type' => $claimDetails->getOption('service_date_type'),
+            'service_amount_billed' => $claimDetails->getOption('service_amount_billed'),
+            'service_discount' => $claimDetails->getOption('service_discount'),
+            'service_covered_amount' => $claimDetails->getOption('service_covered_amount'),
+            'service_copay_deductible' => $claimDetails->getOption('service_copay_deductible'),
+            'service_what_your_plan_paid' => $claimDetails->getOption('service_what_your_plan_paid'),
+            'service_coinsurance' => $claimDetails->getOption('service_coinsurance'),
+            'service_what_i_owe' => $claimDetails->getOption('service_what_i_owe'),
+            'service_see_notes' => $claimDetails->getOption('service_see_notes')
         );
         
         return $this->getTable()->insert($data);
@@ -101,7 +101,7 @@ class Application_Model_CignaClaimDetailsMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteCignaClaimDetails($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

@@ -19,100 +19,15 @@ class Application_Model_CignaMedical
     protected $_to;
     protected $_primary_care_physician;
     
-    public function __construct($options = null)
+    public function setOption($field, $value)
     {
-        if (is_array($options)) $this->setOptions($options);
+        $key = '_' . $field;
+        $this->$key = $value;
     }
     
-    public function setOptions($options)
+    public function getOption($field)
     {
-        $methods = get_class_methods($this);
-        foreach($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
-            if (in_array($method, $methods)) {
-                $this->$method($value);
-            }
-        }
-        return $this;
-    }
-    
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
-    
-    public function getId()
-    {
-        return $this->_id;
-    }
-    
-    public function setUserId($value)
-    {
-        $this->_user_id = $value;
-    }
-    
-    public function getUserId()
-    {
-        return $this->_user_id;
-    }
-    
-    public function setWhosCovered($value)
-    {
-        $this->_whos_covered = $value;
-    }
-    
-    public function getWhosCovered()
-    {
-        return $this->_whos_covered;
-    }
-    
-    public function setDateOfBirth($value)
-    {
-        $this->_date_of_birth = $value;
-    }
-    
-    public function getDateOfBirth()
-    {
-        return $this->_date_of_birth;
-    }
-    
-    public function setRelationship($value)
-    {
-        $this->_relationship = $value;
-    }
-    
-     public function getRelationship()
-    {
-        return $this->_relationship;
-    }
-    
-    public function setCoverageFrom($value)
-    {
-        $this->_coverage_from = $value;
-    }
-
-    public function getCoverageFrom()
-    {
-        return $this->_coverage_from;
-    }
-    
-    public function setTo($to)
-    {
-        $this->_to = $to;
-    }
-
-    public function getTo()
-    {
-        return $this->_to;
-    }
-    
-    public function setPrimaryCarePhysician($primary_care_physician)
-    {
-        $this->_primary_care_physician = $primary_care_physician;
-    }
-
-    public function getPrimaryCarePhysician()
-    {
-        return $this->_primary_care_physician;
+        $key = '_' . $field;
+        return $this->$key;
     }
 }

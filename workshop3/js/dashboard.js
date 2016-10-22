@@ -2,11 +2,19 @@
 
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
+    var provider_execution = '';
     
     $(window).load(function(){
         if (username && token) {
-            var provider_execution = window.localStorage.getItem('provider_execution');
+            $(".medical-grap").css('display', 'none');
+            $(".after-login-screen").css('display', 'block');
+            $("#bz_text").html('Loading your dashboard information, this may take few seconds.');
+
+            provider_execution = window.localStorage.getItem('provider_execution');
             console.log(provider_execution);
+            if (provider_execution !== '') {
+                $("#check_back_msg").css('display', 'block');
+            }
             
             var medical_site = window.localStorage.getItem('medical_site');
             var dental_site= window.localStorage.getItem('dental_site');
@@ -40,6 +48,9 @@
             }
             
             PrepareWelcomeData();
+            
+            $(".medical-grap").css('display', 'block');
+            $(".after-login-screen").css('display', 'none');
         } else {
             ShowLogin();
         }
@@ -76,11 +87,11 @@
     
     function provider_execute(provider_name, provider_type, user_data)
     {
-        var response = false;
-        var provider_execution = window.localStorage.getItem('provider_execution');
+        var response = '';
+        var response_failed_ids = [];
+        //var provider_execution = window.localStorage.getItem('provider_execution');
+        var timed_run = false;
         
-        $(".medical-grap").css('display', 'none');
-        $(".after-login-screen").css('display', 'block');
         $("#bz_text").html('Linking your providers, this may take a minute or two.');
         
         $.ajax({
@@ -91,10 +102,22 @@
             success: function(result){
                 response = result.response;
                 console.log(response);
-                if (response === true) {
-                    var new_provider_execution = provider_execution.replace(provider_name+'==', '');
-                    window.localStorage.setItem('provider_execution', new_provider_execution);
-                    console.log(new_provider_execution);
+                if (response === 'OK') {
+                    provider_execution = provider_execution.replace(provider_name+'~~', '');
+                    window.localStorage.setItem('provider_execution', provider_execution);
+                    console.log(provider_execution);
+                    if (timed_run === true) {
+                        PrepareWelcomeData();
+                        timed_run = false;
+                    }
+                } else if (response === 'QUEUED' || response === 'PENDING' || response === 'RUNNING') {
+                    setTimeout(provider_execute, 10000, provider_name, provider_type, user_data);
+                    timed_run = true;
+                } else if (response === 'FAILED' || response === 'STOPPED') {
+                    provider_execution = provider_execution.replace(provider_name+'~~', '');
+                    window.localStorage.setItem('provider_execution', provider_execution);
+                    console.log(provider_execution);
+                    response_failed_ids = result.response_failed_ids;
                 }
             },
             error: function(a, b, c){
@@ -102,18 +125,40 @@
             }
         });
 
-        $(".medical-grap").css('display', 'block');
-        $(".after-login-screen").css('display', 'none');
+        if (response_failed_ids) {
+            console.log(response_failed_ids);
+            save_failed_ids(response_failed_ids);
+        }
         
+        console.log(provider_execution);
+        if (provider_execution !== '') {
+            $("#check_back_msg").css('display', 'block');
+        } else {
+            $("#check_back_msg").css('display', 'none');
+        }
+
         return response;
+    }
+    
+    function save_failed_ids(response_failed_ids)
+    {
+        $.ajax({
+            url: 'http://www.easybene.com/index.php/api-summary/'+username+'/'+token,
+            type: 'post',
+            data: 'response_failed_ids='+response_failed_ids,
+            dataType: 'json',
+            success: function(result){
+                console.log(result);
+            },
+            error: function(){
+                
+            }
+        });
     }
         
     function PrepareWelcomeData() {
+        console.log('PrepareWelcomeData run');
         
-        $(".medical-grap").css('display', 'none');
-        $(".after-login-screen").css('display', 'block');
-        $("#bz_text").html('Loading your dashboard information, this may take few seconds.');
-
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
         var medical_site = window.localStorage.getItem('medical_site');
@@ -154,9 +199,6 @@
             },
         });
         
-        $(".medical-grap").css('display', 'block');
-        $(".after-login-screen").css('display', 'none');
-
     }
     
     function graph(percent, deductible_met, site, site_type, deductible)

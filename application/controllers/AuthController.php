@@ -1,5 +1,5 @@
 <?php
-//error_reporting(9);
+error_reporting(9);
 class AuthController extends My_Controller_ApiAbstract
 {
     public function init()
@@ -35,10 +35,13 @@ class AuthController extends My_Controller_ApiAbstract
                     $user = $this->_auth($username, $password);
                     $exp = strtotime($user->api_updated) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;
                     $token = $user->api_token;
-                    $result['medical_site'] = $user->medical_site;
-                    $result['dental_site'] = $user->dental_site;
-                    $result['vision_site'] = $user->vision_site;
-                    $result['funds_site'] = $user->funds_site;
+                    
+                    $userProviderMapper = new Application_Model_UserProviderMapper();
+                    $providersSelected = $userProviderMapper->getUserProviderArrForClient($user->user_id);
+                    $result['medical_site'] = isset($providersSelected['medical']->provider_name) ? $providersSelected['medical']->provider_name : '';
+                    $result['dental_site'] = isset($providersSelected['dental']->provider_name) ? $providersSelected['dental']->provider_name : '';
+                    $result['vision_site'] = isset($providersSelected['vision']->provider_name) ? $providersSelected['vision']->provider_name : '';
+                    $result['funds_site'] = isset($providersSelected['funds']->provider_name) ? $providersSelected['funds']->provider_name : '';
                 } else if ($act == 'register') {
                     $data = $this->_register($username, $password);
                     $exp = strtotime($data['api_updated']) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;

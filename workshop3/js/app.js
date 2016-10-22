@@ -19,6 +19,8 @@
         var funds_site = window.localStorage.getItem('funds_site');
         var unix = Math.round(+new Date()/1000);
 
+        //alert(medical_site+'='+dental_site+'='+vision_site+'='+funds_site);
+        
         if (token_expire > unix) {
             if ((!medical_site || medical_site == 'null') && (!dental_site || dental_site == 'null') 
                     && (!vision_site || vision_site == 'null') && (!funds_site || funds_site == 'null')) {

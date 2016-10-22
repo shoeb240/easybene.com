@@ -532,9 +532,9 @@
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
             
-            var provider_list = ['medical', 'dental', 'vision', 'funds'];
+            var provider_types = ['medical', 'dental', 'vision', 'funds'];
             
-            var providerTypeList = '';
+            var provider_list_each_type = '';
             var result_site = '';
             var len = '';
             var plen = '';
@@ -552,41 +552,41 @@
                 async: false,
                 success: function(result) {
                     //console.log(result);
-                        plen = provider_list.length;
+                        plen = provider_types.length;
                         for(var p = 0; p <= plen; p++) {
                             user_id = '';
                             password = '';
                             select_code = '';
                             result_site = '';
                             
-                            if (result.providerList[provider_list[p]]) {
-                                providerTypeList = result.providerList[provider_list[p]];
-                                //console.log(providerTypeList);
+                            if (result.providerList[provider_types[p]]) {
+                                provider_list_each_type = result.providerList[provider_types[p]];
+                                //console.log(provider_list_each_type);
                             }
                             
-                            if (result.providersSelected[provider_list[p]]) {
-                                result_site = result.providersSelected[provider_list[p]].provider_name;
-                                user_id = result.providersSelected[provider_list[p]].provider_user_id;
-                                password = result.providersSelected[provider_list[p]].provider_password;
-                                //console.log(provider_list[p]);
+                            if (result.providersSelected[provider_types[p]]) {
+                                result_site = result.providersSelected[provider_types[p]].provider_name;
+                                user_id = result.providersSelected[provider_types[p]].provider_user_id;
+                                password = result.providersSelected[provider_types[p]].provider_password;
+                                //console.log(provider_types[p]);
                                 //console.log(result_site);
                             }
                             
-                            len = providerTypeList.length;
+                            len = provider_list_each_type.length;
                             selected = '';
                             for(var i = 0; i < len; i++) {
                                 selected = '';
-                                if (result_site && result_site.toLowerCase() === providerTypeList[i].name.toLowerCase()) {
+                                if (result_site && result_site.toLowerCase() === provider_list_each_type[i].name.toLowerCase()) {
                                     selected = 'selected';
                                 }
-                                select_code = select_code + '<option '+selected+' value="'+providerTypeList[i].name+'">'+providerTypeList[i].label+'</option>';
+                                select_code = select_code + '<option '+selected+' value="'+provider_list_each_type[i].name+'">'+provider_list_each_type[i].label+'</option>';
                             }
-                            $('#'+provider_list[p]+'_selected_name').append(select_code);
+                            $('#'+provider_types[p]+'_selected_name').append(select_code);
                             
-                            $('#'+provider_list[p]+'_selected_user_id').val(user_id);
-                            $('#'+provider_list[p]+'_selected_password').val(password);
+                            $('#'+provider_types[p]+'_selected_user_id').val(user_id);
+                            $('#'+provider_types[p]+'_selected_password').val(password);
                             
-                            $('#'+provider_list[p]+'_register').on('click', function() {
+                            $('#'+provider_types[p]+'_register').on('click', function() {
                                 var thsid = $(this).attr('id');
                                 //console.log(thsid.substring(0, thsid.indexOf('register') - 1));
                                 site_type = thsid.substring(0, thsid.indexOf('register') - 1);
@@ -645,6 +645,10 @@
                 success: function(result) {
                         //console.log(result);
                         window.localStorage.setItem(result.provider_type+'_site', result.provider_name);
+                        //console.log(result.provider_type+'_site');
+                        //console.log(result.provider_name);
+                        //var medical_site = window.localStorage.getItem('medical_site');
+                        //console.log(medical_site);
                         
                         var success_count = 0;
                         var res = false;
@@ -652,15 +656,17 @@
                             res = provider_run(result.scrapper_script_path, username, token, result.provider_id);
                         }
                         if (res === true) {
-                             if (typeof provider_execution !== 'undefined' && provider_execution) {
-                                var new_provider_execution = provider_execution + site_name.toLowerCase() + '==';
-                            } else {
-                                var new_provider_execution = site_name.toLowerCase() + '==';
+                            if (site_name && provider_execution.indexOf(site_name.toLowerCase()) < 0) {
+                                if (typeof provider_execution !== 'undefined' && provider_execution) {
+                                   provider_execution = provider_execution + site_name.toLowerCase() + '~~';
+                                } else {
+                                   provider_execution = site_name.toLowerCase() + '~~';
+                                }
+                                window.localStorage.setItem('provider_execution', provider_execution);
                             }
-                            window.localStorage.setItem('provider_execution', new_provider_execution);
                         
                             success_count += 1;
-                            //console.log(new_provider_execution);
+                            console.log(provider_execution);
                         }                        
                         
                         $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'none');

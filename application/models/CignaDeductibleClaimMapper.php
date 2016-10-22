@@ -8,7 +8,7 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_CignaDeductibleMapper
+class Application_Model_CignaDeductibleClaimMapper
 {
     /**
      * @var Application_Model_DbTable_CignaDeductible
@@ -60,16 +60,16 @@ class Application_Model_CignaDeductibleMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveCignaDeductible(Application_Model_CignaDeductible $deductible)
+    public function save(Application_Model_CignaDeductibleClaim $deductible)
     {
         $data = array(
-            'user_id' => $deductible->getUserId(),
-            'deductible_amt' => $deductible->getDeductibleAmt(),
-            'deductible_met' => $deductible->getDeductibleMet(),
-            'deductible_remaining' => $deductible->getDeductibleRemaining(),
-            'out_of_pocket_amt' => $deductible->getOutOfPocketAmt(),
-            'out_of_pocket_met' => $deductible->getOutOfPocketMet(),
-            'out_of_pocket_remaining' => $deductible->getOutOfPocketRemaining()
+            'user_id' => $deductible->getOption('user_id'),
+            'deductible_amt' => $deductible->getOption('deductible_amt'),
+            'deductible_met' => $deductible->getOption('deductible_met'),
+            'deductible_remaining' => $deductible->getOption('deductible_remaining'),
+            'out_of_pocket_amt' => $deductible->getOption('out_of_pocket_amt'),
+            'out_of_pocket_met' => $deductible->getOption('out_of_pocket_met'),
+            'out_of_pocket_remaining' => $deductible->getOption('out_of_pocket_remaining')
         );
         return $this->getTable()->insert($data);
     }
@@ -104,7 +104,7 @@ class Application_Model_CignaDeductibleMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteCignaDeductible($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

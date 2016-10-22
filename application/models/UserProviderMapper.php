@@ -40,7 +40,7 @@ class Application_Model_UserProviderMapper
     {
         $select = $this->getTable()->select();
         $select->setIntegrityCheck(false)
-               ->from(array('up' => 'user_provider'), array('up.*'))
+               ->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
                ->join(array('pl'=>'provider_list'), 
                       "pl.id = up.provider_id", 
                       array('provider_type' => 'pl.provider_type',
@@ -61,18 +61,18 @@ class Application_Model_UserProviderMapper
             $userProvider->provider_label = $row->provider_label;
             $userProvider->scrapper_script_path = $row->scrapper_script_path;
             $userProvider->provider_user_id = $row->provider_user_id;
-            $userProvider->provider_password = $row->provider_password;
+            $userProvider->provider_password = $row->de_provider_password;
             $userProvider->status = $row->status;
             $providersSelected[$userProvider->provider_type] = $userProvider;
         }
-        
+
         return $providersSelected;
     }
     
     public function getUserProvider($providerId, $userId)
     {
         $select = $this->getTable()->select();
-        $select->from(array('up' => 'user_provider'), array('up.*'))
+        $select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
                ->where('up.provider_id = ?', $providerId)
                ->where('up.user_id = ?', $userId);
         $rowSets = $this->getTable()->fetchAll($select);
@@ -84,7 +84,7 @@ class Application_Model_UserProviderMapper
             $userProvider->user_id = $row->user_id;
             $userProvider->provider_id = $row->provider_id;
             $userProvider->provider_user_id = $row->provider_user_id;
-            $userProvider->provider_password = $row->provider_password;
+            $userProvider->provider_password = $row->de_provider_password;
             $userProvider->status = $row->status;
             $providersSelected[$row->user_id] = $userProvider;
         }
@@ -99,7 +99,7 @@ class Application_Model_UserProviderMapper
         $providerId = $providerInfo->id;
         
         $select = $this->getTable()->select();
-        $select->from(array('up' => 'user_provider'), array('up.*'))
+        $select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
                ->where('up.provider_id = ?', $providerId);
         $rowSets = $this->getTable()->fetchAll($select);
 
@@ -110,7 +110,7 @@ class Application_Model_UserProviderMapper
             $userProvider->user_id = $row->user_id;
             $userProvider->provider_id = $row->provider_id;
             $userProvider->provider_user_id = $row->provider_user_id;
-            $userProvider->provider_password = $row->provider_password;
+            $userProvider->provider_password = $row->de_provider_password;
             $userProvider->status = $row->status;
             $providersSelected[$row->user_id] = $userProvider;
         }
@@ -142,7 +142,7 @@ class Application_Model_UserProviderMapper
             $data['user_id'] = $userId;
             $data['provider_id'] = $providerId;
             $data['provider_user_id'] = $providerUserId;
-            $data['provider_password'] = $providerPassword;
+            $data['provider_password'] = new Zend_Db_Expr("AES_ENCRYPT('".$providerPassword."', UNHEX(SHA2('my_secret', 512)))");
             
             $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $row->id, 'INTEGER');
             
@@ -156,7 +156,7 @@ class Application_Model_UserProviderMapper
             $data['user_id'] = $userId;
             $data['provider_id'] = $providerId;
             $data['provider_user_id'] = $providerUserId;
-            $data['provider_password'] = $providerPassword;
+            $data['provider_password'] = new Zend_Db_Expr("AES_ENCRYPT('".$providerPassword."', UNHEX(SHA2('my_secret', 512)))");
             
             $ok = $this->getTable()->insert($data);
         }

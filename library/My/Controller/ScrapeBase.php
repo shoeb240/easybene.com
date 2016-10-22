@@ -21,7 +21,9 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected $cronKey = 'aG$s6&*H';
     
-    protected $ret_res = true;
+    protected $execute_res = true;
+    
+    protected $run_res = true;
     
     protected $ret_failed = array();
     
@@ -30,6 +32,8 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected $provider_type;
     
     protected $runs = array();
+    
+    protected $runs_data = array();
     
     /**
      * Initialize object
@@ -67,9 +71,9 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected function myExecutionResult($userProviderExeObj, $headerArray) 
     {
         $executionId = $userProviderExeObj->exe_id;
-        $this->ret_res = $this->myExecutionCheck($executionId, $headerArray);
+        $execute_res = $this->myExecutionCheck($executionId, $headerArray);
         $result = array();
-        if (1 || 'OK' === $this->ret_res) {
+        if ('OK' === $execute_res) {
             $url = $this->apiEndPoint . "executions/{$executionId}/result";
             $ch = curl_init($url);                                                                      
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
@@ -77,6 +81,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);                                                                                                                   
             $result = curl_exec($ch);
         } else {
+            $this->execute_res = $execute_res;
             $this->ret_failed[] = $userProviderExeObj->id;
         }
 
@@ -153,7 +158,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         try {
             $result = $this->myRunWithInput($data_string, $headerArray, $runId);
         } catch (Exception $e) {
-            $this->ret_res = false;
+            $this->run_res = false;
         }
 
         $arr = json_decode($result, true);
@@ -164,23 +169,24 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         //echo $userObj->provider_user_id.', '.$exeId.', '.$runName.'==';
 
         if (empty($exeId)) {
-            $this->ret_res = false;
+            $this->run_res = false;
         }
     }
     
-    protected function runAllUsers($usersAll, $data, $runFile)
+    protected function runAllUsers($usersAll, $runFile)
     {
-        $this->ret_res = true;
+        $this->run_res = true;
         foreach($usersAll as $k => $userObj) {
             if (empty($userObj->provider_user_id) || empty($userObj->provider_password)) continue;
             
-            $runFileCount = count($runFile);
-            for($i = 0; $i < $runFileCount; $i++) {
-                $this->runEachScrapper($userObj, $data[$i], $runFile[$i]['run_id'], $runFile[$i]['run_name']);
+            reset($this->runs);
+            foreach($this->runs as $run_id => $run_name) {
+                $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
+                $this->runEachScrapper($userObj, $eachRunData, $run_id, $run_name);
             }
         }
         
-        if ($this->ret_res) {
+        if ($this->run_res) {
             return json_encode(array('response' => true));
         } else {
             return json_encode(array('response' => false));
@@ -189,49 +195,62 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected function executeAllUsers($usersAll)
     {
-        $this->ret_res = true;
         $headerArray = $this->getHeaderArr();
         foreach($usersAll as $userId => $userObj) {
             $arr = array();
+            $this->execute_res = 'OK';
             foreach($userObj as $run_name => $userProviderExeObj) {
                 try {
                     $arr[$run_name] = $this->myExecutionResult($userProviderExeObj, $headerArray);
+                    if ('QUEUED' === $this->execute_res || 'PENDING' === $this->execute_res || 'RUNNING' === $this->execute_res) {
+                        break;
+                    }
                 } catch (Exception $e) {
-                    echo $e->getMessage();die();
-                    $this->ret_res = false;
                     $this->ret_failed[] = $userProviderExeObj->id;
                 }
             }
-            
+//            echo '<pre>';
+//            print_r($arr);
+//            echo '</pre>';
             $this->storeScrape($userId, $arr);
         }
         
-        return json_encode(array('response' => $this->ret_res, 'response_failed_ids' => $this->ret_failed));
+        return json_encode(array('response' => $this->execute_res, 'response_failed_ids' => $this->ret_failed));
     }
     
     protected function storeScrape($userId, $arr)
     {
-        foreach($this->runs as $eachRun) {
-            if (!empty($arr[$eachRun]['rows'])) {
-                $mapper_class = 'Application_Model_'.  str_replace(' ', '', ucwords(str_replace('_', ' ', $eachRun))).'Mapper';
+        reset($this->runs);
+        foreach($this->runs as $run_name) {
+            //echo '<br /><br /><br />'.$run_name.'<br />';
+            if (!empty($arr[$run_name]['rows'])) {
+                $mapper_class = 'Application_Model_'.  str_replace(' ', '', ucwords(str_replace('_', ' ', $run_name))).'Mapper';
+                //echo $mapper_class . '<br />';
                 $mapper = new $mapper_class();
                 $mapper->delete($userId);
             }
             
-            foreach($arr[$eachRun]['rows'] as $k => $eachRow) {
-                $provider_class = 'Application_Model_'.  str_replace(' ', '', ucwords(str_replace('_', ' ', $eachRun)));
+            foreach($arr[$run_name]['rows'] as $k => $eachRow) {
+                $provider_class = 'Application_Model_'.  str_replace(' ', '', ucwords(str_replace('_', ' ', $run_name)));
                 $provider = new $provider_class();
-                foreach($arr[$eachRun]['headers'] as $field_name) {
-                    $provider->setOption($field_name, $eachRow[array_search($field_name, $arr[$eachRun]['headers'])]);
+                //echo $provider_class;
+                foreach($arr[$run_name]['headers'] as $field_name) {
+                    //echo  $field_name . '<br />';
+                    $provider->setOption($field_name, $eachRow[array_search($field_name, $arr[$run_name]['headers'])]);
                 }
                 $provider->setOption('user_id', $userId);
                 
                 try {
+//                    echo '<pre>';
+//                    print_r($provider);
+//                    echo '</pre>';
                     $providerId = $mapper->save($provider);
                 } catch(Exception $e) {
+                    echo $e->getMessage();
                 }
                 
                 if (empty($providerId)) {
+                    echo 'failed';
                 }
             }
         }

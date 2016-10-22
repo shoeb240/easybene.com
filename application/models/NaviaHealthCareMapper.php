@@ -66,7 +66,7 @@ class Application_Model_NaviaHealthCareMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveNaviaHealthCare(Application_Model_NaviaHealthCare $medical)
+    public function save(Application_Model_NaviaHealthCare $medical)
     {
         $data = array(
             'user_id' => $medical->getOption('user_id'),
@@ -89,7 +89,7 @@ class Application_Model_NaviaHealthCareMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteNaviaHealthCare($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

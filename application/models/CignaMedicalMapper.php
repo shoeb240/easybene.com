@@ -65,16 +65,16 @@ class Application_Model_CignaMedicalMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveCignaMedical(Application_Model_CignaMedical $medical)
+    public function save(Application_Model_CignaMedical $medical)
     {
         $data = array(
-            'user_id' => $medical->getUserId(),
-            'whos_covered' => $medical->getWhosCovered(),
-            'date_of_birth' => $medical->getDateOfBirth(),
-            'relationship' => $medical->getRelationship(),
-            'coverage_from' =>$medical->getCoverageFrom(),
-            'to' => $medical->getTo(),
-            'primary_care_physician' => mysql_escape_string($medical->getPrimaryCarePhysician()),
+            'user_id' => $medical->getOption('user_id'),
+            'whos_covered' => $medical->getOption('whos_covered'),
+            'date_of_birth' => $medical->getOption('date_of_birth'),
+            'relationship' => $medical->getOption('relationship'),
+            'coverage_from' => $medical->getOption('coverage_from'),
+            'to' => $medical->getOption('to'),
+            'primary_care_physician' => mysql_escape_string($medical->getOption('primary_care_physician')),
         );
         
         return $this->getTable()->insert($data);
@@ -87,7 +87,7 @@ class Application_Model_CignaMedicalMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteCignaMedical($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

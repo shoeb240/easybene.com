@@ -129,7 +129,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         $data['user_id'] = $userObj->provider_user_id;
                         $data['password'] = $userObj->provider_password;
                         $runId = 'ece66e5d-c737-4136-bea7-8b2654816f4e';
-                        $exeFieldName = 'guardian_benefit_exeid';
+                        $exeFieldName = 'guardian_benefit';
                         
                         $data_string = json_encode($data);                                                                                   
                         $headerArray = $this->getHeaderArr();
@@ -157,7 +157,7 @@ class ScrapeGuardianController extends Zend_Controller_Action
                         $data[3]['patient'] = 3;
                         $data[3]['coverage_type'] = 'D';
                         $runId = 'ca638336-786a-4550-b80a-4b045ba3892f';
-                        $exeFieldName = 'guardian_claim_exeid';
+                        $exeFieldName = 'guardian_claim';
                         
                         $data_string = json_encode($data);                                                                                   
                         $headerArray = $this->getHeaderArr();
@@ -222,8 +222,8 @@ class ScrapeGuardianController extends Zend_Controller_Action
             $headerArray = $this->getHeaderArr();
             try {
                 //$result = '{"headers":["user_id","password","whos_covered","date_of_birth","relationship","coverage_from","to","error"],"rows":[["rbrathwaite29","bIMSHIRE79!","Madelyn Brathwaite","11/03/2012","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marcus Brathwaite","08/04/2006","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Marlena Brathwaite","12/19/2010","Dependent","01/01/2016","*",null],["rbrathwaite29","bIMSHIRE79!","Roderick Brathwaite","08/29/1969","Subscriber","01/01/2016","*",null]]}';
-                $resultGuardianBenefit = $this->myExecutionResult($userObj['guardian_benefit_exeid']->exe_id, $headerArray);
-                $resultGuardianClaim = $this->myExecutionResult($userObj['guardian_claim_exeid']->exe_id, $headerArray);
+                $resultGuardianBenefit = $this->myExecutionResult($userObj['guardian_benefit']->exe_id, $headerArray);
+                $resultGuardianClaim = $this->myExecutionResult($userObj['guardian_claim']->exe_id, $headerArray);
             } catch (Exception $e) {
                 //echo $e->getMessage() . '<br />';
                 //die('catch');
