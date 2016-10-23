@@ -22,130 +22,15 @@ class Application_Model_GuardianBenefit
     protected $_amounts;
     protected $_monthly_cost;
     
-    public function __construct($options = null)
+    public function setOption($field, $value)
     {
-        if (is_array($options)) $this->setOptions($options);
+        $key = '_' . $field;
+        $this->$key = $value;
     }
     
-    public function setOptions($options)
+    public function getOption($field)
     {
-        $methods = get_class_methods($this);
-        foreach($options as $key => $value) {
-            $method = 'set' . ucfirst($key);
-            if (in_array($method, $methods)) {
-                $this->$method($value);
-            }
-        }
-        return $this;
-    }
-    
-    public function setId($id)
-    {
-        $this->_id = $id;
-    }
-    
-    public function getId()
-    {
-        return $this->_id;
-    }
-    
-    public function setUserId($value)
-    {
-        $this->_userId = $value;
-    }
-    
-    public function getUserId()
-    {
-        return $this->_userId;
-    }
-    
-    public function setGroupId($value)
-    {
-        $this->_group_id = $value;
-    }
-    
-    public function getGroupId()
-    {
-        return $this->_group_id;
-    }
-    
-    public function setCompanyName($value)
-    {
-        $this->_company_name = $value;
-    }
-    
-    public function getCompanyName()
-    {
-        return $this->_company_name;
-    }
-    
-    public function setMemberName($value)
-    {
-        $this->_member_name = $value;
-    }
-    
-     public function getMemberName()
-    {
-        return $this->_member_name;
-    }
-    
-    public function setName($value)
-    {
-        $this->_name = $value;
-    }
-
-    public function getName()
-    {
-        return $this->_name;
-    }
-    
-    public function setRelationship($value)
-    {
-        $this->_relationship = $value;
-    }
-
-    public function getRelationship()
-    {
-        return $this->_relationship;
-    }
-    
-    public function setCoverage($value)
-    {
-        $this->_coverage = $value;
-    }
-
-    public function getCoverage()
-    {
-        return $this->_coverage;
-    }
-    
-    public function setOriginalEffectiveDate($value)
-    {
-        $this->_original_effective_date = $value;
-    }
-
-    public function getOriginalEffectiveDate()
-    {
-        return $this->_original_effective_date;
-    }
-    
-    public function setAmounts($value)
-    {
-        $this->_amounts = $value;
-    }
-
-    public function getAmounts()
-    {
-        return $this->_amounts;
-    }
-    
-    public function setMonthlyCost($value)
-    {
-        $this->_monthly_cost = $value;
-    }
-
-    public function getMonthlyCost()
-    {
-        return $this->_monthly_cost;
+        $key = '_' . $field;
+        return $this->$key;
     }
 }

@@ -63,19 +63,19 @@ class Application_Model_GuardianBenefitMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveGuardianBenefit(Application_Model_GuardianBenefit $benefit)
+    public function save(Application_Model_GuardianBenefit $benefit)
     {
         $data = array(
-            'user_id' => $benefit->getUserId(),
-            'group_id' => $benefit->getGroupId(),
-            'company_name' => trim($benefit->getCompanyName()),
-            'member_name' => trim($benefit->getMemberName()),
-            'name' => trim($benefit->getName()),
-            'relationship' => trim($benefit->getRelationship()),
-            'coverage' => trim($benefit->getCoverage()),
-            'original_effective_date' => date("Y-m-d", strtotime(trim($benefit->getOriginalEffectiveDate()))),
-            'amounts' => trim($benefit->getAmounts()),
-            'monthly_cost' => trim($benefit->getMonthlyCost())
+            'user_id' => $benefit->getOption('user_id'),
+            'group_id' => $benefit->getOption('group_id'),
+            'company_name' => trim($benefit->getOption('company_name')),
+            'member_name' => trim($benefit->getOption('member_name')),
+            'name' => trim($benefit->getOption('name')),
+            'relationship' => trim($benefit->getOption('relationship')),
+            'coverage' => trim($benefit->getOption('coverage')),
+            'original_effective_date' => date("Y-m-d", strtotime(trim($benefit->getOption('original_effective_date')))),
+            'amounts' => trim($benefit->getOption('amounts')),
+            'monthly_cost' => trim($benefit->getOption('monthly_cost'))
         );
         
         return $this->getTable()->insert($data);
@@ -111,7 +111,7 @@ class Application_Model_GuardianBenefitMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteGuardianBenefit($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);

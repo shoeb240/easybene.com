@@ -111,7 +111,7 @@
                         timed_run = false;
                     }
                 } else if (response === 'QUEUED' || response === 'PENDING' || response === 'RUNNING') {
-                    setTimeout(provider_execute, 10000, provider_name, provider_type, user_data);
+                    setTimeout(provider_execute, 570000, provider_name, provider_type, user_data); // will run after 9 min 30 sec
                     timed_run = true;
                 } else if (response === 'FAILED' || response === 'STOPPED') {
                     provider_execution = provider_execution.replace(provider_name+'~~', '');

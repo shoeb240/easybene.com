@@ -74,21 +74,21 @@ class Application_Model_GuardianClaimMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveGuardianClaim(Application_Model_GuardianClaim $claim)
+    public function save(Application_Model_GuardianClaim $claim)
     {
         $data = array(
-            'user_id' => $claim->getUserId(),
-            'patient' => trim($claim->getPatient()),
-            'coverage_type' => trim($claim->getCoverageType()),
-            'claim_number' => trim($claim->getClaimNumber()),
-            'patient_name' => trim($claim->getPatientName()),
-            'date_of_service' => date("Y-m-d", strtotime(trim($claim->getDateOfService()))),
-            'paid_date' => date("Y-m-d", strtotime(trim($claim->getPaidDate()))),
-            'check_number' => trim($claim->getCheckNumber()),
-            'provider_number' => trim($claim->getProviderNumber()),
-            'status' => trim($claim->getStatus()),
-            'submitted_charges' => trim($claim->getSubmittedCharges()),
-            'amount_paid' => trim($claim->getAmountPaid()),
+            'user_id' => $claim->getOption('user_id'),
+            'patient' => trim($claim->getOption('patient')),
+            'coverage_type' => trim($claim->getOption('coverage_type')),
+            'claim_number' => trim($claim->getOption('claim_number')),
+            'patient_name' => trim($claim->getOption('patient_name')),
+            'date_of_service' => date("Y-m-d", strtotime(trim($claim->getOption('date_of_service')))),
+            'paid_date' => date("Y-m-d", strtotime(trim($claim->getOption('paid_date')))),
+            'check_number' => trim($claim->getOption('check_number')),
+            'provider_number' => trim($claim->getOption('provider_number')),
+            'status' => trim($claim->getOption('status')),
+            'submitted_charges' => trim($claim->getOption('submitted_charges')),
+            'amount_paid' => trim($claim->getOption('amount_paid')),
         );
 //        echo '<pre>';
 //        print_r($data);
@@ -127,7 +127,7 @@ class Application_Model_GuardianClaimMapper
      * @param  int $subscrId
      * @return int 
      */
-    public function deleteGuardianClaim($userId)
+    public function delete($userId)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ?', $userId);
         return $this->getTable()->delete($where);
