@@ -8,7 +8,7 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_CignaDeductibleClaimMapper
+class Application_Model_CignaDeductibleMapper
 {
     /**
      * @var Application_Model_DbTable_CignaDeductible
@@ -60,7 +60,7 @@ class Application_Model_CignaDeductibleClaimMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function save(Application_Model_CignaDeductibleClaim $deductible)
+    public function save(Application_Model_CignaDeductible $deductible)
     {
         $data = array(
             'user_id' => $deductible->getOption('user_id'),
