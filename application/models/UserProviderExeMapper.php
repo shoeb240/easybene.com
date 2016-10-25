@@ -103,6 +103,7 @@ class Application_Model_UserProviderExeMapper
         
         if ($row) {
             $row->exe_id = $exeId;
+            $row->failed = 0;
             
             return $row->save();
         } else {
@@ -110,6 +111,7 @@ class Application_Model_UserProviderExeMapper
             $data['user_provider_table_id'] = $userProviderTableId;
             $data['run_name'] = $runName;
             $data['exe_id'] = $exeId;
+            $data['failed'] = 0;
             
             return $this->getTable()->insert($data);
         }

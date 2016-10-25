@@ -72,6 +72,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     {
         $executionId = $userProviderExeObj->exe_id;
         $execute_res = $this->myExecutionCheck($executionId, $headerArray);
+        //echo $execute_res . '==' . $executionId . '<br />';
         $result = array();
         if ('OK' === $execute_res) {
             $url = $this->apiEndPoint . "executions/{$executionId}/result";
@@ -122,9 +123,9 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $usersAll = array();
         if (is_numeric($userId) && is_numeric($providerId)) {
             $usersAll = $userProviderMapper->getUserProvider($providerId, $userId);
-        } else if ($this->cronKey === $userId) {
+        } /*else if ($this->cronKey === $userId) {
             $usersAll = $userProviderMapper->getAllUserProviders($providerName, $providerType);
-        }
+        }*/
 
         return $usersAll;
         
@@ -154,6 +155,9 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $runData['password'] = $userObj->provider_password;
             
         $data_string = json_encode($runData);    
+        /*echo '<pre>';
+        print_r($data_string);
+        echo '</pre>';*/
         $headerArray = $this->getHeaderArr();
         try {
             $result = $this->myRunWithInput($data_string, $headerArray, $runId);
@@ -182,6 +186,9 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             reset($this->runs);
             foreach($this->runs as $run_id => $run_name) {
                 $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
+                /*echo '<pre>';
+                print_r($eachRunData);
+                echo '</pre>';*/
                 $this->runEachScrapper($userObj, $eachRunData, $run_id, $run_name);
             }
         }
@@ -215,7 +222,15 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             $this->storeScrape($userId, $arr);
         }
         
-        return json_encode(array('response' => $this->execute_res, 'response_failed_ids' => $this->ret_failed));
+        if (!empty($this->ret_failed)) {
+            $responseFailedIds = implode(',', $this->ret_failed);
+            $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+            $ok = $userProviderExeMapper->updateFailed($responseFailedIds);
+            
+            //$this->send_email($responseFailedIds);
+        }
+
+        return json_encode(array('response' => $this->execute_res, 'response_failed_ids' => $responseFailedIds));
     }
     
     protected function storeScrape($userId, $arr)
@@ -255,6 +270,27 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             }
         }
 
+    }
+    
+    protected function send_email($failed)
+    {
+        try {
+            $this->load->library('email');
+
+            $this->email->from('shoeb240@gmail.com', 'Easy Bene');
+            $this->email->to('shoeb240@gmail.com');
+            $this->email->cc('shoeb56@gmail.com');
+
+            $this->email->subject('Easy Bene Failed Executions');
+            $this->email->message('Following user_provider_exe.id failed while execution: ' . $failed);
+
+            if ( ! $this->email->send())
+            {
+                echo 'Could not send email';
+            }
+        } catch(Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
 }

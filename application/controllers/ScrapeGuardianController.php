@@ -49,19 +49,27 @@ class ScrapeGuardianController extends My_Controller_ScrapeBase
             'guardian_claim' => array(
                 array(
                     'patient' => 0,
-                    'coverage_type' => 'D'
+                    'coverage_type' => 'D',
+                    'date_of_service_from' => '01/01/'.date("Y"),
+                    'date_of_service_to' =>  date("m/d/Y")
                 ),
                 array(
                     'patient' => 1,
-                    'coverage_type' => 'D'
+                    'coverage_type' => 'D',
+                    'date_of_service_from' => '01/01/'.date("Y"),
+                    'date_of_service_to' => date("m/d/Y")
                 ),
                 array(
                     'patient' => 2,
-                    'coverage_type' => 'D'
+                    'coverage_type' => 'D',
+                    'date_of_service_from' => '01/01/'.date("Y"),
+                    'date_of_service_to' =>  date("m/d/Y")
                 ),
                 array(
                     'patient' => 3,
-                    'coverage_type' => 'D'
+                    'coverage_type' => 'D',
+                    'date_of_service_from' => '01/01/'.date("Y"),
+                    'date_of_service_to' =>  date("m/d/Y")
                 ),
             )
         );

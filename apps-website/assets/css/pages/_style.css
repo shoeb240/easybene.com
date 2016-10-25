@@ -1,0 +1,152 @@
+html, body {
+  height: 100%;
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.photo {
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  height: 450px;
+  /*position: relative;*/
+}
+
+.intro-setion {
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: repeat;
+  /*    position: relative;*/
+  background-image: url("../images/intro-bg.jpg");
+  background-color: #444;
+  background-size: auto auto;
+  height: 100%;
+  min-height: 100%;
+  width: 100%;
+  display: table;
+  overflow: hidden;
+  vertical-align: middle;
+  z-index: 1;
+}
+
+.quotes {
+  display: none;
+}
+
+.parallax-overlay {
+  background-color: rgba(44, 62, 80, 0.6);
+  background-image: url("../images/pattern.png");
+  background-repeat: repeat;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+}
+
+.intro-content {
+  display: table-cell;
+  position: relative;
+  vertical-align: middle;
+  z-index: 3;
+  text-align: center;
+}
+
+.autumn {
+  background-image: url(../images/autumn.jpg);
+}
+
+.winter {
+  background-image: url(../images/winter.jpg);
+}
+
+.spring {
+  background-image: url(../images/spring.jpg);
+}
+
+#navbar-main {
+  /* Added `.affix-top` class css when the element is top */
+  /* Added `.affix` class css when the element is >= 170px (Look: line 8 html) */
+  /* Added `.affix-bottom` class css when the element is footer */
+}
+
+#navbar-main.affixed-top {
+  background: black;
+}
+
+#navbar-main.affix {
+  background: gray;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+#navbar-main.affix-bottom {
+  background: red;
+}
+
+/* Not important */
+.footer {
+  background: #eee;
+  height: 1000px;
+}
+
+/*css for the intro section*/
+header.page-header {
+  border: none;
+}
+
+header.page-header .topTitle h2 {
+  font-size: 45px;
+  color: #fff;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.intro-setion .navbar {
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+  background: transparent none repeat scroll 0 0;
+  transition: top 0.3s ease 0s, left 0.3s ease 0s, right 0.3s ease 0s, background 0.3s ease 0s;
+  border: none;
+  border-radius: 0;
+}
+
+.intro-setion .navbar ul {
+  text-align: center;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.intro-setion .navbar ul li {
+  display: inline-block;
+  float: none;
+}
+
+.intro-setion .navbar ul li a {
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 16px;
+  padding-top: 17px;
+}
+
+.intro-setion .navbar ul li.active a {
+  color: #fff;
+  text-transform: uppercase;
+  padding-bottom: 16px;
+  padding-top: 17px;
+}
+
+.intro-setion .navbar ul li.active a::before {
+  background: #25cbf5;
+  bottom: 0;
+  content: "";
+  height: 5px;
+  left: 40%;
+  position: absolute;
+  z-index: 1;
+  width: 20px;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
+  background: transparent;
+}

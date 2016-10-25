@@ -1,0 +1,98 @@
+// Defining values
+$screen-sm-min: 768px;
+$screen-xs-max: ($screen-sm-min - 1);
+$screen-md-min: 992px;
+$screen-sm-max: ($screen-md-min - 1);
+$screen-lg-min: 1200px;
+$screen-md-max: ($screen-lg-min - 1);
+
+// Usage
+
+@media (max-width: 360px) { 
+
+}
+@media (max-width: $screen-xs-max) { 
+    .navbar-header {
+        width: 100% !important;
+    }
+    .navbar-inverse .navbar-toggle .icon-bar {
+        background: $primary-color;
+    }
+    .navbar-inverse .navbar-toggle {
+        border-color: $primary-color;
+    }
+    .navbar-inverse .navbar-toggle:hover, .navbar-inverse .navbar-toggle:focus {
+        background: transparent;
+    }
+    .intro-setion .navbar ul {
+        width: 100%!important;
+    }
+    .intro-setion .navbar ul  li {
+        display: block;
+        text-align: left;
+    }
+    .intro-setion .navbar ul li.active a, .intro-setion .navbar ul li a, .navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
+        padding: 10px;
+        display: block;
+        color: #222;
+    }
+    .intro-setion .navbar ul li.active a::before, .intro-setion .navbar ul li a:hover::before {
+        bottom: 4px;
+        left: 11px;
+    }
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+        border: none;
+        background: #fff;
+        margin-top: 24px;
+    }
+    .intro-setion .navbar .navbar-right li a:hover:before {
+        content: "";
+        height: 0;
+        width: 0;
+    }
+    .intro-setion .navbar .navbar-right li a {
+        display: block;
+    }
+    .intro-content-text h1 {
+        font-size: 40px;
+    }
+    .survey-section .box-wrapper {
+        margin-bottom: 50px;
+    }
+    .intuitive-features-content {
+        max-width: 300px;
+        margin: 15px auto;
+    }
+    .intuitive-features-content  p {
+        padding: 0 15px;
+    }
+    h2 {
+        font-size: 32px !important;
+    }
+    .single-about-app, .about-content {
+        padding: 0;
+    }
+} //max-767px
+@media (min-width: $screen-sm-min) { 
+}
+@media (max-width: $screen-sm-max) {   
+}//max-768px
+@media (min-width: $screen-md-min) {
+}
+@media (max-width: $screen-md-max) {    
+
+    .intro-setion .navbar ul:first-child {
+        width: 60%;
+    }
+    .intro-setion .navbar .navbar-right {
+
+        width: 28%;
+    }
+    .navbar-header {
+        width: 11%;
+    }
+}//max-992px
+@media (min-width: $screen-lg-min) { 
+
+}
+

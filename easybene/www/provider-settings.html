@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/slidebars-theme.css">
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+        
+        <!-- ============================================
+        ================= Stylesheets ===================
+        ============================================= -->
+        <!-- vendor css files -->
+        <link rel="stylesheet" href="assets/js/vendor/chosen/chosen.css">
+        
+        <style>
+            .login-list li {
+                margin: 0 auto 3px;
+                width: 85%;
+            }
+            
+            .btn-wrapper {
+                border: medium none !important;
+                margin-top: 5px !important;
+            }
+            
+            .provider-login-wrapper .login-list {
+                margin-top: 10px;
+            }
+            
+            .btn-wrapper button {
+                font-size: 16px;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <!-- Top Navigation Bar -->
+        <div class="sb-navbar sb-slide">
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
+            <!--             Left Slidebar control -->
+            <div class="sb-toggle-left">
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="page-title">Provider Settings</h2>
+
+        </div>
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
+
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
+
+
+                <div class="page-content search-prvider-page">
+
+                    <div class="content-block less-margin">
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            
+                            <div id="site_reg_div" class="provider-login-wrapper" style="display: block; box-shadow: none; margin: 0;">
+                                <h2>Linking your <span id="site_selected_type_name"></span> account to Bene Fits.</h2>
+                                <p class="provider-login-info-text">
+                                    <a href="#Why-imp-Modal" data-toggle="modal">Why it is important?</a>
+                                </p>
+
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_medical" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
+                                        <ul>
+                                            <li>Medical Provider</li>
+                                            <li>
+                                                <div id="medical_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Medical Provider Registered Successfully</div>
+                                                <div id="medical_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div id="medical_provider_div" class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <!--<input id="medical_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="medical_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="medical_selected_user_id"  type="text" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="medical_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="medical_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                                
+                                
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_dental" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
+                                        <ul>
+                                            <li>Dental Provider</li>
+                                            <li>
+                                                <div id="dental_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Dental Provider Registered Successfully</div>
+                                                <div id="dental_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div id="dental_provider_div" class="item-input">
+                                                        <!--<input id="dental_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="dental_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="dental_selected_user_id"  type="text" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="dental_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                 <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="dental_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                                
+                                
+                                
+                                <div>
+                                    <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_vision" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
+                                        <ul>
+                                            <li>Vision Provider</li>
+                                            <li>
+                                                <div id="vision_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Vision Provider Registered Successfully</div>
+                                                <div id="vision_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div id="vision_provider_div" class="item-input">
+                                                        <!--<input id="vision_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="vision_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="vision_selected_user_id"  type="text" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="vision_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="vision_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                                
+                                
+                                
+                                
+                                
+                                <div>
+                                    <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_funds" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
+                                        <ul>
+                                            <li>Funds Provider</li>
+                                            <li>
+                                                <div id="funds_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Funds Provider Registered Successfully</div>
+                                                <div id="funds_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div id="funds_provider_div" class="item-input">
+                                                        <!--<input id="funds_selected_user_id"  type="email" placeholder="User Name">-->
+                                                        <select id="funds_selected_name">
+                                                            <option>--Select Provider--</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="funds_selected_user_id"  type="text" placeholder="User Name">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="funds_selected_password"  type="password" placeholder="Password">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            <li class="btn-wrapper">
+                                                <a id="funds_register" href="javascript:void(0);" style="float: right; margin: 5px;"><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" style="float: right; margin: 5px;"><button type="submit">Cancel</button></a>
+                                            </li>
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                        
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
+
+        <!-- Modal HTML -->
+        <div id="Why-imp-Modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <div class="why-important-text-wrapper">
+                            <div class="why-important-text-wrapper-text">
+                                <h3>Linking is how the magic Happens</h3>
+                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
+                                <a data-dismiss="modal" style="cursor: pointer">Got it</a>
+                            </div>
+
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        
+        
+         <!-- ============================================
+        ============== Vendor JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/vendor/jRespond/jRespond.min.js"></script>
+
+        <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
+
+        <script src="assets/js/vendor/chosen/chosen.jquery.js"></script>
+
+        <!--/ vendor javascripts -->
+
+        <!-- ============================================
+        ============== Custom JavaScripts ===============
+        ============================================= -->
+        <script src="assets/js/main.js"></script>
+        <!--/ custom javascripts -->
+        
+        
+        <script>
+        function show_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "block");
+            $(ths).closest("li").addClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "block");
+        }
+        
+        function remove_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        function show_ok(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "block");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        //$('#funds_selected_user_id').on("change", function(){
+        $('input:text').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 2) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+        
+        //$('#funds_selected_password').on("change", function(){
+        $('input:password').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 6) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+    
+        function validation_check(site_name) {
+            var valid = true;
+            site_name = site_name.toLowerCase();
+            if ($('#'+site_name+'_selected_name').val() === '--Select Provider--') {
+                show_error($('#'+site_name+'_selected_name'));
+                valid = false;
+            } else {
+                remove_error($('#'+site_name+'_selected_name'));
+            }
+            
+            if ($('#'+site_name+'_selected_user_id').val().length < 2) {
+                show_error($('#'+site_name+'_selected_user_id'));
+                valid = false;
+            } else {
+                remove_error($('#'+site_name+'_selected_user_id'));
+            }
+
+            if ($('#'+site_name+'_selected_password').val().length < 6) {
+                show_error($('#'+site_name+'_selected_password'));
+                valid = false;
+            } else {
+                remove_error($('#'+site_name+'_selected_password'));
+            }
+
+            return valid;
+        }
+        
+        function hideAll() {
+            $('#welcome_div').css('display', 'none');
+            $('#site_choice_dental_div').css('display', 'none');   
+            $('#site_choice_vision_div').css('display', 'none');   
+
+            $('#site_reg_div').css('display', 'none');   
+            $('#site_reg_fail_div').css('display', 'none');   
+        }
+
+        function ShowDentalSiteLinks() {
+            hideAll(); 
+            $('#site_choice_dental_div').css('display', 'block');
+        }
+
+        function ShowVisionSiteLinks() {
+            hideAll(); 
+            $('#site_choice_vision_div').css('display', 'block');
+        }
+
+        function ShowSiteReg(type, site, image) {
+            hideAll();
+            $('#site_reg_div').css('display', 'block');
+            $('#site_selected_type_name').html(type);
+            $('#site_selected_name').val(site);
+            $('#site_selected_type_image').attr("src", "assets/images/" + image);
+        }
+
+         function ProcessLogout() {
+            window.localStorage.removeItem('username');
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('token_expire');
+            window.localStorage.removeItem('medical_site');
+            window.localStorage.removeItem('dental_site');
+            window.localStorage.removeItem('vision_site');
+            window.localStorage.removeItem('funds_site');
+            location.href = "index.html";
+        }
+
+        function GetUserData() {
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+            
+            var provider_types = ['medical', 'dental', 'vision', 'funds'];
+            
+            var provider_list_each_type = '';
+            var result_site = '';
+            var len = '';
+            var plen = '';
+            var selected = '';
+            var select_code = '';
+            var site_type = '';
+            var site_name = '';
+            var site_user_id = '';
+            var site_password = '';
+            
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                type: "GET",
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                    //console.log(result);
+                        plen = provider_types.length;
+                        for(var p = 0; p <= plen; p++) {
+                            user_id = '';
+                            password = '';
+                            select_code = '';
+                            result_site = '';
+                            
+                            if (result.providerList[provider_types[p]]) {
+                                provider_list_each_type = result.providerList[provider_types[p]];
+                                //console.log(provider_list_each_type);
+                            }
+                            
+                            if (result.providersSelected[provider_types[p]]) {
+                                result_site = result.providersSelected[provider_types[p]].provider_name;
+                                user_id = result.providersSelected[provider_types[p]].provider_user_id;
+                                password = result.providersSelected[provider_types[p]].provider_password;
+                                //console.log(provider_types[p]);
+                                //console.log(result_site);
+                            }
+                            
+                            len = provider_list_each_type.length;
+                            selected = '';
+                            for(var i = 0; i < len; i++) {
+                                selected = '';
+                                if (result_site && result_site.toLowerCase() === provider_list_each_type[i].name.toLowerCase()) {
+                                    selected = 'selected';
+                                }
+                                select_code = select_code + '<option '+selected+' value="'+provider_list_each_type[i].name+'">'+provider_list_each_type[i].label+'</option>';
+                            }
+                            $('#'+provider_types[p]+'_selected_name').append(select_code);
+                            
+                            $('#'+provider_types[p]+'_selected_user_id').val(user_id);
+                            $('#'+provider_types[p]+'_selected_password').val(password);
+                            
+                            $('#'+provider_types[p]+'_register').on('click', function() {
+                                var thsid = $(this).attr('id');
+                                //console.log(thsid.substring(0, thsid.indexOf('register') - 1));
+                                site_type = thsid.substring(0, thsid.indexOf('register') - 1);
+                                site_name = $('#'+site_type+'_selected_name').val();
+                                site_user_id = $('#'+site_type+'_selected_user_id').val();
+                                site_password = $('#'+site_type+'_selected_password').val();
+                                if (validation_check(site_type)) {
+                                    RegisterSite(site_type, site_name, site_user_id, site_password);
+                                }
+                            });
+                        }
+                        
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //console.log(xhr);
+                        //console.log(ajaxOptions);
+                        //console.log(thrownError);
+                        ShowSitelRegFail();
+                    },
+            });
+        }
+
+        function provider_run(scrapper_script_path, username, token, provider_id)
+        {
+            var response = false;
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/'+scrapper_script_path+'/run/'+username+'/'+token+'/'+provider_id,
+                type: "GET",
+                dataType: 'json',
+                async: false,
+                success: function(result){
+                    //console.log(result);
+                    response = result.response;
+                },
+                error: function(a, b, c){
+                    response = false; 
+                }
+            });
+            
+            return response;
+        }
+        
+        function RegisterSite(site_type, site_name, site_user_id, site_password) {
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+            var provider_execution = window.localStorage.getItem('provider_execution');
+            
+            $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'block');
+
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                type: "POST",
+                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        window.localStorage.setItem(result.provider_type+'_site', result.provider_name);
+                        //console.log(result.provider_type+'_site');
+                        //console.log(result.provider_name);
+                        //var medical_site = window.localStorage.getItem('medical_site');
+                        //console.log(medical_site);
+                        
+                        var success_count = 0;
+                        var res = false;
+                        if (result.provider_name) {
+                            res = provider_run(result.scrapper_script_path, username, token, result.provider_id);
+                        }
+                        if (res === true) {
+                            if (site_name) {
+                                if (provider_execution && provider_execution.indexOf(site_name.toLowerCase()) < 0) {
+                                   provider_execution = provider_execution + site_name.toLowerCase() + '~~';
+                                } else {
+                                   provider_execution = site_name.toLowerCase() + '~~';
+                                }
+                                window.localStorage.setItem('provider_execution', provider_execution);
+                            }
+                        
+                            success_count += 1;
+                            //console.log(provider_execution);
+                        }                        
+                        
+                        $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'none');
+                        $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
+                        
+                        GetUserData();
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //console.log(xhr);
+                        //console.log(ajaxOptions);
+                        //console.log(thrownError);
+                        $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'none');
+                        $("#" + site_type.toLowerCase() + "_error").css('display', 'block');
+                    },
+            });
+        }
+        
+        GetUserData();
+        </script>
+    </body>
+</html>
