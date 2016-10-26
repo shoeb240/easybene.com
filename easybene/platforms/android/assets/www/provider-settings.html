@@ -532,6 +532,11 @@
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
             
+            if (!username || !token) {
+                location.href = 'index.html';
+                return false;
+            }
+            
             var provider_types = ['medical', 'dental', 'vision', 'funds'];
             
             var provider_list_each_type = '';
@@ -656,16 +661,17 @@
                             res = provider_run(result.scrapper_script_path, username, token, result.provider_id);
                         }
                         if (res === true) {
-                            if (site_name && provider_execution.indexOf(site_name.toLowerCase()) < 0) {
-                                if (typeof provider_execution !== 'undefined' && provider_execution) {
-                                   provider_execution = provider_execution + site_name.toLowerCase() + '~~';
-                                } else {
+                            if (site_name) {
+                                if (!provider_execution) {
                                    provider_execution = site_name.toLowerCase() + '~~';
+                                } else if (provider_execution.substring(provider_execution.length-2) !== '~~') {
+                                    provider_execution = site_name.toLowerCase() + '~~';
+                                } else if (provider_execution.indexOf(site_name.toLowerCase()) < 0) {
+                                   provider_execution = provider_execution + site_name.toLowerCase() + '~~';
                                 }
                                 window.localStorage.setItem('provider_execution', provider_execution);
+                                success_count += 1;
                             }
-                        
-                            success_count += 1;
                             //console.log(provider_execution);
                         }                        
                         

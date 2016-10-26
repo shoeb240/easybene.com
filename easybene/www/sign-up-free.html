@@ -285,6 +285,7 @@
                         window.localStorage.setItem("username", email);
                         window.localStorage.setItem("token", result.token);
                         window.localStorage.setItem("token_expire", result.token_expire);
+                        window.localStorage.setItem('provider_execution', '');
 
                         location.href = "index.html";
                     },
@@ -295,6 +296,12 @@
                         $("#error_after_submit").css("display", "block");
                     },
                 });
+            }
+            
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem("token");
+            if (username && token) {
+                location.href = 'dashboard.html';
             }
         </script>
 

@@ -40,20 +40,24 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             $result['medical_percent'] = '';
             $result['medical_deductible'] = '';
             $result['medical_deductible_met'] = '';
+            $result['medical_data_exists'] = '';
             $result['dental_percent'] = '';
             $result['dental_deductible'] = '';
             $result['dental_deductible_met'] = '';
+            $result['dental_data_exists'] = '';
             $result['vision_percent'] = '';
             $result['vision_deductible'] = '';
             $result['vision_deductible_met'] = '';
+            $result['vision_data_exists'] = '';
             if ($userInfo['medical']->provider_name == 'cigna') {
                 
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
                 $cignaDeductible = $deductibleMapper->getCignaDeductible($userId);
-
+                
                 $result['medical_deductible'] = str_replace(array('$', ','), '', $cignaDeductible['deductible_amt']);
                 $result['medical_deductible_met'] = str_replace(array('$', ','), '', $cignaDeductible['deductible_met']);
                 $result['medical_percent'] = round($result['medical_deductible_met'] / $result['medical_deductible'] * 100);
+                $result['medical_data_exists'] = !empty($cignaDeductible['user_id']) ? 'yes' : '';
                 
             } else if ($userInfo['medical']->provider_name == 'guardian') {
                 
@@ -66,6 +70,7 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['medical_deductible'] = str_replace(array('$', ','), '', $anthemDeductible['CD_deductible_in_net_family_limit']);
                 $result['medical_deductible_met'] = str_replace(array('$', ','), '', $anthemDeductible['CD_deductible_in_net_family_accumulate']);
                 $result['medical_percent'] = round($result['medical_deductible_met'] / $result['medical_deductible'] * 100);
+                $result['medical_data_exists'] = !empty($anthemDeductible['user_id']) ? 'yes' : '';
             }
             
             if ($userInfo['dental_site'] == 'Cigna') {
@@ -87,6 +92,7 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['dental_deductible'] = $submittedCharges;
                 $result['dental_deductible_met'] = $amountPaid;
                 $result['dental_percent'] = round((($amountPaid / $submittedCharges))*100);
+                $result['dental_data_exists'] = !empty($guardianClaim['user_id']) ? 'yes' : '';
                 
             } else if ($userInfo['dental_site'] == 'Anthem') {
                 

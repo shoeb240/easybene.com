@@ -179,9 +179,9 @@
             async: false,
             success: function(result) {
                 //console.log(result);
-                graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible);
-                graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible);
-                graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible);
+                graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible, result.medical_data_exists);
+                graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible, result.dental_data_exists);
+                graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible, result.vision_data_exists);
                 
                 if (!funds_site || funds_site == 'null' || funds_site == 'undefined') {
                     $("#summary_link_funds").css("color", "#f8c572");
@@ -201,7 +201,7 @@
         
     }
     
-    function graph(percent, deductible_met, site, site_type, deductible)
+    function graph(percent, deductible_met, site, site_type, deductible, data_exists)
     {
         var graph_id = "#"+site_type+"-circle";
         var image_id = "#"+site_type+"_image";
@@ -222,6 +222,14 @@
                 $(graph_id).parent().removeClass("orange-graph");
                 $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
                 $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
+            } else if (data_exists !== 'yes') {
+                $(graph_id).parent().children("p.status-text").html("Data Unavailable");
+                $(graph_id).parent().addClass("orange-graph");
+                $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
+                $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
+                fontColor = "#f8c572";
+                foregroundColor = "#f8c572";
+                percent = 0;
             } else {
                 $(graph_id).parent().children("p.status-text").html("Provider Pending");
                 $(graph_id).parent().addClass("orange-graph");
