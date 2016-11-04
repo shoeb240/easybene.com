@@ -72,6 +72,10 @@ $screen-md-max: ($screen-lg-min - 1);
     .single-about-app, .about-content {
         padding: 0;
     }
+    .verticl-centermodal .modal-dialog .modal-content button.close {
+        right: 2px;
+        top: 5px;
+    }
 } //max-767px
 @media (min-width: $screen-sm-min) { 
 }
@@ -80,7 +84,6 @@ $screen-md-max: ($screen-lg-min - 1);
 @media (min-width: $screen-md-min) {
 }
 @media (max-width: $screen-md-max) {    
-
     .intro-setion .navbar ul:first-child {
         width: 60%;
     }

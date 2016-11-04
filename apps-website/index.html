@@ -14,18 +14,14 @@
         <!-- Bootstrap core CSS -->
         <link href="assets/fonts/font-awesome.css" rel="stylesheet">
         <link href="assets/css/main.css" rel="stylesheet">
-
         <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700,300italic,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Tangerine:400,700' rel='stylesheet' type='text/css'>
-
-
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
         <!-- Favicons -->
         <link rel="apple-touch-icon-precomposed" href="assets/images/easybene.png">
         <link rel="icon" href="assets/images/easybene.png">
@@ -33,9 +29,7 @@
 
 
     <body data-offset="80"  data-spy="scroll" data-target=".affix">
-
         <section class="intro-setion">
-
             <div class="parallax-overlay"></div>
             <div class="intro-content">
                 <nav id="navbar-main" class="navbar navbar-inverse navbar-left" role="navigation">
@@ -54,15 +48,16 @@
                     </div>
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav">
-<!--                            <li class="hidden"><a href="#page-top" class="page-scroll"></a></li>-->
+                            <!--                            <li class="hidden"><a href="#page-top" class="page-scroll"></a></li>-->
                             <li><a href="#">How it Works</a></li>
                             <li><a href="#">Find Savings</a></li>
                             <li><a href="#">Support</a></li>
                             <li><a href="#">Blog</a></li>                           
                         </ul>
                         <ul class="navbar-right">                            
-                            <li><a  href="#">login</a></li>                     
-                            <li><a  href="#">Sign up</a></li>                              
+                            <li><a  id="login_li" href="#logInModal" role="button" data-toggle="modal">login</a></li>                     
+                            <li><a  id="signup_li" href="#signUpModal" role="button" data-toggle="modal">Sign up</a></li>                              
+                            <li><a  id="logout_li" href="javascript: void(0);" class="logout" role="button">Logout</a></li>                             
                         </ul>
                     </div>
                     <!--                        /.nav-collapse -->
@@ -78,11 +73,11 @@
                                 <p>Save on debt or get the loan right for you in our new <a href="#">Loan</a> Center.</p>
                                 <div class="download-links text-center">
 
-                                    <a href="#"><i class="fa fa-android" aria-hidden="true"></i>
+                                    <a href="#signUpModal" role="button" data-toggle="modal"><i class="fa fa-android" aria-hidden="true"></i>
                                         <div class="text fix"><span>Available in</span><h4>Android Market</h4>
                                         </div>
                                     </a>
-                                    <a href="assets/app/android-debug.apk"><i class="fa fa-cloud-download" aria-hidden="true"></i>
+                                    <a class="download_now" href="#signUpModal" role="button" data-toggle="modal"><i class="fa fa-cloud-download" aria-hidden="true"></i>
                                         <div class="text fix"><span>Available to</span><h4>Download Now</h4>
                                         </div>
                                     </a>
@@ -220,8 +215,6 @@
                     <div class="col-xs-12 col-sm-6 left-text">
                         <img src="assets/images/feature-2.png" alt="about" class="img-responsive" />
                     </div>
-
-
                 </div>
             </div>
         </section>
@@ -307,9 +300,7 @@
                     </div>
                 </div>
             </div>
-        </section>
-
-
+        </section> 
         <section class="download-area overlay">
             <div class="container">
                 <div class="row">
@@ -318,11 +309,11 @@
                         <p>Lorem ipsum dolor sit a met, consectetur adipisicing elit, sed do eiusmod tempor</p>
                         <div class="download-links text-center">
 
-                            <a href="#"><i class="fa fa-android" aria-hidden="true"></i>
+                            <a href="#signUpModal" role="button" data-toggle="modal"><i class="fa fa-android" aria-hidden="true"></i>
                                 <div class="text fix"><span>Available in</span><h4>Android Market</h4>
                                 </div>
                             </a>
-                            <a href="assets/app/android-debug.apk"><i class="fa fa-cloud-download" aria-hidden="true"></i>
+                            <a class="download_now" href="#signUpModal" role="button" data-toggle="modal"><i class="fa fa-cloud-download" aria-hidden="true"></i>
                                 <div class="text fix"><span>Available to</span><h4>Download Now</h4>
                                 </div>
                             </a>
@@ -368,6 +359,142 @@
                 </div>
             </div>
         </footer>
+
+
+
+
+        <!-- Modal HTML -->
+
+        <div id="signUpModal" class="verticl-centermodal modal fade">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        <h4 class="modal-title">Sign Up</h4>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="logo-wrapper">
+                            <img src="assets/images/logo.png" alt="logo" class="img-reponsive" />
+                        </div>
+
+                        <form>
+                            <div id="error_after_submit" style="display: none; position: static;" class="error">Email and/or Password did not match</div>
+                            <div class="input-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input type="email" id="reg_email" class="form-control" placeholder="E-mail">            
+                                </div>
+                                <span class="error" style="display: none;">Please enter a valid E-mail</span>
+                            </div>
+                            <div class="input-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon" ><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input type="email" id="reg_email_confirm" class="form-control" placeholder="Confirm E-mail">
+                                </div>
+                                <span class="error" style="display: none;">Confirm Email don't match</span>
+                            </div>
+                            <div class="input-wrapper pass-condition-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <input type="password" id="reg_password" class="form-control" placeholder="Password">
+
+                                </div>
+                                <span class="error" style="display: none;">Please enter a valid Password</span>
+                                <!--<div class="clearfix"></div>
+                                <ul style="display: block;" class="pass-condition open-con">
+                                    <li class="condition-reached">use 8 or more characters</li>
+                                    <li>use upper and lower case litters(Aa)</li>
+                                    <li>use a number and symbole (!@#$)</li>
+                                </ul>-->
+                            </div>
+                            <div class="input-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-unlock-alt" aria-hidden="true"></i></span>
+                                    <input type="password" id="reg_password_confirm" class="form-control" placeholder="Confirm Password">
+                                </div>
+                                <span class="error" style="display: none;">Confirm Password don't match</span>
+                            </div>
+                            <!-- <div class="input-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                    <div class="select-style">
+                                        <select class="form-control">
+                                            <option selected="selected">Select state</option>
+                                            <option value="volvo">Volvo</option>
+                                            <option value="saab">Saab</option>
+                                            <option value="mercedes">Mercedes</option>
+                                            <option value="audi">Audi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="input-group sign-up-btn-wrapper ">
+                                <button type="button" id="reg_next2" class="btn sign-up-btn" > <i class="fa fa-sign-in" aria-hidden="true"></i>SIGN UP</button>
+                            </div>
+                        </form>
+                        <p>By tapping Sign in you agree to <a href="#"> our License Agreement</a> and <a href="#">Privacy Statement</a></p>
+                        <!-- <p>Already have an account? <a href="#signUpModal" role="button" data-toggle="modal">Login In</a></p> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div id="logInModal" class="verticl-centermodal modal fade">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+
+                        <h4 class="modal-title">Log In</h4>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <div class="logo-wrapper">
+                            <img src="assets/images/logo.png" alt="logo" class="img-reponsive" />
+                        </div>
+
+                        <form>
+                            <div id="error_after_submit" style="display: none; position: static;" class="error">Email and/or Password did not match</div>
+                            <div class="input-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
+                                    <input type="email" id="login_email" class="form-control" placeholder="E-mail">            
+                                </div>
+                                <span class="error" style="display: none;">Please enter a valid E-mail</span>
+                            </div>
+                            <div class="input-wrapper pass-condition-wrapper">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                                    <input type="password" id="login_password" class="form-control" placeholder="Password">
+
+                                </div>
+                                <span class="error" style="display: none;">Please enter a valid Password</span>
+                            </div>
+                            <div class="input-group sign-up-btn-wrapper ">
+                                <button type="button" id="login_next2" class="btn sign-up-btn" > <i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</button>
+                            </div>
+                        </form>
+                        <p>Already have an account? <a href="#">Login In</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
 
         <!-- Bootstrap core JavaScript
         ================================================== -->
@@ -419,21 +546,238 @@
             })();
 
             // With JQuery
-            $('#ex1').slider({
+            /*$('#ex1').slider({
                 formatter: function (value) {
                     return 'Current value: ' + value;
                 }
-            });
+            });*/
 
             // Without JQuery
-            var slider = new Slider('#ex1', {
+            /*var slider = new Slider('#ex1', {
                 formatter: function (value) {
                     return 'Current value: ' + value;
                 }
+            });*/
+
+
+
+
+
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        function show_error(ths)
+        {
+            $(ths).removeClass("valid-input");
+            $(ths).addClass("error-input");
+            //$(ths).closest("li").addClass("error-found");
+            $(ths).parent().parent().children("span.error").css("display", "block");
+        }
+
+        function show_ok(ths)
+        {
+            $(ths).addClass("valid-input");
+            $(ths).removeClass("error-input");
+            //$(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".error").css("display", "none");
+            $(ths).parent().parent().children("span.error").css("display", "none");
+        }
+
+        $('#reg_email').on("change", function () {
+            $("#error_after_submit").css("display", "none");
+            if (!isEmail($(this).val())) {
+                show_error(this);
+            } else {
+                show_ok(this);
+            }
+        });
+
+        $('#reg_email_confirm').on("change", function () {
+            if ($(this).val() !== $("#reg_email").val()) {
+                show_error(this);
+            } else {
+                show_ok(this);
+            }
+        });
+
+        $('#reg_password').on("change", function () {
+            if ($(this).val().length < 8) {
+                show_error(this);
+            } else {
+                show_ok(this);
+            }
+        });
+
+        $('#reg_password_confirm').on("change", function () {
+            if ($(this).val() !== $("#reg_password").val()) {
+                show_error(this);
+            } else {
+                show_ok(this);
+            }
+        });
+
+        $('#reg_next2').on('click', function () {
+            if (validation_check()) {
+                ProcessReg();
+            }
+        });
+
+        $('.logout').on('click',  function() {
+            window.localStorage.removeItem('username');
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('token_expire');
+
+            location.href = 'index.html';
+        });
+
+        function validation_check(msg) {
+            var valid = true;
+
+            if (!isEmail($('#reg_email').val())) {
+                show_error($('#reg_email'));
+                valid = false;
+            } else {
+                show_ok($('#reg_email'));
+            }
+
+            if ($('#reg_email_confirm').val() !== $("#reg_email").val()) {
+                show_error($('#reg_email_confirm'));
+                valid = false;
+            } else {
+                show_ok($('#reg_email_confirm'));
+            }
+
+            if ($('#reg_password').val().length < 8) {
+                show_error($('#reg_password'));
+                valid = false;
+            } else {
+                show_ok($('#reg_password'));
+            }
+
+            if ($('#reg_password_confirm').val() !== $("#reg_password").val()) {
+                show_error($('#reg_password_confirm'));
+                valid = false;
+            } else {
+                show_ok($('#reg_password_confirm'));
+            }
+
+            return valid;
+        }
+
+        function ProcessReg() {
+            var email = $('#reg_email').val();
+            var password = $('#reg_password').val();
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/auth/register',
+                type: "POST",
+                data: 'username=' + email + '&password=' + password,
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    //console.log(result);
+                    //ShowLoginRegSucc();
+                    window.localStorage.setItem("username", email);
+                    window.localStorage.setItem("token", result.token);
+                    window.localStorage.setItem("token_expire", result.token_expire);
+
+                    location.href = "index.html";
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //ShowRegFail(xhr.responseJSON);
+                    //console.log(xhr.responseJSON);
+                    $("#error_after_submit").html(xhr.responseJSON);
+                    $("#error_after_submit").css("display", "block");
+                },
             });
+        }
 
+        $('#login_email').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if (!isEmail($(this).val())) {
+                show_error(this);
+            } else {
+                show_ok(this);
+            }
+        });
+        
+        $('#login_password').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 8) {
+                show_error(this);
+            } else {
+                show_ok(this);
+            }
+        });
+    
+        function validation_check(msg) {
+            var valid = true;
+            
+            if (!isEmail($('#login_email').val())) {
+                show_error($('#login_email'));
+                valid = false;
+            } else {
+                show_ok($('#login_email'));
+            }
 
+            if ($('#login_password').val().length < 8) {
+                show_error($('#login_password'));
+                valid = false;
+            } else {
+                show_ok($('#login_password'));
+            }
 
+            return valid;
+        }
+        
+        $('#login_next2').on('click', function() {
+            if (validation_check()) {
+                ProcessLogin();
+            }
+        });
+
+        function ProcessLogin() {
+            var email = $('#login_email').val();
+            var password = $('#login_password').val();
+            $.ajax({
+                url: 'http://www.easybene.com/index.php/auth',
+                type: "POST",
+                data: 'username='+email+'&password='+password,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        window.localStorage.setItem("username", email);
+                        window.localStorage.setItem("token", result.token);
+                        window.localStorage.setItem("token_expire", result.token_expire);
+
+                        location.href = "index.html";
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //ShowLoginFail(xhr.responseJSON);
+                        //alert(xhr.responseJSON);
+                        $("#error_after_submit").css("display", "block");
+                    },
+            });
+        }
+        
+        
+        var username = window.localStorage.getItem('username');
+        var token = window.localStorage.getItem("token");
+        if (username && token) {
+            //location.href = 'dashboard.html';
+            $("#login_li").css('display', 'none');
+            $("#signup_li").css('display', 'none');
+            $("#logout_li").css('display', 'block');
+            $(".download_now").attr('href', ''); // assets/app/android-debug.apk
+            
+        } else {
+            $("#login_li").css('display', 'block');
+            $("#signup_li").css('display', 'block');
+            $("#logout_li").css('display', 'none');
+            $(".download_now").attr('href', '#signUpModal');
+        }
 
         </script>
 

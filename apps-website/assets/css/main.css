@@ -8495,6 +8495,236 @@ footer p {
   font-size: 12px;
 }
 
+/*css for signup modal*/
+.verticl-centermodal.modal {
+  text-align: center;
+  padding: 0 !important;
+}
+
+.verticl-centermodal.modal:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -4px;
+}
+
+.verticl-centermodal .modal-dialog {
+  display: inline-block;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.verticl-centermodal .modal-dialog .modal-content {
+  background: url("../images/modal-bg.png") repeat center center;
+  border-radius: 0;
+  border: none;
+  position: relative;
+}
+
+.verticl-centermodal .modal-dialog .modal-content .modal-header {
+  border: none;
+  padding: 0;
+}
+
+.verticl-centermodal .modal-dialog .modal-content .modal-title {
+  background: #25cbf5;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom: none;
+}
+
+.verticl-centermodal .modal-dialog .modal-content button.close {
+  position: absolute;
+  top: -20px;
+  right: -11px;
+  width: 30px;
+  height: 30px;
+  background: #fff;
+  color: #cdcdcd;
+  text-align: center;
+  border-radius: 50%;
+  z-index: 2;
+  opacity: 1;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form {
+  width: 70%;
+  margin: 20px auto;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form .input-group .form-control {
+  border-radius: 0;
+  margin: 0 auto;
+  box-shadow: none;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form .input-group .input-group-addon {
+  border-radius: 0;
+  background: #25cbf5;
+  color: #fff;
+  border: none;
+  min-width: 38px;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form .sign-up-btn-wrapper {
+  display: block;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form .sign-up-btn-wrapper .sign-up-btn {
+  border-radius: 0;
+  background: #25cbf5;
+  width: 100px;
+  margin: 0 auto;
+  display: block;
+  color: #fff;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form .sign-up-btn-wrapper .sign-up-btn i {
+  margin-right: 10px;
+}
+
+.verticl-centermodal .modal-dialog .modal-content form .sign-up-btn-wrapper .sign-up-btn:hover {
+  background: #002d4c;
+}
+
+.verticl-centermodal .modal-dialog .modal-content .logo-wrapper {
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+.verticl-centermodal .modal-dialog .modal-content .logo-wrapper img {
+  display: inline-block;
+}
+
+.verticl-centermodal .modal-dialog .modal-content p {
+  text-align: center;
+  font-size: 14px;
+  color: #222;
+}
+
+.verticl-centermodal .modal-dialog .modal-content p a {
+  text-decoration: none;
+  color: #25cbf5;
+}
+
+.input-wrapper {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-wrapper .error {
+  display: block;
+  padding: 3px 5px;
+  background: #eb3432;
+  color: #fff;
+  font-size: 14px;
+  position: relative;
+  margin-top: 8px;
+}
+
+.input-wrapper .error:before {
+  color: #eb3432;
+  content: "\f0d8";
+  display: block;
+  font-family: "FontAwesome";
+  font-size: 22px;
+  right: 10px;
+  position: absolute;
+  top: -19px;
+  z-index: 2;
+}
+
+.input-wrapper .form-control.error-input {
+  background: url("../images/error.png") no-repeat 98% center;
+}
+
+.input-wrapper .form-control.valid-input {
+  background: url("../images/tick.png") no-repeat 98% center;
+}
+
+.pass-condition-wrapper .input-group {
+  margin-bottom: 0 !important;
+}
+
+.pass-condition.open-con {
+  border: 1px solid #00a5ff;
+  display: block;
+  margin-top: 7px;
+  padding: 0 0 4px 4px;
+  position: relative;
+}
+
+.pass-condition.open-con::before {
+  color: #00a5ff;
+  content: "\f0d8";
+  display: block;
+  font-family: "FontAwesome";
+  font-size: 22px;
+  left: 10px;
+  position: absolute;
+  top: -20px;
+}
+
+.pass-condition.open-con li {
+  color: #222;
+  font-size: 12px;
+  margin: 0;
+  text-align: left;
+  list-style: none;
+}
+
+.pass-condition.open-con li::before {
+  content: "\f00d";
+  font-family: "FontAwesome";
+  font-size: 9px;
+  margin-right: 5px;
+  font-weight: lighter;
+}
+
+.pass-condition.open-con li.condition-reached::before {
+  color: #51aa4d;
+  content: "\f00c";
+  font-family: "FontAwesome";
+  font-size: 14px;
+  font-weight: lighter;
+}
+
+.pass-condition.open-con li.condition-reached {
+  color: #51aa4d;
+}
+
+/*custome select box -css*/
+.select-style {
+  border: 1px solid #ccc;
+  width: 100%;
+  overflow: hidden;
+  background: url("../images/select-arrow.png") no-repeat 98% center;
+  background-size: 24px;
+}
+
+.select-style select {
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  background-image: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  border-radius: 0;
+  color: #555;
+}
+
+.select-style select:focus {
+  outline: none;
+}
+
 @media (max-width: 767px) {
   .navbar-header {
     width: 100% !important;
@@ -8555,6 +8785,10 @@ footer p {
   }
   .single-about-app, .about-content {
     padding: 0;
+  }
+  .verticl-centermodal .modal-dialog .modal-content button.close {
+    right: 2px;
+    top: 5px;
   }
 }
 
