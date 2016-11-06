@@ -506,6 +506,12 @@
         <script src="assets/javascripts/bootstrap.min.js"></script>      
         <script src="assets/javascripts/stellar.js"></script>
         <script src="assets/javascripts/jquery.easing.min.js"></script>
+        
+       <!--  <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>  -->
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        
         <script>
             $.stellar({
                 horizontalScrolling: false,
@@ -632,7 +638,7 @@
             location.href = 'index.html';
         });
 
-        function validation_check(msg) {
+        function validation_check() {
             var valid = true;
 
             if (!isEmail($('#reg_email').val())) {
@@ -681,6 +687,7 @@
                     window.localStorage.setItem("username", email);
                     window.localStorage.setItem("token", result.token);
                     window.localStorage.setItem("token_expire", result.token_expire);
+                    window.localStorage.setItem('provider_execution', '');
 
                     location.href = "index.html";
                 },
@@ -711,7 +718,7 @@
             }
         });
     
-        function validation_check(msg) {
+        function validation_check_login() {
             var valid = true;
             
             if (!isEmail($('#login_email').val())) {
@@ -732,7 +739,7 @@
         }
         
         $('#login_next2').on('click', function() {
-            if (validation_check()) {
+            if (validation_check_login()) {
                 ProcessLogin();
             }
         });
@@ -751,6 +758,10 @@
                         window.localStorage.setItem("username", email);
                         window.localStorage.setItem("token", result.token);
                         window.localStorage.setItem("token_expire", result.token_expire);
+                        window.localStorage.setItem('medical_site', result.medical_site);
+                        window.localStorage.setItem('dental_site', result.dental_site);
+                        window.localStorage.setItem('vision_site', result.vision_site);
+                        window.localStorage.setItem('funds_site', result.funds_site);
 
                         location.href = "index.html";
                     },
