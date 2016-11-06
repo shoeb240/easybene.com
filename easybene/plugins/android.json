@@ -9,7 +9,14 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.app.easybene"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.app.easybene"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.app.easybene"
+        }
+    }
 }
