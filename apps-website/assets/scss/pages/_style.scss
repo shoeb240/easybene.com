@@ -471,7 +471,9 @@ header {
     text-align: center;
     .fea-img {
         overflow: hidden;
+        max-height: 214px;
     }
+    
     img {
         width: 100%;
         transform: scale(1);

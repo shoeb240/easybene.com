@@ -8221,6 +8221,7 @@ header a {
 
 .intuitive-features-content .fea-img {
   overflow: hidden;
+  max-height: 214px;
 }
 
 .intuitive-features-content img {
