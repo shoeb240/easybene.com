@@ -22,7 +22,8 @@
         ================= Stylesheets ===================
         ============================================= -->
         <!-- vendor css files -->
-        <link rel="stylesheet" href="assets/js/vendor/chosen/chosen.css">
+        <link rel="stylesheet" href="js/vendor/chosen/chosen.css">
+        <link rel="stylesheet" href="css/desktop-style.css">
         
         <style>
             .login-list li {
@@ -407,18 +408,18 @@
          <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
-        <script src="assets/js/vendor/jRespond/jRespond.min.js"></script>
+        <script src="js/vendor/jRespond/jRespond.min.js"></script>
 
-        <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
+        <script src="js/vendor/animsition/js/jquery.animsition.min.js"></script>
 
-        <script src="assets/js/vendor/chosen/chosen.jquery.js"></script>
+        <script src="js/vendor/chosen/chosen.jquery.js"></script>
 
         <!--/ vendor javascripts -->
 
         <!-- ============================================
         ============== Custom JavaScripts ===============
         ============================================= -->
-        <script src="assets/js/main.js"></script>
+        <script src="js/main.js"></script>
         <!--/ custom javascripts -->
         
         
@@ -494,16 +495,16 @@
             return valid;
         }
         
-        function hideAll() {
+        /*function hideAll() {
             $('#welcome_div').css('display', 'none');
             $('#site_choice_dental_div').css('display', 'none');   
             $('#site_choice_vision_div').css('display', 'none');   
 
             $('#site_reg_div').css('display', 'none');   
             $('#site_reg_fail_div').css('display', 'none');   
-        }
+        }*/
 
-        function ShowDentalSiteLinks() {
+        /*function ShowDentalSiteLinks() {
             hideAll(); 
             $('#site_choice_dental_div').css('display', 'block');
         }
@@ -511,9 +512,9 @@
         function ShowVisionSiteLinks() {
             hideAll(); 
             $('#site_choice_vision_div').css('display', 'block');
-        }
+        }*/
 
-        function ShowSiteReg(type, site, image) {
+        /*function ShowSiteReg(type, site, image) {
             hideAll();
             $('#site_reg_div').css('display', 'block');
             $('#site_selected_type_name').html(type);
@@ -521,7 +522,7 @@
             $('#site_selected_type_image').attr("src", "assets/images/" + image);
         }
 
-         function ProcessLogout() {
+        function ProcessLogout() {
             window.localStorage.removeItem('username');
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('token_expire');
@@ -530,7 +531,7 @@
             window.localStorage.removeItem('vision_site');
             window.localStorage.removeItem('funds_site');
             location.href = "index.html";
-        }
+        }*/
 
         function GetUserData() {
             var username = window.localStorage.getItem("username");
