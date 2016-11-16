@@ -21,6 +21,8 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected $cronKey = 'aG$s6&*H';
     
+    protected $cronRunning = false;
+    
     protected $execute_res = true;
     
     protected $run_res = true;
@@ -71,18 +73,17 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected function myExecutionResult($userProviderExeObj, $headerArray) 
     {
         $executionId = $userProviderExeObj->exe_id;
-        $execute_res = $this->myExecutionCheck($executionId, $headerArray);
-        //echo $execute_res . '==' . $executionId . '<br />';
+        $this->execute_res = $this->myExecutionCheck($executionId, $headerArray);
+        //echo $this->execute_res . '==' . $executionId . '<br />';
         $result = array();
-        if ('OK' === $execute_res) {
+        if ('OK' === $this->execute_res) {
             $url = $this->apiEndPoint . "executions/{$executionId}/result";
             $ch = curl_init($url);                                                                      
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);                                                                                                                   
             $result = curl_exec($ch);
-        } else {
-            $this->execute_res = $execute_res;
+        } else if ('FAILED' === $this->execute_res || 'STOPPED' === $this->execute_res) {
             $this->ret_failed[] = $userProviderExeObj->id;
         }
 
@@ -120,12 +121,16 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $userId = $this->_getParam('user_id', null);
         $providerId = $this->_getParam('id', null);
         
+        if ($this->cronKey === $userId) {
+            $this->cronRunning = true;
+        }
+        
         $usersAll = array();
         if (is_numeric($userId) && is_numeric($providerId)) {
-            $usersAll = $userProviderMapper->getUserProvider($providerId, $userId);
-        } /*else if ($this->cronKey === $userId) {
-            $usersAll = $userProviderMapper->getAllUserProviders($providerName, $providerType);
-        }*/
+            $usersAll = $userProviderMapper->getUserProviderRun($providerId, $userId);
+        } else if ($this->cronRunning) {
+            $usersAll = $userProviderMapper->getAllUserProvidersCronRun($providerName, $providerType);
+        }
 
         return $usersAll;
         
@@ -139,11 +144,15 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $userId = $this->_getParam('user_id', null);
         $userProviderTableId = $this->_getParam('id', null);
         
+        if ($this->cronKey === $userId) {
+            $this->cronRunning = true;
+        }
+        
         $usersAll = array();
         if (is_numeric($userProviderTableId) && is_numeric($userId)) {
             $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
-        } else if ($this->cronKey === $userId) {
-            $usersAll = $userProviderExeMapper->getAllUserProvidersExe($providerName, $providerType);
+        } else if ($this->cronRunning) {
+            $usersAll = $userProviderExeMapper->getAllUserProvidersCronExe($providerName, $providerType);
         }
         
         return $usersAll;
@@ -151,9 +160,18 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected function runEachScrapper($userObj, $runData, $runId, $runName)
     {
-        $runData['user_id'] = $userObj->provider_user_id;
-        $runData['password'] = $userObj->provider_password;
+        if (isset($runData[0]) && is_array($runData[0])) {
+            $cnt = count($runData);
+            for($i = 0; $i < $cnt; $i++) {
+                $runData[$i]['user_id'] = $userObj->provider_user_id;
+                $runData[$i]['password'] = $userObj->provider_password;
+            }
             
+        } else {
+            $runData['user_id'] = $userObj->provider_user_id;
+            $runData['password'] = $userObj->provider_password;
+        }
+        
         $data_string = json_encode($runData);    
         /*echo '<pre>';
         print_r($data_string);
@@ -205,16 +223,24 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $headerArray = $this->getHeaderArr();
         foreach($usersAll as $userId => $userObj) {
             $arr = array();
-            $this->execute_res = 'OK';
+            //$this->execute_res = 'OK';
             foreach($userObj as $run_name => $userProviderExeObj) {
                 try {
                     $arr[$run_name] = $this->myExecutionResult($userProviderExeObj, $headerArray);
+                    // If any execution is not complete for this user, we are skipping all remaining runs for the user. 
+                    // This is not for FAILED ro STOPPED
                     if ('QUEUED' === $this->execute_res || 'PENDING' === $this->execute_res || 'RUNNING' === $this->execute_res) {
                         break;
                     }
                 } catch (Exception $e) {
                     $this->ret_failed[] = $userProviderExeObj->id;
                 }
+            }
+            
+            if ($this->cronRunning) {
+                $response[$userId] = $this->execute_res;
+            } else {
+                $response = $this->execute_res;
             }
 //            echo '<pre>';
 //            print_r($arr);
@@ -230,7 +256,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             //$this->send_email($responseFailedIds);
         }
 
-        return json_encode(array('response' => $this->execute_res, 'response_failed_ids' => $responseFailedIds));
+        return json_encode(array('response' => $response, 'response_failed_ids' => $responseFailedIds));
     }
     
     protected function storeScrape($userId, $arr)

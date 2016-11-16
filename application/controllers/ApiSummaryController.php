@@ -49,6 +49,8 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             $result['vision_deductible'] = '';
             $result['vision_deductible_met'] = '';
             $result['vision_data_exists'] = '';
+            
+            // MEDICAL
             if ($userInfo['medical']->provider_name == 'cigna') {
                 
                 $deductibleMapper = new Application_Model_CignaDeductibleMapper();
@@ -73,14 +75,16 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['medical_data_exists'] = !empty($anthemDeductible['user_id']) ? 'yes' : '';
             }
             
-            if ($userInfo['dental_site'] == 'Cigna') {
+            
+            //DENTAL
+            if ($userInfo['dental']->provider_name == 'cigna') {
                 
-            } else if ($userInfo['dental_site'] == 'Guardian') {
+            } else if ($userInfo['dental']->provider_name == 'guardian') {
                 
                 // guardian_claim
                 $claimMapper = new Application_Model_GuardianClaimMapper();
                 $guardianClaim = $claimMapper->getGuardianClaim($userId);
-
+                
                 $count = count($guardianClaim);
                 $submittedCharges = 0;
                 $amountPaid = 0;
@@ -92,21 +96,23 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['dental_deductible'] = $submittedCharges;
                 $result['dental_deductible_met'] = $amountPaid;
                 $result['dental_percent'] = round((($amountPaid / $submittedCharges))*100);
-                $result['dental_data_exists'] = !empty($guardianClaim['user_id']) ? 'yes' : '';
+                $result['dental_data_exists'] = !empty($guardianClaim[0]['user_id']) ? 'yes' : '';
                 
-            } else if ($userInfo['dental_site'] == 'Anthem') {
-                
-            }
-            
-            if ($userInfo['dental_site'] == 'Cigna') {
-                
-            } else if ($userInfo['dental_site'] == 'Guardian') {
-                
-            } else if ($userInfo['dental_site'] == 'Anthem') {
+            } else if ($userInfo['dental']->provider_name == 'anthem') {
                 
             }
             
-            if ($userInfo['funds_site'] == 'navia') {
+            // VISION
+            if ($userInfo['vision']->provider_name == 'cigna') {
+                
+            } else if ($userInfo['vision']->provider_name == 'guardian') {
+                
+            } else if ($userInfo['vision']->provider_name == 'anthem') {
+                
+            }
+            
+            // FUNDS
+            if ($userInfo['funds']->provider_name == 'navia') {
                 
             } 
             

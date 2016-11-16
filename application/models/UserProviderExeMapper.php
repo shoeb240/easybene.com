@@ -63,7 +63,7 @@ class Application_Model_UserProviderExeMapper
         return $exeInfo;
     }
     
-    public function getAllUserProvidersExe($providerName, $providerType)
+    public function getAllUserProvidersCronExe($providerName, $providerType)
     {
         $providerMapper = new Application_Model_ProviderListMapper();
         $providerInfo = $providerMapper->getProviderByNameType($providerName, $providerType);

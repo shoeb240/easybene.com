@@ -69,7 +69,7 @@ class Application_Model_UserProviderMapper
         return $providersSelected;
     }
     
-    public function getUserProvider($providerId, $userId)
+    public function getUserProviderRun($providerId, $userId)
     {
         $select = $this->getTable()->select();
         $select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
@@ -92,7 +92,7 @@ class Application_Model_UserProviderMapper
         return $providersSelected;
     }
     
-    public function getAllUserProviders($providerName, $providerType)
+    public function getAllUserProvidersCronRun($providerName, $providerType)
     {
         $providerMapper = new Application_Model_ProviderListMapper();
         $providerInfo = $providerMapper->getProviderByNameType($providerName, $providerType);
@@ -100,7 +100,8 @@ class Application_Model_UserProviderMapper
         
         $select = $this->getTable()->select();
         $select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
-               ->where('up.provider_id = ?', $providerId);
+               ->where('up.provider_id = ?', $providerId)
+               ->where('up.status = ?', 1); // So that only problematic ones can be run.
         $rowSets = $this->getTable()->fetchAll($select);
 
         $providersSelected = array();
