@@ -556,7 +556,7 @@
             var site_password = '';
             
             $.ajax({
-                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                url: 'https://easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "GET",
                 dataType: 'json',
                 async: false,
@@ -623,7 +623,7 @@
         {
             var response = false;
             $.ajax({
-                url: 'http://www.easybene.com/index.php/'+scrapper_script_path+'/run/'+username+'/'+token+'/'+provider_id,
+                url: 'https://easybene.com/index.php/'+scrapper_script_path+'/run/'+username+'/'+token+'/'+provider_id,
                 type: "GET",
                 dataType: 'json',
                 async: false,
@@ -647,7 +647,7 @@
             $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'block');
 
             $.ajax({
-                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                url: 'https://easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "POST",
                 data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
                 dataType: 'json',

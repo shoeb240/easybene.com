@@ -1,0 +1,8 @@
+RewriteOptions inherit
+
+RewriteEngine On 
+RewriteCond %{HTTP_HOST} ^easybene.com$ [OR]
+RewriteCond %{HTTP_HOST} ^www.easybene.com$
+RewriteCond %{SERVER_PORT} 80 
+RewriteRule ^(.*)$ https://easybene.com/$1 [R,L]
+

@@ -63,7 +63,7 @@
         var result_data = '';
 
         $.ajax({
-            url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+            url: 'https://easybene.com/index.php/api-user/'+username+'/'+token,
             type: "GET",
             dataType: 'json',
             async: false,
@@ -96,7 +96,7 @@
         $("#bz_text").html('Linking your providers, this may take a minute or two.');
         
         $.ajax({
-            url: 'http://www.easybene.com/index.php/'+user_data.providersSelected[provider_type]['scrapper_script_path']+'/execute/'+username+'/'+token+'/'+user_data.providersSelected[provider_type]['id'],
+            url: 'https://easybene.com/index.php/'+user_data.providersSelected[provider_type]['scrapper_script_path']+'/execute/'+username+'/'+token+'/'+user_data.providersSelected[provider_type]['id'],
             type: "GET",
             dataType: 'json',
             async: false,
@@ -148,7 +148,7 @@
     /*function save_failed_ids(response_failed_ids)
     {
         $.ajax({
-            url: 'http://www.easybene.com/index.php/api-summary/'+username+'/'+token,
+            url: 'https://easybene.com/index.php/api-summary/'+username+'/'+token,
             type: 'post',
             data: 'response_failed_ids='+response_failed_ids,
             dataType: 'json',
@@ -173,7 +173,7 @@
         
         if (!username || !token) return false;
         $.ajax({
-            url: 'http://www.easybene.com/index.php/api-summary/'+username+'/'+token,
+            url: 'https://easybene.com/index.php/api-summary/'+username+'/'+token,
             type: "GET",
             dataType: 'json',
             async: false,
