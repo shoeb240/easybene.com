@@ -80,7 +80,7 @@ class ScrapeGuardianController extends My_Controller_ScrapeBase
     {
         $this->_helper->viewRenderer->setNoRender(true);
         
-        $usersAll = $this->prepareUsers($this->provider_name, $this->provider_type);
+        $usersAll = $this->prepareUsersForRun($this->provider_name, $this->provider_type);
 
         $ret = $this->runAllUsers($usersAll);
         

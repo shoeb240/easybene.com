@@ -58,7 +58,7 @@ class ScrapeAnthemController extends My_Controller_ScrapeBase
     {
         $this->_helper->viewRenderer->setNoRender(true);
         
-        $usersAll = $this->prepareUsers($this->provider_name, $this->provider_type);
+        $usersAll = $this->prepareUsersForRun($this->provider_name, $this->provider_type);
 
         /*$data = array();
         $data[0]['claims_benefit_coverage'] = '2016-01-01_0001-01-01';

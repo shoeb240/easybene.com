@@ -19,7 +19,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
 
     protected $apiEndPoint = "https://api.dexi.io/";
     
-    protected $cronKey = 'aG$s6&*H';
+    protected $cronKey = 'aG!s6*H';
     
     protected $cronRunning = false;
     
@@ -114,7 +114,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         );
     }
     
-    protected function prepareUsers($providerName, $providerType)
+    protected function prepareUsersForRun($providerName, $providerType)
     {
         $userProviderMapper = new Application_Model_UserProviderMapper();
         
@@ -128,7 +128,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $usersAll = array();
         if (is_numeric($userId) && is_numeric($providerId)) {
             $usersAll = $userProviderMapper->getUserProviderRun($providerId, $userId);
-        } else if ($this->cronRunning) {
+        } else if ($this->cronRunning && $this->isCronRunSchedule()) {
             $usersAll = $userProviderMapper->getAllUserProvidersCronRun($providerName, $providerType);
         }
 
@@ -151,7 +151,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $usersAll = array();
         if (is_numeric($userProviderTableId) && is_numeric($userId)) {
             $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
-        } else if ($this->cronRunning) {
+        } else if ($this->cronRunning && $this->isCronRunSchedule()) {
             $usersAll = $userProviderExeMapper->getAllUserProvidersCronExe($providerName, $providerType);
         }
         
@@ -317,6 +317,26 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         } catch(Exception $e) {
             echo $e->getMessage();
         }
+    }
+    
+    protected function isCronRunSchedule()
+    {
+        $options = array();
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/cron.ini', 'production', $options);
+        
+        $run = false;
+        $wday = date("w");
+        $mday = date("j");
+        
+        if ($config->cron->run->schedule === 'weekly' && $wday == 1) { // runs on monday
+            $run = true;
+        } else if ($config->cron->run->schedule === 'monthly' && $mday == 1) { // runs on the first day of month
+            $run = true;
+        } else if ($config->cron->run->schedule === 'daily') {
+            $run = true;
+        }
+        
+        return $run;     
     }
 
 }
