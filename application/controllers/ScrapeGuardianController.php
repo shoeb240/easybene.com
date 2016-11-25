@@ -41,8 +41,8 @@ class ScrapeGuardianController extends My_Controller_ScrapeBase
         // 
         // key is the run id from dexi
         $this->runs = array(
-            'ece66e5d-c737-4136-bea7-8b2654816f4e' => 'guardian_benefit', 
-            'ca638336-786a-4550-b80a-4b045ba3892f' => 'guardian_claim'
+            'guardian_benefit' => 'ece66e5d-c737-4136-bea7-8b2654816f4e', 
+            'guardian_claim' => 'ca638336-786a-4550-b80a-4b045ba3892f'
         );
         
         $this->runs_data = array(

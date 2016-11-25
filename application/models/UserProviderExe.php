@@ -14,5 +14,13 @@ class Application_Model_UserProviderExe
     public $user_provider_table_id;
     public $run_name;
     public $exe_id;
+    public $run_time;
+    public $executed;
+    public $execution_time;
+    public $failed;
+    
     public $user_id;
+    public $provider_id;
+    public $provider_user_id;
+    public $provider_password;
 }

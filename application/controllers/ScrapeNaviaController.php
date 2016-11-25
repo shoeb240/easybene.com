@@ -41,10 +41,10 @@ class ScrapeNaviaController extends My_Controller_ScrapeBase
         // 
         // key is the run id from dexi
         $this->runs = array(
-            '32de3a3e-76f9-45e8-a37d-4ff66132f667' => 'navia_statements', 
-            'cff9b254-a1a3-4861-97dd-5eff1000582f' => 'navia_day_care', 
-            'b846427f-a72a-45a8-966e-990e42678bf2' => 'navia_health_care', 
-            'e51b26e3-6aa6-44f9-b6e3-8143d02a2f98' => 'navia_health_savings'
+            'navia_statements' => '32de3a3e-76f9-45e8-a37d-4ff66132f667', 
+            'navia_day_care' => 'cff9b254-a1a3-4861-97dd-5eff1000582f', 
+            'navia_health_care' => 'b846427f-a72a-45a8-966e-990e42678bf2', 
+            'navia_health_savings' => 'e51b26e3-6aa6-44f9-b6e3-8143d02a2f98'
         );
         
         $this->runs_data = array();

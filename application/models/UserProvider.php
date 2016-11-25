@@ -18,6 +18,4 @@ class Application_Model_UserProvider
     public $provider_name;
     public $provider_user_id;
     public $provider_password;
-    public $status;
-
 }

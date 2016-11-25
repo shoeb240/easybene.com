@@ -41,9 +41,9 @@ class ScrapeCignaController extends My_Controller_ScrapeBase
         // 
         // key is the run id from dexi
         $this->runs = array(
-            '6e1a629d-815b-4f5c-ae98-7145dd8ea815' => 'cigna_medical', 
-            'ca7fefc4-baf2-46cd-80b3-80433b488c00' => 'cigna_deductible',
-            '0758a9a6-647a-42ad-9ec3-4b64fd6cddfb' => 'cigna_claim_details'
+            'cigna_medical' => '6e1a629d-815b-4f5c-ae98-7145dd8ea815', 
+            'cigna_deductible' => 'ca7fefc4-baf2-46cd-80b3-80433b488c00',
+            'cigna_claim_details' => '0758a9a6-647a-42ad-9ec3-4b64fd6cddfb'
         );
         
         $this->runs_data = array(

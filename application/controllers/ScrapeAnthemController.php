@@ -41,8 +41,8 @@ class ScrapeAnthemController extends My_Controller_ScrapeBase
         // 
         // key is the run id from dexi
         $this->runs = array(
-            'c6e8ec2a-466e-4a72-a269-c6586a3c25c6' => 'anthem', 
-            'b34f0574-bb01-44bf-9adb-8ca5ea962610' => 'anthem_claim_overview'
+            'anthem' => 'c6e8ec2a-466e-4a72-a269-c6586a3c25c6', 
+            'anthem_claim_overview' => 'b34f0574-bb01-44bf-9adb-8ca5ea962610'
         );
         
         $this->runs_data = array(

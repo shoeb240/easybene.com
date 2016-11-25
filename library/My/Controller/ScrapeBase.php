@@ -29,6 +29,8 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected $ret_failed = array();
     
+    protected $ret_succeeded = array();
+    
     protected $provider_name;
     
     protected $provider_type;
@@ -36,6 +38,10 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected $runs = array();
     
     protected $runs_data = array();
+    
+    protected $run_count = 0;
+    
+    protected $execution_count = 0;
     
     /**
      * Initialize object
@@ -83,6 +89,8 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);                                                                                                                   
             $result = curl_exec($ch);
+            $this->ret_succeeded[] = $userProviderExeObj->id;
+            $this->execution_count++;
         } else if ('FAILED' === $this->execute_res || 'STOPPED' === $this->execute_res) {
             $this->ret_failed[] = $userProviderExeObj->id;
         }
@@ -90,9 +98,13 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         return json_decode($result, true);
     }
 
-    protected function myRunWithInput($data_string, $headerArray, $runId) 
+    protected function myRunWithInput($data_string, $headerArray, $runId, $bulk = false) 
     {
-        $url = $this->apiEndPoint . "/runs/" . $runId . "/execute/inputs";
+        if ($bulk) {
+            $url = $this->apiEndPoint . "/runs/" . $runId . "/execute/bulk";
+        } else {
+            $url = $this->apiEndPoint . "/runs/" . $runId . "/execute/inputs";
+        }
         $ch = curl_init($url);                                                                      
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);                                                                  
@@ -116,7 +128,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected function prepareUsersForRun($providerName, $providerType)
     {
-        $userProviderMapper = new Application_Model_UserProviderMapper();
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
         
         $userId = $this->_getParam('user_id', null);
         $providerId = $this->_getParam('id', null);
@@ -127,9 +139,9 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         
         $usersAll = array();
         if (is_numeric($userId) && is_numeric($providerId)) {
-            $usersAll = $userProviderMapper->getUserProviderRun($providerId, $userId);
+            $usersAll = $userProviderExeMapper->getUserProviderRun($providerId, $userId);
         } else if ($this->cronRunning && $this->isCronRunSchedule()) {
-            $usersAll = $userProviderMapper->getAllUserProvidersCronRun($providerName, $providerType);
+            $usersAll = $userProviderExeMapper->getAllUserProvidersCronRun($providerName, $providerType);
         }
 
         return $usersAll;
@@ -151,7 +163,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         $usersAll = array();
         if (is_numeric($userProviderTableId) && is_numeric($userId)) {
             $usersAll = $userProviderExeMapper->getUserProviderExe($userProviderTableId, $userId);
-        } else if ($this->cronRunning && $this->isCronRunSchedule()) {
+        } else if ($this->cronRunning && $this->isCronExeSchedule()) {
             $usersAll = $userProviderExeMapper->getAllUserProvidersCronExe($providerName, $providerType);
         }
         
@@ -160,13 +172,14 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected function runEachScrapper($userObj, $runData, $runId, $runName)
     {
+        $bulk = false;
         if (isset($runData[0]) && is_array($runData[0])) {
             $cnt = count($runData);
             for($i = 0; $i < $cnt; $i++) {
                 $runData[$i]['user_id'] = $userObj->provider_user_id;
                 $runData[$i]['password'] = $userObj->provider_password;
             }
-            
+            $bulk = true;
         } else {
             $runData['user_id'] = $userObj->provider_user_id;
             $runData['password'] = $userObj->provider_password;
@@ -178,50 +191,102 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         echo '</pre>';*/
         $headerArray = $this->getHeaderArr();
         try {
-            $result = $this->myRunWithInput($data_string, $headerArray, $runId);
+            $result = $this->myRunWithInput($data_string, $headerArray, $runId, $bulk);
         } catch (Exception $e) {
             $this->run_res = false;
         }
 
         $arr = json_decode($result, true);
-        $exeId = $arr['_id'];
+        $exeId = isset($arr['_id']) ? $arr['_id'] : '';
 
         $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
-        $userProviderExeMapper->updateSiteCredentials($userObj->id, $runName, $exeId);
+        $exe_table_id = $userProviderExeMapper->updateSiteCredentials($userObj->id, $runName, $exeId);
         //echo $userObj->provider_user_id.', '.$exeId.', '.$runName.'==';
 
         if (empty($exeId)) {
             $this->run_res = false;
+            $this->ret_failed[] = $exe_table_id;
+        } else {
+            $this->run_res = true;
+            $this->ret_succeeded[] = $exe_table_id;
+            $this->run_count++;
         }
     }
     
     protected function runAllUsers($usersAll, $runFile)
     {
-        $this->run_res = true;
-        foreach($usersAll as $k => $userObj) {
-            if (empty($userObj->provider_user_id) || empty($userObj->provider_password)) continue;
-            
-            reset($this->runs);
-            foreach($this->runs as $run_id => $run_name) {
-                $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
-                /*echo '<pre>';
-                print_r($eachRunData);
-                echo '</pre>';*/
-                $this->runEachScrapper($userObj, $eachRunData, $run_id, $run_name);
+        $cronConfig = $this->getCronConfig();
+        
+        foreach($usersAll as $userId => $userRuns) {
+            if ($this->run_count >= $cronConfig->cron->run->each_time_run_count) break;
+            if (count($userRuns) >= count($this->runs)) {
+                // If rows for all runs are at user_provider_exe table
+                echo '<br />=above=<br />';
+                foreach($userRuns as $k => $userObj) {
+                    if (empty($userObj->provider_user_id) || empty($userObj->provider_password)
+                            || !$userObj->run_name) continue;
+                    echo $userId . '==' . $userObj->exe_table_id . '==' . $userObj->failed . '==' . $userObj->executed . '==' . $userObj->timediff . '<br />';
+                    
+                    if (($userObj->failed == 1 && $userObj->timediff > $cronConfig->cron->run->failed->gap_sec)
+                            || ($userObj->failed == 0 && $userObj->executed == 1 && $userObj->timediff > $cronConfig->cron->run->update->gap_sec)
+                    ) { 
+                        // if run was failed, and specified time has passed.
+                        // if run was not failed, and was executed, and specified time has passed.
+                        $this->run_res = true;
+                        $run_name = $userObj->run_name;
+                        $run_id = $this->runs[$run_name];
+                        $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
+                        echo $run_name . '<br />';
+                        $this->runEachScrapper($userObj, $eachRunData, $run_id, $run_name);
+
+                        if ($this->cronRunning) {
+                            $response[$userId][$run_name] = $this->run_res;
+                        } else {
+                            $response[$run_name] = $this->run_res;
+                        }
+                    }
+                }
+            } else {
+                // If rows for all runs are NOT at user_provider_exe table
+                echo '<br />=below=<br />';
+                reset($this->runs);
+                foreach($this->runs as $run_name => $run_id) {
+                    if (empty($userRuns[0]->provider_user_id) || empty($userRuns[0]->provider_password)) continue;
+
+                    $this->run_res = true;
+                    $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
+                    echo $userId . '==' . $run_name . '<br />';
+                    $this->runEachScrapper($userRuns[0], $eachRunData, $run_id, $run_name);
+
+                    if ($this->cronRunning) {
+                        $response[$userId][$run_name] = $this->run_res;
+                    } else {
+                        $response[$run_name] = $this->run_res;
+                    }
+                }
             }
         }
         
-        if ($this->run_res) {
-            return json_encode(array('response' => true));
-        } else {
-            return json_encode(array('response' => false));
+        /*if (!empty($this->ret_succeeded)) {
+            $responseSucceededIds = implode(',', $this->ret_succeeded);
+        }*/
+        if (!empty($this->ret_failed)) {
+            $responseFailedIds = implode(',', $this->ret_failed);
+            //$this->send_email($responseFailedIds);
         }
+
+        return json_encode(array('response' => $response, 'response_failed_ids' => $responseFailedIds));
     }
     
     protected function executeAllUsers($usersAll)
     {
         $headerArray = $this->getHeaderArr();
+        $cronConfig = $this->getCronConfig();
+        /*echo '<pre>';
+        print_r($usersAll);
+        echo '<pre>';*/
         foreach($usersAll as $userId => $userObj) {
+            if ($this->execution_count >= $cronConfig->cron->exe->each_time_execution_count) break;
             $arr = array();
             //$this->execute_res = 'OK';
             foreach($userObj as $run_name => $userProviderExeObj) {
@@ -248,9 +313,13 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
             $this->storeScrape($userId, $arr);
         }
         
+        $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
+        if (!empty($this->ret_succeeded)) {
+            $responseSucceededIds = implode(',', $this->ret_succeeded);
+            $ok = $userProviderExeMapper->updateSucceeded($responseSucceededIds);
+        }
         if (!empty($this->ret_failed)) {
             $responseFailedIds = implode(',', $this->ret_failed);
-            $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
             $ok = $userProviderExeMapper->updateFailed($responseFailedIds);
             
             //$this->send_email($responseFailedIds);
@@ -262,7 +331,7 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected function storeScrape($userId, $arr)
     {
         reset($this->runs);
-        foreach($this->runs as $run_name) {
+        foreach($this->runs as $run_name => $run_id) {
             //echo '<br /><br /><br />'.$run_name.'<br />';
             if (!empty($arr[$run_name]['rows'])) {
                 $mapper_class = 'Application_Model_'.  str_replace(' ', '', ucwords(str_replace('_', ' ', $run_name))).'Mapper';
@@ -337,6 +406,34 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         }
         
         return $run;     
+    }
+    
+    protected function isCronExeSchedule()
+    {
+        $options = array();
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/cron.ini', 'production', $options);
+        
+        $run = false;
+        $wday = date("w");
+        $mday = date("j");
+        
+        if ($config->cron->exe->schedule === 'weekly' && $wday == 1) { // runs on monday
+            $run = true;
+        } else if ($config->cron->exe->schedule === 'monthly' && $mday == 1) { // runs on the first day of month
+            $run = true;
+        } else if ($config->cron->exe->schedule === 'daily') {
+            $run = true;
+        }
+        
+        return $run;     
+    }
+    
+    protected function getCronConfig()
+    {
+        $options = array();
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/cron.ini', 'production', $options);
+        
+        return $config;     
     }
 
 }

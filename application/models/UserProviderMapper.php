@@ -62,60 +62,10 @@ class Application_Model_UserProviderMapper
             $userProvider->scrapper_script_path = $row->scrapper_script_path;
             $userProvider->provider_user_id = $row->provider_user_id;
             $userProvider->provider_password = $row->de_provider_password;
-            $userProvider->status = $row->status;
+            //$userProvider->failed = $row->failed;
             $providersSelected[$userProvider->provider_type] = $userProvider;
         }
 
-        return $providersSelected;
-    }
-    
-    public function getUserProviderRun($providerId, $userId)
-    {
-        $select = $this->getTable()->select();
-        $select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
-               ->where('up.provider_id = ?', $providerId)
-               ->where('up.user_id = ?', $userId);
-        $rowSets = $this->getTable()->fetchAll($select);
-
-        $providersSelected = array();
-        foreach($rowSets as $k => $row) {
-            $userProvider = new Application_Model_UserProvider();
-            $userProvider->id = $row->id;
-            $userProvider->user_id = $row->user_id;
-            $userProvider->provider_id = $row->provider_id;
-            $userProvider->provider_user_id = $row->provider_user_id;
-            $userProvider->provider_password = $row->de_provider_password;
-            $userProvider->status = $row->status;
-            $providersSelected[$row->user_id] = $userProvider;
-        }
-        
-        return $providersSelected;
-    }
-    
-    public function getAllUserProvidersCronRun($providerName, $providerType)
-    {
-        $providerMapper = new Application_Model_ProviderListMapper();
-        $providerInfo = $providerMapper->getProviderByNameType($providerName, $providerType);
-        $providerId = $providerInfo->id;
-        
-        $select = $this->getTable()->select();
-        $select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
-               ->where('up.provider_id = ?', $providerId)
-               ->where('up.status = ?', 1); // So that only problematic ones can be run.
-        $rowSets = $this->getTable()->fetchAll($select);
-
-        $providersSelected = array();
-        foreach($rowSets as $k => $row) {
-            $userProvider = new Application_Model_UserProvider();
-            $userProvider->id = $row->id;
-            $userProvider->user_id = $row->user_id;
-            $userProvider->provider_id = $row->provider_id;
-            $userProvider->provider_user_id = $row->provider_user_id;
-            $userProvider->provider_password = $row->de_provider_password;
-            $userProvider->status = $row->status;
-            $providersSelected[$row->user_id] = $userProvider;
-        }
-        
         return $providersSelected;
     }
     
@@ -171,7 +121,7 @@ class Application_Model_UserProviderMapper
         return $providerInfo;
     }
     
-    public function updateExecutionId($userId, $userProviderTableId, $exeId)
+    /*public function updateExecutionId($userId, $userProviderTableId, $exeId)
     {
         $select = $this->getTable()->select();
         $select->where('id = ?', $userProviderTableId, 'INTEGER');
@@ -184,6 +134,6 @@ class Application_Model_UserProviderMapper
         }
         
         return 0;
-    }
+    }*/
     
 }
