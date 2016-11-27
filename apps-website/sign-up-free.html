@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">
+        <!-- Path to your custom app styles-->
+        <!-- <link rel="stylesheet" href="css/slidebars.min.css"> -->
+        <link rel="stylesheet" href="css/slidebars-theme.css">
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+        <link rel="stylesheet" href="css/desktop-style.css">
+    </head>
+    <body>
+
+        <!-- Top Navigation Bar -->
+        <div class="sb-navbar sb-slide">
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
+            <!--             Left Slidebar control -->
+            <div class="sb-toggle-left">
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="page-title">Sign Up</h2>
+
+        </div>
+
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
+
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
+
+
+                <div class="page-content login-page-content">            
+                    <div class="content-block">
+                        <div class="content-block-inner signUp">
+                            <div class="logo-wrapper">
+                                <img src="images/logo.png" alt="logo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-block login-list">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li><div id="error_after_submit" style="display: none; position: static;" class="inValidText">Email and/or Password did not match</div></li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-envelope"></i></div>
+                                    <div class="item-inner">                                               
+                                        <div class="item-input">
+                                            <input type="email" id="reg_email"  placeholder="E-mail">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Email</div>
+                            </li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-envelope"></i></div>
+                                    <div class="item-inner">                                               
+                                        <div class="item-input">
+                                            <input type="email" id="reg_email_confirm"  placeholder="Confrim E-mail">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Confirm Email don't match</div>
+                            </li>
+                            <li class="pass-field-wrapper">
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input  type="password" id="reg_password"  placeholder="Password">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password</div>
+                            <!-- <ul style="display: none;" class="pass-condition">
+                                    <li class="condition-reached">use 8 or more characters</li>
+                                    <li>use upper and lower case litters(Aa)</li>
+                                    <li>use a number and symbole (!@#$)</li>
+                            </ul> -->
+                            </li>
+                            <li> <!--  class="error-found" -->
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-unlock-alt"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" id="reg_password_confirm" placeholder="Confirm Password">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--error massage-->
+                                <div  style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Confirm Password don't match</div>
+                            </li>
+                            <!--<li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-location2"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+
+                                            <select name="country">
+                                                <option value="United states" selected>United states</option>
+                                                <option value="United Kingdom">United Kingdom</option>
+                                                <option value="Cambodia">Cambodia</option>
+                                                <option value="Denmark">Denmark</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Barbados">Barbados</option>
+                                                <option value="Andorra">Andorra</option>
+                                                <option value="Cambodia">Cambodia</option>
+                                                <option value="Denmark">Denmark</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Barbados">Barbados</option>
+                                                <option value="Andorra">Andorra</option>
+                                                <option value="Cambodia">Cambodia</option>
+                                                <option value="Denmark">Denmark</option>
+                                                <option value="Canada">Canada</option>
+                                                <option value="Barbados">Barbados</option>
+                                                <option value="Andorra">Andorra</option>
+                                            </select>                                                       
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>-->
+                            <li class="btn-wrapper">
+                                <a href="javascript:void(0);" id="reg_next2"><button type="submit"><i class=' icon-cloud-check'></i> Sign Up</button></a>
+                            </li>
+                        </ul>                      
+                        <div class="privacy-text">
+                            <!-- <p>By tapping Sign in you agree to our  <a href="">License Agreement</a> and <a href="#">Privacy Statement</a> </p> -->
+
+                            <p class="forgot-pass">Already have an account? <a class="login-text" href="index.html">Login In</a></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
+
+
+
+        <!-- Path to Framework7 Library JS-->
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+
+        <script>
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            }
+
+            function show_error(ths)
+            {
+                $(ths).parent().children(".valid-field").css("display", "none");
+                $(ths).parent().children(".inValid-field").css("display", "block");
+                $(ths).closest("li").addClass("error-found");
+                $(ths).closest("li").children(".inValidText").css("display", "block");
+            }
+
+            function show_ok(ths)
+            {
+                $(ths).parent().children(".valid-field").css("display", "block");
+                $(ths).parent().children(".inValid-field").css("display", "none");
+                $(ths).closest("li").removeClass("error-found");
+                $(ths).closest("li").children(".inValidText").css("display", "none");
+            }
+
+            $('#reg_email').on("change", function () {
+                $("#error_after_submit").css("display", "none");
+                if (!isEmail($(this).val())) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#reg_email_confirm').on("change", function () {
+                if ($(this).val() !== $("#reg_email").val()) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#reg_password').on("change", function () {
+                if ($(this).val().length < 8) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#reg_password_confirm').on("change", function () {
+                if ($(this).val() !== $("#reg_password").val()) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#reg_next2').on('click', function () {
+                if (validation_check()) {
+                    ProcessReg();
+                }
+            });
+
+            function validation_check(msg) {
+                var valid = true;
+
+                if (!isEmail($('#reg_email').val())) {
+                    show_error($('#reg_email'));
+                    valid = false;
+                } else {
+                    show_ok($('#reg_email'));
+                }
+
+                if ($('#reg_email_confirm').val() !== $("#reg_email").val()) {
+                    show_error($('#reg_email_confirm'));
+                    valid = false;
+                } else {
+                    show_ok($('#reg_email_confirm'));
+                }
+
+                if ($('#reg_password').val().length < 8) {
+                    show_error($('#reg_password'));
+                    valid = false;
+                } else {
+                    show_ok($('#reg_password'));
+                }
+
+                if ($('#reg_password_confirm').val() !== $("#reg_password").val()) {
+                    show_error($('#reg_password_confirm'));
+                    valid = false;
+                } else {
+                    show_ok($('#reg_password_confirm'));
+                }
+
+                return valid;
+            }
+
+            function ProcessReg() {
+                var email = $('#reg_email').val();
+                var password = $('#reg_password').val();
+                $.ajax({
+                    url: 'https://easybene.com/index.php/auth/register',
+                    type: "POST",
+                    data: 'username=' + email + '&password=' + password,
+                    dataType: 'json',
+                    async: false,
+                    success: function (result) {
+                        //console.log(result);
+                        //ShowLoginRegSucc();
+                        window.localStorage.setItem("username", email);
+                        window.localStorage.setItem("token", result.token);
+                        window.localStorage.setItem("token_expire", result.token_expire);
+                        window.localStorage.setItem('provider_execution', '');
+
+                        location.href = "index.html";
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //ShowRegFail(xhr.responseJSON);
+                        //console.log(xhr.responseJSON);
+                        $("#error_after_submit").html(xhr.responseJSON);
+                        $("#error_after_submit").css("display", "block");
+                    },
+                });
+            }
+            
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem("token");
+            if (username && token) {
+                location.href = 'dashboard.html';
+            }
+        </script>
+
+
+
+    </body>
+</html>
