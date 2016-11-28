@@ -361,6 +361,22 @@
                                                 </div>
                                                 <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                             </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <select id="funds_family_single">
+                                                            <option value="s">Single</option>
+                                                            <option value="f">Family</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            
                                             <li class="btn-wrapper">
                                                 <a id="funds_register" href="javascript:void(0);" ><button type="submit">Save</button></a>
                                                 <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
@@ -578,6 +594,7 @@
                                 result_site = result.providersSelected[provider_types[p]].provider_name;
                                 user_id = result.providersSelected[provider_types[p]].provider_user_id;
                                 password = result.providersSelected[provider_types[p]].provider_password;
+                                funds_family_single = result.providersSelected[provider_types[p]].funds_family_single;
                                 //console.log(provider_types[p]);
                                 //console.log(result_site);
                             }
@@ -595,6 +612,22 @@
                             
                             $('#'+provider_types[p]+'_selected_user_id').val(user_id);
                             $('#'+provider_types[p]+'_selected_password').val(password);
+                            
+                            if ('s' === funds_family_single) {
+                                selected = 'selected';
+                            } else {
+                                selected = '';
+                            }
+                            select_code = '<option ' + selected + ' value="s">Single</option>';
+                            
+                            if ('f' === funds_family_single) {
+                                selected = 'selected';
+                            } else {
+                                selected = '';
+                            }
+                            select_code = select_code + '<option ' + selected + ' value="f">Family</option>';
+
+                            $('#funds_family_single').html(select_code);
                             
                             $('#'+provider_types[p]+'_register').on('click', function() {
                                 var thsid = $(this).attr('id');
@@ -643,13 +676,17 @@
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
             var provider_execution = window.localStorage.getItem('provider_execution');
-            
+            var funds_family_single = '';
+            if (site_type == 'funds') {
+                funds_family_single = $('#funds_family_single').val();
+            }
+                
             $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'block');
 
             $.ajax({
                 url: 'https://easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "POST",
-                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
+                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password + '&funds_family_single=' + funds_family_single,
                 dataType: 'json',
                 async: false,
                 success: function(result) {

@@ -62,6 +62,8 @@ class Application_Model_UserProviderMapper
             $userProvider->scrapper_script_path = $row->scrapper_script_path;
             $userProvider->provider_user_id = $row->provider_user_id;
             $userProvider->provider_password = $row->de_provider_password;
+            $userProvider->funds_family_single = $row->funds_family_single;
+            
             //$userProvider->failed = $row->failed;
             $providersSelected[$userProvider->provider_type] = $userProvider;
         }
@@ -69,7 +71,7 @@ class Application_Model_UserProviderMapper
         return $providersSelected;
     }
     
-    public function updateSiteCredentials($userId, $providerName, $providerType, $providerUserId, $providerPassword)
+    public function updateSiteCredentials($userId, $providerName, $providerType, $providerUserId, $providerPassword, $fundsFamilySingle = '')
     {
         $providerMapper = new Application_Model_ProviderListMapper();
         $providerInfo = $providerMapper->getProviderByNameType($providerName, $providerType);
@@ -94,6 +96,7 @@ class Application_Model_UserProviderMapper
             $data['provider_id'] = $providerId;
             $data['provider_user_id'] = $providerUserId;
             $data['provider_password'] = new Zend_Db_Expr("AES_ENCRYPT('".$providerPassword."', UNHEX(SHA2('my_secret', 512)))");
+            $data['funds_family_single'] = $fundsFamilySingle;
             
             $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $row->id, 'INTEGER');
             
@@ -108,6 +111,7 @@ class Application_Model_UserProviderMapper
             $data['provider_id'] = $providerId;
             $data['provider_user_id'] = $providerUserId;
             $data['provider_password'] = new Zend_Db_Expr("AES_ENCRYPT('".$providerPassword."', UNHEX(SHA2('my_secret', 512)))");
+            $data['funds_family_single'] = $fundsFamilySingle;
             
             $ok = $this->getTable()->insert($data);
         }

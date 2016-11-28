@@ -117,10 +117,10 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $statementMapper = new Application_Model_NaviaStatementsMapper();
                 $naviaStatements = $statementMapper->getNaviaStatements($userId);
                 
-                $single_family = 'f';
+                $single_family = $userInfo['funds']->funds_family_single;
                 
                 $cronConfig = $this->getScraperConfig();
-                if ($single_family = 'f') {
+                if ($single_family == 'f') {
                     $denominator = $cronConfig->scraper->navia->hsa->family->denominator;
                 } else {
                     $denominator = $cronConfig->scraper->navia->hsa->single->denominator;

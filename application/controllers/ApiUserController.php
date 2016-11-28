@@ -66,9 +66,10 @@ class ApiUserController extends My_Controller_ApiAbstract //Zend_Controller_Acti
             $siteType = $this->_getParam('site_type', null);
             $siteUserId = $this->_getParam('site_user_id', null);
             $sitePassword = $this->_getParam('site_password', null);
-
+            $fundsFamilySingle = $this->_getParam('funds_family_single', null);
+            
             $userProviderMapper = new Application_Model_UserProviderMapper();
-            $providerInfo = $userProviderMapper->updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword);
+            $providerInfo = $userProviderMapper->updateSiteCredentials($userId, $siteName, $siteType, $siteUserId, $sitePassword, $fundsFamilySingle);
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
             $this->getHelper('json')->sendJson($providerInfo);
