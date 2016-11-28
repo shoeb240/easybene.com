@@ -120,10 +120,10 @@ body {
 }
 .intro-setion .navbar ul li a:hover::before{
     background: #222 none repeat scroll 0 0;
-    bottom: 22px;
+    bottom: 0;
     content: "";
     height: 2px;
-    left: 16px;
+    left: 3px;
     position: absolute;
     width: 25px;
     z-index: 1;
@@ -624,6 +624,29 @@ body {
     max-width: 80% !important;
     margin: 0 auto;
 }
+.intro-setion .top-list {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 70%;
+}
+.intro-setion .top-list li  {
+    position: relative;
+    margin: 0 5px;
+}
+.intro-setion .top-list li a {
+    color: #25cbf5 !important ;
+    padding: 10px 3px !important;
+}
+.intro-setion .top-list li a i {
+    display: block;
+}
+.intro-setion .top-list li a:hover {
+    color: #5a575e !important;
+}
 /*css for responsive*/
 @media (max-width: 500px) {
     .left-menu.nav {
@@ -632,6 +655,17 @@ body {
     .tab-none-for-desktop .desktop-content-wrapper {
         float: none;
         width: 100%!important;
+    }
+    .navbar-brand > img {
+        width: 57%;
+    }
+    .intro-setion .top-list {
+        max-width: 100%;
+        top: inherit;
+        bottom: -5px;
+    }
+    .intro-setion .navbar ul.top-list li a {
+        font-size: 11px !important;
     }
 }
 
@@ -723,6 +757,17 @@ body {
     }
     .status-info span {
         font-size: 15px;
+    }
+    .intro-setion .navbar ul.top-list li {
+        margin: 0;
+    }
+    .intro-setion .navbar ul.top-list li a {
+        font-size: 13px;
+    }
+
+     .intro-setion .navbar ul.top-list li {
+        display: inline-block;        
+        text-align: center;
     }
 }
 

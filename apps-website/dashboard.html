@@ -36,17 +36,18 @@
                         <a class="navbar-brand" href="#">                           
                             <img src="images/logo.png" alt="logo" class="gray-logo" />
                         </a>
+                        <ul class="top-list">
 
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav">
                             <li><a href="#"> <i class="fa fa-book" aria-hidden="true"></i> Recommendations</a></li>
                             <li><a href="#"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
+                            <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
                             <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
-                        </ul>
 
+                        </ul>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
                         <ul class="nav navbar-nav visible-xs">    
-                            <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="#" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
                             <li><a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
                             <li><a href="#"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
                             <li><a href="#"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
@@ -89,25 +90,6 @@
                         <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
                     </ol>
 
-
-                    <div class="content-block less-margin">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
-                            <li role="presentation">
-                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical 
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
-                            </li>
-                        </ul>
-                    </div>
 
                     <div class="content-block">
                         <div class="medical-grap-text">
@@ -161,15 +143,15 @@
 
                                     <li>
                                         <a href="#funds-panel">
-                                            <div class="circle-wrapper equalheight">
-                                                <h3 class=" ">Funds</h3>                                   
+                                            <div class="circle-wrapper equalheight"  style="vertical-align: central;">
+
+                                                <h3 class=" ">Funds</h3>
                                                 <div class="status-info-wrapper  ">
                                                     <p class="status-info">Available Balance <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This is how much you're on the hook for before the insurance company starts kicking in dough."><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-text"></span></p>
                                                     <p class="status-info">IRS Limit <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Demo text here. Demo text"><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-met-text"></span></p>
                                                 </div>
                                                 <div id="funds-circle"></div>
                                                 <p id="funds_image" class="grap-rel-img" style="background: url('images/Guardian_logo.png')"></p>
-
 
                                             </div>
                                         </a>
@@ -187,7 +169,7 @@
                                         <div class="">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <a class="link-btn" href="cigna-medical.html" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
+                                                    <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
 
                                                         </span>
                                                     </a>
@@ -227,7 +209,7 @@
                                             <div class="">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <a class="link-btn" href="cigna-medical.html" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
+                                                        <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
 
                                                             </span>
                                                         </a>
@@ -301,9 +283,9 @@
                 <div class="left-menu nav nav-pills nav-stacked" id="myAffix" data-spy="affix">
                     <nav>
                         <ul class="" >
-                            <li><a href="#"  class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="#" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
                             <li><a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
-                            <li><a href="#" class=""><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="#"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
                             <li><a href="#"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
                             <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
                             <li><a href="#"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
@@ -443,15 +425,15 @@
                 startCollapsed: 'accordion',
                 active: 0,
             });
-            
+
             $('#myAffix').affix({
-  offset: {
-    top: 150,
-    bottom: function () {
-      return (this.bottom = $('footer').outerHeight(true))
-    }
-  }
-})
+                offset: {
+                    top: 150,
+                    bottom: function () {
+                        return (this.bottom = $('footer').outerHeight(true))
+                    }
+                }
+            })
 
         </script>
     </body>
