@@ -182,15 +182,8 @@
                 graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible, result.medical_data_exists);
                 graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible, result.dental_data_exists);
                 graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible, result.vision_data_exists);
+                graph(result.funds_percent, result.funds_denominator, funds_site, 'funds', result.funds_balance, result.funds_data_exists);
                 
-                if (!funds_site || funds_site == 'null' || funds_site == 'undefined') {
-                    $("#summary_link_funds").css("color", "#f8c572");
-                } else {
-                    var image_name = funds_site.toLowerCase() + "_logo.jpg";
-                    //$("#summary_link_funds").html('<a style="color: #14efef" href="' + funds_site + '-funds.html">HSA Funds</a>');
-                    $("#summary_link_funds").html('<a  style="color: #14efef;" href="funds.html">HSA Funds</a>');
-                    $("#funds_image").html('<a style="color: #14efef" href="funds.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
-                }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -207,7 +200,7 @@
         var image_id = "#"+site_type+"_image";
         var fontColor = "#14efef";
         var foregroundColor = "#14efef";
-        
+console.log(graph_id);
         if (!site || site == 'null' || site == 'undefined') {
             $(graph_id).parent().children("p.status-text").html("No Provider");
             $(graph_id).parent().addClass("orange-graph");
@@ -216,25 +209,26 @@
             percent = 0;
         } else {
             var site_lower = site.toLowerCase();
-            var image_name = site_lower + "_logo.jpg";
+            var image_name = site_lower + "_logo.png";
             if (percent > 0) {
-                $(graph_id).parent().children("p.status-text").html("Deductible <span>$" + deductible + "</span><br />Total Spent <span>$" + deductible_met + "</span>");
+                $(graph_id).parent().find("span.deductible-text").html('$'+deductible);
+                $(graph_id).parent().find("span.deductible-met-text").html('$'+deductible_met);
                 $(graph_id).parent().removeClass("orange-graph");
-                $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
-                $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
+                $(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
+                $(image_id).css("background", "url('images/"+image_name+"')");
             } else if (data_exists !== 'yes') {
                 $(graph_id).parent().children("p.status-text").html("Data Unavailable");
                 $(graph_id).parent().addClass("orange-graph");
-                $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
-                $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
+                $(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
+                $(image_id).css("background", "url('images/"+image_name+"')");
                 fontColor = "#f8c572";
                 foregroundColor = "#f8c572";
                 percent = 0;
             } else {
                 $(graph_id).parent().children("p.status-text").html("Provider Pending");
                 $(graph_id).parent().addClass("orange-graph");
-                $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
-                $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
+                $(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
+                $(image_id).css("background", "url('images/"+image_name+"')");
                 //fontColor = "#f8c572";
                 //foregroundColor = "#f8c572";
                 fontColor = "#25cbf5";

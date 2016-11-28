@@ -113,7 +113,24 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
             
             // FUNDS
             if ($userInfo['funds']->provider_name == 'navia') {
+                // guardian_claim
+                $statementMapper = new Application_Model_NaviaStatementsMapper();
+                $naviaStatements = $statementMapper->getNaviaStatements($userId);
                 
+                $single_family = 'f';
+                
+                $cronConfig = $this->getScraperConfig();
+                if ($single_family = 'f') {
+                    $denominator = $cronConfig->scraper->navia->hsa->family->denominator;
+                } else {
+                    $denominator = $cronConfig->scraper->navia->hsa->single->denominator;
+                }
+            
+                
+                $result['funds_balance'] = str_replace(array('$', ','), '', $naviaStatements['HS_balance']);
+                $result['funds_denominator'] = str_replace(array('$', ','), '', $denominator);
+                $result['funds_percent'] = round($result['funds_balance'] / $denominator * 100);
+                $result['funds_data_exists'] = !empty($naviaStatements['user_id']) ? 'yes' : '';
             } 
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
@@ -151,6 +168,14 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
     {
         $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "DELETE - There is no such functionality at this moment");
         exit;
+    }
+    
+    protected function getScraperConfig()
+    {
+        $options = array();
+        $config = new Zend_Config_Ini(APPLICATION_PATH . '/configs/scraper.ini', 'production', $options);
+        
+        return $config;     
     }
     
     

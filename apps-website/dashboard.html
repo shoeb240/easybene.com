@@ -47,8 +47,8 @@
 
                         <ul class="nav navbar-nav visible-xs">    
                             <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
-                            <li><a href="#" class="active"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
-                            <li><a href="#" class=""><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="#"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
                             <li><a href="#"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
                             <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
                             <li><a href="#"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
@@ -86,8 +86,7 @@
                     <!--breadcrumb start--> 
                     <ol class="breadcrumb  " >
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                        <li class="breadcrumb-item active">Medical</li>
+                        <li class="breadcrumb-item active"><a href="#">Dashboard</a></li>
                     </ol>
 
 
@@ -119,8 +118,8 @@
                                             <div class="circle-wrapper saperator equalheight">
                                                 <h3>Medical</h3>                                                    
                                                 <div class="status-info-wrapper  ">
-                                                    <p class="status-info">Deductible <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This is how much you're on the hook for before the insurance company starts kicking in dough."><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span>$5000.00</span></p>
-                                                    <p class="status-info">Total Spent <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Demo text here. thisi is demo text"><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span>$485.91</span></p>
+                                                    <p class="status-info">Deductible <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This is how much you're on the hook for before the insurance company starts kicking in dough."><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-text"></span></p>
+                                                    <p class="status-info">Total Spent <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Demo text here. thisi is demo text"><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-met-text"></span></p>
                                                 </div>
                                                 <div id="medical-circle"></div>
                                                 <p id="medical_image" class="grap-rel-img" ></p>
@@ -135,8 +134,8 @@
                                             <div class="circle-wrapper equalheight">
                                                 <h3 class=" ">Dental</h3>                                   
                                                 <div class="status-info-wrapper  ">
-                                                    <p class="status-info">Deductible <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This is how much you're on the hook for before the insurance company starts kicking in dough."><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span>$534.00</span></p>
-                                                    <p class="status-info">Total Spent <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Demo text here. Demo text"><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span>$222.91</span></p>
+                                                    <p class="status-info">Deductible <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This is how much you're on the hook for before the insurance company starts kicking in dough."><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-text"></span></p>
+                                                    <p class="status-info">Total Spent <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Demo text here. Demo text"><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-met-text"></span></p>
                                                 </div>
                                                 <div id="dental-circle"></div>
                                                 <p id="dental_image" class="grap-rel-img" style="background: url('images/Guardian_logo.png')"></p>
@@ -162,13 +161,15 @@
 
                                     <li>
                                         <a href="#funds-panel">
-                                            <div class="circle-wrapper equalheight"  style="vertical-align: central;">
-
-                                                <h3 class=" ">Funds</h3>
+                                            <div class="circle-wrapper equalheight">
+                                                <h3 class=" ">Funds</h3>                                   
                                                 <div class="status-info-wrapper  ">
-
+                                                    <p class="status-info">Available Balance <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="This is how much you're on the hook for before the insurance company starts kicking in dough."><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-text"></span></p>
+                                                    <p class="status-info">IRS Limit <button class="popover-wrapper" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Demo text here. Demo text"><i class="fa fa-info-circle" aria-hidden="true"></i></button> <span class="deductible-met-text"></span></p>
                                                 </div>
-                                                <p id="funds_image" class="grap-rel-img" style="background: url('images/navia-logo.png')"></p>
+                                                <div id="funds-circle"></div>
+                                                <p id="funds_image" class="grap-rel-img" style="background: url('images/Guardian_logo.png')"></p>
+
 
                                             </div>
                                         </a>
@@ -186,7 +187,7 @@
                                         <div class="">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
+                                                    <a class="link-btn" href="cigna-medical.html" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
 
                                                         </span>
                                                     </a>
@@ -226,7 +227,7 @@
                                             <div class="">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
+                                                        <a class="link-btn" href="cigna-medical.html" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
 
                                                             </span>
                                                         </a>
@@ -300,8 +301,8 @@
                 <div class="left-menu nav nav-pills nav-stacked" id="myAffix" data-spy="affix">
                     <nav>
                         <ul class="" >
-                            <li><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
-                            <li><a href="#" class="active"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="#"  class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
                             <li><a href="#" class=""><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
                             <li><a href="#"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
                             <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
