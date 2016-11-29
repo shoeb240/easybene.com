@@ -9,7 +9,7 @@
             $("#top_tab_link_medical").addClass("active");
             $("#top_tab_link_dental").removeClass("active");
             $("#top_tab_link_vision").removeClass("active");
-            GetDentalData();
+            GetMedicalData();
         } else {
             ShowLogin();
         }
@@ -25,7 +25,7 @@
         location.href = 'index.html';
     }
     
-    function GetDentalData() {
+    function GetMedicalData() {
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
         var status = '';

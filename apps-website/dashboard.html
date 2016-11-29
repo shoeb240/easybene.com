@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="css/responsive-tabs.css">
 
     </head>
-    <body>
+    <body id="dashboard_body">
         <section class="intro-setion dashboard-dasktop">
             <div class="intro-content">
                 <nav id="navbar-main" class="navbar navbar-inverse affix">
@@ -163,13 +163,13 @@
                                 <div id="medical-panel" class="medical-grap-text table-text"> 
                                     <div id="claim_div" style="display: block;">
                                         <div class="tbl-header-wrapper">
-                                            <h3>Medical Claims test</h3>
-                                            <p class="sub-info">Cigna</p>
+                                            <h3>Medical Claim Details</h3>
+                                            <p class="sub-info" id="medical_site_name">Cigna</p>
                                         </div>
                                         <div class="">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
+                                                    <a class="link-btn" href="cigna-medical.html" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
 
                                                         </span>
                                                     </a>
@@ -178,21 +178,15 @@
                                             <table>
                                                 <thead>
                                                     <tr>
-                                                        <th>Date1</th>
+                                                        <th>Date</th>
                                                         <th>For</th>
                                                         <th>Total</th>
                                                         <th>You Pay</th>
-                                                        <!--<th>Status</th>-->
                                                     </tr>
                                                 </thead>
 
-                                                <tbody id="claim">
-                                                    <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                    <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                    <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                    <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                    <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                    <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
+                                                <tbody id="medical_claim">
+                                                    
                                                 </tbody>
                                             </table> 
                                         </div>
@@ -203,77 +197,79 @@
 
                                         <div id="claim_div" style="display: block;">
                                             <div class="tbl-header-wrapper">
-                                                <h3>Medical Claims dfd</h3>
-                                                <p class="sub-info">Cigna</p>
+                                                <h3>Dental Claim Details</h3>
+                                                <p class="sub-info" id="dental_site_name"></p>
                                             </div>
                                             <div class="">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
-
-                                                            </span>
-                                                        </a>
-                                                    </div>
-                                                </div>
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th>Date1</th>
+                                                            <th>Date</th>
                                                             <th>For</th>
                                                             <th>Total</th>
                                                             <th>You Pay</th>
-                                                            <!--<th>Status</th>-->
+                                                            <th>Status</th>
                                                         </tr>
                                                     </thead>
 
-                                                    <tbody id="claim">
-                                                        <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                        <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                        <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                        <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                        <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
-                                                        <tr><td><p>06/14/2016</p></td><td>RODERICK BRATHWAITE</td><td>$120.00</td><td>$74.57</td></tr>
+                                                    <tbody id="dental_claim">
                                                     </tbody>
                                                 </table> 
-                                            </div>
-                                        </div>
-
-                                        <div id="deductible_div" style="display: none;">
-                                            <div class="tbl-header-wrapper">
-                                                <h3>Medical Deductible</h3>
-                                                <p class="sub-info">Cigna</p>
-                                            </div>
-                                            <div class="">
-
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <a style="color: #14efef;" href="javascript:void(0);" id="claim_link">< Medical Claim</a>
-                                                    </div>
-                                                </div>
-
-                                                <div class="circle-wrapper saperator">
-                                                    <div id="plan-deductible-circle"></div>
-                                                    <p><img style="height: 30px;" id="medical_image" src="" alt="" /></p>
-                                                    <p>Plan Deductible </p>
-                                                    <p class="status-text"  style="top: 5px;"></p>
-                                                </div>
-
-                                                <div class="circle-wrapper">
-                                                    <div id="out-of-pocket-circle"></div>
-                                                    <p><img style="height: 30px;" id="dental_image" src="" alt="" /></p>
-                                                    <p>Out of Pocket Maximum </p>
-                                                    <p class="status-text"  style="top: 5px;"></p>
-                                                </div>
-
-                                                <div class="clearfix"></div>
-
                                             </div>
                                         </div>
 
                                     </div>
                                 </div>
                                 <div id="vision-panel" class="medical-grap-text table-text"><h2>Vision content will goes here</h2></div>
-                                <div id="funds-panel" class="medical-grap-text table-text"><h2>funds content will goes here</h2></div>
+                                <div id="funds-panel" class="medical-grap-text table-text">
+                                    <div id="hsa_summary_div" style="display: block;">
+                                        <div class="tbl-header-wrapper">
+                                            <h3>YOUR HSA ACCOUNT BALANCES</h3>
+                                            <p class="sub-info" id="dental_site_name"></p>
+                                        </div>
+                                        <div class="row blance-row">
+                                            <div class="balance-wrapper">
+                                                <p id="hsa_checking_value">-</p>
+                                                <p>Checking</p>
+                                            </div>
+                                            <div class="balance-wrapper no-right-border">
+                                                <p id="hsa_investment_value">-</p>
+                                                <p>Investments</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a class="link-btn" href="funds.html" id="hsa_details_link">HSA Transaction Details <span class="icon-angle-double-right"></span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div id="hsa_transaction_activity_div" style="display: none;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <a class="link-btn" href="javascript:void(0);" id="hsa_summary_link"><span class="icon-angle-left"></span> HSA Account Balances</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <p>REIMBURSEMENTS</p>
+                                        </div>
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Transaction Date </th>
+                                                    <th>Transaction Type </th>
+                                                    <th>Transaction Amt </th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody id="hsa_transaction_activity_loop">
+
+                                            </tbody>
+                                        </table> 
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -283,13 +279,13 @@
                 <div class="left-menu nav nav-pills nav-stacked" id="myAffix" data-spy="affix">
                     <nav>
                         <ul class="" >
-                            <li><a href="#" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
-                            <li><a href="#"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
-                            <li><a href="#"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
-                            <li><a href="#"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
-                            <li><a href="#"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="dashboard.html#dashboard_body" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
                             <li><a href="#"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
-                            <li><a href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+                            <li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
                         </ul>
                     </nav>
                     <div class="clearfix"></div>
@@ -378,7 +374,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-reset" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-action">Yes</button>
+                        <button type="button"  onclick="javascript: location.href='logout.html'" class="btn btn-action">Yes</button>
                     </div>
                 </div>
             </div>

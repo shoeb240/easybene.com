@@ -184,6 +184,12 @@
                 graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible, result.vision_data_exists);
                 graph(result.funds_percent, result.funds_denominator, funds_site, 'funds', result.funds_balance, result.funds_data_exists);
                 
+                $("#medical_site_name").html(medical_site.toUpperCase());
+                $("#dental_site_name").html(dental_site.toUpperCase());
+                
+                GetMedicalData(medical_site);
+                GetDentalData(dental_site);
+                GetFundsData();
             },
             error: function(xhr, ajaxOptions, thrownError) {
                     //console.log(xhr);
@@ -200,7 +206,7 @@
         var image_id = "#"+site_type+"_image";
         var fontColor = "#14efef";
         var foregroundColor = "#14efef";
-console.log(graph_id);
+
         if (!site || site == 'null' || site == 'undefined') {
             $(graph_id).parent().children("p.status-text").html("No Provider");
             $(graph_id).parent().addClass("orange-graph");
@@ -214,12 +220,12 @@ console.log(graph_id);
                 $(graph_id).parent().find("span.deductible-text").html('$'+deductible);
                 $(graph_id).parent().find("span.deductible-met-text").html('$'+deductible_met);
                 $(graph_id).parent().removeClass("orange-graph");
-                $(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
+                //$(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
                 $(image_id).css("background", "url('images/"+image_name+"')");
             } else if (data_exists !== 'yes') {
                 $(graph_id).parent().children("p.status-text").html("Data Unavailable");
                 $(graph_id).parent().addClass("orange-graph");
-                $(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
+                //$(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
                 $(image_id).css("background", "url('images/"+image_name+"')");
                 fontColor = "#f8c572";
                 foregroundColor = "#f8c572";
@@ -227,7 +233,7 @@ console.log(graph_id);
             } else {
                 $(graph_id).parent().children("p.status-text").html("Provider Pending");
                 $(graph_id).parent().addClass("orange-graph");
-                $(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
+                //$(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
                 $(image_id).css("background", "url('images/"+image_name+"')");
                 //fontColor = "#f8c572";
                 //foregroundColor = "#f8c572";
@@ -252,6 +258,143 @@ console.log(graph_id);
             percentageTextSize: 30
 
         });
+    }
+    
+    function GetMedicalData(medical_site) {
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+        var status = '';
+        var cssclass = '';
+        $.ajax({
+            url: 'https://easybene.com/index.php/api-medical/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                    //console.log(result.deductible_percent);
+                    //console.log(result.deductible_amt);
+                    //console.log(result.deductible_met);
+                    
+                    dyn_functions[medical_site+'_medical_table'](result);
+                },
+            error: function(xhr, ajaxOptions, thrownError) {
+                    //console.log(xhr);
+                    //console.log(ajaxOptions);
+                    //console.log(thrownError);
+                },
+        });
+    }
+    
+    function GetDentalData(dental_site) {
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+        var status = '';
+        var cssclass = '';
+        $.ajax({
+            url: 'https://easybene.com/index.php/api-dental/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                    //console.log(result.claim);
+                    dyn_functions[dental_site+'_dental_table'](result);
+                },
+            error: function(xhr, ajaxOptions, thrownError) {
+                    //console.log(xhr);
+                    //console.log(ajaxOptions);
+                    //console.log(thrownError);
+                },
+        });
+    }
+    
+    function GetFundsData() {
+        var username = window.localStorage.getItem("username");
+        var token = window.localStorage.getItem("token");
+        $.ajax({
+            url: 'https://easybene.com/index.php/api-funds/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                    //console.log(result);
+                    if (result.HS_balance === '' || result.HS_balance === null) {
+                        result.HS_balance = 'Pending';
+                        $('#hsa_checking_value').css('color', '#f8c572');
+                        
+                    }
+                    if (result.portfolio_balance === '' || result.portfolio_balance === null) {
+                        result.portfolio_balance = 'Pending';
+                        $('#hsa_investment_value').css('color', '#f8c572');
+                    }
+                    $('#hsa_checking_value').html(result.HS_balance);
+                    $('#hsa_investment_value').html(result.portfolio_balance);
+                    
+                    /*if (result.transaction_activity[0]) {
+                        $.each(result.transaction_activity, function(key, row) {
+                            
+                            if (row.transaction_type) {
+                                $('#hsa_transaction_activity_loop').append('<tr><td>' +
+                                    row.transaction_date +
+                                '</td><td>' +
+                                    row.transaction_type +
+                                '</td><td>' +
+                                    row.transaction_amt +
+                                '</td></tr>');
+                            }
+                        });
+                    } else {
+                        $('#hsa_transaction_activity_loop').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+                    }*/
+                    
+                    //showHSASummaryDiv();
+                },
+            error: function(xhr, ajaxOptions, thrownError) {
+                    //console.log(xhr);
+                    //console.log(ajaxOptions);
+                    //console.log(thrownError);
+                },
+        });
+    }
+    
+    var dyn_functions = [];
+    dyn_functions['cigna_medical_table'] = function (result) {
+        if (result.claim_details[0]) {
+            $.each(result.claim_details, function(key, row) {
+                status = 'Pending';
+                cssclass = 'pending';
+                $('#medical_claim').append('<tr><td><p>'+row.claim_processed_on+'</p></td><td>'+row.for+'</td><td>'+row.service_amount_billed+'</td><td>'+row.service_what_i_owe+'</td><!--<td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></td>--></tr>');
+            });
+        } else {
+            $('#medical_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+        }
+    }
+    
+    dyn_functions['anthem_medical_table'] = function (result) {
+        if (result.claim_details[0]) {
+            $.each(result.claim_details, function(key, row) {
+                status = 'Pending';
+                cssclass = 'pending';
+                $('#medical_claim').append('<tr><td><p>'+row.date+'</p></td><td>'+row.for+'</td><td>'+row.total+'</td><td>'+row.member_responsibility+'</td><!--<td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></td>--></tr>');
+            });
+        } else {
+            $('#medical_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+        }
+    }
+    
+    dyn_functions['guardian_dental_table'] = function (result) {
+        if (result.claim[0]) {
+            $.each(result.claim, function(key, row) {
+                status = 'Pending';
+                cssclass = 'pending';
+                if (row.status.search("Processed") >= 0) {
+                    status = 'Processed';
+                    cssclass = 'processed';
+                }
+                $('#dental_claim').append('<tr><td>'+row.paid_date+'</td><td><p>'+row.patient_name+'</p></td><td>'+row.submitted_charges+'</td><td>'+row.i_owe+'</td><td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></tr>');
+            });
+        } else {
+            $('#dental_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+        }
     }
     
 
