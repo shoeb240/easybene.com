@@ -178,11 +178,13 @@
             dataType: 'json',
             async: false,
             success: function(result) {
-                //console.log(result);
+                console.log(result);
                 graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible, result.medical_data_exists);
                 graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible, result.dental_data_exists);
                 graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible, result.vision_data_exists);
-                graph(result.funds_percent, result.funds_denominator, funds_site, 'funds', result.funds_balance, result.funds_data_exists);
+                graph(result.funds_percent, result.funds_denominator, funds_site, 'funds', result.funds_nominator, result.funds_data_exists);
+                graph(result.day_care_FSA_percent, result.day_care_FSA_denominator, funds_site, 'day_care_FSA', result.day_care_FSA_nominator, result.day_care_FSA_data_exists);
+                graph(result.health_care_FSA_percent, result.health_care_FSA_denominator, funds_site, 'health_care_FSA', result.health_care_FSA_nominator, result.health_care_FSA_data_exists);
                 
                 $("#medical_site_name").html(medical_site.toUpperCase());
                 $("#dental_site_name").html(dental_site.toUpperCase());
@@ -208,7 +210,8 @@
         var foregroundColor = "#14efef";
 
         if (!site || site == 'null' || site == 'undefined') {
-            $(graph_id).parent().children("p.status-text").html("No Provider");
+            $(graph_id).parent().find("span.deductible-text").html("No Provider");
+            $(graph_id).parent().find("span.deductible-met-text").html("No Provider");
             $(graph_id).parent().addClass("orange-graph");
             fontColor = "#f8c572";
             foregroundColor = "#f8c572";
@@ -216,31 +219,30 @@
         } else {
             var site_lower = site.toLowerCase();
             var image_name = site_lower + "_logo.png";
-            if (percent > 0) {
+            if (data_exists === 'yes') {
                 $(graph_id).parent().find("span.deductible-text").html('$'+deductible);
                 $(graph_id).parent().find("span.deductible-met-text").html('$'+deductible_met);
                 $(graph_id).parent().removeClass("orange-graph");
-                //$(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
                 $(image_id).css("background", "url('images/"+image_name+"')");
             } else if (data_exists !== 'yes') {
-                $(graph_id).parent().children("p.status-text").html("Data Unavailable");
+                $(graph_id).parent().find("span.deductible-text").html("Unavailable");
+                $(graph_id).parent().find("span.deductible-met-text").html("Unavailable");
                 $(graph_id).parent().addClass("orange-graph");
-                //$(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
                 $(image_id).css("background", "url('images/"+image_name+"')");
                 fontColor = "#f8c572";
                 foregroundColor = "#f8c572";
                 percent = 0;
-            } else {
-                $(graph_id).parent().children("p.status-text").html("Provider Pending");
+            } /*else {
+                $(graph_id).parent().find("span.deductible-text").html("Pending");
+                $(graph_id).parent().find("span.deductible-met-text").html("Pending");
                 $(graph_id).parent().addClass("orange-graph");
-                //$(image_id).closest("a").attr('href', site + '-' + site_type + '.html');
                 $(image_id).css("background", "url('images/"+image_name+"')");
                 //fontColor = "#f8c572";
                 //foregroundColor = "#f8c572";
                 fontColor = "#25cbf5";
                 foregroundColor = "#25cbf5";
                 percent = 0;
-            }
+            }*/
         }
 
         $(graph_id).circliful({
@@ -329,22 +331,43 @@
                     $('#hsa_checking_value').html(result.HS_balance);
                     $('#hsa_investment_value').html(result.portfolio_balance);
                     
-                    /*if (result.transaction_activity[0]) {
-                        $.each(result.transaction_activity, function(key, row) {
+                    if (result.day_care_FSA[0]) {
+                        $.each(result.day_care_FSA, function(key, row) {
                             
                             if (row.transaction_type) {
-                                $('#hsa_transaction_activity_loop').append('<tr><td>' +
-                                    row.transaction_date +
+                                $('#day_care_FSA_loop').append('<tr><td>' +
+                                    row.date_posted +
                                 '</td><td>' +
                                     row.transaction_type +
                                 '</td><td>' +
-                                    row.transaction_amt +
+                                    row.claim_amount +
+                                '</td><td>' +
+                                    row.amount +
                                 '</td></tr>');
                             }
                         });
                     } else {
-                        $('#hsa_transaction_activity_loop').append('<tr role="row"><td colspan="5">No data available</td></tr>');
-                    }*/
+                        $('#day_care_FSA_loop').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+                    }
+                    
+                    if (result.health_care_FSA[0]) {
+                        $.each(result.health_care_FSA, function(key, row) {
+                            
+                            if (row.transaction_type) {
+                                $('#health_care_FSA_loop').append('<tr><td>' +
+                                    row.date_posted +
+                                '</td><td>' +
+                                    row.transaction_type +
+                                '</td><td>' +
+                                    row.claim_amount +
+                                '</td><td>' +
+                                    row.amount +
+                                '</td></tr>');
+                            }
+                        });
+                    } else {
+                        $('#health_care_FSA_loop').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+                    }
                     
                     //showHSASummaryDiv();
                 },

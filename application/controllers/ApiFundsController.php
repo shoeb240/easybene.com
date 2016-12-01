@@ -46,6 +46,12 @@ class ApiFundsController extends My_Controller_ApiAbstract //Zend_Controller_Act
                 $hs = $hsMapper->getNaviaHealthSavings($userId);
                 $arr['portfolio_balance'] = $hs[0]['portfolio_balance'];
                 $arr['transaction_activity'] = $hs;
+                
+                $dayCareMapper = new Application_Model_NaviaDayCareMapper();
+                $arr['day_care_FSA'] = $dayCareMapper->getNaviaDayCare($userId);
+                
+                $healthCareMapper = new Application_Model_NaviaHealthCareMapper();
+                $arr['health_care_FSA'] = $healthCareMapper->getNaviaHealthCare($userId);
             }
 
             /*echo '<pre>';

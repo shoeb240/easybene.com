@@ -217,7 +217,7 @@
         } else {
             var site_lower = site.toLowerCase();
             var image_name = site_lower + "_logo.jpg";
-            if (percent > 0) {
+            if (data_exists === 'yes') {
                 $(graph_id).parent().children("p.status-text").html("Deductible <span>$" + deductible + "</span><br />Total Spent <span>$" + deductible_met + "</span>");
                 $(graph_id).parent().removeClass("orange-graph");
                 $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
@@ -230,7 +230,7 @@
                 fontColor = "#f8c572";
                 foregroundColor = "#f8c572";
                 percent = 0;
-            } else {
+            } /*else {
                 $(graph_id).parent().children("p.status-text").html("Provider Pending");
                 $(graph_id).parent().addClass("orange-graph");
                 $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
@@ -238,7 +238,7 @@
                 fontColor = "#f8c572";
                 foregroundColor = "#f8c572";
                 percent = 0;
-            }
+            }*/
         }
 
         $(graph_id).circliful({

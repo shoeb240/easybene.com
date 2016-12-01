@@ -126,11 +126,26 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                     $denominator = $cronConfig->scraper->navia->hsa->single->denominator;
                 }
             
-                
-                $result['funds_balance'] = str_replace(array('$', ','), '', $naviaStatements['HS_balance']);
+                $result['funds_nominator'] = str_replace(array('$', ','), '', $naviaStatements['HS_balance']);
                 $result['funds_denominator'] = str_replace(array('$', ','), '', $denominator);
-                $result['funds_percent'] = round($result['funds_balance'] / $denominator * 100);
+                $result['funds_percent'] = round($result['funds_nominator'] / $result['funds_denominator'] * 100);
                 $result['funds_data_exists'] = !empty($naviaStatements['user_id']) ? 'yes' : '';
+                
+                $dayCareMapper = new Application_Model_NaviaDayCareMapper();
+                $naviaDayCare = $dayCareMapper->getNaviaDayCare($userId);
+                
+                $result['day_care_FSA_nominator'] = str_replace(array('$', ','), '', $naviaDayCare[0]['reimbursed_to_date']);
+                $result['day_care_FSA_denominator'] = str_replace(array('$', ','), '', $naviaDayCare[0]['annual_election']);
+                $result['day_care_FSA_percent'] = round($result['day_care_FSA_nominator'] / $result['day_care_FSA_denominator'] * 100);
+                $result['day_care_FSA_data_exists'] = !empty($naviaDayCare[0]['user_id']) ? 'yes' : '';
+                
+                $healthCareMapper = new Application_Model_NaviaHealthCareMapper();
+                $naviaHealthCare = $healthCareMapper->getNaviaHealthCare($userId);
+                
+                $result['health_care_FSA_nominator'] = str_replace(array('$', ','), '', $naviaHealthCare[0]['reimbursed_to_date']);
+                $result['health_care_FSA_denominator'] = str_replace(array('$', ','), '', $naviaHealthCare[0]['annual_election']);
+                $result['health_care_FSA_percent'] = round($result['health_care_FSA_nominator'] / $result['health_care_FSA_denominator'] * 100);
+                $result['health_care_FSA_data_exists'] = !empty($naviaHealthCare[0]['user_id']) ? 'yes' : '';
             } 
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
