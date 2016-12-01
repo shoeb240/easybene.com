@@ -204,8 +204,8 @@
     
     function graph(percent, deductible_met, site, site_type, deductible, data_exists)
     {
-        var graph_id = "#"+site_type+"-circle";
-        var image_id = "#"+site_type+"_image";
+        var graph_id = "."+site_type+"-circle";
+        var image_id = "."+site_type+"_image";
         var fontColor = "#14efef";
         var foregroundColor = "#14efef";
 
