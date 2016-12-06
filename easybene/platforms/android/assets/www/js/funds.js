@@ -29,7 +29,7 @@
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
         $.ajax({
-            url: 'http://www.easybene.com/index.php/api-funds/'+username+'/'+token,
+            url: 'https://easybene.com/index.php/api-funds/'+username+'/'+token,
             type: "GET",
             dataType: 'json',
             async: false,

@@ -22,7 +22,8 @@
         ================= Stylesheets ===================
         ============================================= -->
         <!-- vendor css files -->
-        <link rel="stylesheet" href="assets/js/vendor/chosen/chosen.css">
+        <link rel="stylesheet" href="js/vendor/chosen/chosen.css">
+        <link rel="stylesheet" href="css/desktop-style.css">
         
         <style>
             .login-list li {
@@ -360,6 +361,22 @@
                                                 </div>
                                                 <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                             </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <select id="funds_family_single">
+                                                            <option value="s">Single</option>
+                                                            <option value="f">Family</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            
                                             <li class="btn-wrapper">
                                                 <a id="funds_register" href="javascript:void(0);" ><button type="submit">Save</button></a>
                                                 <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
@@ -407,18 +424,18 @@
          <!-- ============================================
         ============== Vendor JavaScripts ===============
         ============================================= -->
-        <script src="assets/js/vendor/jRespond/jRespond.min.js"></script>
+        <script src="js/vendor/jRespond/jRespond.min.js"></script>
 
-        <script src="assets/js/vendor/animsition/js/jquery.animsition.min.js"></script>
+        <script src="js/vendor/animsition/js/jquery.animsition.min.js"></script>
 
-        <script src="assets/js/vendor/chosen/chosen.jquery.js"></script>
+        <script src="js/vendor/chosen/chosen.jquery.js"></script>
 
         <!--/ vendor javascripts -->
 
         <!-- ============================================
         ============== Custom JavaScripts ===============
         ============================================= -->
-        <script src="assets/js/main.js"></script>
+        <script src="js/main.js"></script>
         <!--/ custom javascripts -->
         
         
@@ -494,16 +511,16 @@
             return valid;
         }
         
-        function hideAll() {
+        /*function hideAll() {
             $('#welcome_div').css('display', 'none');
             $('#site_choice_dental_div').css('display', 'none');   
             $('#site_choice_vision_div').css('display', 'none');   
 
             $('#site_reg_div').css('display', 'none');   
             $('#site_reg_fail_div').css('display', 'none');   
-        }
+        }*/
 
-        function ShowDentalSiteLinks() {
+        /*function ShowDentalSiteLinks() {
             hideAll(); 
             $('#site_choice_dental_div').css('display', 'block');
         }
@@ -511,9 +528,9 @@
         function ShowVisionSiteLinks() {
             hideAll(); 
             $('#site_choice_vision_div').css('display', 'block');
-        }
+        }*/
 
-        function ShowSiteReg(type, site, image) {
+        /*function ShowSiteReg(type, site, image) {
             hideAll();
             $('#site_reg_div').css('display', 'block');
             $('#site_selected_type_name').html(type);
@@ -521,7 +538,7 @@
             $('#site_selected_type_image').attr("src", "assets/images/" + image);
         }
 
-         function ProcessLogout() {
+        function ProcessLogout() {
             window.localStorage.removeItem('username');
             window.localStorage.removeItem('token');
             window.localStorage.removeItem('token_expire');
@@ -530,7 +547,7 @@
             window.localStorage.removeItem('vision_site');
             window.localStorage.removeItem('funds_site');
             location.href = "index.html";
-        }
+        }*/
 
         function GetUserData() {
             var username = window.localStorage.getItem("username");
@@ -555,7 +572,7 @@
             var site_password = '';
             
             $.ajax({
-                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                url: 'https://easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "GET",
                 dataType: 'json',
                 async: false,
@@ -577,6 +594,7 @@
                                 result_site = result.providersSelected[provider_types[p]].provider_name;
                                 user_id = result.providersSelected[provider_types[p]].provider_user_id;
                                 password = result.providersSelected[provider_types[p]].provider_password;
+                                funds_family_single = result.providersSelected[provider_types[p]].funds_family_single;
                                 //console.log(provider_types[p]);
                                 //console.log(result_site);
                             }
@@ -594,6 +612,22 @@
                             
                             $('#'+provider_types[p]+'_selected_user_id').val(user_id);
                             $('#'+provider_types[p]+'_selected_password').val(password);
+                            
+                            if ('s' === funds_family_single) {
+                                selected = 'selected';
+                            } else {
+                                selected = '';
+                            }
+                            select_code = '<option ' + selected + ' value="s">Single</option>';
+                            
+                            if ('f' === funds_family_single) {
+                                selected = 'selected';
+                            } else {
+                                selected = '';
+                            }
+                            select_code = select_code + '<option ' + selected + ' value="f">Family</option>';
+
+                            $('#funds_family_single').html(select_code);
                             
                             $('#'+provider_types[p]+'_register').on('click', function() {
                                 var thsid = $(this).attr('id');
@@ -622,7 +656,7 @@
         {
             var response = false;
             $.ajax({
-                url: 'http://www.easybene.com/index.php/'+scrapper_script_path+'/run/'+username+'/'+token+'/'+provider_id,
+                url: 'https://easybene.com/index.php/'+scrapper_script_path+'/run/'+username+'/'+token+'/'+provider_id,
                 type: "GET",
                 dataType: 'json',
                 async: false,
@@ -642,13 +676,17 @@
             var username = window.localStorage.getItem("username");
             var token = window.localStorage.getItem("token");
             var provider_execution = window.localStorage.getItem('provider_execution');
-            
+            var funds_family_single = '';
+            if (site_type == 'funds') {
+                funds_family_single = $('#funds_family_single').val();
+            }
+                
             $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'block');
 
             $.ajax({
-                url: 'http://www.easybene.com/index.php/api-user/'+username+'/'+token,
+                url: 'https://easybene.com/index.php/api-user/'+username+'/'+token,
                 type: "POST",
-                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password,
+                data: 'site_name='+site_name+'&site_type='+site_type+'&site_user_id='+site_user_id+'&site_password='+site_password + '&funds_family_single=' + funds_family_single,
                 dataType: 'json',
                 async: false,
                 success: function(result) {

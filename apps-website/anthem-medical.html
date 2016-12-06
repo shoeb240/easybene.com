@@ -47,25 +47,13 @@
                             <li><a href="#"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
                             <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
                             <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
-
                         </ul>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav visible-xs">    
-                            <li><a href="dashboard.html#dashboard_body"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
-                            <li><a href="dashboard.html#medical-panel" class="active"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
-                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
-                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
-                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
-                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
-                            <li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-                        </ul>
-                        <ul class="navbar-right hidden-xs">    
+                        <ul class="navbar-right">    
                             <li class="profile-pic">
                                 <a href="#" style="background: url('images/pro-pic.jpg')"></a>
                             </li>
                             <li><div class="dropdown">
-                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                                         RodeRick
                                         <span class="caret"></span>
                                     </button>
@@ -79,11 +67,23 @@
                             </li> 
                         </ul>
                     </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav visible-xs">    
+                            <li><a href="dashboard.html#dashboard_body" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
+
+                        </ul>
+
+                    </div>
                     <!--                        /.nav-collapse -->
                 </nav>
                 <div class="clearfix"></div>
             </div>
-        </section>       
+        </section>        
 
         <div class="container">
             <div class="page-content medical-grap tab-none-for-desktop">
@@ -115,9 +115,9 @@
                         </ul>
                     </div>
                     <div class="content-block less-padding desktop-margin">
-                        
+
                         <div class="table-text">
-                            
+
                             <div id="claim_div" style="display: block;">
                                 <div class="tbl-header-wrapper">
                                     <h3>Medical Claims</h3>
@@ -129,24 +129,26 @@
                                             <a style="color: #14efef" href="javascript:void(0);" id="deductible_link">Medical Deductible ></a>
                                         </div>
                                     </div>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>For</th>
-                                                <th>Total</th>
-                                                <th>You Pay</th>
-                                                <!--<th>Status</th>-->
-                                            </tr>
-                                        </thead>
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>For</th>
+                                                    <th>Total</th>
+                                                    <th>You Pay</th>
+                                                    <!--<th>Status</th>-->
+                                                </tr>
+                                            </thead>
 
-                                        <tbody id="claim">
+                                            <tbody id="claim">
 
-                                        </tbody>
-                                    </table> 
+                                            </tbody>
+                                        </table> 
+                                    </div>
                                 </div>
                             </div>
-                            
+
                             <div id="deductible_div" style="display: none;">
                                 <div class="tbl-header-wrapper">
                                     <h3>Medical Deductible</h3>
@@ -159,7 +161,7 @@
                                             <a style="color: #14efef;" href="javascript:void(0);" id="claim_link">< Medical Claim</a>
                                         </div>
                                     </div>
-                                    
+
                                     <div class="circle-wrapper saperator">
                                         <div id="plan-deductible-circle"></div>
                                         <p><img style="height: 30px;" id="medical_image" src="" alt="" /></p>
@@ -178,14 +180,14 @@
 
                                 </div>
                             </div>
-                                
+
                         </div>
-                            
+
                     </div>
 
                 </div>
                 <div class="clearfix"></div>
-                
+
                 <!--left menu start from here-->
                 <div class="left-menu nav nav-pills nav-stacked" id="myAffix" data-spy="affix">
                     <nav>
@@ -269,14 +271,14 @@
         <script type="text/javascript" src="js/anthem-medical.js"></script>
         <script type="text/javascript" src="js/common-details.js"></script>
         <script>
-            $('#myAffix').affix({
-                offset: {
-                    top: 150,
-                    bottom: function () {
-                        return (this.bottom = $('footer').outerHeight(true))
-                    }
-                }
-            });
+                            $('#myAffix').affix({
+                                offset: {
+                                    top: 150,
+                                    bottom: function () {
+                                        return (this.bottom = $('footer').outerHeight(true))
+                                    }
+                                }
+                            });
         </script>
     </body>
 </html>

@@ -11,7 +11,7 @@ error_reporting(9);
  * @version    1.0
  */
 
-class My_Controller_ScrapeBase extends Zend_Controller_Action
+abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
 {
     protected $accountId = "17b650b4-4bd8-485d-9c83-cc84c542078a";
     
@@ -43,6 +43,18 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     
     protected $execution_count = 0;
     
+    protected $file_run_name;
+    
+    protected $file_run_field;
+    
+    protected $file_run_field_prefix;
+
+    abstract public function runAction();
+    
+    abstract public function executeAction();
+    
+    abstract protected function prepare_id_card_data($text, $fileId);
+
     /**
      * Initialize object
      *
@@ -97,6 +109,22 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
 
         return json_decode($result, true);
     }
+    
+    protected function myExecutionFileResult($userProviderExeObj, $headerArray, $fileId) 
+    {
+        $executionId = $userProviderExeObj->exe_id;
+        
+        $url = $this->apiEndPoint . "executions/{$executionId}/file/{$fileId}";
+        $ch = curl_init($url);                                                                      
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");                                                                     
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);                                                                      
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headerArray);   
+        $result = curl_exec($ch);
+        
+        //print_r($result);
+
+        return $result;
+    }
 
     protected function myRunWithInput($data_string, $headerArray, $runId, $bulk = false) 
     {
@@ -118,10 +146,21 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected function getHeaderArr()
     {
         return array(                                                                          
-                'X-CloudScrape-Access: ' . md5($this->accountId . $this->apiKey),
-                'X-CloudScrape-Account: ' . $this->accountId,
+                'X-DexiIO-Access: ' . md5($this->accountId . $this->apiKey),
+                'X-DexiIO-Account: ' . $this->accountId,
                 'Accept: application/json',
                 'Content-Type: application/json', 
+                'Access-Control-Allow-Origin: *'
+        );
+    }
+    
+    protected function getHeaderFileArr()
+    {
+        return array(                                                                          
+                'X-DexiIO-Access: ' . md5($this->accountId . $this->apiKey),
+                'X-DexiIO-Account: ' . $this->accountId,
+                'Accept: application/json',
+                'Accept-Encoding: application/pdf', 
                 'Access-Control-Allow-Origin: *'
         );
     }
@@ -297,6 +336,35 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
                     if ('QUEUED' === $this->execute_res || 'PENDING' === $this->execute_res || 'RUNNING' === $this->execute_res) {
                         break;
                     }
+                    
+                    if ($this->file_run_name == $run_name) {
+                        $headerFileArray = $this->getHeaderFileArr();
+                        $file_run_field_val = $arr[$run_name]['rows'][0][2];
+                        $tarr = explode(';', $file_run_field_val);
+                        $fileId = $tarr[count($tarr) - 1];
+                        //echo $fileId . '==';
+                        $file_string = $this->myExecutionFileResult($userProviderExeObj, $headerFileArray, $fileId);
+                        
+                        file_put_contents(APPLICATION_PATH . '/../pdf_dl/'.$fileId.'.pdf', $file_string);
+                        
+                        // ID Card work
+                        include APPLICATION_PATH . '/../pdfparser/vendor/autoload.php';
+
+                        // Parse pdf file and build necessary objects.
+                        $parser = new \Smalot\PdfParser\Parser();
+                        $pdf    = $parser->parseFile(APPLICATION_PATH . '/../pdf_dl/'.$fileId.'.pdf');
+
+                        $text = $pdf->getText();
+                        /*echo '<pre>';
+                        echo $text;
+                        echo '</pre>';*/
+                        
+                        $arr[$run_name]['rows'][0] = $this->prepare_id_card_data($text, $fileId);
+                        
+                        /*echo '<pre>';
+                        print_r($arr[$run_name]);
+                        echo '</pre>';*/
+                    }
                 } catch (Exception $e) {
                     $this->ret_failed[] = $userProviderExeObj->id;
                 }
@@ -435,5 +503,5 @@ class My_Controller_ScrapeBase extends Zend_Controller_Action
         
         return $config;     
     }
-
+    
 }

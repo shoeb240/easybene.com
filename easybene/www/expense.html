@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/slidebars-theme.css">
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+        
+        <!-- ============================================
+        ================= Stylesheets ===================
+        ============================================= -->
+        <!-- vendor css files -->
+        <link rel="stylesheet" href="js/vendor/chosen/chosen.css">
+        <link rel="stylesheet" href="css/desktop-style.css">
+        
+        <style>
+            .login-list li {
+                margin: 0 auto 3px;
+                width: 85%;
+            }
+            
+            .btn-wrapper {
+                border: medium none !important;
+                margin-top: 5px !important;
+            }
+            
+            .provider-login-wrapper .login-list {
+                margin-top: 10px;
+            }
+            
+            .btn-wrapper button {
+                font-size: 16px;
+            }
+        </style>
+
+    </head>
+    <body>
+
+        <!-- Top Navigation Bar -->
+        <div class="sb-navbar sb-slide">
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
+            <!--             Left Slidebar control -->
+            <div class="sb-toggle-left">
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="page-title">Expense</h2>
+
+        </div>
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
+
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
+
+
+                <div class="page-content search-prvider-page">
+
+                    <div class="content-block less-margin provider-settings-wrapper">
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            
+                            <div id="site_reg_div" class="provider-login-wrapper" style="display: block; box-shadow: none; margin: 0;">
+                                <h2></h2>
+                                <div>
+                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
+                                    <div class="list-block login-list">
+                                        <div id="floatingBarsG" class="floatingBarsG_medical" style="display: none;">
+                                            <div class="blockG" id="rotateG_01"></div>
+                                            <div class="blockG" id="rotateG_02"></div>
+                                            <div class="blockG" id="rotateG_03"></div>
+                                            <div class="blockG" id="rotateG_04"></div>
+                                            <div class="blockG" id="rotateG_05"></div>
+                                            <div class="blockG" id="rotateG_06"></div>
+                                            <div class="blockG" id="rotateG_07"></div>
+                                            <div class="blockG" id="rotateG_08"></div>
+                                        </div>
+                                        <ul>
+                                            <li>Expense</li>
+                                            <li>
+                                                <div id="medical_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Medical Provider Registered Successfully</div>
+                                                <div id="medical_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-media"><i class="icon-user"></i></div>
+                                                    <div id="medical_provider_div" class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <select id="user_list">
+                                                            <option>--Select Expense Type--</option>
+                                                            <option>AAAAAA</option>
+                                                            <option>BBBBBB</option>
+                                                        </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                            <a href="javascript: void(0)" onclick="openCamera()">Camera</a>
+                                                        <img id="imageFile" src="" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="description"  type="text" placeholder="Enter a description of the expense">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="description"  type="text" placeholder="mm/dd/yyyy">
+                                                        </div>
+                                                    </div>
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="description"  type="text" placeholder="0.00">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="medical_selected_password"  type="password" placeholder="Additional details about expense">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                            </li>
+                                            
+                                            
+                                            <li class="btn-wrapper">
+                                                <a id="medical_register" href="javascript:void(0);" ><button type="submit">Save</button></a>
+                                                <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
+                                                 <div class="clearfix"></div>
+                                            </li>
+                                        
+                                        </ul>
+                                    </div>
+                                </div> 
+                                <div style="clear:both;"></div>
+                                
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
+
+        <!-- Modal HTML -->
+        <div id="Why-imp-Modal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <div class="why-important-text-wrapper">
+                            <div class="why-important-text-wrapper-text">
+                                <h3>Linking is how the magic Happens</h3>
+                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
+                                <a data-dismiss="modal" style="cursor: pointer">Got it</a>
+                            </div>
+
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        
+        
+         <!-- ============================================
+        ============== Vendor JavaScripts ===============
+        ============================================= -->
+        <script src="js/vendor/jRespond/jRespond.min.js"></script>
+
+        <script src="js/vendor/animsition/js/jquery.animsition.min.js"></script>
+
+        <script src="js/vendor/chosen/chosen.jquery.js"></script>
+
+        <!--/ vendor javascripts -->
+
+        <!-- ============================================
+        ============== Custom JavaScripts ===============
+        ============================================= -->
+        <script src="js/main.js"></script>
+        <!--/ custom javascripts -->
+        
+        
+        <script>
+            /*navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI });
+
+            function onSuccess(imageURI) {
+                var image = document.getElementById('myImage');
+                image.src = imageURI;
+            }
+
+            function onFail(message) {
+                alert('Failed because: ' + message);
+            }*/
+    
+        function setOptions(srcType) {
+            var options = {
+                // Some common settings are 20, 50, and 100
+                quality: 50,
+                destinationType: Camera.DestinationType.FILE_URI,
+                // In this app, dynamically set the picture source, Camera or photo gallery
+                sourceType: srcType,
+                encodingType: Camera.EncodingType.JPEG,
+                mediaType: Camera.MediaType.PICTURE,
+                allowEdit: true,
+                correctOrientation: true  //Corrects Android orientation quirks
+            }
+            return options;
+        }
+
+        function openCamera() {
+            alert('opening camera');
+            var srcType = Camera.PictureSourceType.CAMERA;
+            var options = setOptions(srcType);
+            var func = createNewFileEntry;
+
+            navigator.camera.getPicture(function cameraSuccess(imageUri) {
+
+                displayImage(imageUri);
+                // You may choose to copy the picture, save it somewhere, or upload.
+                func(imageUri);
+
+            }, function cameraError(error) {
+                console.debug("Unable to obtain picture: " + error, "app");
+
+            }, options);
+        }
+        
+        function displayImage(imgUri) {
+
+            var elem = document.getElementById('imageFile');
+            elem.src = imgUri;
+        }
+
+
+        </script>
+    </body>
+</html>

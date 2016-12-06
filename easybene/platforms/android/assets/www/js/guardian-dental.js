@@ -26,7 +26,7 @@
         var status = '';
         var cssclass = '';
         $.ajax({
-            url: 'http://www.easybene.com/index.php/api-dental/'+username+'/'+token,
+            url: 'https://easybene.com/index.php/api-dental/'+username+'/'+token,
             type: "GET",
             dataType: 'json',
             async: false,

@@ -65,25 +65,13 @@
                             <li><a href="#"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
                             <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
                             <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
-
                         </ul>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav visible-xs">    
-                            <li><a href="dashboard.html#dashboard_body"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
-                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
-                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
-                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
-                            <li><a href="provider-settings.html"  class="active"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
-                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
-                            <li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-                        </ul>
-                        <ul class="navbar-right hidden-xs">    
+                        <ul class="navbar-right">    
                             <li class="profile-pic">
                                 <a href="#" style="background: url('images/pro-pic.jpg')"></a>
                             </li>
                             <li><div class="dropdown">
-                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                                         RodeRick
                                         <span class="caret"></span>
                                     </button>
@@ -97,12 +85,23 @@
                             </li> 
                         </ul>
                     </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav visible-xs">    
+                            <li><a href="dashboard.html#dashboard_body" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
+
+                        </ul>
+
+                    </div>
                     <!--                        /.nav-collapse -->
                 </nav>
                 <div class="clearfix"></div>
             </div>
-        </section>  
-
+        </section>
 
 
         <!-- Your main site content in here -->
@@ -117,25 +116,6 @@
                         <li class="breadcrumb-item active">Medical</li>
                     </ol>
 
-
-                    <div class="content-block less-margin">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
-                            <li role="presentation">
-                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical 
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
-                            </li>
-                        </ul>
-                    </div>
 
                     <!-- Tab panes -->
                     <div class="page-content search-prvider-page">
@@ -358,12 +338,6 @@
                                         </div>
                                     </div> 
                                     <div style="clear:both;"></div>
-
-
-
-
-
-
                                     <div>
                                         <div class="list-block login-list">
                                             <div id="floatingBarsG" class="floatingBarsG_funds" style="display: none;">
@@ -387,7 +361,7 @@
                                                         <div class="item-media"><i class="icon-user"></i></div>
                                                         <div class="item-inner">                                               
                                                             <div id="funds_provider_div" class="item-input">
-                                                                <!--<input id="funds_selected_user_id"  type="email" placeholder="User Name">-->
+                                                             
                                                                 <select id="funds_selected_name">
                                                                     <option>--Select Provider--</option>
                                                                 </select>
@@ -420,7 +394,7 @@
                                                     </div>
                                                     <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                                 </li>
-                                                
+
                                                 <li>
                                                     <div class="item-content">
                                                         <div class="item-media"></div>
@@ -435,7 +409,7 @@
                                                     </div>
                                                     <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
                                                 </li>
-                                                
+
                                                 <li class="btn-wrapper">
                                                     <a id="funds_register" href="javascript:void(0);" ><button type="submit">Save</button></a>
                                                     <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
@@ -574,304 +548,304 @@
 
 
         <script>
-            function show_error(ths)
-            {
-                $(ths).parent().children(".valid-field").css("display", "none");
-                $(ths).parent().children(".inValid-field").css("display", "block");
-                $(ths).closest("li").addClass("error-found");
-                $(ths).closest("li").children(".inValidText").css("display", "block");
-            }
-
-            function remove_error(ths)
-            {
-                $(ths).parent().children(".valid-field").css("display", "none");
-                $(ths).parent().children(".inValid-field").css("display", "none");
-                $(ths).closest("li").removeClass("error-found");
-                $(ths).closest("li").children(".inValidText").css("display", "none");
-            }
-
-            function show_ok(ths)
-            {
-                $(ths).parent().children(".valid-field").css("display", "block");
-                $(ths).parent().children(".inValid-field").css("display", "none");
-                $(ths).closest("li").removeClass("error-found");
-                $(ths).closest("li").children(".inValidText").css("display", "none");
-            }
-
-            //$('#funds_selected_user_id').on("change", function(){
-            $('input:text').on("change", function () {
-                $("#error_after_submit").css("display", "none");
-                if ($(this).val().length < 2) {
-                    show_error(this);
-                } else {
-                    remove_error(this);
-                }
-            });
-
-            //$('#funds_selected_password').on("change", function(){
-            $('input:password').on("change", function () {
-                $("#error_after_submit").css("display", "none");
-                if ($(this).val().length < 6) {
-                    show_error(this);
-                } else {
-                    remove_error(this);
-                }
-            });
-
-            function validation_check(site_name) {
-                var valid = true;
-                site_name = site_name.toLowerCase();
-                if ($('#' + site_name + '_selected_name').val() === '--Select Provider--') {
-                    show_error($('#' + site_name + '_selected_name'));
-                    valid = false;
-                } else {
-                    remove_error($('#' + site_name + '_selected_name'));
-                }
-
-                if ($('#' + site_name + '_selected_user_id').val().length < 2) {
-                    show_error($('#' + site_name + '_selected_user_id'));
-                    valid = false;
-                } else {
-                    remove_error($('#' + site_name + '_selected_user_id'));
-                }
-
-                if ($('#' + site_name + '_selected_password').val().length < 6) {
-                    show_error($('#' + site_name + '_selected_password'));
-                    valid = false;
-                } else {
-                    remove_error($('#' + site_name + '_selected_password'));
-                }
-
-                return valid;
-            }
-
-            /*function hideAll() {
-             $('#welcome_div').css('display', 'none');
-             $('#site_choice_dental_div').css('display', 'none');   
-             $('#site_choice_vision_div').css('display', 'none');   
-             
-             $('#site_reg_div').css('display', 'none');   
-             $('#site_reg_fail_div').css('display', 'none');   
-             }*/
-
-            /*function ShowDentalSiteLinks() {
-             hideAll(); 
-             $('#site_choice_dental_div').css('display', 'block');
-             }
-             
-             function ShowVisionSiteLinks() {
-             hideAll(); 
-             $('#site_choice_vision_div').css('display', 'block');
-             }*/
-
-            /*function ShowSiteReg(type, site, image) {
-             hideAll();
-             $('#site_reg_div').css('display', 'block');
-             $('#site_selected_type_name').html(type);
-             $('#site_selected_name').val(site);
-             $('#site_selected_type_image').attr("src", "assets/images/" + image);
-             }
-             
-             function ProcessLogout() {
-             window.localStorage.removeItem('username');
-             window.localStorage.removeItem('token');
-             window.localStorage.removeItem('token_expire');
-             window.localStorage.removeItem('medical_site');
-             window.localStorage.removeItem('dental_site');
-             window.localStorage.removeItem('vision_site');
-             window.localStorage.removeItem('funds_site');
-             location.href = "index.html";
-             }*/
-
-            function GetUserData() {
-                var username = window.localStorage.getItem("username");
-                var token = window.localStorage.getItem("token");
-
-                if (!username || !token) {
-                    location.href = 'index.html';
-                    return false;
-                }
-
-                var provider_types = ['medical', 'dental', 'vision', 'funds'];
-
-                var provider_list_each_type = '';
-                var result_site = '';
-                var len = '';
-                var plen = '';
-                var selected = '';
-                var select_code = '';
-                var site_type = '';
-                var site_name = '';
-                var site_user_id = '';
-                var site_password = '';
-
-                $.ajax({
-                    url: 'https://easybene.com/index.php/api-user/' + username + '/' + token,
-                    type: "GET",
-                    dataType: 'json',
-                    async: false,
-                    success: function (result) {
-                        //console.log(result);
-                        plen = provider_types.length;
-                        for (var p = 0; p <= plen; p++) {
-                            user_id = '';
-                            password = '';
-                            select_code = '';
-                            result_site = '';
-
-                            if (result.providerList[provider_types[p]]) {
-                                provider_list_each_type = result.providerList[provider_types[p]];
-                                //console.log(provider_list_each_type);
+                            function show_error(ths)
+                            {
+                                $(ths).parent().children(".valid-field").css("display", "none");
+                                $(ths).parent().children(".inValid-field").css("display", "block");
+                                $(ths).closest("li").addClass("error-found");
+                                $(ths).closest("li").children(".inValidText").css("display", "block");
                             }
 
-                            if (result.providersSelected[provider_types[p]]) {
-                                result_site = result.providersSelected[provider_types[p]].provider_name;
-                                user_id = result.providersSelected[provider_types[p]].provider_user_id;
-                                password = result.providersSelected[provider_types[p]].provider_password;
-                                funds_family_single = result.providersSelected[provider_types[p]].funds_family_single;
-                                //console.log(provider_types[p]);
-                                //console.log(result_site);
+                            function remove_error(ths)
+                            {
+                                $(ths).parent().children(".valid-field").css("display", "none");
+                                $(ths).parent().children(".inValid-field").css("display", "none");
+                                $(ths).closest("li").removeClass("error-found");
+                                $(ths).closest("li").children(".inValidText").css("display", "none");
                             }
 
-                            len = provider_list_each_type.length;
-                            selected = '';
-                            for (var i = 0; i < len; i++) {
-                                selected = '';
-                                if (result_site && result_site.toLowerCase() === provider_list_each_type[i].name.toLowerCase()) {
-                                    selected = 'selected';
-                                }
-                                select_code = select_code + '<option ' + selected + ' value="' + provider_list_each_type[i].name + '">' + provider_list_each_type[i].label + '</option>';
+                            function show_ok(ths)
+                            {
+                                $(ths).parent().children(".valid-field").css("display", "block");
+                                $(ths).parent().children(".inValid-field").css("display", "none");
+                                $(ths).closest("li").removeClass("error-found");
+                                $(ths).closest("li").children(".inValidText").css("display", "none");
                             }
-                            $('#' + provider_types[p] + '_selected_name').append(select_code);
 
-                            $('#' + provider_types[p] + '_selected_user_id').val(user_id);
-                            $('#' + provider_types[p] + '_selected_password').val(password);
-                            
-                            if ('s' === funds_family_single) {
-                                selected = 'selected';
-                            } else {
-                                selected = '';
-                            }
-                            select_code = '<option ' + selected + ' value="s">Single</option>';
-                            
-                            if ('f' === funds_family_single) {
-                                selected = 'selected';
-                            } else {
-                                selected = '';
-                            }
-                            select_code = select_code + '<option ' + selected + ' value="f">Family</option>';
-
-                            $('#funds_family_single').html(select_code);
-
-                            $('#' + provider_types[p] + '_register').on('click', function () {
-                                var thsid = $(this).attr('id');
-                                //console.log(thsid.substring(0, thsid.indexOf('register') - 1));
-                                site_type = thsid.substring(0, thsid.indexOf('register') - 1);
-                                site_name = $('#' + site_type + '_selected_name').val();
-                                site_user_id = $('#' + site_type + '_selected_user_id').val();
-                                site_password = $('#' + site_type + '_selected_password').val();
-                                if (validation_check(site_type)) {
-                                    RegisterSite(site_type, site_name, site_user_id, site_password);
+                            //$('#funds_selected_user_id').on("change", function(){
+                            $('input:text').on("change", function () {
+                                $("#error_after_submit").css("display", "none");
+                                if ($(this).val().length < 2) {
+                                    show_error(this);
+                                } else {
+                                    remove_error(this);
                                 }
                             });
-                        }
 
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        //console.log(xhr);
-                        //console.log(ajaxOptions);
-                        //console.log(thrownError);
-                        ShowSitelRegFail();
-                    },
-                });
-            }
-
-            function provider_run(scrapper_script_path, username, token, provider_id)
-            {
-                var response = false;
-                $.ajax({
-                    url: 'https://easybene.com/index.php/' + scrapper_script_path + '/run/' + username + '/' + token + '/' + provider_id,
-                    type: "GET",
-                    dataType: 'json',
-                    async: false,
-                    success: function (result) {
-                        //console.log(result);
-                        response = result.response;
-                    },
-                    error: function (a, b, c) {
-                        response = false;
-                    }
-                });
-
-                return response;
-            }
-
-            function RegisterSite(site_type, site_name, site_user_id, site_password) {
-                var username = window.localStorage.getItem("username");
-                var token = window.localStorage.getItem("token");
-                var provider_execution = window.localStorage.getItem('provider_execution');
-                var funds_family_single = '';
-                if (site_type == 'funds') {
-                    funds_family_single = $('#funds_family_single').val();
-                }
-
-                $(".floatingBarsG_" + site_type.toLowerCase()).css('display', 'block');
-
-                $.ajax({
-                    url: 'https://easybene.com/index.php/api-user/' + username + '/' + token,
-                    type: "POST",
-                    data: 'site_name=' + site_name + '&site_type=' + site_type + '&site_user_id=' + site_user_id + '&site_password=' + site_password + '&funds_family_single=' + funds_family_single,
-                    dataType: 'json',
-                    async: false,
-                    success: function (result) {
-                        //console.log(result);
-                        window.localStorage.setItem(result.provider_type + '_site', result.provider_name);
-                        //console.log(result.provider_type+'_site');
-                        //console.log(result.provider_name);
-                        //var medical_site = window.localStorage.getItem('medical_site');
-                        //console.log(medical_site);
-
-                        var success_count = 0;
-                        var res = false;
-                        if (result.provider_name) {
-                            res = provider_run(result.scrapper_script_path, username, token, result.provider_id);
-                        }
-                        if (res === true) {
-                            if (site_name) {
-                                if (!provider_execution) {
-                                    provider_execution = site_name.toLowerCase() + '~~';
-                                } else if (provider_execution.substring(provider_execution.length - 2) !== '~~') {
-                                    provider_execution = site_name.toLowerCase() + '~~';
-                                } else if (provider_execution.indexOf(site_name.toLowerCase()) < 0) {
-                                    provider_execution = provider_execution + site_name.toLowerCase() + '~~';
+                            //$('#funds_selected_password').on("change", function(){
+                            $('input:password').on("change", function () {
+                                $("#error_after_submit").css("display", "none");
+                                if ($(this).val().length < 6) {
+                                    show_error(this);
+                                } else {
+                                    remove_error(this);
                                 }
-                                window.localStorage.setItem('provider_execution', provider_execution);
-                                success_count += 1;
+                            });
+
+                            function validation_check(site_name) {
+                                var valid = true;
+                                site_name = site_name.toLowerCase();
+                                if ($('#' + site_name + '_selected_name').val() === '--Select Provider--') {
+                                    show_error($('#' + site_name + '_selected_name'));
+                                    valid = false;
+                                } else {
+                                    remove_error($('#' + site_name + '_selected_name'));
+                                }
+
+                                if ($('#' + site_name + '_selected_user_id').val().length < 2) {
+                                    show_error($('#' + site_name + '_selected_user_id'));
+                                    valid = false;
+                                } else {
+                                    remove_error($('#' + site_name + '_selected_user_id'));
+                                }
+
+                                if ($('#' + site_name + '_selected_password').val().length < 6) {
+                                    show_error($('#' + site_name + '_selected_password'));
+                                    valid = false;
+                                } else {
+                                    remove_error($('#' + site_name + '_selected_password'));
+                                }
+
+                                return valid;
                             }
-                            //console.log(provider_execution);
-                        }
 
-                        $(".floatingBarsG_" + site_type.toLowerCase()).css('display', 'none');
-                        $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
+                            /*function hideAll() {
+                             $('#welcome_div').css('display', 'none');
+                             $('#site_choice_dental_div').css('display', 'none');   
+                             $('#site_choice_vision_div').css('display', 'none');   
+                             
+                             $('#site_reg_div').css('display', 'none');   
+                             $('#site_reg_fail_div').css('display', 'none');   
+                             }*/
 
-                        GetUserData();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        //console.log(xhr);
-                        //console.log(ajaxOptions);
-                        //console.log(thrownError);
-                        $(".floatingBarsG_" + site_type.toLowerCase()).css('display', 'none');
-                        $("#" + site_type.toLowerCase() + "_error").css('display', 'block');
-                    },
-                });
-            }
+                            /*function ShowDentalSiteLinks() {
+                             hideAll(); 
+                             $('#site_choice_dental_div').css('display', 'block');
+                             }
+                             
+                             function ShowVisionSiteLinks() {
+                             hideAll(); 
+                             $('#site_choice_vision_div').css('display', 'block');
+                             }*/
 
-            GetUserData();
+                            /*function ShowSiteReg(type, site, image) {
+                             hideAll();
+                             $('#site_reg_div').css('display', 'block');
+                             $('#site_selected_type_name').html(type);
+                             $('#site_selected_name').val(site);
+                             $('#site_selected_type_image').attr("src", "assets/images/" + image);
+                             }
+                             
+                             function ProcessLogout() {
+                             window.localStorage.removeItem('username');
+                             window.localStorage.removeItem('token');
+                             window.localStorage.removeItem('token_expire');
+                             window.localStorage.removeItem('medical_site');
+                             window.localStorage.removeItem('dental_site');
+                             window.localStorage.removeItem('vision_site');
+                             window.localStorage.removeItem('funds_site');
+                             location.href = "index.html";
+                             }*/
+
+                            function GetUserData() {
+                                var username = window.localStorage.getItem("username");
+                                var token = window.localStorage.getItem("token");
+
+                                if (!username || !token) {
+                                    location.href = 'index.html';
+                                    return false;
+                                }
+
+                                var provider_types = ['medical', 'dental', 'vision', 'funds'];
+
+                                var provider_list_each_type = '';
+                                var result_site = '';
+                                var len = '';
+                                var plen = '';
+                                var selected = '';
+                                var select_code = '';
+                                var site_type = '';
+                                var site_name = '';
+                                var site_user_id = '';
+                                var site_password = '';
+
+                                $.ajax({
+                                    url: 'https://easybene.com/index.php/api-user/' + username + '/' + token,
+                                    type: "GET",
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (result) {
+                                        //console.log(result);
+                                        plen = provider_types.length;
+                                        for (var p = 0; p <= plen; p++) {
+                                            user_id = '';
+                                            password = '';
+                                            select_code = '';
+                                            result_site = '';
+
+                                            if (result.providerList[provider_types[p]]) {
+                                                provider_list_each_type = result.providerList[provider_types[p]];
+                                                //console.log(provider_list_each_type);
+                                            }
+
+                                            if (result.providersSelected[provider_types[p]]) {
+                                                result_site = result.providersSelected[provider_types[p]].provider_name;
+                                                user_id = result.providersSelected[provider_types[p]].provider_user_id;
+                                                password = result.providersSelected[provider_types[p]].provider_password;
+                                                funds_family_single = result.providersSelected[provider_types[p]].funds_family_single;
+                                                //console.log(provider_types[p]);
+                                                //console.log(result_site);
+                                            }
+
+                                            len = provider_list_each_type.length;
+                                            selected = '';
+                                            for (var i = 0; i < len; i++) {
+                                                selected = '';
+                                                if (result_site && result_site.toLowerCase() === provider_list_each_type[i].name.toLowerCase()) {
+                                                    selected = 'selected';
+                                                }
+                                                select_code = select_code + '<option ' + selected + ' value="' + provider_list_each_type[i].name + '">' + provider_list_each_type[i].label + '</option>';
+                                            }
+                                            $('#' + provider_types[p] + '_selected_name').append(select_code);
+
+                                            $('#' + provider_types[p] + '_selected_user_id').val(user_id);
+                                            $('#' + provider_types[p] + '_selected_password').val(password);
+
+                                            if ('s' === funds_family_single) {
+                                                selected = 'selected';
+                                            } else {
+                                                selected = '';
+                                            }
+                                            select_code = '<option ' + selected + ' value="s">Single</option>';
+
+                                            if ('f' === funds_family_single) {
+                                                selected = 'selected';
+                                            } else {
+                                                selected = '';
+                                            }
+                                            select_code = select_code + '<option ' + selected + ' value="f">Family</option>';
+
+                                            $('#funds_family_single').html(select_code);
+
+                                            $('#' + provider_types[p] + '_register').on('click', function () {
+                                                var thsid = $(this).attr('id');
+                                                //console.log(thsid.substring(0, thsid.indexOf('register') - 1));
+                                                site_type = thsid.substring(0, thsid.indexOf('register') - 1);
+                                                site_name = $('#' + site_type + '_selected_name').val();
+                                                site_user_id = $('#' + site_type + '_selected_user_id').val();
+                                                site_password = $('#' + site_type + '_selected_password').val();
+                                                if (validation_check(site_type)) {
+                                                    RegisterSite(site_type, site_name, site_user_id, site_password);
+                                                }
+                                            });
+                                        }
+
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        //console.log(xhr);
+                                        //console.log(ajaxOptions);
+                                        //console.log(thrownError);
+                                        ShowSitelRegFail();
+                                    },
+                                });
+                            }
+
+                            function provider_run(scrapper_script_path, username, token, provider_id)
+                            {
+                                var response = false;
+                                $.ajax({
+                                    url: 'https://easybene.com/index.php/' + scrapper_script_path + '/run/' + username + '/' + token + '/' + provider_id,
+                                    type: "GET",
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (result) {
+                                        //console.log(result);
+                                        response = result.response;
+                                    },
+                                    error: function (a, b, c) {
+                                        response = false;
+                                    }
+                                });
+
+                                return response;
+                            }
+
+                            function RegisterSite(site_type, site_name, site_user_id, site_password) {
+                                var username = window.localStorage.getItem("username");
+                                var token = window.localStorage.getItem("token");
+                                var provider_execution = window.localStorage.getItem('provider_execution');
+                                var funds_family_single = '';
+                                if (site_type == 'funds') {
+                                    funds_family_single = $('#funds_family_single').val();
+                                }
+
+                                $(".floatingBarsG_" + site_type.toLowerCase()).css('display', 'block');
+
+                                $.ajax({
+                                    url: 'https://easybene.com/index.php/api-user/' + username + '/' + token,
+                                    type: "POST",
+                                    data: 'site_name=' + site_name + '&site_type=' + site_type + '&site_user_id=' + site_user_id + '&site_password=' + site_password + '&funds_family_single=' + funds_family_single,
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (result) {
+                                        //console.log(result);
+                                        window.localStorage.setItem(result.provider_type + '_site', result.provider_name);
+                                        //console.log(result.provider_type+'_site');
+                                        //console.log(result.provider_name);
+                                        //var medical_site = window.localStorage.getItem('medical_site');
+                                        //console.log(medical_site);
+
+                                        var success_count = 0;
+                                        var res = false;
+                                        if (result.provider_name) {
+                                            res = provider_run(result.scrapper_script_path, username, token, result.provider_id);
+                                        }
+                                        if (res === true) {
+                                            if (site_name) {
+                                                if (!provider_execution) {
+                                                    provider_execution = site_name.toLowerCase() + '~~';
+                                                } else if (provider_execution.substring(provider_execution.length - 2) !== '~~') {
+                                                    provider_execution = site_name.toLowerCase() + '~~';
+                                                } else if (provider_execution.indexOf(site_name.toLowerCase()) < 0) {
+                                                    provider_execution = provider_execution + site_name.toLowerCase() + '~~';
+                                                }
+                                                window.localStorage.setItem('provider_execution', provider_execution);
+                                                success_count += 1;
+                                            }
+                                            //console.log(provider_execution);
+                                        }
+
+                                        $(".floatingBarsG_" + site_type.toLowerCase()).css('display', 'none');
+                                        $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
+
+                                        GetUserData();
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        //console.log(xhr);
+                                        //console.log(ajaxOptions);
+                                        //console.log(thrownError);
+                                        $(".floatingBarsG_" + site_type.toLowerCase()).css('display', 'none');
+                                        $("#" + site_type.toLowerCase() + "_error").css('display', 'block');
+                                    },
+                                });
+                            }
+
+                            GetUserData();
 
 
-           
+
         </script>
-          <script>
+        <script>
             $('#myAffix').affix({
                 offset: {
                     top: 150,

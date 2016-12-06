@@ -47,25 +47,13 @@
                             <li><a href="#"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
                             <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
                             <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
-
                         </ul>
-                    </div>
-                    <div id="navbar" class="collapse navbar-collapse">
-                        <ul class="nav navbar-nav visible-xs">    
-                            <li><a href="dashboard.html#dashboard_body"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
-                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
-                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
-                            <li><a href="dashboard.html#funds-panel"  class="active"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
-                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
-                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
-                            <li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
-                        </ul>
-                        <ul class="navbar-right hidden-xs">    
+                        <ul class="navbar-right">    
                             <li class="profile-pic">
                                 <a href="#" style="background: url('images/pro-pic.jpg')"></a>
                             </li>
                             <li><div class="dropdown">
-                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
                                         RodeRick
                                         <span class="caret"></span>
                                     </button>
@@ -78,6 +66,18 @@
                                 </div>
                             </li> 
                         </ul>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav visible-xs">    
+                            <li><a href="dashboard.html#dashboard_body" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
+
+                        </ul>
+
                     </div>
                     <!--                        /.nav-collapse -->
                 </nav>
@@ -96,24 +96,7 @@
                     </ol>
 
 
-                    <div class="content-block less-margin">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
-                            <li role="presentation">
-                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical 
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
-                            </li>
-                        </ul>
-                    </div>
+                    
                     <div class="content-block less-padding desktop-margin">
 
                         <div class="table-text">
@@ -155,20 +138,21 @@
                                     <div class="row">
                                         <p>REIMBURSEMENTS</p>
                                     </div>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Transaction Date </th>
-                                                <th>Transaction Type </th>
-                                                <th>Transaction Amt </th>
-                                            </tr>
-                                        </thead>
+                                    <div class="table-responsive">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Transaction Date </th>
+                                                    <th>Transaction Type </th>
+                                                    <th>Transaction Amt </th>
+                                                </tr>
+                                            </thead>
 
-                                        <tbody id="hsa_transaction_activity_loop">
+                                            <tbody id="hsa_transaction_activity_loop">
 
-                                        </tbody>
-                                    </table> 
-
+                                            </tbody>
+                                        </table> 
+                                    </div>
                                 </div>
 
 
@@ -195,11 +179,7 @@
                     <div class="clearfix"></div>
                 </div>
             </div>
-
-
         </div>
-
-
         <footer class="footer">
             <div class="container">
                 <div class="row">
@@ -260,14 +240,14 @@
         <script type="text/javascript" src="js/funds.js"></script>
         <script type="text/javascript" src="js/common-details.js"></script>
         <script>
-            $('#myAffix').affix({
-                offset: {
-                    top: 150,
-                    bottom: function () {
-                        return (this.bottom = $('footer').outerHeight(true))
-                    }
-                }
-            });
+                            $('#myAffix').affix({
+                                offset: {
+                                    top: 150,
+                                    bottom: function () {
+                                        return (this.bottom = $('footer').outerHeight(true))
+                                    }
+                                }
+                            });
         </script>
     </body>
 </html>

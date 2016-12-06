@@ -48,29 +48,33 @@ body {
     width: 60%;
 }
 .intro-setion .navbar .navbar-right {
-    margin: 12px 0 0 0;
-    width: 20%;
+    margin: 0;
+    width: 25%;
+    position: absolute;
+    right: 15px;
     padding: 0;
     text-align: right;
 }
-.intro-setion .navbar .navbar-right li a {
+.intro-setion.dashboard-dasktop .navbar .navbar-right li a {
     display: block;
     color: #525151;
     transition: background 0.5s ease-out 0s;
     padding: 5px 8px;
     font-size: 14px;
     text-transform: capitalize;
+    background: transparent;
 }
-.intro-setion .navbar .navbar-right li ul {
+.intro-setion .navbar-right li ul {
     padding: 12px;
     margin-top: 22px;
     border-radius: 0;
     box-shadow: 0 0 1px rgba(76, 86, 103, 0.25), 0 2px 18px rgba(31, 37, 50, 0.32);
     border: none;
 }
-.intro-setion .navbar .navbar-right li ul li {
+.intro-setion .navbar-right li ul li {
     display: block;
     text-align: left;
+    margin: 0 !important;
 }
 .intro-setion .navbar .navbar-right .dropdown  button {
     border: none;
@@ -96,13 +100,13 @@ body {
 .navbar-right li ul li .dropdown span {
     color: #525151;
 }
-.intro-setion .navbar .navbar-right li ul li i {
+.intro-setion.dashboard-dasktop .navbar .navbar-right li ul li i {
     margin-right: 8px;
 }
-.intro-setion .navbar .navbar-right li a:before, .intro-setion .navbar .navbar-right li a:after {
+.intro-setion.dashboard-dasktop .navbar .navbar-right li .dropdown-menu a:before, .intro-setion.dashboard-dasktop .navbar .navbar-right li .dropdown-menu a:after {
     display: none;
 }
-.intro-setion .navbar .navbar-right li a:hover {
+.intro-setion.dashboard-dasktop .navbar .navbar-right li .dropdown-menu a:hover {
     background: #f5f5f5;
     color: #25cbf5;
 }
@@ -157,6 +161,10 @@ body {
     line-height: 22px;
 }
 
+.cigna-medical-det .circle-wrapper {
+    max-width: 350px;
+    margin: 20px auto;
+}
 /*css for footer*/
 footer {
     background: #000;
@@ -281,7 +289,7 @@ footer p {
     padding: 0;
     margin: 0;
 }
-.grap-rel-img img {
+#grap-rel-img img {
     border-color: #d7e0f1 !important;
 }
 .left-menu ul li a {
@@ -560,7 +568,7 @@ btn.btn-reset {
 .popover-content {
     font-size: 12px;
 }
-.grap-rel-img {
+#grap-rel-img {
     width: 50px;
     height: 38px;
     min-height: 38px;
@@ -647,7 +655,16 @@ body {
 .intro-setion .top-list li a:hover {
     color: #5a575e !important;
 }
+.search-result-wrapper .btn-wrapper button {
+    min-height: 50px;
+    height: auto;
+}
 /*css for responsive*/
+@media (max-width: 400px) {
+    .navbar-right .dropdown-menu {
+        left: -35px;
+    }
+}
 @media (max-width: 500px) {
     .left-menu.nav {
         display: none !important;
@@ -659,13 +676,21 @@ body {
     .navbar-brand > img {
         width: 57%;
     }
-    .intro-setion .top-list {
-        max-width: 100%;
-        top: inherit;
-        bottom: -5px;
-    }
+
     .intro-setion .navbar ul.top-list li a {
         font-size: 11px !important;
+    }
+    .intro-setion .navbar .navbar-right {
+        left: 35%!important;
+    }
+    .intro-setion .navbar .navbar-right li ul li a, .intro-setion .navbar .navbar-right .dropdown  button {
+        font-size: 13px !important;
+    }
+    .footer {
+        min-height: 450px;       
+    }
+    body {
+        margin-bottom: 450px;
     }
 }
 
@@ -693,6 +718,7 @@ body {
         padding: 10px;
         display: block;
         color: #222;
+        outline: none;
     }
     .intro-setion .navbar ul li.active a::before, .intro-setion .navbar ul li a:hover::before {
         bottom: 4px;
@@ -753,7 +779,7 @@ body {
         margin: 2px;
     }
     .intro-setion .navbar ul li a {
-        font-size: 14px;
+        font-size: 12px;
     }
     .status-info span {
         font-size: 15px;
@@ -765,12 +791,52 @@ body {
         font-size: 13px;
     }
 
-     .intro-setion .navbar ul.top-list li {
+    .intro-setion .navbar ul.top-list li {
         display: inline-block;        
         text-align: center;
     }
+    .intro-setion .navbar .navbar-right {
+        right: inherit;
+        left: 50%;
+        width: auto !important;
+    }
+    .intro-setion .navbar .navbar-right > li {
+      float: left;
+      margin-top: 12px;
+    }
+    .intro-setion .navbar .navbar-right .dropdown button {
+        margin-top: 8px;
+    }
+    #navbar-main {
+        min-height: 100px;
+    }
+    .intro-setion.dashboard-dasktop {
+        margin-bottom: 80px;
+    }
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+        margin-top: 44px;
+    }
+    .intro-setion .top-list {
+        max-width: 100%;
+        top: inherit;
+        bottom: 0;
+    }
+    .circle-wrapper {
+        padding-bottom: 20px;
+    }
+    #grap-rel-img {
+        bottom: 5px;
+    }
 }
-
+@media (max-width: 992px) {
+    .intro-setion .navbar ul li a {
+        font-size: 14px;
+    }
+    .login-list li .item-inner {
+        width: 93%;
+        padding-left: 10px;
+    }
+}
 @media only screen and (max-width: 1024px) {
 
     .left-menu {

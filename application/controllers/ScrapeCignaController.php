@@ -43,7 +43,8 @@ class ScrapeCignaController extends My_Controller_ScrapeBase
         $this->runs = array(
             'cigna_medical' => '6e1a629d-815b-4f5c-ae98-7145dd8ea815', 
             'cigna_deductible' => 'ca7fefc4-baf2-46cd-80b3-80433b488c00',
-            'cigna_claim_details' => '0758a9a6-647a-42ad-9ec3-4b64fd6cddfb'
+            'cigna_claim_details' => '0758a9a6-647a-42ad-9ec3-4b64fd6cddfb',
+            'cigna_id_card' => 'db206502-ef21-42b0-9614-2f7a77302b89'
         );
         
         $this->runs_data = array(
@@ -52,6 +53,10 @@ class ScrapeCignaController extends My_Controller_ScrapeBase
                 'date_range' => 'js-this-year'
             )
         );
+        
+        $this->file_run_name = 'cigna_id_card';
+        $this->file_run_field = 'pdf_dl';
+        $this->file_run_field_prefix = 'FILE:text/plain;';
         
     }
     
@@ -81,4 +86,21 @@ class ScrapeCignaController extends My_Controller_ScrapeBase
         echo $ret;
     }
     
+    protected function prepare_id_card_data($text, $fileId)
+    {
+        preg_match('/name\W+([^\n]+)/i', $text, $matches1);
+        preg_match_all('/[a-zA-Z\( ]+(\d+)\)?/i', $text, $matches2);
+
+        $arr_run_name_rows_0[2] = $fileId;
+        $arr_run_name_rows_0[3] = $matches1[1];
+        $arr_run_name_rows_0[4] = $matches2[1][5];
+        $arr_run_name_rows_0[5] = $matches2[1][3];
+        $arr_run_name_rows_0[6] = $matches2[1][4];
+        $arr_run_name_rows_0[7] = $matches2[1][6];
+        $arr_run_name_rows_0[8] = $matches2[1][7];
+        $arr_run_name_rows_0[9] = $matches2[1][8];
+        $arr_run_name_rows_0[10] = $matches2[1][9];
+        
+        return $arr_run_name_rows_0;
+    }
 }

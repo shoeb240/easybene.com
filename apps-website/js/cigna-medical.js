@@ -118,9 +118,9 @@
             animationStep: 6,
             foregroundBorderWidth: 2,
             backgroundBorderWidth: 2,
-            backgroundColor: "#3c4447",
+             backgroundColor: "#f9f9f9",
             foregroundColor: foregroundColor,
-            fillColor: '#262e31',
+            fillColor: '#f9f9f9',
             percent: percent,
             fontColor: fontColor,
             percentageTextSize: 30
