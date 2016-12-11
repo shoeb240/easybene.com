@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="css/desktop-style.css">
         
+        <script src="cordova.js"></script>
+        
         <style>
             .login-list li {
                 margin: 0 auto 3px;
@@ -268,27 +270,58 @@
             alert('opening camera');
             var srcType = Camera.PictureSourceType.CAMERA;
             var options = setOptions(srcType);
-            var func = createNewFileEntry;
+            //var func = createNewFileEntry;
 
-            navigator.camera.getPicture(function cameraSuccess(imageUri) {
-
-                displayImage(imageUri);
-                // You may choose to copy the picture, save it somewhere, or upload.
-                func(imageUri);
-
-            }, function cameraError(error) {
-                console.debug("Unable to obtain picture: " + error, "app");
-
-            }, options);
+            navigator.camera.getPicture(cameraSuccess, cameraError, options);
         }
         
+        function cameraSuccess(imageUri) {
+
+            alert(imageUri);
+
+            displayImage(imageUri);
+            // You may choose to copy the picture, save it somewhere, or upload.
+            //createNewFileEntry(imageUri);
+
+        }
+        
+        function cameraError(error) {
+            //console.debug("Unable to obtain picture: " + error, "app");
+            alert("Unable to obtain picture: " + error);
+
+        }
+            
         function displayImage(imgUri) {
 
             var elem = document.getElementById('imageFile');
             elem.src = imgUri;
         }
+        
+        function createNewFileEntry(imgUri) {
+            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, success, onErrorResolveUrl);
+        }
 
+        function success(dirEntry) {
 
+            // JPEG file
+            dirEntry.getFile("tempFile.jpeg", { create: true, exclusive: false }, function (fileEntry) {
+                alert(fileEntry);
+                // Do something with it, like write to it, upload it, etc.
+                // writeFile(fileEntry, imgUri);
+                //console.log("got file: " + fileEntry.fullPath);
+                // displayFileData(fileEntry.fullPath, "File copied to");
+
+            }, onErrorCreateFile);
+
+        }
+
+        function onErrorResolveUrl() {
+            alert('onErrorResolveUrl');
+        }
+        
+        function onErrorCreateFile() {
+            alert('onErrorCreateFile');
+        }
         </script>
     </body>
 </html>

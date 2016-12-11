@@ -62,6 +62,7 @@ class Application_Model_ProviderListMapper
         if ($type) {
             $select->where('provider_type = ?', $type);
         }
+        $select->order('name asc');
         $rowSets = $this->getTable()->fetchAll($select);
         
         $info = array();

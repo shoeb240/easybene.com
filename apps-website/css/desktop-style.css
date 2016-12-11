@@ -827,6 +827,9 @@ body {
     #grap-rel-img {
         bottom: 5px;
     }
+    .small-modal .modal-dialog {
+    width: auto;
+}
 }
 @media (max-width: 992px) {
     .intro-setion .navbar ul li a {
