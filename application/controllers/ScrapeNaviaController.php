@@ -84,4 +84,8 @@ class ScrapeNaviaController extends My_Controller_ScrapeBase
         echo $ret;
     }
     
+    protected function prepare_id_card_data($text, $fileId)
+    {
+        return null;
+    }
 }

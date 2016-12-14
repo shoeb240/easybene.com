@@ -186,8 +186,8 @@
                 graph(result.day_care_FSA_percent, result.day_care_FSA_denominator, funds_site, 'day_care_FSA', result.day_care_FSA_nominator, result.day_care_FSA_data_exists);
                 graph(result.health_care_FSA_percent, result.health_care_FSA_denominator, funds_site, 'health_care_FSA', result.health_care_FSA_nominator, result.health_care_FSA_data_exists);
 
-                $("#medical_site_name").html(medical_site.toUpperCase());
-                $("#dental_site_name").html(dental_site.toUpperCase());
+                //$("#medical_site_name").html(medical_site.toUpperCase());
+                //$("#dental_site_name").html(dental_site.toUpperCase());
 
                 GetMedicalData(medical_site);
                 GetDentalData(dental_site);
@@ -302,8 +302,9 @@
                 //console.log(result.deductible_percent);
                 //console.log(result.deductible_amt);
                 //console.log(result.deductible_met);
-
+                if ($.isFunction(medical_site+'_medical_table')) {
                     dyn_functions[medical_site+'_medical_table'](result);
+                }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 //console.log(xhr);
@@ -323,7 +324,9 @@
             async: false,
             success: function(result) {
                 //console.log(result.claim);
+                if ($.isFunction(dental_site+'_dental_table')) {
                     dyn_functions[dental_site+'_dental_table'](result);
+                }
             },
             error: function(xhr, ajaxOptions, thrownError) {
                 //console.log(xhr);
@@ -355,7 +358,7 @@
                 $('#hsa_checking_value').html(result.HS_balance);
                 $('#hsa_investment_value').html(result.portfolio_balance);
 
-                if (result.day_care_FSA[0]) {
+                if (typeof result.day_care_FSA != 'undefined' && result.day_care_FSA[0]) {
                         $.each(result.day_care_FSA, function(key, row) {
 
                         if (row.transaction_type) {
@@ -374,7 +377,7 @@
                     $('#day_care_FSA_loop').append('<tr role="row"><td colspan="5">No data available</td></tr>');
                 }
 
-                if (result.health_care_FSA[0]) {
+                if (typeof result.day_care_FSA != 'undefined' && result.health_care_FSA[0]) {
                         $.each(result.health_care_FSA, function(key, row) {
 
                         if (row.transaction_type) {

@@ -129,7 +129,7 @@
                                                 <div class="item-content">
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                            <a href="javascript: void(0)" onclick="openCamera()">Camera</a>
+                                                            <a  id="login_li" href="#cameraModal" role="button" data-toggle="modal">Camera</a>                  
                                                         <img id="imageFile" src="" />
                                                         </div>
                                                     </div>
@@ -214,6 +214,41 @@
             </div>
         </div>
         
+        <div id="cameraModal" class="verticl-centermodal modal fade">
+
+            <div class="modal-dialog">
+
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="input-wrapper" style="text-align: center;">
+                            Photo Options
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="input-group">
+                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="openCamera()">Take Photo</a></span>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="input-group">
+                                <span class="input-group-addon">Use Last Photo Taken</span>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="input-group">
+                                <span class="input-group-addon">From Library</span>
+                            </div>
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="input-group">
+                                <span class="input-group-addon">From Dropbox</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -239,18 +274,7 @@
         
         
         <script>
-            /*navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-            destinationType: Camera.DestinationType.FILE_URI });
-
-            function onSuccess(imageURI) {
-                var image = document.getElementById('myImage');
-                image.src = imageURI;
-            }
-
-            function onFail(message) {
-                alert('Failed because: ' + message);
-            }*/
-    
+            
         function setOptions(srcType) {
             var options = {
                 // Some common settings are 20, 50, and 100
@@ -275,13 +299,29 @@
             navigator.camera.getPicture(cameraSuccess, cameraError, options);
         }
         
+        /*function getPhotoLibrary() {
+            var srcType = Camera.PictureSourceType.PHOTOLIBRARY;
+            var options = setOptions(srcType);
+            //var func = createNewFileEntry;
+
+            navigator.camera.getPicture(cameraSuccess, cameraError, options);
+        }
+        
+        function getSavedPhoto() {
+            var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+            var options = setOptions(srcType);
+            //var func = createNewFileEntry;
+
+            navigator.camera.getPicture(cameraSuccess, cameraError, options);
+        }*/
+        
         function cameraSuccess(imageUri) {
 
             alert(imageUri);
 
             displayImage(imageUri);
             // You may choose to copy the picture, save it somewhere, or upload.
-            //createNewFileEntry(imageUri);
+            createNewFileEntry(imageUri);
 
         }
         
@@ -297,22 +337,36 @@
             elem.src = imgUri;
         }
         
+        // For existing file
+        /*function getFileEntry(imgUri) {
+            window.resolveLocalFileSystemURL(imgUri, function success(fileEntry) {
+
+                // Do something with the FileEntry object, like write to it, upload it, etc.
+                writeFile(fileEntry, imgUri);
+                alert("got file: " + fileEntry.fullPath);
+                // displayFileData(fileEntry.nativeURL, "Native URL");
+
+            }, function () {
+              // If don't get the FileEntry (which may happen when testing
+              // on some emulators), copy to a new FileEntry.
+                createNewFileEntry(imgUri);
+            });
+        }*/
+
         function createNewFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, success, onErrorResolveUrl);
-        }
+            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function success(dirEntry) {
 
-        function success(dirEntry) {
+                // JPEG file
+                dirEntry.getFile("shoeb.jpeg", { create: true, exclusive: false }, function (fileEntry) {
 
-            // JPEG file
-            dirEntry.getFile("tempFile.jpeg", { create: true, exclusive: false }, function (fileEntry) {
-                alert(fileEntry);
-                // Do something with it, like write to it, upload it, etc.
-                // writeFile(fileEntry, imgUri);
-                //console.log("got file: " + fileEntry.fullPath);
-                // displayFileData(fileEntry.fullPath, "File copied to");
+                    // Do something with it, like write to it, upload it, etc.
+                    writeFile(fileEntry, imgUri);
+                    alert("got file: " + fileEntry.fullPath);
+                    // displayFileData(fileEntry.fullPath, "File copied to");
 
-            }, onErrorCreateFile);
+                }, onErrorCreateFile);
 
+            }, onErrorResolveUrl);
         }
 
         function onErrorResolveUrl() {
@@ -322,6 +376,57 @@
         function onErrorCreateFile() {
             alert('onErrorCreateFile');
         }
+        
+        function writeFile(fileEntry, dataObj) {
+            // Create a FileWriter object for our FileEntry (tempFile.jpeg).
+            fileEntry.createWriter(function (fileWriter) {
+
+                fileWriter.onwriteend = function() {
+                    alert("Successful file read...");
+                    //readFile(fileEntry);
+                    upload(fileEntry);
+                };
+
+                fileWriter.onerror = function (e) {
+                    alert("Failed file read: " + e.toString());
+                };
+
+                fileWriter.write(dataObj);
+            });
+        }
+
+        function upload(fileEntry) {
+            // !! Assumes variable fileURL contains a valid URL to a text file on the device,
+            var fileURL = fileEntry.toURL();
+
+            var success = function (r) {
+                alert("Successful upload...");
+                alert("Code = " + r.responseCode);
+                // displayFileData(fileEntry.fullPath + " (content uploaded to server)");
+            }
+
+            var fail = function (error) {
+                alert("An error has occurred: Code = " + error.code);
+            }
+
+            var options = new FileUploadOptions();
+            options.fileKey = "file";
+            options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+            options.mimeType = "text/plain";
+
+            var params = {};
+            params.value1 = "test";
+            params.value2 = "param";
+
+            options.params = params;
+
+            var ft = new FileTransfer();
+            // SERVER must be a URL that can handle the request, like
+            // http://some.server.com/upload.php
+            ft.upload(fileURL, encodeURI("http://some.server.com/upload.php"), success, fail, options);
+        };
+
+        
         </script>
     </body>
 </html>

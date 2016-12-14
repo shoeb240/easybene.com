@@ -24,13 +24,13 @@
         },
         "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.app.easybene"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.app.easybene"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "com.app.easybene"
-        },
-        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.app.easybene"
         }
     }
