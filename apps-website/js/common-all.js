@@ -3,9 +3,10 @@
     
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
+    $(".top_right_username").html(username);
     
     $(window).load(function(){
-        sideMenu();
+        //sideMenu();
     });
     
     function sideMenu()
