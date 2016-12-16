@@ -354,7 +354,7 @@
         }*/
 
         function createNewFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function success(dirEntry) {
+            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function (dirEntry) {
 
                 // JPEG file
                 dirEntry.getFile("shoeb.jpeg", { create: true, exclusive: false }, function (fileEntry) {
@@ -423,10 +423,12 @@
             var ft = new FileTransfer();
             // SERVER must be a URL that can handle the request, like
             // http://some.server.com/upload.php
-            ft.upload(fileURL, encodeURI("http://some.server.com/upload.php"), success, fail, options);
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+            
+            ft.upload(fileURL, encodeURI('https://easybene.com/index.php/upload/'+username+'/'+token), success, fail, options);
         };
 
-        
         </script>
     </body>
 </html>

@@ -354,7 +354,7 @@
         }*/
 
         function createNewFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function success(dirEntry) {
+            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function (dirEntry) {
 
                 // JPEG file
                 dirEntry.getFile("shoeb.jpeg", { create: true, exclusive: false }, function (fileEntry) {
@@ -383,7 +383,8 @@
 
                 fileWriter.onwriteend = function() {
                     alert("Successful file read...");
-                    readFile(fileEntry);
+                    //readFile(fileEntry);
+                    upload(fileEntry);
                 };
 
                 fileWriter.onerror = function (e) {
@@ -394,6 +395,39 @@
             });
         }
 
+        function upload(fileEntry) {
+            // !! Assumes variable fileURL contains a valid URL to a text file on the device,
+            var fileURL = fileEntry.toURL();
+
+            var success = function (r) {
+                alert("Successful upload...");
+                alert("Code = " + r.responseCode);
+                // displayFileData(fileEntry.fullPath + " (content uploaded to server)");
+            }
+
+            var fail = function (error) {
+                alert("An error has occurred: Code = " + error.code);
+            }
+
+            var options = new FileUploadOptions();
+            options.fileKey = "file";
+            options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
+            options.mimeType = "text/plain";
+
+            var params = {};
+            params.value1 = "test";
+            params.value2 = "param";
+
+            options.params = params;
+
+            var ft = new FileTransfer();
+            // SERVER must be a URL that can handle the request, like
+            // http://some.server.com/upload.php
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+            
+            ft.upload(fileURL, encodeURI('https://easybene.com/index.php/upload/'+username+'/'+token), success, fail, options);
+        };
 
         </script>
     </body>

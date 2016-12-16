@@ -27,6 +27,9 @@
         },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.app.easybene"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.app.easybene"
         }
     },
     "dependent_plugins": {

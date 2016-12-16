@@ -83,6 +83,15 @@ body {
     color: #25cbf5;
     margin-top: 20px;
     font-size: 15px;
+
+}
+.intro-setion .navbar .navbar-right .dropdown  button span.top_right_username {
+    width: 110px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .navbar-right .profile-pic a {
@@ -115,9 +124,14 @@ body {
 }
 .intro-setion #navbar-main.affix .navbar-nav li a {
     color: #25cbf5;
+    text-decoration: none!important;
 }
 .navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:hover, .navbar-inverse .navbar-nav > .active > a:focus {
     background: transparent;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none!important;
 }
 .navbar-header {
     width: 18%;
@@ -131,6 +145,9 @@ body {
     position: absolute;
     width: 25px;
     z-index: 1;
+}
+.intro-setion .navbar ul.navbar-right li a:hover::before {
+    display: none;
 }
 #navbar-main {
     width: 100%;
@@ -218,8 +235,9 @@ footer p {
     float: none;
 }
 .svg-container {
-    width: 70%;
+    width: 68%;
     margin-top: -15px;
+    margin-bottom: 20px;
 }
 .circle-wrapper .status-text {
     font-size: 18px;
@@ -357,7 +375,7 @@ footer {
     -webkit-box-shadow: 9px 9px 5px -7px rgba(140,138,140,0.75);
     -moz-box-shadow: 9px 9px 5px -7px rgba(140,138,140,0.75);
     box-shadow: 9px 9px 5px -7px rgba(140,138,140,0.75);
-    padding-bottom: 10px;
+    padding-bottom: 20px;
 }
 .circle-wrapper:first-child {
     border: 1px solid #d7e0f1;
@@ -569,10 +587,10 @@ btn.btn-reset {
     font-size: 12px;
 }
 #grap-rel-img {
-    width: 50px;
-    height: 38px;
+    width: 90px;
+    height: 50px;
     min-height: 38px;
-    background-size: 50px 38px !important;
+    background-size: contain !important;
     background-repeat: no-repeat !important;
     border: 1px solid #ccc;
     position: absolute;
@@ -580,9 +598,12 @@ btn.btn-reset {
     left: 0;
     right: 0;
     margin: 0 auto;
+    background-position:  center center !important;
 }
 
-
+.dashboard-content .desktop-content-wrapper {
+    width: 85%;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -610,14 +631,19 @@ body {
 .provider-settings-wrapper .login-list li {
     list-style: none;
 }
-.login-list li .item-inner, .login-list .item-content {
-    display: table-cell;
-    vertical-align: middle;
-}
+
 .login-list ul li .item-content {
     display: table;
     width: 100%;
-    vertical-align: middle;;
+    vertical-align: middle;
+    position: relative;
+    padding-left: 44px;
+}
+.login-list li .item-media {
+    position: absolute;
+    left: 0;
+    top: 1px;
+    z-index: 1;
 }
 .login-list ul .item-input input, .login-list ul .item-input select {
     width: 100%;
@@ -681,7 +707,14 @@ body {
         font-size: 11px !important;
     }
     .intro-setion .navbar .navbar-right {
-        left: 35%!important;
+        left: 30%!important;
+    }
+    .intro-setion .navbar .navbar-right .dropdown  button span.top_right_username {
+        font-size: 12px;
+        width: 85px !important;
+    }
+    .intro-setion .navbar .navbar-right > li {
+        margin-left: 0;
     }
     .intro-setion .navbar .navbar-right li ul li a, .intro-setion .navbar .navbar-right .dropdown  button {
         font-size: 13px !important;
@@ -692,6 +725,7 @@ body {
     body {
         margin-bottom: 450px;
     }
+   
 }
 
 @media (max-width: 767px) {
@@ -799,10 +833,12 @@ body {
         right: inherit;
         left: 50%;
         width: auto !important;
+        margin-top: 0;
+       
     }
     .intro-setion .navbar .navbar-right > li {
-      float: left;
-      margin-top: 12px;
+        float: left;
+        margin-top: 12px;
     }
     .intro-setion .navbar .navbar-right .dropdown button {
         margin-top: 8px;
@@ -828,8 +864,12 @@ body {
         bottom: 5px;
     }
     .small-modal .modal-dialog {
-    width: auto;
-}
+        width: auto;
+    }
+    #grap-rel-img {
+        width: 75px;
+        height: 35px;
+    }
 }
 @media (max-width: 992px) {
     .intro-setion .navbar ul li a {
@@ -838,6 +878,26 @@ body {
     .login-list li .item-inner {
         width: 93%;
         padding-left: 10px;
+    }
+    .intro-setion .navbar .navbar-right {
+        margin-top: 0;
+    }
+    .intro-setion .navbar .navbar-right .dropdown  button span.top_right_username {
+        width: 90px;
+    }
+     .navbar-right .profile-pic a {
+        margin-right: 0;
+    }
+    .intro-setion .navbar .navbar-right .dropdown  button {
+        padding: 0;
+    }
+    
+    .dashboard-content .desktop-content-wrapper  {
+        margin: 0 auto;
+        width: 100%;        
+    }
+    .r-tabs .r-tabs-nav {
+        text-align: center;
     }
 }
 @media only screen and (max-width: 1024px) {

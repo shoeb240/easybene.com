@@ -15,6 +15,10 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                           array('controller' => 'api', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApi', $route);
 
+        $route = new Zend_Controller_Router_Route('upload/:username/:token/:id',
+                                  array('controller' => 'upload', 'action' => 'index', 'id' => null));
+        $router->addRoute('indexUpload', $route);
+        
         $route = new Zend_Controller_Router_Route('api-user/:username/:token/:id',
                                   array('controller' => 'api-user', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiUser', $route);
