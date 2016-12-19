@@ -311,7 +311,7 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
         }*/
         if (!empty($this->ret_failed)) {
             $responseFailedIds = implode(',', $this->ret_failed);
-            //$this->send_email($responseFailedIds);
+            $this->send_email($responseFailedIds);
         }
 
         return json_encode(array('response' => $response, 'response_failed_ids' => $responseFailedIds));
@@ -390,7 +390,7 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
             $responseFailedIds = implode(',', $this->ret_failed);
             $ok = $userProviderExeMapper->updateFailed($responseFailedIds);
             
-            //$this->send_email($responseFailedIds);
+            $this->send_email($responseFailedIds);
         }
 
         return json_encode(array('response' => $response, 'response_failed_ids' => $responseFailedIds));
@@ -438,21 +438,16 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
     protected function send_email($failed)
     {
         try {
-            $this->load->library('email');
-
-            $this->email->from('shoeb240@gmail.com', 'Easy Bene');
-            $this->email->to('shoeb240@gmail.com');
-            $this->email->cc('shoeb56@gmail.com');
-
-            $this->email->subject('Easy Bene Failed Executions');
-            $this->email->message('Following user_provider_exe.id failed while execution: ' . $failed);
-
-            if ( ! $this->email->send())
-            {
-                echo 'Could not send email';
-            }
+            $mail = new Zend_Mail();
+            $mail->setBodyText('Following user_provider_exe -> id failed while execution: ' . $failed);
+            $mail->setFrom('easybenehelp@gmail.com', 'EasyBene');
+            $mail->addTo('rod.brathwaite@gmail.com');
+            $mail->addCc('shoeb240@gmail.com');
+            $mail->setSubject('Easy Bene Failed Executions');
+            $mail->send();
+            
         } catch(Exception $e) {
-            echo $e->getMessage();
+            echo $e->getMessage() . 'error';
         }
     }
     
