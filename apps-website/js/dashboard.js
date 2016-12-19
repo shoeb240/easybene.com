@@ -302,7 +302,8 @@
                 //console.log(result.deductible_percent);
                 //console.log(result.deductible_amt);
                 //console.log(result.deductible_met);
-                if ($.isFunction(medical_site+'_medical_table')) {
+                //alert(medical_site);
+                if ($.isFunction(dyn_functions[medical_site+'_medical_table'])) {
                     dyn_functions[medical_site+'_medical_table'](result);
                 }
             },
@@ -324,7 +325,7 @@
             async: false,
             success: function(result) {
                 //console.log(result.claim);
-                if ($.isFunction(dental_site+'_dental_table')) {
+                if ($.isFunction(dyn_functions[dental_site+'_dental_table'])) {
                     dyn_functions[dental_site+'_dental_table'](result);
                 }
             },
