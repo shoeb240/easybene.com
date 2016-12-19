@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <!--<link rel="stylesheet" href="css/framework7.ios.min.css">-->
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <!--<link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+        <!-- Path to your custom app styles-->
+        <!-- <link rel="stylesheet" href="css/slidebars.min.css"> -->
+        <!--<link rel="stylesheet" href="css/slidebars-theme.css">-->
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+        <link rel="stylesheet" href="css/desktop-style.css">
+    </head>
+    <body>
+
+        <!-- Top Navigation Bar -->
+        <div class="sb-navbar sb-slide">
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
+            <!--             Left Slidebar control -->
+            <div class="sb-toggle-left">
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="page-title">Password Recovery</h2>
+
+        </div>
+
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
+
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
+
+
+                <div class="page-content login-page-content">            
+                    <div class="content-block">
+                        <div class="content-block-inner signUp">
+                            <div class="logo-wrapper">
+                                <img src="images/logo.png" alt="logo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div id="email_block" class="list-block login-list">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li><div id="error_after_submit" style="display: none; position: static;" class="inValidText">Email and/or Password did not match</div></li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-envelope"></i></div>
+                                    <div class="item-inner">                                               
+                                        <div class="item-input">
+                                            <input type="email" id="rec_email"  placeholder="E-mail">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Email</div>
+                            </li>
+                            <li class="btn-wrapper">
+                                <a href="javascript:void(0);" id="email_submit"><button type="submit"><i class=' icon-cloud-check'></i>Submit</button></a>
+                            </li>
+                        </ul>                      
+                    </div>
+                    
+                    <div id="code_block" class="list-block login-list" style="display: none">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li><div id="error_after_submit_code" style="display: none; position: static;" class="inValidText">Recovery code did not match</div></li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-inner">                                               
+                                        <div class="item-input">
+                                            <input type="text" id="rec_code"  placeholder="Recovery Code">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Code</div>
+                            </li>
+                            <li class="btn-wrapper">
+                                <a href="javascript:void(0);" id="code_submit"><button type="submit"><i class=' icon-cloud-check'></i>Submit</button></a>
+                            </li>
+                        </ul>                      
+                    </div>
+                    
+                    <div id="pass_block" class="list-block login-list" style="display: none">
+                        <ul>
+                            <!-- Text inputs -->
+                            <li><div id="error_after_submit_pass" style="display: none; position: static;" class="inValidText">Could not reset password</div></li>
+                            <li class="pass-field-wrapper">
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input  type="hidden" id="ret_code">
+                                            <input  type="password" id="rec_password"  placeholder="Password">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password</div>
+                            </li>
+                            <li> <!--  class="error-found" -->
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-unlock-alt"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                            <input type="password" id="rec_password_confirm" placeholder="Confirm Password">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--error massage-->
+                                <div  style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Confirm Password don't match</div>
+                            </li>
+                            <li class="btn-wrapper">
+                                <a href="javascript:void(0);" id="pass_submit"><button type="submit"><i class=' icon-cloud-check'></i> Reset Password</button></a>
+                            </li>
+                        </ul>                      
+                    </div>
+                    
+                </div>
+
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
+
+
+
+        <!-- Path to Framework7 Library JS-->
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <!--<script type="text/javascript" src="js/left-side-bar.js"></script>-->
+        <script type="text/javascript" src="js/common-all.js"></script>
+
+        <script>
+            function isEmail(email) {
+                var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                return regex.test(email);
+            }
+
+            function show_error(ths)
+            {
+                $(ths).parent().children(".valid-field").css("display", "none");
+                $(ths).parent().children(".inValid-field").css("display", "block");
+                $(ths).closest("li").addClass("error-found");
+                $(ths).closest("li").children(".inValidText").css("display", "block");
+            }
+
+            function show_ok(ths)
+            {
+                $(ths).parent().children(".valid-field").css("display", "block");
+                $(ths).parent().children(".inValid-field").css("display", "none");
+                $(ths).closest("li").removeClass("error-found");
+                $(ths).closest("li").children(".inValidText").css("display", "none");
+            }
+
+            $('#rec_email').on("change", function () {
+                $("#error_after_submit").css("display", "none");
+                if (!isEmail($(this).val())) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#email_submit').on('click', function () {
+                if (email_validation_check()) {
+                    GenerateCode();
+                }
+            });
+
+            function email_validation_check() {
+                var valid = true;
+
+                if (!isEmail($('#rec_email').val())) {
+                    show_error($('#rec_email'));
+                    valid = false;
+                } else {
+                    show_ok($('#rec_email'));
+                }
+
+                return valid;
+            }
+
+            function GenerateCode() {
+                var email = $('#rec_email').val();
+                $.ajax({
+                    url: 'https://easybene.com/index.php/auth/forgetpass',
+                    type: "POST",
+                    data: 'username=' + email,
+                    dataType: 'json',
+                    async: false,
+                    success: function (result) {
+                        console.log(result);
+                        $("#email_block").css("display", "none");
+                        $("#code_block").css("display", "block");
+                        $("#pass_block").css("display", "none");
+                        //ShowLoginRegSucc();
+                        //location.href = "index.html";
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //ShowRegFail(xhr.responseJSON);
+                        console.log(xhr.responseJSON);
+                        $("#error_after_submit").html(xhr.responseJSON);
+                        $("#error_after_submit").css("display", "block");
+                    },
+                });
+            }
+            
+            
+            
+            
+            
+            $('#rec_code').on("change", function () {
+                $("#error_after_submit_code").css("display", "none");
+                if ($(this).val().length > 6 || $(this).val().length < 6) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#code_submit').on('click', function () {
+                if (code_validation_check()) {
+                    var code = $('#rec_code').val();
+                    CheckCode(code);
+                }
+            });
+
+            function code_validation_check() {
+                var valid = true;
+
+                if ($('#rec_code').val().length > 6 || $('#rec_code').val().length < 6) {
+                    show_error($('#rec_code'));
+                    valid = false;
+                } else {
+                    show_ok($('#rec_code'));
+                }
+
+                return valid;
+            }
+
+            function CheckCode(code) {
+                
+                $.ajax({
+                    url: 'https://easybene.com/index.php/auth/checkcode',
+                    type: "POST",
+                    data: 'code=' + code,
+                    dataType: 'json',
+                    async: false,
+                    success: function (result) {
+                        console.log(result);
+                        $("#email_block").css("display", "none");
+                        $("#code_block").css("display", "none");
+                        $("#pass_block").css("display", "block");
+
+                        $("#ret_code").val(code);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //ShowRegFail(xhr.responseJSON);
+                        //console.log(xhr.responseJSON);
+                        $("#error_after_submit_code").html(xhr.responseJSON);
+                        $("#error_after_submit_code").css("display", "block");
+                    },
+                });
+            }
+            
+            
+            
+            $('#rec_password').on("change", function () {
+                $("#error_after_submit_pass").css("display", "none");
+                if ($(this).val().length < 8) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#rec_password_confirm').on("change", function () {
+                $("#error_after_submit_pass").css("display", "none");
+                if ($(this).val() !== $("#rec_password").val()) {
+                    show_error(this);
+                } else {
+                    show_ok(this);
+                }
+            });
+
+            $('#pass_submit').on('click', function () {
+                if (validation_check()) {
+                    SetPass();
+                }
+            });
+
+            function validation_check(msg) {
+                var valid = true;
+
+                if ($('#rec_password').val().length < 8) {
+                    show_error($('#rec_password'));
+                    valid = false;
+                } else {
+                    show_ok($('#rec_password'));
+                }
+
+                if ($('#rec_password_confirm').val() !== $("#rec_password").val()) {
+                    show_error($('#rec_password_confirm'));
+                    valid = false;
+                } else {
+                    show_ok($('#rec_password_confirm'));
+                }
+
+                return valid;
+            }
+
+            function SetPass() {
+                var password = $('#rec_password').val();
+                var code = $('#ret_code').val();
+                $.ajax({
+                    url: 'https://easybene.com/index.php/auth/setpass',
+                    type: "POST",
+                    data: 'password=' + password + '&code=' + code,
+                    dataType: 'json',
+                    async: false,
+                    success: function (result) {
+                        //console.log(result);
+                        location.href = "index.html";
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        //ShowRegFail(xhr.responseJSON);
+                        //console.log(xhr.responseJSON);
+                        $("#error_after_submit_pass").html(xhr.responseJSON);
+                        $("#error_after_submit_pass").css("display", "block");
+                    },
+                });
+            }
+            
+            function catch_param(varables) {
+                var hash = varables.split('=');
+                code = hash[1];
+                if (typeof code !== 'undefined' && code.length == 6) {
+                    $("#email_block").css("display", "none");
+                    $("#code_block").css("display", "block");
+                    $("#pass_block").css("display", "none");
+                    CheckCode(code);
+                } else {
+                    $("#email_block").css("display", "block");
+                    $("#code_block").css("display", "none");
+                    $("#pass_block").css("display", "none");
+                }
+            }
+            
+            var code = '';
+            var loc = location.href;
+            var indq = loc.indexOf('?');
+            if (indq > 0) {
+                var varables = loc.slice( indq + 1);
+                catch_param(varables);
+            }
+            
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem("token");
+            if (username && token) {
+                location.href = 'dashboard.html';
+            }
+        </script>
+
+
+
+    </body>
+</html>

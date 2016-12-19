@@ -30,6 +30,10 @@ class AuthController extends My_Controller_ApiAbstract
             $password = $this->_getParam('password', null);
             $act = $this->_getParam('act', null);
             $cigna_exists = null;
+            $token = null;
+            $exp = null;
+            $recovery_code = $this->_getParam('code', null);
+            
             if ($username && $password) {
                 if ($act == 'login') {
                     $user = $this->_auth($username, $password);
@@ -50,7 +54,17 @@ class AuthController extends My_Controller_ApiAbstract
                     $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'Invalid action');
                     exit;
                 }
-            } /*elseif ($token) {
+            } elseif ($username && $act == 'forgetpass') {
+                $this->_forgetpass($username);
+            } elseif ($recovery_code && $act == 'checkcode') {
+                $this->_checkcode($recovery_code);
+            } else if ($recovery_code && $password && $act == 'setpass') {
+                    $data = $this->_setpass($password, $recovery_code);
+                    $exp = strtotime($data['api_updated']) + My_Controller_ApiAbstract::API_TOKEN_LIFE_TIME;
+                    $token = $data['api_token'];
+            } 
+            
+            /*elseif ($token) {
                 $user = $this->_checkAuth($token);
             }*/ else {
                 $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "Trying to access without credentials");
@@ -200,7 +214,110 @@ class AuthController extends My_Controller_ApiAbstract
             exit;
         }
     }
+    
+    
+    protected function _forgetpass($username)
+    {
+        $userTable = new Application_Model_DbTable_User();
 
+        $p_username = trim(substr($username, 0, 32));
+        
+        try {
+            $user = $userTable->fetchRow(
+                array(
+                    "username = ?" => $p_username,
+                )
+            );
+
+            if (empty($user)) {
+                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'User does not exist');
+                exit;
+            } else {
+                $recovery_code = substr($this->_generateToken(), 1, 6);//md5(substr($p_username, 2, 5).time());
+                $this->send_email($p_username, $recovery_code);
+                
+                $user->code = md5($recovery_code);
+                $user->save();
+
+                return $user;
+            }
+        } catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+    
+    
+    protected function _checkcode($code)
+    {
+        $userTable = new Application_Model_DbTable_User();
+
+        try {
+            $user = $userTable->fetchRow(
+                array(
+                    "code = ?" => md5($code),
+                )
+            );
+
+            if (empty($user)) {
+                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'Code does not match');
+                exit;
+            }
+            
+            return true;
+            
+        } catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    protected function _setpass($password, $code)
+    {
+        $userTable = new Application_Model_DbTable_User();
+
+        $p_password = trim(substr($password, 0, 32));
+        
+        try {
+            $user = $userTable->fetchRow(
+                array(
+                    "code = ?" => md5($code)
+                )
+            );
+
+            if (!empty($user)) {
+                $user->password = md5($p_password);
+                $user->code = '';
+                $user->save();
+                
+                return $user;
+            } else {
+                $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'Failed to reset password');
+                exit;
+            }
+        } catch(Exception $e) {
+            $this->_error(My_Controller_ApiAbstract::ERROR_DENIED, 'Password reset failed.' . $e->getMessage()); // $e->getMessage()
+            exit;
+        }
+    }
+    
+    protected function send_email($email, $code)
+    {
+        try {
+            $mail = new Zend_Mail();
+            $mail->setBodyText('Recovery Code: ' . $code . '
+
+or click on the link below
+
+https://easybene.com/forgetpass.html?code=' . $code);
+            $mail->setFrom('easybenehelp@gmail.com', 'EasyBene');
+            $mail->addTo($email);
+            $mail->setSubject('EasyBene Password Recovery');
+            $mail->send();
+            
+        } catch(Exception $e) {
+            echo $e->getMessage() . 'error';
+        }
+    }
+    
     /**
      * Check if user is authentificated by token
      * If it is true - regenerate token and store it to the database
