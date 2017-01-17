@@ -45,6 +45,11 @@
             .btn-wrapper button {
                 font-size: 16px;
             }
+            
+            .login-list li.error-found {
+                position: relative;
+                margin-bottom: 50px;
+            }
         </style>
 
     </head>
@@ -114,27 +119,30 @@
                                                     <div class="item-media"><i class="icon-user"></i></div>
                                                     <div id="medical_provider_div" class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <select id="user_list">
-                                                            <option>--Select Expense Type--</option>
-                                                            <option>AAAAAA</option>
-                                                            <option>BBBBBB</option>
+                                                        <select id="expense_type">
+                                                            <option value="">--Select Expense Type--</option>
+                                                            <option>Medical Fees and Copays</option>
+                                                            <option>Dental Fees and Copays</option>
+                                                            <option>Prescription Fees and Copays</option>
+                                                            <option>Vision Fees and Copays</option>
                                                         </select>
+                                                        <i style="display: none;" class="valid-field"></i>
+                                                        <i style="display: none;" class="inValid-field"></i> 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a expense type</div>
                                             </li>
                                             
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                            <a  id="login_li" href="#cameraModal" role="button" data-toggle="modal">Camera</a>                  
+                                                            <a  id="camera_link" href="#cameraModal" role="button" data-toggle="modal">Camera</a>                  
                                                         <img id="imageFile" src="" />
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
                                             </li>
                                             
                                             <li>
@@ -142,42 +150,53 @@
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
                                                         <input id="description"  type="text" placeholder="Enter a description of the expense">
+                                                        <i style="display: none;" class="valid-field"></i>
+                                                        <i style="display: none;" class="inValid-field"></i> 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Enter a expense description</div>
                                             </li>
                                             
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <input id="description"  type="text" placeholder="mm/dd/yyyy">
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-inner">                                               
-                                                        <div class="item-input">
-                                                        <input id="description"  type="text" placeholder="0.00">
+                                                        <input id="date"  type="text" placeholder="mm/dd/yyyy">
+                                                        <i style="display: none;" class="valid-field"></i>
+                                                        <i style="display: none;" class="inValid-field"></i> 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Enter a expense date</div>
                                             </li>
                                             
                                             <li>
                                                 <div class="item-content">
                                                     <div class="item-inner">                                               
                                                         <div class="item-input">
-                                                        <input id="medical_selected_password"  type="password" placeholder="Additional details about expense">
+                                                        <input id="amount"  type="text" placeholder="0.00">
+                                                        <i style="display: none;" class="valid-field"></i>
+                                                        <i style="display: none;" class="inValid-field"></i> 
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
+                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Enter a expense amount</div>
+                                            </li>
+                                            
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">                                               
+                                                        <div class="item-input">
+                                                        <input id="additional_details"  type="text" placeholder="Additional details about expense">
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </li>
                                             
                                             
                                             <li class="btn-wrapper">
-                                                <a id="medical_register" href="javascript:void(0);" ><button type="submit">Save</button></a>
+                                                <a id="save_expense" href="javascript:void(0);" ><button type="submit">Save</button></a>
                                                 <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
                                                  <div class="clearfix"></div>
                                             </li>
@@ -236,7 +255,7 @@
                         </div>
                         <div class="input-wrapper">
                             <div class="input-group">
-                                <span class="input-group-addon">From Library</span>
+                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="fromLibrary()">From Library</a></span>
                             </div>
                         </div>
                         <div class="input-wrapper">
@@ -285,6 +304,8 @@
                 encodingType: Camera.EncodingType.JPEG,
                 mediaType: Camera.MediaType.PICTURE,
                 allowEdit: true,
+                targetWidth: 100,
+                targetHeight: 100,
                 correctOrientation: true  //Corrects Android orientation quirks
             }
             return options;
@@ -294,35 +315,29 @@
             alert('opening camera');
             var srcType = Camera.PictureSourceType.CAMERA;
             var options = setOptions(srcType);
-            //var func = createNewFileEntry;
 
             navigator.camera.getPicture(cameraSuccess, cameraError, options);
+            
+            $('#cameraModal').modal('hide');
         }
         
-        /*function getPhotoLibrary() {
-            var srcType = Camera.PictureSourceType.PHOTOLIBRARY;
-            var options = setOptions(srcType);
-            //var func = createNewFileEntry;
-
-            navigator.camera.getPicture(cameraSuccess, cameraError, options);
-        }
-        
-        function getSavedPhoto() {
+        function fromLibrary() {
+            alert('From library');
             var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
             var options = setOptions(srcType);
-            //var func = createNewFileEntry;
 
             navigator.camera.getPicture(cameraSuccess, cameraError, options);
-        }*/
+            
+            $('#cameraModal').modal('hide');
+        }
         
         function cameraSuccess(imageUri) {
 
             alert(imageUri);
+            
+            uploadPhoto(imageUri);
 
             displayImage(imageUri);
-            // You may choose to copy the picture, save it somewhere, or upload.
-            createNewFileEntry(imageUri);
-
         }
         
         function cameraError(error) {
@@ -330,105 +345,127 @@
             alert("Unable to obtain picture: " + error);
 
         }
+        
+                // Below one succeeded
+        function uploadPhoto(imageURI) {
+            alert('in the function');
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+            alert('settings parms');
+            var params = new Object();
+            params.value1 = "test";
+            params.value2 = "param";
+  
+            options.params = params;
+            options.chunkedMode = false;
+            alert('transferring...');
+             
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
             
+            var ft = new FileTransfer();
+            ft.upload(imageURI, 'https://easybene.com/index.php/upload/'+username+'/'+token, win, fail, options);
+        }
+  
+        function win(r) {
+            alert(r.response);
+        }
+  
+        function fail(error) {
+            alert("An error has occurred: Code = " + error.code);
+        }
+
         function displayImage(imgUri) {
 
             var elem = document.getElementById('imageFile');
             elem.src = imgUri;
         }
         
-        // For existing file
-        /*function getFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(imgUri, function success(fileEntry) {
-
-                // Do something with the FileEntry object, like write to it, upload it, etc.
-                writeFile(fileEntry, imgUri);
-                alert("got file: " + fileEntry.fullPath);
-                // displayFileData(fileEntry.nativeURL, "Native URL");
-
-            }, function () {
-              // If don't get the FileEntry (which may happen when testing
-              // on some emulators), copy to a new FileEntry.
-                createNewFileEntry(imgUri);
-            });
-        }*/
-
-        function createNewFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function (dirEntry) {
-
-                // JPEG file
-                dirEntry.getFile("shoeb.jpeg", { create: true, exclusive: false }, function (fileEntry) {
-
-                    // Do something with it, like write to it, upload it, etc.
-                    writeFile(fileEntry, imgUri);
-                    alert("got file: " + fileEntry.fullPath);
-                    // displayFileData(fileEntry.fullPath, "File copied to");
-
-                }, onErrorCreateFile);
-
-            }, onErrorResolveUrl);
-        }
-
-        function onErrorResolveUrl() {
-            alert('onErrorResolveUrl');
-        }
-        
-        function onErrorCreateFile() {
-            alert('onErrorCreateFile');
-        }
-        
-        function writeFile(fileEntry, dataObj) {
-            // Create a FileWriter object for our FileEntry (tempFile.jpeg).
-            fileEntry.createWriter(function (fileWriter) {
-
-                fileWriter.onwriteend = function() {
-                    alert("Successful file read...");
-                    //readFile(fileEntry);
-                    upload(fileEntry);
-                };
-
-                fileWriter.onerror = function (e) {
-                    alert("Failed file read: " + e.toString());
-                };
-
-                fileWriter.write(dataObj);
-            });
-        }
-
-        function upload(fileEntry) {
-            // !! Assumes variable fileURL contains a valid URL to a text file on the device,
-            var fileURL = fileEntry.toURL();
-
-            var success = function (r) {
-                alert("Successful upload...");
-                alert("Code = " + r.responseCode);
-                // displayFileData(fileEntry.fullPath + " (content uploaded to server)");
+        $('#save_expense').on('click', function () {
+            if (validation_check()) {
+                //SaveExpense();
+                alert("cxvcx");
             }
+        });
 
-            var fail = function (error) {
-                alert("An error has occurred: Code = " + error.code);
+        function validation_check(msg) {
+            var valid = true;
+
+            if ($('#expense_type').val() == '') {
+                show_error($('#expense_type'));
+                valid = false;
+            } else {
+                show_ok($('#expense_type'));
             }
-
-            var options = new FileUploadOptions();
-            options.fileKey = "file";
-            options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
-            options.mimeType = "text/plain";
-
-            var params = {};
-            params.value1 = "test";
-            params.value2 = "param";
-
-            options.params = params;
-
-            var ft = new FileTransfer();
-            // SERVER must be a URL that can handle the request, like
-            // http://some.server.com/upload.php
-            var username = window.localStorage.getItem("username");
-            var token = window.localStorage.getItem("token");
             
-            ft.upload(fileURL, encodeURI('https://easybene.com/index.php/upload/'+username+'/'+token), success, fail, options);
-        };
+            if ($('#description').val().length < 2) {
+                show_error($('#description'));
+                valid = false;
+            } else {
+                show_ok($('#description'));
+            }
+            
+            if ($('#date').val().length < 10) {
+                show_error($('#date'));
+                valid = false;
+            } else {
+                show_ok($('#date'));
+            }
+            
+            if ($('#amount').val() == '') {
+                show_error($('#amount'));
+                valid = false;
+            } else {
+                show_ok($('#amount'));
+            }
 
+            return valid;
+        }
+        
+        function show_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "block");
+            $(ths).closest("li").addClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "block");
+        }
+
+        function show_ok(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "block");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+            
+        function SaveExpense() {
+            var expense_type = $('#expense_type').val();
+            var description = $('#description').val();
+            var date = $('#date').val();
+            var amount = $('#amount').val();
+            var additional_details = $('#additional_details').val();
+            $.ajax({
+                url: 'https://easybene.com/index.php/auth/register',
+                type: "POST",
+                data: 'expense_type=' + expense_type + '&description=' + description + '&date=' + date + '&amount=' + amount + '&additional_details=' + additional_details,
+                dataType: 'json',
+                async: false,
+                success: function (result) {
+                    //console.log(result);
+                    //ShowLoginRegSucc();
+
+                    location.href = "index.html";
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //ShowRegFail(xhr.responseJSON);
+                    //console.log(xhr.responseJSON);
+                    $("#error_after_submit").html(xhr.responseJSON);
+                    $("#error_after_submit").css("display", "block");
+                },
+            });
+        }
         </script>
     </body>
 </html>

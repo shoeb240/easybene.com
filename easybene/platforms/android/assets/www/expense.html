@@ -236,7 +236,7 @@
                         </div>
                         <div class="input-wrapper">
                             <div class="input-group">
-                                <span class="input-group-addon">From Library</span>
+                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="fromLibrary()">From Library</a></span>
                             </div>
                         </div>
                         <div class="input-wrapper">
@@ -285,6 +285,8 @@
                 encodingType: Camera.EncodingType.JPEG,
                 mediaType: Camera.MediaType.PICTURE,
                 allowEdit: true,
+                targetWidth: 100,
+                targetHeight: 100,
                 correctOrientation: true  //Corrects Android orientation quirks
             }
             return options;
@@ -294,35 +296,25 @@
             alert('opening camera');
             var srcType = Camera.PictureSourceType.CAMERA;
             var options = setOptions(srcType);
-            //var func = createNewFileEntry;
 
             navigator.camera.getPicture(cameraSuccess, cameraError, options);
         }
         
-        /*function getPhotoLibrary() {
-            var srcType = Camera.PictureSourceType.PHOTOLIBRARY;
-            var options = setOptions(srcType);
-            //var func = createNewFileEntry;
-
-            navigator.camera.getPicture(cameraSuccess, cameraError, options);
-        }
-        
-        function getSavedPhoto() {
+        function fromLibrary() {
+            alert('From library');
             var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
             var options = setOptions(srcType);
-            //var func = createNewFileEntry;
 
             navigator.camera.getPicture(cameraSuccess, cameraError, options);
-        }*/
+        }
         
         function cameraSuccess(imageUri) {
 
             alert(imageUri);
+            
+            uploadPhoto(imageUri);
 
             displayImage(imageUri);
-            // You may choose to copy the picture, save it somewhere, or upload.
-            createNewFileEntry(imageUri);
-
         }
         
         function cameraError(error) {
@@ -330,30 +322,82 @@
             alert("Unable to obtain picture: " + error);
 
         }
+        
+                // Below one succeeded
+        function uploadPhoto(imageURI) {
+            alert('in the function');
+            var options = new FileUploadOptions();
+            options.fileKey="file";
+            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
+            options.mimeType="image/jpeg";
+            alert('settings parms');
+            var params = new Object();
+            params.value1 = "test";
+            params.value2 = "param";
+  
+            options.params = params;
+            options.chunkedMode = false;
+            alert('transferring...');
+             
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
             
+            var ft = new FileTransfer();
+            ft.upload(imageURI, 'https://easybene.com/index.php/upload/'+username+'/'+token, win, fail, options);
+        }
+  
+        function win(r) {
+            alert(r.response);
+        }
+  
+        function fail(error) {
+            alert("An error has occurred: Code = " + error.code);
+        }
+
         function displayImage(imgUri) {
 
             var elem = document.getElementById('imageFile');
             elem.src = imgUri;
         }
         
+        
+        //////////////////////////
+        
         // For existing file
-        /*function getFileEntry(imgUri) {
+        function getFileEntry(imgUri) {
             window.resolveLocalFileSystemURL(imgUri, function success(fileEntry) {
 
                 // Do something with the FileEntry object, like write to it, upload it, etc.
-                writeFile(fileEntry, imgUri);
+                // writeFile(fileEntry, imgUri); // shoeb commented
                 alert("got file: " + fileEntry.fullPath);
+                upload(fileEntry);
                 // displayFileData(fileEntry.nativeURL, "Native URL");
 
             }, function () {
               // If don't get the FileEntry (which may happen when testing
               // on some emulators), copy to a new FileEntry.
-                createNewFileEntry(imgUri);
+                //createNewFileEntry(imgUri);
+                alert("No FileEntry");
             });
-        }*/
+        }
+        
+        function getFileEntry2(imgUri) {
+            
+            window.resolveLocalFileSystemURI(imgUri, function(fileEntry) {
+                fileEntry.file(function(fileObj) {
 
-        function createNewFileEntry(imgUri) {
+                    var fileName = fileObj.fullPath;
+
+                    //now use the fileName in your method
+                    //ft.upload(fileName ,serverURL + '/ajax.php?fname=appuploadspotimage'...);
+                    alert("got file: " + fileEntry.fullPath);
+                    upload(fileName);
+
+                  });
+            });
+        }
+
+        /*function createNewFileEntry(imgUri) {
             window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function (dirEntry) {
 
                 // JPEG file
@@ -375,9 +419,9 @@
         
         function onErrorCreateFile() {
             alert('onErrorCreateFile');
-        }
+        }*/
         
-        function writeFile(fileEntry, dataObj) {
+        /*function writeFile(fileEntry, dataObj) {
             // Create a FileWriter object for our FileEntry (tempFile.jpeg).
             fileEntry.createWriter(function (fileWriter) {
 
@@ -393,41 +437,7 @@
 
                 fileWriter.write(dataObj);
             });
-        }
-
-        function upload(fileEntry) {
-            // !! Assumes variable fileURL contains a valid URL to a text file on the device,
-            var fileURL = fileEntry.toURL();
-
-            var success = function (r) {
-                alert("Successful upload...");
-                alert("Code = " + r.responseCode);
-                // displayFileData(fileEntry.fullPath + " (content uploaded to server)");
-            }
-
-            var fail = function (error) {
-                alert("An error has occurred: Code = " + error.code);
-            }
-
-            var options = new FileUploadOptions();
-            options.fileKey = "file";
-            options.fileName = fileURL.substr(fileURL.lastIndexOf('/') + 1);
-            options.mimeType = "text/plain";
-
-            var params = {};
-            params.value1 = "test";
-            params.value2 = "param";
-
-            options.params = params;
-
-            var ft = new FileTransfer();
-            // SERVER must be a URL that can handle the request, like
-            // http://some.server.com/upload.php
-            var username = window.localStorage.getItem("username");
-            var token = window.localStorage.getItem("token");
-            
-            ft.upload(fileURL, encodeURI('https://easybene.com/index.php/upload/'+username+'/'+token), success, fail, options);
-        };
+        }*/
 
         </script>
     </body>
