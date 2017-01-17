@@ -15,8 +15,6 @@ class Application_Model_UserProviderExeMapper
      */
     private $_dbTable = null;
     
-    private $_dbTable2 = null;
-    
     /**
      * Create Zend_Db_Adapter_Abstract object
      *
@@ -31,53 +29,36 @@ class Application_Model_UserProviderExeMapper
         return $this->_dbTable;
     }
     
-    public function getProviderTable()
-    {
-        if (null == $this->_dbTable2) {
-            $this->_dbTable2 = new Application_Model_DbTable_UserProvider();
-        }
-        
-        return $this->_dbTable2;
-    }
-    
     public function getUserProviderRun($providerId, $userId)
     {
-        $select = $this->getProviderTable()->select();
-        $select->from(array('up' => 'user_provider'), array('id' => 'up.id', 'user_id' => 'up.user_id', 'provider_id' => 'up.provider_id', 'provider_user_id' => 'up.provider_user_id',
-                          'de_provider_password' => 'AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512)))'))
-               ->where('up.provider_id = ?', $providerId)
-               ->where('up.user_id = ?', $userId);
-        $row = $this->getProviderTable()->fetchRow($select);
-        
-        $providersSelected = array();
-        
-        $userProvider = new Application_Model_UserProvider();
-        $userProvider->id = $row->id;
-        $userProvider->user_id = $row->user_id;
-        $userProvider->provider_id = $row->provider_id;
-        $userProvider->provider_user_id = $row->provider_user_id;
-        $userProvider->provider_password = $row->de_provider_password;
-        $providersSelected[$row->user_id]['provider'] = $userProvider; // to enable mutiple provider, replace user_id with provider id in the index
-
         $select = $this->getTable()->select();
+        /*$select->from(array('up' => 'user_provider'), array('up.*, AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512))) as de_provider_password'))
+               ->where('up.provider_id = ?', $providerId)
+               ->where('up.user_id = ?', $userId);*/
         $select->setIntegrityCheck(false)
-               ->from(array('upe' => 'user_provider_exe'), array('exe_table_id' => 'upe.id', 'upe.run_name', 'upe.failed', 'upe.executed', 'timediff' => 'TIMESTAMPDIFF(SECOND, upe.run_time, NOW())'))
-               ->join(array('up' => 'user_provider'), 
-                       'upe.user_provider_table_id = up.id',
-                      array('user_id' => 'up.user_id'))
+               ->from(array('up' => 'user_provider'), array('id' => 'up.id', 'user_id' => 'up.user_id', 'provider_id' => 'up.provider_id', 'provider_user_id' => 'up.provider_user_id',
+                          'de_provider_password' => 'AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512)))'))
+               ->joinLeft(array('upe' => 'user_provider_exe'), 
+                       'up.id = upe.user_provider_table_id',
+                      array('exe_table_id' => 'upe.id', 'upe.run_name', 'upe.failed', 'upe.executed', 'timediff' => 'TIMESTAMPDIFF(SECOND, upe.run_time, NOW())'))
                ->where('up.provider_id = ?', $providerId)
                ->where('up.user_id = ?', $userId);
         $rowSets = $this->getTable()->fetchAll($select);
-      
+
+        $providersSelected = array();
         foreach($rowSets as $k => $row) {
-            $userProviderExe = new Application_Model_UserProviderExe();
-            $userProviderExe->user_id = $row->user_id;
-            $userProviderExe->exe_table_id = $row->exe_table_id;
-            $userProviderExe->run_name = $row->run_name;
-            $userProviderExe->failed = $row->failed;  
-            $userProviderExe->executed = $row->executed;  
-            $userProviderExe->timediff = $row->timediff;
-            $providersSelected[$row->user_id]['runs'][] = $userProviderExe; // to enable mutiple provider, replace user_id with provider id in the index
+            $userProvider = new Application_Model_UserProvider();
+            $userProvider->id = $row->id;
+            $userProvider->user_id = $row->user_id;
+            $userProvider->provider_id = $row->provider_id;
+            $userProvider->provider_user_id = $row->provider_user_id;
+            $userProvider->provider_password = $row->de_provider_password;
+            $userProvider->exe_table_id = $row->exe_table_id;
+            $userProvider->run_name = $row->run_name;
+            $userProvider->failed = $row->failed;  
+            $userProvider->executed = $row->executed;  
+            $userProvider->timediff = $row->timediff;
+            $providersSelected[$row->user_id][] = $userProvider;
         }
         
         return $providersSelected;
@@ -88,44 +69,32 @@ class Application_Model_UserProviderExeMapper
         $providerMapper = new Application_Model_ProviderListMapper();
         $providerInfo = $providerMapper->getProviderByNameType($providerName, $providerType);
         $providerId = $providerInfo->id;
-                    
-        $select = $this->getProviderTable()->select();
-        $select->from(array('up' => 'user_provider'), array('id' => 'up.id', 'user_id' => 'up.user_id', 'provider_id' => 'up.provider_id', 'provider_user_id' => 'up.provider_user_id',
+        
+        $select = $this->getTable()->select();
+        $select->setIntegrityCheck(false)
+               ->from(array('up' => 'user_provider'), array('id' => 'up.id', 'user_id' => 'up.user_id', 'provider_id' => 'up.provider_id', 'provider_user_id' => 'up.provider_user_id',
                           'de_provider_password' => 'AES_DECRYPT(up.provider_password, UNHEX(SHA2(\'my_secret\', 512)))'))
+               ->joinLeft(array('upe' => 'user_provider_exe'), 
+                       'up.id = upe.user_provider_table_id',
+                      array('exe_table_id' => 'upe.id', 'upe.run_name', 'upe.failed', 'upe.executed', 'timediff' => 'TIMESTAMPDIFF(SECOND, upe.run_time, NOW())'))
                ->where('up.provider_id = ?', $providerId);
         $rowSets = $this->getTable()->fetchAll($select);
 
         $providersSelected = array();
-        
         foreach($rowSets as $k => $row) {
-            $userProvider = new Application_Model_UserProvider();
+            $userProvider = new Application_Model_UserProviderExe();
             $userProvider->id = $row->id;
             $userProvider->user_id = $row->user_id;
             $userProvider->provider_id = $row->provider_id;
             $userProvider->provider_user_id = $row->provider_user_id;
             $userProvider->provider_password = $row->de_provider_password;
-            $providersSelected[$row->user_id]['provider'] = $userProvider;
-        }
-        
-        $select = $this->getTable()->select();
-        $select->setIntegrityCheck(false)
-               ->from(array('upe' => 'user_provider_exe'), array('exe_table_id' => 'upe.id', 'upe.run_name', 'upe.failed', 'upe.executed', 'timediff' => 'TIMESTAMPDIFF(SECOND, upe.run_time, NOW())'))
-               ->join(array('up' => 'user_provider'), 
-                       'upe.user_provider_table_id = up.id',
-                      array('user_id' => 'up.user_id'))
-               ->where('up.provider_id = ?', $providerId);
-        $rowSets = $this->getTable()->fetchAll($select);
-
-        foreach($rowSets as $k => $row) {
-            $userProviderExe = new Application_Model_UserProviderExe();
-            $userProviderExe->user_id = $row->user_id;
-            $userProviderExe->exe_table_id = $row->exe_table_id;
-            $userProviderExe->run_name = $row->run_name;
-            $userProviderExe->failed = $row->failed;  
-            $userProviderExe->executed = $row->executed;  
-            $userProviderExe->timediff = $row->timediff;  
+            $userProvider->exe_table_id = $row->exe_table_id;
+            $userProvider->run_name = $row->run_name;
+            $userProvider->failed = $row->failed;  
+            $userProvider->executed = $row->executed;  
+            $userProvider->timediff = $row->timediff;  
             
-            $providersSelected[$row->user_id]['runs'][] = $userProviderExe;
+            $providersSelected[$row->user_id][] = $userProvider;
         }
         
         return $providersSelected;

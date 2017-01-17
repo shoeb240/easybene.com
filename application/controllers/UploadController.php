@@ -41,11 +41,12 @@ class UploadController extends My_Controller_ApiAbstract //Zend_Controller_Actio
 
     public function postAction()
     {
-        echo '<pre>';
+        /*echo '<pre>';
         print_r($_FILES);
         print_r($_POST);
+        print_r($_PUT);
         print_r($_GET);
-        echo '</pre>';
+        echo '</pre>';*/
         try{
             move_uploaded_file($_FILES["file"]["tmp_name"], APPLICATION_PATH . '/../camera/' . time() . '.jpeg');            
         } catch (Exception $ex) {

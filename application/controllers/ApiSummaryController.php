@@ -100,6 +100,25 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 
             } else if ($userInfo['dental']->provider_name == 'anthem') {
                 
+            } else if ($userInfo['dental']->provider_name == 'UnitedConcordiaDental') {
+                
+                // guardian_claim
+                $claimMapper = new Application_Model_UnitedConcordiaDentalClaimMapper();
+                $concordianClaim = $claimMapper->getUnitedConcordiaDentalClaim($userId);
+                
+                $count = count($concordianClaim);
+                $submittedCharges = 0;
+                $amountPaid = 0;
+                for($i=0; $i < $count; $i++) {
+                    $submittedCharges += str_replace(array('$', ','), '', $concordianClaim[$i]['submitted_charges']);
+                    $amountPaid += str_replace(array('$', ','), '', $concordianClaim[$i]['amount_paid']);;
+                }
+                
+                $result['dental_deductible'] = $submittedCharges;
+                $result['dental_deductible_met'] = $amountPaid;
+                $result['dental_percent'] = round((($amountPaid / $submittedCharges))*100);
+                $result['dental_data_exists'] = !empty($concordianClaim[0]['user_id']) ? 'yes' : '';
+                
             }
             
             // VISION
@@ -146,6 +165,35 @@ class ApiSummaryController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $result['health_care_FSA_denominator'] = str_replace(array('$', ','), '', $naviaHealthCare[0]['annual_election']);
                 $result['health_care_FSA_percent'] = round($result['health_care_FSA_nominator'] / $result['health_care_FSA_denominator'] * 100);
                 $result['health_care_FSA_data_exists'] = !empty($naviaHealthCare[0]['user_id']) ? 'yes' : '';
+            } else if ($userInfo['funds']->provider_name == 'WageWorks') {
+                // guardian_claim
+                /*$statementMapper = new Application_Model_WageWorksStatementsMapper();
+                $wageWorksStatements = $statementMapper->getWageWorksStatements($userId);
+                
+                $result['funds_nominator'] = str_replace(array('$', ','), '', $wageWorksStatements['HS_balance']);
+                $result['funds_denominator'] = str_replace(array('$', ','), '', $denominator);
+                $result['funds_percent'] = round($result['funds_nominator'] / $result['funds_denominator'] * 100);
+                $result['funds_data_exists'] = !empty($wageWorksStatements['user_id']) ? 'yes' : '';*/
+                
+                $dayCareMapper = new Application_Model_WageWorksDayCareMapper();
+                $wageWorksDayCare = $dayCareMapper->getWageWorksDayCare($userId);
+                
+                $available_balance = str_replace(array('$', ','), '', $wageWorksDayCare[0]['available_balance']);
+                $result['day_care_FSA_denominator'] = str_replace(array('$', ','), '', $wageWorksDayCare[0]['annual_election']);
+                $result['day_care_FSA_nominator'] = $result['day_care_FSA_denominator'] - $available_balance;
+                
+                $result['day_care_FSA_percent'] = round($result['day_care_FSA_nominator'] / $result['day_care_FSA_denominator'] * 100);
+                $result['day_care_FSA_data_exists'] = !empty($wageWorksDayCare[0]['user_id']) ? 'yes' : '';
+                
+                $healthCareMapper = new Application_Model_WageWorksHealthCareMapper();
+                $wageWorksHealthCare = $healthCareMapper->getWageWorksHealthCare($userId);
+                
+                $available_balance = str_replace(array('$', ','), '', $wageWorksHealthCare[0]['available_balance']);
+                $result['health_care_FSA_denominator'] = str_replace(array('$', ','), '', $wageWorksHealthCare[0]['annual_election']);
+                $result['health_care_FSA_nominator'] = $result['health_care_FSA_denominator'] - $available_balance;
+                
+                $result['health_care_FSA_percent'] = round($result['health_care_FSA_nominator'] / $result['health_care_FSA_denominator'] * 100);
+                $result['health_care_FSA_data_exists'] = !empty($wageWorksHealthCare[0]['user_id']) ? 'yes' : '';
             } 
             
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);

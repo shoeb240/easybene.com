@@ -52,6 +52,22 @@ class ApiFundsController extends My_Controller_ApiAbstract //Zend_Controller_Act
                 
                 $healthCareMapper = new Application_Model_NaviaHealthCareMapper();
                 $arr['health_care_FSA'] = $healthCareMapper->getNaviaHealthCare($userId);
+            } else if ($userInfo['funds']->provider_name == 'WageWorks') {
+                /*$statementsMapper = new Application_Model_WageWorksStatementsMapper();
+                $statements = $statementsMapper->getWageWorksStatements($userId);
+                //print_r($statements);
+                $arr['HS_balance'] = $statements['HS_balance'];
+
+                $hsMapper = new Application_Model_WageWorksHealthSavingsMapper();
+                $hs = $hsMapper->getWageWorksHealthSavings($userId);
+                $arr['portfolio_balance'] = $hs[0]['portfolio_balance'];
+                $arr['transaction_activity'] = $hs;*/
+                
+                $dayCareMapper = new Application_Model_WageWorksDayCareMapper();
+                $arr['day_care_FSA'] = $dayCareMapper->getWageWorksDayCare($userId);
+                
+                $healthCareMapper = new Application_Model_WageWorksHealthCareMapper();
+                $arr['health_care_FSA'] = $healthCareMapper->getWageWorksHealthCare($userId);
             }
 
             /*echo '<pre>';

@@ -50,6 +50,15 @@ class ApiDentalController extends My_Controller_ApiAbstract //Zend_Controller_Ac
                 $claimMapper = new Application_Model_GuardianClaimMapper();
                 $arr['claim'] = $claimMapper->getGuardianClaim($userId);
             }
+            
+            if ($userInfo['dental']->provider_name == 'UnitedConcordiaDental') {
+                //$benefitMapper = new Application_Model_UnitedConcordiaDentalBenefitMapper();
+                //$arr['benefit'] = $benefitMapper->getUnitedConcordiaDentalBenefit($userId);
+
+                // guardian_claim
+                $claimMapper = new Application_Model_UnitedConcordiaDentalClaimMapper();
+                $arr['claim'] = $claimMapper->getUnitedConcordiaDentalClaim($userId);
+            }
 
 //            echo '<pre>';
 //            print_r($arr);

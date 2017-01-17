@@ -303,6 +303,7 @@ class AuthController extends My_Controller_ApiAbstract
     {
         try {
             $mail = new Zend_Mail();
+            $mail->setBodyHtml($this->get_html_body($code));
             $mail->setBodyText('Recovery Code: ' . $code . '
 
 or click on the link below
@@ -359,6 +360,129 @@ https://easybene.com/forgetpass.html?code=' . $code);
     protected function _generateToken()
     {
         return md5(base64_encode(date('miHYsd') . chr(rand(34, 63)) . microtime()));
+    }
+    
+    private function get_html_body($code)
+    {
+        
+        $doc = <<<AAA
+
+        <table align="center"  cellpadding="0" cellspacing="0" width="600"  style="border-collapse: collapse; ">
+            <tr>
+                <td bgcolor="#08598d" style="font-size: 0; line-height: 0;" height="5">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td bgcolor="#10c6ed" style="color: #fff; font-size: 20px; line-height: 25px; text-align: center;font-family: Verdana,Arial, sans-serif, helvetica; " align="center" height="40">PASSWORD RECOVERY</td>
+            </tr>
+            
+            <tr>
+                <td bgcolor="#f6f4fa" style="font-size: 0; line-height: 0;" height="10">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td align="center" bgcolor="#f6f4fa" >
+                    <a href="http://www.easybene.com/"><img src="https://easybene.com/images/logo.png" alt="Easy bene" width="70" height="50" style="display: block;" border="0" /></a>
+                </td>
+            </tr>
+            
+            <tr>
+                <td bgcolor="#f6f4fa"  style="font-size: 0; line-height: 0;" height="10">&nbsp;</td>
+            </tr>
+
+            <tr>
+                <td bgcolor="#f6f4fa">
+                    <table width="100%">
+                        <tr>
+                            <td width="2"></td>
+                            <td width="92">
+                                <table>
+                                    <tr>
+                                        <td style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">Thank you for requesting password recovery for access to your account.</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td  style="font-size: 0; line-height: 0;" height="10">&nbsp;</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td width="20"></td>
+                                                    <td width="60" height="40"  align="left" bgcolor="#d5d8d8" >
+                                                        <table width="100%">
+                                                            <tr>
+                                                                <td width="10%"></td>
+                                                                <td width="40%" style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 15px;"><b>Recovery Code:</b></td>
+                                                                <td width="10%"></td>
+                                                                <td width="40%" style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 15px; color: #10c6ed; font-weight: bold;" >$code</td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td width="20"></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+									
+									<tr>
+                                        <td  style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">or click on the link below</td>
+                                    </tr>
+									
+									<tr>
+                                        <td  style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;" height="10"><a href="https://easybene.com/forgetpass.html?code=$code">https://easybene.com/forgetpass.html?code=$code</a></td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td  style="font-size: 0; line-height: 0;" height="10">&nbsp;</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td  style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">For personal information security reasons, please do not share your account ID or password with anyone. </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td height="30" style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">Thank you for using our online solution! </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td height="30" style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">Sincerely, </td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td height="30" style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">Your EasyBene Team</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td height="30" style="font-family: Verdana,Arial, sans-serif, helvetica; font-size: 13px;">
+                                            Please Note: This is an automated message. Please do not reply to it.</td>
+                                    </tr>
+                                    
+                                </table>
+                            </td>
+                            <td width="5"></td>
+                        </tr>
+                        
+                    </table>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td bgcolor="#10c6ed" style="font-size: 0; line-height: 0;" height="30">&nbsp;</td>
+            </tr>
+            
+            <tr>
+                <td bgcolor="#08598d" style="font-size: 0; line-height: 0;" height="5">&nbsp;</td>
+            </tr>
+            
+        </table>
+                    
+                
+AAA;
+
+        return $doc;
     }
 
 }

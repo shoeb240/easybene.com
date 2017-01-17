@@ -20,7 +20,7 @@ class Application_Model_UserProviderExe
     public $failed;
     
     public $user_id;
-    public $provider_id;
-    public $provider_user_id;
-    public $provider_password;
+    //public $provider_id;
+    //public $provider_user_id;
+    //public $provider_password;
 }
