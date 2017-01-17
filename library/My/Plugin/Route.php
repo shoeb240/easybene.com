@@ -83,7 +83,24 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                                         'action' => 'execute'));
         $router->addRoute('indexNaviaScrapeCron', $route);
         
-
+        $route = new Zend_Controller_Router_Route('scrape-wageworks/:action/:username/:token/:id',
+                                                  array('controller' => 'scrape-wage-works',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexWageWorksScrape', $route);
+        $route = new Zend_Controller_Router_Route('scrape-wageworks/:action/:user_id',
+                                                  array('controller' => 'scrape-wage-works',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexWageWorksScrapeCron', $route);
+        
+        $route = new Zend_Controller_Router_Route('scrape-concordia/:action/:username/:token/:id',
+                                                  array('controller' => 'scrape-united-concordia-dental',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexUnitedConcordiaDentalScrape', $route);
+        $route = new Zend_Controller_Router_Route('scrape-concordia/:action/:user_id',
+                                                  array('controller' => 'scrape-united-concordia-dental',
+                                                        'action' => 'execute'));
+        $router->addRoute('indexUnitedConcordiaDentalScrapeCron', $route);
+        
         
         $route = new Zend_Controller_Router_Route('index/paypal-payment/:userId',
                                                   array('controller' => 'index',

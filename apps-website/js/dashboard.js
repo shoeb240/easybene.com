@@ -413,7 +413,7 @@
             $.each(result.claim_details, function(key, row) {
                 status = 'Pending';
                 cssclass = 'pending';
-                $('#medical_claim').append('<tr><td><p>' + row.claim_processed_on + '</p></td><td>' + row.for + '</td><td>' + row.service_amount_billed + '</td><td>' + row.service_what_i_owe + '</td><!--<td><span class="' + status.toLowerCase() + '">' + cssclass + '</span></td></td>--></tr>');
+                $('#medical_claim').append('<tr><td><p>' + row.claim_processed_on + '</p></td><td>' + row.for + '</td><td>' + row.service_amount_billed + '</td><td>' + row.service_what_i_owe + '</td><!--<td><span class="' + cssclass + '">' + status.toLowerCase() + '</span></td></td>--></tr>');
             });
         } else {
             $('#medical_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
@@ -425,7 +425,7 @@
             $.each(result.claim_details, function(key, row) {
                 status = 'Pending';
                 cssclass = 'pending';
-                $('#medical_claim').append('<tr><td><p>' + row.date + '</p></td><td>' + row.for + '</td><td>' + row.total + '</td><td>' + row.member_responsibility + '</td><!--<td><span class="' + status.toLowerCase() + '">' + cssclass + '</span></td></td>--></tr>');
+                $('#medical_claim').append('<tr><td><p>' + row.date + '</p></td><td>' + row.for + '</td><td>' + row.total + '</td><td>' + row.member_responsibility + '</td><!--<td><span class="' + cssclass + '">' + status.toLowerCase() + '</span></td></td>--></tr>');
             });
         } else {
             $('#medical_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
@@ -441,7 +441,24 @@
                     status = 'Processed';
                     cssclass = 'processed';
                 }
-                $('#dental_claim').append('<tr><td>' + row.paid_date + '</td><td><p>' + row.patient_name + '</p></td><td>' + row.submitted_charges + '</td><td>' + row.i_owe + '</td><td><span class="' + status.toLowerCase() + '">' + cssclass + '</span></td></tr>');
+                $('#dental_claim').append('<tr><td>' + row.paid_date + '</td><td><p>' + row.patient_name + '</p></td><td>' + row.submitted_charges + '</td><td>' + row.i_owe + '</td><td><span class="' + cssclass + '">' + status.toLowerCase() + '</span></td></tr>');
+            });
+        } else {
+            $('#dental_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
+        }
+    }
+    
+    dyn_functions['UnitedConcordiaDental_dental_table'] = function (result) {
+        if (result.claim[0]) {
+            $('#dental_claim_head').html('<tr><th>Date of Service</th><th>Patient Name</th><th>Dentist</th><th>Total</th><!--<th>You Pay</th>--><th>Amount Paid</th><th>Status</th></tr>');
+            $.each(result.claim, function(key, row) {
+                status = row.status;
+                cssclass = 'pending';
+                if (row.status.search(/Approved/i) >= 0) {
+                    status = row.status;
+                    cssclass = 'processed';
+                }
+                $('#dental_claim').append('<tr><td>' + row.date_of_service + '</td><td><p>' + row.patient_name + '</p></td><td>' + row.dentist + '</td><td>' + row.submitted_charges + '</td><!--<td>' + row.i_owe + '</td>--><td>' + row.amount_paid + '</td><td><span class="' + cssclass + '">' + status.toLowerCase() + '</span></td></tr>');
             });
         } else {
             $('#dental_claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');

@@ -385,7 +385,7 @@
                         </div>
 
                         <form>
-                            <div id="error_after_submit" style="display: none; position: static;" class="error">Email and/or Password did not match</div>
+                            <div id="error_after_submit" style="display: none; position: static;  color: red;" class="error">Email and/or Password did not match</div>
                             <div class="input-wrapper">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
@@ -449,7 +449,7 @@
                         </div>
 
                         <form>
-                            <div id="error_after_submit" style="display: none; position: static;" class="error">Email and/or Password did not match</div>
+                            <div id="error_after_login_submit" style="display: none; position: static; color: red;" class="error">Email and/or Password did not match</div>
                             <div class="input-wrapper">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-envelope" aria-hidden="true"></i></span>
@@ -624,7 +624,7 @@
         }
 
         $('#login_email').on("change", function(){
-            $("#error_after_submit").css("display", "none");
+            $("#error_after_login_submit").css("display", "none");
             if (!isEmail($(this).val())) {
                 show_error(this);
             } else {
@@ -633,7 +633,7 @@
         });
         
         $('#login_password').on("change", function(){
-            $("#error_after_submit").css("display", "none");
+            $("#error_after_login_submit").css("display", "none");
             if ($(this).val().length < 8) {
                 show_error(this);
             } else {
@@ -691,7 +691,7 @@
                 error: function(xhr, ajaxOptions, thrownError) {
                         //ShowLoginFail(xhr.responseJSON);
                         //alert(xhr.responseJSON);
-                        $("#error_after_submit").css("display", "block");
+                        $("#error_after_login_submit").css("display", "block");
                     },
             });
         }

@@ -211,19 +211,19 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
         return $usersAll;
     }
     
-    protected function runEachScrapper($userProvider, $runData, $runId, $runName)
+    protected function runEachScrapper($userObj, $runData, $runId, $runName)
     {
         $bulk = false;
         if (isset($runData[0]) && is_array($runData[0])) {
             $cnt = count($runData);
             for($i = 0; $i < $cnt; $i++) {
-                $runData[$i]['user_id'] = $userProvider->provider_user_id;
-                $runData[$i]['password'] = $userProvider->provider_password;
+                $runData[$i]['user_id'] = $userObj->provider_user_id;
+                $runData[$i]['password'] = $userObj->provider_password;
             }
             $bulk = true;
         } else {
-            $runData['user_id'] = $userProvider->provider_user_id;
-            $runData['password'] = $userProvider->provider_password;
+            $runData['user_id'] = $userObj->provider_user_id;
+            $runData['password'] = $userObj->provider_password;
         }
         
         $data_string = json_encode($runData);    
@@ -241,8 +241,8 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
         $exeId = isset($arr['_id']) ? $arr['_id'] : '';
 
         $userProviderExeMapper = new Application_Model_UserProviderExeMapper();
-        $exe_table_id = $userProviderExeMapper->updateSiteCredentials($userProvider->id, $runName, $exeId);
-        //echo $userProvider->provider_user_id.', '.$exeId.', '.$runName.'==';
+        $exe_table_id = $userProviderExeMapper->updateSiteCredentials($userObj->id, $runName, $exeId);
+        //echo $userObj->provider_user_id.', '.$exeId.', '.$runName.'==';
 
         if (empty($exeId)) {
             $this->run_res = false;
@@ -258,40 +258,33 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
     {
         $cronConfig = $this->getCronConfig();
         
-        foreach($usersAll as $userId => $userProviderArr) {
-            
-            $userProvider = $userProviderArr['provider'];
-            $userProviderRuns = $userProviderArr['runs'];
+        foreach($usersAll as $userId => $userRuns) {
             if ($this->run_count >= $cronConfig->cron->run->each_time_run_count) break;
-            if ($this->cronRunning) {
-              echo $userId . '==' . $userProvider->provider_user_id . '==' . $userProvider->provider_password . '<br />';
-            }
-            if (empty($userProvider->provider_user_id) || empty($userProvider->provider_password)) continue;
-
-            if (count($userProviderRuns) >= count($this->runs)) {
+            if (count($userRuns) >= count($this->runs)) {
                 // If rows for all runs are at user_provider_exe table
                 if ($this->cronRunning) {
                     echo '<br />=above=<br />';
                 }
-                foreach($userProviderRuns as $k => $userRunObj) {
-                    if (!$userRunObj->run_name) continue;
+                foreach($userRuns as $k => $userObj) {
+                    if (empty($userObj->provider_user_id) || empty($userObj->provider_password)
+                            || !$userObj->run_name) continue;
                     if ($this->cronRunning) {
-                        echo $userRunObj->run_name . '==' . $userRunObj->exe_table_id . '==' . $userRunObj->failed . '==' . $userRunObj->executed . '==' . $userRunObj->timediff . '<br />';
+                        echo $userId . '==' . $userObj->exe_table_id . '==' . $userObj->failed . '==' . $userObj->executed . '==' . $userObj->timediff . '<br />';
                     }
                     
-                    if (($userRunObj->failed == 1 && $userRunObj->timediff > $cronConfig->cron->run->failed->gap_sec)
-                            || ($userRunObj->failed == 0 && $userRunObj->executed == 1 && $userRunObj->timediff > $cronConfig->cron->run->update->gap_sec)
+                    if (($userObj->failed == 1 && $userObj->timediff > $cronConfig->cron->run->failed->gap_sec)
+                            || ($userObj->failed == 0 && $userObj->executed == 1 && $userObj->timediff > $cronConfig->cron->run->update->gap_sec)
                     ) { 
                         // if run was failed, and specified time has passed.
                         // if run was not failed, and was executed, and specified time has passed.
                         $this->run_res = true;
-                        $run_name = $userRunObj->run_name;
+                        $run_name = $userObj->run_name;
                         $run_id = $this->runs[$run_name];
                         $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
                         if ($this->cronRunning) {
                             echo $run_name . '<br />';
                         }
-                        $this->runEachScrapper($userProvider, $eachRunData, $run_id, $run_name);
+                        $this->runEachScrapper($userObj, $eachRunData, $run_id, $run_name);
 
                         if ($this->cronRunning) {
                             $response[$userId][$run_name] = $this->run_res;
@@ -307,14 +300,14 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
                 }
                 reset($this->runs);
                 foreach($this->runs as $run_name => $run_id) {
-                    if (empty($userProvider->provider_user_id) || empty($userProvider->provider_password)) continue;
+                    if (empty($userRuns[0]->provider_user_id) || empty($userRuns[0]->provider_password)) continue;
 
                     $this->run_res = true;
                     $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
                     if ($this->cronRunning) {
                         echo $userId . '==' . $run_name . '<br />';
                     }
-                    $this->runEachScrapper($userProvider, $eachRunData, $run_id, $run_name);
+                    $this->runEachScrapper($userRuns[0], $eachRunData, $run_id, $run_name);
 
                     if ($this->cronRunning) {
                         $response[$userId][$run_name] = $this->run_res;
@@ -340,7 +333,9 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
     {
         $headerArray = $this->getHeaderArr();
         $cronConfig = $this->getCronConfig();
-        
+        /*echo '<pre>';
+        print_r($usersAll);
+        echo '<pre>';*/
         foreach($usersAll as $userId => $userObj) {
             if ($this->execution_count >= $cronConfig->cron->exe->each_time_execution_count) break;
             $arr = array();
