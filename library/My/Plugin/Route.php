@@ -43,6 +43,14 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                   array('controller' => 'api-id-card', 'action' => 'index', 'id' => null));
         $router->addRoute('indexApiIdCard', $route);
         
+        $route = new Zend_Controller_Router_Route('api-expense/:username/:token/:id',
+                                  array('controller' => 'api-expense', 'action' => 'index', 'id' => null));
+        $router->addRoute('indexApiExpense', $route);
+        
+        $route = new Zend_Controller_Router_Route('api-document/:username/:token/:id',
+                                  array('controller' => 'api-document', 'action' => 'index', 'id' => null));
+        $router->addRoute('indexApiDocument', $route);
+        
         
         $route = new Zend_Controller_Router_Route('scrape-cigna/:action/:username/:token/:id',
                                                   array('controller' => 'scrape-cigna',

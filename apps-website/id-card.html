@@ -96,24 +96,69 @@
                         <li class="breadcrumb-item active">Medical</li>
                     </ol>
                     
-                    <div class="content-block less-padding desktop-margin">
+                    <div id="cigna_id_card" style="display: none;" class="content-block less-padding desktop-margin">
                         <div class="medical-grap-text table-text ">
 
                             <div class="tbl-header-wrapper">
-                                <h3>ID Card</h3>
-                                <p class="sub-info">Here it's Your Medical ID card </p>
+                                <h3>Cigna ID Card</h3>
+                                <!--<p class="sub-info">Here it's Your Medical ID card </p>-->
                             </div>
                             <div class="id-info-wrapper">
                                 <div class="id-image"><img src="images/provider-log-1.png" alt="Id info"/></div>
                                 <ul class="id-info">
-                                    <li><span class="left-value">name: </span><span id="cigna_name" class="right-value">Roderick Brathwaite</span></li>
-                                    <li><span class="left-value">ID: </span><span id="cigna_card_id" class="right-value">102619660</span></li>
-                                    <li><span class="left-value">Group Number: </span><span id="cigna_group" class="right-value">00614457</span></li>
-                                    <li><span class="left-value">Issuer:</span><span id="cigna_issuer" class="right-value">808840</span></li>
-                                    <li><span class="left-value">RxBIN:</span><span id="cigna_RxBIN" class="right-value">017010</span></li>
-                                    <li><span class="left-value">RxPCN:</span><span id="cigna_RxPCN" class="right-value">05180000</span></li>
-                                    <li><span class="left-value">RxGrp:</span><span id="cigna_RxGrp" class="right-value">017010</span></li>
-                                    <li><span class="left-value">RxID:</span><span id="cigna_RxID" class="right-value">05180000</span></li>
+                                    <li><span class="left-value">name: </span><span id="cigna_name" class="right-value"></span></li>
+                                    <li><span class="left-value">ID: </span><span id="cigna_card_id" class="right-value"></span></li>
+                                    <li><span class="left-value">Group Number: </span><span id="cigna_group" class="right-value"></span></li>
+                                    <li><span class="left-value">Issuer:</span><span id="cigna_issuer" class="right-value"></span></li>
+                                    <li><span class="left-value">RxBIN:</span><span id="cigna_RxBIN" class="right-value"></span></li>
+                                    <li><span class="left-value">RxPCN:</span><span id="cigna_RxPCN" class="right-value"></span></li>
+                                    <li><span class="left-value">RxGrp:</span><span id="cigna_RxGrp" class="right-value"></span></li>
+                                    <li><span class="left-value">RxID:</span><span id="cigna_RxID" class="right-value"></span></li>
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div id="cigna_id_card" style="display: none;" class="content-block less-padding desktop-margin">
+                        <div class="medical-grap-text table-text ">
+
+                            <div class="tbl-header-wrapper">
+                                <h3>Guardian ID Card</h3>
+                                <!--<p class="sub-info">Here it's Your Dental ID card </p>-->
+                            </div>
+                            <div class="id-info-wrapper">
+                                <div class="id-image"><img src="images/provider-log-1.png" alt="Id info"/></div>
+                                <ul class="id-info">
+                                    <li><span class="left-value">Subscriber: </span><span id="guardian_subscriber" class="right-value"></span></li>
+                                    <li><span class="left-value">Card ID: </span><span id="guardian_card_id" class="right-value"></span></li>
+                                    <li><span class="left-value">Plan Number: </span><span id="guardian_plan_number" class="right-value"></span></li>
+                                    <li><span class="left-value">Member ID:</span><span id="guardian_member_id" class="right-value"></span></li>
+                                    <li><span class="left-value">Customer Response Unit:</span><span id="guardian_customer_response_unit" class="right-value"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="anthem_id_card" style="display: none;" class="content-block less-padding desktop-margin">
+                        <div class="medical-grap-text table-text ">
+
+                            <div class="tbl-header-wrapper">
+                                <h3>Anthem ID Card</h3>
+                                <!--<p class="sub-info">Here it's Your Vision ID card </p>-->
+                            </div>
+                            <div class="id-info-wrapper">
+                                <div class="id-image"><img src="images/provider-log-1.png" alt="Id info"/></div>
+                                <ul class="id-info">
+                                    <li><span class="left-value">name: </span><span id="anthem_name" class="right-value"></span></li>
+                                    <li><span class="left-value">ID: </span><span id="anthem_card_id" class="right-value"></span></li>
+                                    <li><span class="left-value">Group Number: </span><span id="anthem_group" class="right-value"></span></li>
+                                    <li><span class="left-value">Issuer:</span><span id="anthem_issuer" class="right-value"></span></li>
+                                    <li><span class="left-value">RxBIN:</span><span id="anthem_RxBIN" class="right-value"></span></li>
+                                    <li><span class="left-value">RxPCN:</span><span id="anthem_RxPCN" class="right-value"></span></li>
+                                    <li><span class="left-value">RxGrp:</span><span id="anthem_RxGrp" class="right-value"></span></li>
+                                    <li><span class="left-value">RxID:</span><span id="anthem_RxID" class="right-value"></span></li>
                                     
                                 </ul>
                             </div>
@@ -213,8 +258,9 @@
                     dataType: 'json',
                     async: false,
                     success: function(result) {
-                            //console.log(result);
+                            console.log(result);
                             if (result.cigna) {
+                                $("#cigna_id_card").css("display", "block");
                                 $("#cigna_name").html(result.cigna.name);
                                 $("#cigna_card_id").html(result.cigna.card_id);
                                 $("#cigna_group").html(result.cigna.group);
@@ -223,6 +269,27 @@
                                 $("#cigna_RxPCN").html(result.cigna.RxPCN);
                                 $("#cigna_RxGrp").html(result.cigna.RxGrp);
                                 $("#cigna_RxID").html(result.cigna.RxID);
+                            }
+                            
+                            if (result.guardian) {
+                                $("#guardian_id_card").css("display", "block");
+                                $("#guardian_subscriber").html(result.guardian.subscriber);
+                                $("#guardian_card_id").html(result.guardian.card_id);
+                                $("#guardian_plan_number").html(result.guardian.plan_number);
+                                $("#guardian_member_id").html(result.guardian.member_id);
+                                $("#guardian_customer_response_unit").html(result.guardian.customer_response_unit);
+                            }
+                            
+                            if (result.anthem) {
+                                $("#anthem_id_card").css("display", "block");
+                                $("#anthem_name").html(result.anthem.name);
+                                $("#anthem_card_id").html(result.anthem.card_id);
+                                $("#anthem_group").html(result.anthem.group);
+                                $("#anthem_issuer").html(result.anthem.issuer);
+                                $("#anthem_RxBIN").html(result.anthem.RxBIN);
+                                $("#anthem_RxPCN").html(result.anthem.RxPCN);
+                                $("#anthem_RxGrp").html(result.anthem.RxGrp);
+                                $("#anthem_RxID").html(result.anthem.RxID);
                             }
                         },
                     error: function(xhr, ajaxOptions, thrownError) {

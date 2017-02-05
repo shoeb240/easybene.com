@@ -41,11 +41,23 @@ class ApiIdCardController extends My_Controller_ApiAbstract //Zend_Controller_Ac
                 $medicalMapper = new Application_Model_CignaIdCardMapper();
                 $arr['cigna'] = $medicalMapper->getCignaIdCard($userId);
             }
+            
+            if ($userInfo['dental']->provider_name == 'guardian') {
+                // cingna_medical
+                $medicalMapper = new Application_Model_GuardianIdCardMapper();
+                $arr['guardian'] = $medicalMapper->getGuardianIdCard($userId);
+            }
+            
+            if ($userInfo['vision']->provider_name == 'anthem') {
+                // cingna_medical
+                $medicalMapper = new Application_Model_AnthemIdCardMapper();
+                $arr['anthem'] = $medicalMapper->getAnthemIdCard($userId);
+            }
 
-            /*echo '<pre>';
-            print_r($hs);
-            echo '</pre>';
-            die();*/
+//            echo '<pre>';
+//            print_r($arr);
+//            echo '</pre>';
+//            die();
             $this->getResponse()->setHttpResponseCode(My_Controller_ApiAbstract::RESPONSE_CREATED);
             $this->getHelper('json')->sendJson($arr);
             

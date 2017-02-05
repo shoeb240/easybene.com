@@ -259,7 +259,7 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
         $cronConfig = $this->getCronConfig();
         
         foreach($usersAll as $userId => $userProviderArr) {
-            
+            if ($userId == 127) continue; // REMOVE
             $userProvider = $userProviderArr['provider'];
             $userProviderRuns = $userProviderArr['runs'];
             if ($this->run_count >= $cronConfig->cron->run->each_time_run_count) break;
@@ -274,7 +274,9 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
                     echo '<br />=above=<br />';
                 }
                 foreach($userProviderRuns as $k => $userRunObj) {
-                    if (!$userRunObj->run_name) continue;
+                    $run_name = $userRunObj->run_name;
+                    $run_id = $this->runs[$run_name];
+                    if (!$run_name || !$run_id) continue;
                     if ($this->cronRunning) {
                         echo $userRunObj->run_name . '==' . $userRunObj->exe_table_id . '==' . $userRunObj->failed . '==' . $userRunObj->executed . '==' . $userRunObj->timediff . '<br />';
                     }
@@ -285,8 +287,6 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
                         // if run was failed, and specified time has passed.
                         // if run was not failed, and was executed, and specified time has passed.
                         $this->run_res = true;
-                        $run_name = $userRunObj->run_name;
-                        $run_id = $this->runs[$run_name];
                         $eachRunData = isset($this->runs_data[$run_name]) ? $this->runs_data[$run_name] : array();
                         if ($this->cronRunning) {
                             echo $run_name . '<br />';
@@ -342,6 +342,7 @@ abstract class My_Controller_ScrapeBase extends Zend_Controller_Action
         $cronConfig = $this->getCronConfig();
         
         foreach($usersAll as $userId => $userObj) {
+            if ($userId == 127) continue; // REMOVE
             if ($this->execution_count >= $cronConfig->cron->exe->each_time_execution_count) break;
             $arr = array();
             //$this->execute_res = 'OK';

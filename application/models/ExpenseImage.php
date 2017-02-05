@@ -1,6 +1,6 @@
 <?php
 /**
- * Application_Model_Expenses class
+ * Application_Model_ExpenseImage class
  * 
  * @category   Application
  * @package    Application_Model
@@ -8,17 +8,13 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_Expenses
+class Application_Model_ExpenseImage
 {
     public $_id;
-    public $_provider_type;
-    public $_label;
-    public $_name;
-    public $_description;
-    public $_url;
+    public $_user_id;
+    public $_expense_id;
     public $_image;
-    public $_status;
-    public $_default;
+    public $_date;
         
     public function setOption($field, $value)
     {

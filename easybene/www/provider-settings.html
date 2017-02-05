@@ -511,6 +511,33 @@
             return valid;
         }
         
+        $('#medical_register').on('click', function() {
+            prepare_register_calls(this);
+        });
+        
+        $('#dental_register').on('click', function() {
+            prepare_register_calls(this);
+        });
+        
+        $('#vision_register').on('click', function() {
+            prepare_register_calls(this);
+        });
+        
+        $('#funds_register').on('click', function() {
+            prepare_register_calls(this);
+        });
+        
+        function prepare_register_calls(ths) {
+            var thsid = $(ths).attr('id');
+            //console.log(thsid.substring(0, thsid.indexOf('register') - 1));
+            site_type = thsid.substring(0, thsid.indexOf('register') - 1);
+            site_name = $('#'+site_type+'_selected_name').val();
+            site_user_id = $('#'+site_type+'_selected_user_id').val();
+            site_password = $('#'+site_type+'_selected_password').val();
+            if (validation_check(site_type)) {
+                RegisterSite(site_type, site_name, site_user_id, site_password);
+            }
+        }
         /*function hideAll() {
             $('#welcome_div').css('display', 'none');
             $('#site_choice_dental_div').css('display', 'none');   
@@ -629,17 +656,6 @@
 
                             $('#funds_family_single').html(select_code);
                             
-                            $('#'+provider_types[p]+'_register').on('click', function() {
-                                var thsid = $(this).attr('id');
-                                //console.log(thsid.substring(0, thsid.indexOf('register') - 1));
-                                site_type = thsid.substring(0, thsid.indexOf('register') - 1);
-                                site_name = $('#'+site_type+'_selected_name').val();
-                                site_user_id = $('#'+site_type+'_selected_user_id').val();
-                                site_password = $('#'+site_type+'_selected_password').val();
-                                if (validation_check(site_type)) {
-                                    RegisterSite(site_type, site_name, site_user_id, site_password);
-                                }
-                            });
                         }
                         
                     },
@@ -721,7 +737,7 @@
                         $(".floatingBarsG_"+site_type.toLowerCase()).css('display', 'none');
                         $("#" + site_type.toLowerCase() + "_success").css('display', 'block');
                         
-                        GetUserData();
+                        //GetUserData();
                     },
                 error: function(xhr, ajaxOptions, thrownError) {
                         //console.log(xhr);

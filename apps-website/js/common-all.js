@@ -6,6 +6,9 @@
     $(".top_right_username").html(username);
     
     $(window).load(function(){
+        if (username && token) {
+            setLogoutTimer();
+        }
         //sideMenu();
     });
     
@@ -61,5 +64,26 @@
         history.go(-1);
     });
     
+    
+    var timeoutTimer;
+
+    function setLogoutTimer() {
+        timeoutTimer = setTimeout(timeoutLogout, 1800000); // Auto logout after 30mins of inactivity
+    }
+
+    function timeoutLogout() {
+        location.href = "logout.html";
+    }
+    
+    function resetTimer() {
+        clearTimeout(timeoutTimer);
+        setLogoutTimer();
+    }
+
+    if (username && token) {
+        $(this).mousemove(function(e){
+                resetTimer();
+        });
+    }
     
 }());    

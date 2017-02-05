@@ -42,7 +42,8 @@ class ScrapeAnthemController extends My_Controller_ScrapeBase
         // key is the run id from dexi
         $this->runs = array(
             'anthem' => 'c6e8ec2a-466e-4a72-a269-c6586a3c25c6', 
-            'anthem_claim_overview' => 'b34f0574-bb01-44bf-9adb-8ca5ea962610'
+            'anthem_claim_overview' => 'b34f0574-bb01-44bf-9adb-8ca5ea962610',
+            'anthem_id_card' => 'db206502-ef21-42b0-9614-2f7a77302b89'
         );
         
         $this->runs_data = array(
@@ -51,6 +52,10 @@ class ScrapeAnthemController extends My_Controller_ScrapeBase
                 'claims_deductible_for' => 10
             )
         );
+        
+        $this->file_run_name = 'anthem_id_card';
+        $this->file_run_field = 'pdf_dl';
+        $this->file_run_field_prefix = 'FILE:text/plain;';
         
     }
     

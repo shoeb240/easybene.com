@@ -8,7 +8,7 @@
  * @copyright  Copyright (c) 2013, Shoeb Abdullah
  * @version    1.0
  */
-class Application_Model_ExpensesMapper
+class Application_Model_ExpenseMapper
 {
     /**
      * @var Application_Model_DbTable_Anthem
@@ -23,7 +23,7 @@ class Application_Model_ExpensesMapper
     public function getTable()
     {
         if (null == $this->_dbTable) {
-            $this->_dbTable = new Application_Model_DbTable_Expenses();
+            $this->_dbTable = new Application_Model_DbTable_Expense();
         }
         
         return $this->_dbTable;
@@ -32,11 +32,35 @@ class Application_Model_ExpensesMapper
     public function getExpense($expenseId)
     {
         $select = $this->getTable()->select();
-        $select->from('expenses', array('*'))
+        $select->from('expense', array('*'))
                ->where('id = ?', $expenseId);
         $row = $this->getTable()->fetchRow($select);
         
         return $row;
+    }
+    
+    public function getExpenseByUser($userId)
+    {
+        $select = $this->getTable()->select();
+        $select->from('expense', array('*'))
+               ->where('user_id = ?', $userId);
+        $rowSets = $this->getTable()->fetchAll($select);
+        
+        $info = array();
+        foreach($rowSets as $k => $row) {
+            $expense = array();
+            $expense['id'] = $row->id;
+            $expense['name'] = $row->name;
+            $expense['expense_type'] = $row->expense_type;
+            $expense['description'] = $row->description;
+            $expense['date'] = date("F j, Y", strtotime($row->date));  
+            $expense['amount'] = $row->amount;
+            $expense['additional_details'] = $row->additional_details;
+            
+            $info[] = $expense;
+        }
+
+        return $info;
     }
     
     /**
@@ -45,7 +69,7 @@ class Application_Model_ExpensesMapper
      * @param  int    $userId
      * @return string
      */
-    public function getExpenses($type = null)
+    public function getExpenseList($type = null)
     {
         $select = $this->getTable()->select();
         if ($type) {
@@ -58,9 +82,10 @@ class Application_Model_ExpensesMapper
         foreach($rowSets as $k => $row) {
             $expense = array();
             $expense['id'] = $row->id;
+            $expense['name'] = $row->name;
             $expense['expense_type'] = $row->expense_type;
             $expense['description'] = $row->description;
-            $expense['date'] = $row->date; 
+            $expense['date'] = date("F j, Y", strtotime($row->date)); 
             $expense['amount'] = $row->amount;
             $expense['additional_details'] = $row->additional_details;
             
@@ -76,15 +101,16 @@ class Application_Model_ExpensesMapper
      * @param  Application_Model_User $scrape
      * @return int
      */
-    public function saveExpenses(Application_Model_Expenses $expenses)
+    public function saveExpense($user_id, $name, $expense_type, $description, $date, $amount, $additional_details)
     {
         $data = array(
-            'id' => $expenses->getOption('id'),
-            'expense_type' => $expenses->getOption('expense_type'),
-            'description' => $expenses->getOption('description'),
-            'date' => $expenses->getOption('date'),
-            'amount' => trim($expenses->getOption('amount')),
-            'additional_details' => trim($expenses->getOption('additional_details')),
+            'user_id' => $user_id,
+            'name' => $name,
+            'expense_type' => $expense_type,
+            'description' => $description,
+            'date' => date('Y-m-d', strtotime($date)),
+            'amount' => $amount,
+            'additional_details' => $additional_details,
         );
 
         return $this->getTable()->insert($data);
