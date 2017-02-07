@@ -17,36 +17,7 @@
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
-        
-        <!-- ============================================
-        ================= Stylesheets ===================
-        ============================================= -->
-        <!-- vendor css files -->
-        <link rel="stylesheet" href="js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="css/desktop-style.css">
-        
-        <script src="cordova.js"></script>
-        
-        <style>
-            .login-list li {
-                margin: 0 auto 3px;
-                width: 85%;
-            }
-            
-            .btn-wrapper {
-                border: medium none !important;
-                margin-top: 5px !important;
-            }
-            
-            .provider-login-wrapper .login-list {
-                margin-top: 10px;
-            }
-            
-            .btn-wrapper button {
-                font-size: 16px;
-            }
-        </style>
-
     </head>
     <body>
 
@@ -62,7 +33,7 @@
                 </a>
             </div>
             <div class="clearfix"></div>
-            <h2 class="page-title">Expense</h2>
+            <h2 class="page-title">Insurance Details</h2>
 
         </div>
         <aside data-sidebar>
@@ -79,366 +50,198 @@
         <!-- Your main site content in here -->
         <main>
             <div id="main-content">
+                <div class="page-content medical-grap">
+                    <div class="content-block less-margin">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
+                            <li role="presentation" class="active">
+                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
+                                </a>
+                            </li>
+                            <li role="presentation">
+                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
+                            </li>
+                            <li role="presentation">
+                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
+                            </li>
+                        </ul>
+                    </div>
 
+                    <div class="id-card content-block">
+                        <div class="custom-tab" > 
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a id="document_a" href="#document" aria-controls="document" role="tab" data-toggle="tab">Documents</a></li>
+                                <li role="presentation"><a id="expense_a" href="#expense" aria-controls="expense" role="tab" data-toggle="tab">Expenses</a></li>
+                                <li role="presentation"><a href="#reimburse" aria-controls="reimburse" role="tab" data-toggle="tab">Reimburse</a></li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <!--tab document-->
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="document">
+                                    <!--if there is no document then this this div will show-->
+                                    <div class="no-doc-found" style="display: none;">No Documents or notes found</div>
 
-                <div class="page-content search-prvider-page">
-
-                    <div class="content-block less-margin provider-settings-wrapper">
-
-                        <!-- Tab panes -->
-                        <div class="tab-content">
-                            
-                            <div id="site_reg_div" class="provider-login-wrapper" style="display: block; box-shadow: none; margin: 0;">
-                                <h2></h2>
-                                <div>
-                                    <!--<div class="col-md-12 text-center"  style="float:left;">-->
-                                    <div class="list-block login-list">
-                                        <div id="floatingBarsG" class="floatingBarsG_medical" style="display: none;">
-                                            <div class="blockG" id="rotateG_01"></div>
-                                            <div class="blockG" id="rotateG_02"></div>
-                                            <div class="blockG" id="rotateG_03"></div>
-                                            <div class="blockG" id="rotateG_04"></div>
-                                            <div class="blockG" id="rotateG_05"></div>
-                                            <div class="blockG" id="rotateG_06"></div>
-                                            <div class="blockG" id="rotateG_07"></div>
-                                            <div class="blockG" id="rotateG_08"></div>
-                                        </div>
+                                    <!--if there is a document then this div will show just remove display: none css--> 
+                                    <div class="vault-content" style="display: block;">
                                         <ul>
-                                            <li>Expense</li>
-                                            <li>
-                                                <div id="medical_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Medical Provider Registered Successfully</div>
-                                                <div id="medical_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
-                                            </li>
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-media"><i class="icon-user"></i></div>
-                                                    <div id="medical_provider_div" class="item-inner">                                               
-                                                        <div class="item-input">
-                                                        <select id="user_list">
-                                                            <option>--Select Expense Type--</option>
-                                                            <option>AAAAAA</option>
-                                                            <option>BBBBBB</option>
-                                                        </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a Provider</div>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-inner">                                               
-                                                        <div class="item-input">
-                                                            <a  id="login_li" href="#cameraModal" role="button" data-toggle="modal">Camera</a>                  
-                                                        <img id="imageFile" src="" />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid User Name (Minimum 2 Characters)</div>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-inner">                                               
-                                                        <div class="item-input">
-                                                        <input id="description"  type="text" placeholder="Enter a description of the expense">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-inner">                                               
-                                                        <div class="item-input">
-                                                        <input id="description"  type="text" placeholder="mm/dd/yyyy">
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-inner">                                               
-                                                        <div class="item-input">
-                                                        <input id="description"  type="text" placeholder="0.00">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
-                                            </li>
-                                            
-                                            <li>
-                                                <div class="item-content">
-                                                    <div class="item-inner">                                               
-                                                        <div class="item-input">
-                                                        <input id="medical_selected_password"  type="password" placeholder="Additional details about expense">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password (Minimum 6 Characters)</div>
-                                            </li>
-                                            
-                                            
-                                            <li class="btn-wrapper">
-                                                <a id="medical_register" href="javascript:void(0);" ><button type="submit">Save</button></a>
-                                                <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
-                                                 <div class="clearfix"></div>
-                                            </li>
-                                        
+                                            <!--<li>
+                                                <a href="#">
+                                                    <p>Medical prescription</p>
+                                                    <span>December6, 2016-rod</span>
+                                                </a>
+                                            </li>-->
                                         </ul>
                                     </div>
-                                </div> 
-                                <div style="clear:both;"></div>
-                                
-                            </div>
+                                </div>
+                                <!--tab expense-->
+                                <div role="tabpanel" class="tab-pane" id="expense">
+                                    <div class="vault-content">
+                                        <ul>
+                                            <!--<li>
+                                                <a href="#">
+                                                    <p>Medical prescription</p>
+                                                    <span>December6, 2016-rod</span>
+                                                </a>
+                                            </li>-->
+                                            <!--<li>
+                                                <div class="add-edit-content-wrapper">
+                                                    <div id="ex-content-wrapper">
+                                                        <a href="#">
+                                                            <p>Medical prescription</p>
+                                                            <span>December6, 2016-rod</span>
+                                                        </a>
+                                                    </div>
+                                                    <div id="edit-wrapper" class="edit-content">
+                                                        <div class="edit-con">
+                                                            <div>
+                                                                <button class="delete-btn" ><span class="icon-trash-o"></span></button>
+                                                                <button class="edit-btn" data-toggle="modal" data-target="#edit-modal"><span class="icon-edit"></span></button>
+                                                            </div>
+                                                            <div>
+                                                                <p>Edit</p>
+                                                                <span>December6, 2016-rod</span>
+                                                            </div>
 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>-->
+                                            
+                                        </ul>                                    
+                                    </div>
+                                </div>
+                                <!-- tab reimburse -->
+                                <div role="tabpanel" class="tab-pane" id="reimburse">
+                                    <div class="reimburse-content">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <p class="label-text">Qualified Expenses</p>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <p class="ammount-number">$20.00</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <p class="label-text">Paid with HSA Funds</p>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <p class="ammount-number" >$00.00</p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <p class="label-text">Eligible for withdrawal<br/> (From HSA Funds)</p>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <p class="ammount-number total-ammonut">$20.00</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="plus-img-wrapper" id="add-entry">
+                            <a href="#"><img src="images/plus.png" alt="plus icon" class="img-responsive" /></a>
                         </div>
                     </div>
+                </div>
+
+                <div id="add-entry-screen">
+                    <div class="add-content-wrapper">
+                        <div class="green-bar-with-arrow">
+                            <a href="#">Rod</a>
+                        </div>
+                        <div class="click-able-box">
+                            <a href="add-expense.html">
+                                <h3>Add an Expense </h3>
+                                <p>Record a Medical expense you paid for out-of-pocket or with HSA funds Attach receipts, insurance Explanation of bennefit (EOB's). Statements, or other proof of payment.</p>
+                            </a>
+                        </div>
+                        <div class="click-able-box">
+                            <a href="add-expense.html?page=document">
+                                <h3>Add Note or Document</h3>
+                                <p>Add other health related document for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc</p>
+                            </a>
+                        </div>
+                        <div class="close-big-btn"><a href="expense.html">Close</a></div>
+                    </div>
+                </div>
+                <div>
                 </div>
             </div>
             <div class="overlay" data-sidebar-overlay></div>
         </main>
 
-        <!-- Modal HTML -->
-        <div id="Why-imp-Modal" class="modal fade">
-            <div class="modal-dialog">
+        <!-- edit Modal start from here -->
+        <div class="modal fade edit-modal" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">                    
                     <div class="modal-body">
-                        <div class="why-important-text-wrapper">
-                            <div class="why-important-text-wrapper-text">
-                                <h3>Linking is how the magic Happens</h3>
-                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
-                                <a data-dismiss="modal" style="cursor: pointer">Got it</a>
-                            </div>
-
+                        <h3>Expense Recorded</h3>
+                        <p>Include one space before the opening brace of declaration blocks for legibility.Include one space before the opening brace of declaration blocks for legibility.</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="$20.00">
                         </div>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-        
-        <div id="cameraModal" class="verticl-centermodal modal fade">
-
-            <div class="modal-dialog">
-
-                <div class="modal-content">
-
-                    <div class="modal-body">
-                        <div class="input-wrapper" style="text-align: center;">
-                            Photo Options
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="openCamera()">Take Photo</a></span>
-                            </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon">Use Last Photo Taken</span>
-                            </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="fromLibrary()">From Library</a></span>
-                            </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon">From Dropbox</span>
-                            </div>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
-        <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/jquery.circliful.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
-        
-        
-         <!-- ============================================
-        ============== Vendor JavaScripts ===============
-        ============================================= -->
-        <script src="js/vendor/jRespond/jRespond.min.js"></script>
-
-        <script src="js/vendor/animsition/js/jquery.animsition.min.js"></script>
-
-        <script src="js/vendor/chosen/chosen.jquery.js"></script>
-
-        <!--/ vendor javascripts -->
-
-        <!-- ============================================
-        ============== Custom JavaScripts ===============
-        ============================================= -->
-        <script src="js/main.js"></script>
-        <!--/ custom javascripts -->
-        
+        <script type="text/javascript" src="js/common-details.js"></script>
+        <script type="text/javascript" src="js/expense.js"></script>
         
         <script>
-            
-        function setOptions(srcType) {
-            var options = {
-                // Some common settings are 20, 50, and 100
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                // In this app, dynamically set the picture source, Camera or photo gallery
-                sourceType: srcType,
-                encodingType: Camera.EncodingType.JPEG,
-                mediaType: Camera.MediaType.PICTURE,
-                allowEdit: true,
-                targetWidth: 100,
-                targetHeight: 100,
-                correctOrientation: true  //Corrects Android orientation quirks
-            }
-            return options;
-        }
-
-        function openCamera() {
-            alert('opening camera');
-            var srcType = Camera.PictureSourceType.CAMERA;
-            var options = setOptions(srcType);
-
-            navigator.camera.getPicture(cameraSuccess, cameraError, options);
-        }
-        
-        function fromLibrary() {
-            alert('From library');
-            var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
-            var options = setOptions(srcType);
-
-            navigator.camera.getPicture(cameraSuccess, cameraError, options);
-        }
-        
-        function cameraSuccess(imageUri) {
-
-            alert(imageUri);
-            
-            uploadPhoto(imageUri);
-
-            displayImage(imageUri);
-        }
-        
-        function cameraError(error) {
-            //console.debug("Unable to obtain picture: " + error, "app");
-            alert("Unable to obtain picture: " + error);
-
-        }
-        
-                // Below one succeeded
-        function uploadPhoto(imageURI) {
-            alert('in the function');
-            var options = new FileUploadOptions();
-            options.fileKey="file";
-            options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
-            options.mimeType="image/jpeg";
-            alert('settings parms');
-            var params = new Object();
-            params.value1 = "test";
-            params.value2 = "param";
-  
-            options.params = params;
-            options.chunkedMode = false;
-            alert('transferring...');
-             
-            var username = window.localStorage.getItem("username");
-            var token = window.localStorage.getItem("token");
-            
-            var ft = new FileTransfer();
-            ft.upload(imageURI, 'https://easybene.com/index.php/upload/'+username+'/'+token, win, fail, options);
-        }
-  
-        function win(r) {
-            alert(r.response);
-        }
-  
-        function fail(error) {
-            alert("An error has occurred: Code = " + error.code);
-        }
-
-        function displayImage(imgUri) {
-
-            var elem = document.getElementById('imageFile');
-            elem.src = imgUri;
-        }
-        
-        
-        //////////////////////////
-        
-        // For existing file
-        function getFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(imgUri, function success(fileEntry) {
-
-                // Do something with the FileEntry object, like write to it, upload it, etc.
-                // writeFile(fileEntry, imgUri); // shoeb commented
-                alert("got file: " + fileEntry.fullPath);
-                upload(fileEntry);
-                // displayFileData(fileEntry.nativeURL, "Native URL");
-
-            }, function () {
-              // If don't get the FileEntry (which may happen when testing
-              // on some emulators), copy to a new FileEntry.
-                //createNewFileEntry(imgUri);
-                alert("No FileEntry");
+            $(document).ready(function () {
+                $("#add-entry").click(function () {
+                    $("#add-entry-screen").show();
+                });
             });
-        }
-        
-        function getFileEntry2(imgUri) {
+                /*$(document).ready(
+                    function () {
+                        $("#add-entry").click(function () {
+                            $("#add-entry-screen").show();
+                        });
+                        $(".ex-content-wrapper").click(function () {
+                            alert('xxx');
+                            //$("#edit-wrapper").show();
+                            $('.edit-content', this).show();
+                        });
+                    });*/
             
-            window.resolveLocalFileSystemURI(imgUri, function(fileEntry) {
-                fileEntry.file(function(fileObj) {
-
-                    var fileName = fileObj.fullPath;
-
-                    //now use the fileName in your method
-                    //ft.upload(fileName ,serverURL + '/ajax.php?fname=appuploadspotimage'...);
-                    alert("got file: " + fileEntry.fullPath);
-                    upload(fileName);
-
-                  });
-            });
-        }
-
-        /*function createNewFileEntry(imgUri) {
-            window.resolveLocalFileSystemURL(cordova.file.cacheDirectory, function (dirEntry) {
-
-                // JPEG file
-                dirEntry.getFile("shoeb.jpeg", { create: true, exclusive: false }, function (fileEntry) {
-
-                    // Do something with it, like write to it, upload it, etc.
-                    writeFile(fileEntry, imgUri);
-                    alert("got file: " + fileEntry.fullPath);
-                    // displayFileData(fileEntry.fullPath, "File copied to");
-
-                }, onErrorCreateFile);
-
-            }, onErrorResolveUrl);
-        }
-
-        function onErrorResolveUrl() {
-            alert('onErrorResolveUrl');
-        }
-        
-        function onErrorCreateFile() {
-            alert('onErrorCreateFile');
-        }*/
-        
-        /*function writeFile(fileEntry, dataObj) {
-            // Create a FileWriter object for our FileEntry (tempFile.jpeg).
-            fileEntry.createWriter(function (fileWriter) {
-
-                fileWriter.onwriteend = function() {
-                    alert("Successful file read...");
-                    //readFile(fileEntry);
-                    upload(fileEntry);
-                };
-
-                fileWriter.onerror = function (e) {
-                    alert("Failed file read: " + e.toString());
-                };
-
-                fileWriter.write(dataObj);
-            });
-        }*/
-
         </script>
     </body>
 </html>
