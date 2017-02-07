@@ -64,33 +64,41 @@
         return options;
     }
 
+    $('.take_photo').on('click', function(){
+        openCamera();
+    });
+    
+    $('.from_library').on('click', function(){
+        fromLibrary();
+    });
+    
     function openCamera() {
-        alert('opening camera');
+        //alert('opening camera');
         var srcType = Camera.PictureSourceType.CAMERA;
         var options = setOptions(srcType);
 
         navigator.camera.getPicture(cameraSuccess, cameraError, options);
 
-        $('#cameraModal').modal('hide');
+        $('#select-photo').modal('hide');
     }
 
     function fromLibrary() {
-        alert('From library');
+        //alert('From library');
         var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
         var options = setOptions(srcType);
 
         navigator.camera.getPicture(cameraSuccess, cameraError, options);
 
-        $('#cameraModal').modal('hide');
+        $('#select-photo').modal('hide');
     }
 
-    function cameraSuccess(imageUri) {
+    var imageURI;
+    
+    function cameraSuccess(newImageUri) {
 
-        alert(imageUri);
-
-        uploaded_img_name = uploadPhoto(imageUri);
-
-        displayImage(imageUri, uploaded_img_name);
+        imageURI = newImageUri;
+        //alert(imageURI);
+        uploaded_img_name = uploadPhoto();
     }
 
     function cameraError(error) {
@@ -100,13 +108,13 @@
     }
 
             // Below one succeeded
-    function uploadPhoto(imageURI) {
-        alert('in the function');
+    function uploadPhoto() {
+        //alert('in the function');
         var options = new FileUploadOptions();
         options.fileKey="file";
         options.fileName=imageURI.substr(imageURI.lastIndexOf('/')+1);
         options.mimeType="image/jpeg";
-        alert('settings parms');
+        //alert('settings parms');
         //var params = new Object();
         var params = {};
         params.value1 = "img" + Date.now();
@@ -114,7 +122,7 @@
 
         options.params = params;
         options.chunkedMode = false;
-        alert('transferring...');
+        //alert('transferring...');
 
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
@@ -126,7 +134,9 @@
     }
 
     function win(r) {
-        alert(r.response);
+        //alert(r.response);
+        uploaded_img_name = r.response;
+        displayImage(imageURI, uploaded_img_name);
     }
 
     function fail(error) {

@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
-        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+
         <!-- Path to your custom app styles-->
         <link rel="stylesheet" href="css/app.css">
         <link rel="stylesheet" href="css/slidebars-theme.css">
@@ -74,40 +74,40 @@
                         <div class="custom-tab" > 
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a id="document_a" href="#document" aria-controls="document" role="tab" data-toggle="tab">Documents</a></li>
-                                <li role="presentation"><a id="expense_a" href="#expense" aria-controls="expense" role="tab" data-toggle="tab">Expenses</a></li>
+                                <li role="presentation" class="active"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Documents</a></li>
+                                <li role="presentation"><a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a></li>
                                 <li role="presentation"><a href="#reimburse" aria-controls="reimburse" role="tab" data-toggle="tab">Reimburse</a></li>
                             </ul>
                             <!-- Tab panes -->
-                            <!--tab document-->
+                            <!--tab documents-->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="document">
+                                <div role="tabpanel" class="tab-pane active" id="documents">
                                     <!--if there is no document then this this div will show-->
-                                    <div class="no-doc-found" style="display: none;">No Documents or notes found</div>
-
-                                    <!--if there is a document then this div will show just remove display: none css--> 
-                                    <div class="vault-content" style="display: block;">
+                                    <div class="no-doc-found">No Documents or notes found</div>
+                                    <!--if there is a documents then this div will show just remove display: none css--> 
+                                    <div class="vault-content" style="display: none;">
                                         <ul>
-                                            <!--<li>
+                                            <li>
                                                 <a href="#">
                                                     <p>Medical prescription</p>
                                                     <span>December6, 2016-rod</span>
                                                 </a>
-                                            </li>-->
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <p>Medical prescription</p>
+                                                    <span>December6, 2016-rod</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
-                                <!--tab expense-->
-                                <div role="tabpanel" class="tab-pane" id="expense">
+                                
+                                <!--tab expenses-->
+                                <div role="tabpanel" class="tab-pane" id="expenses">
                                     <div class="vault-content">
                                         <ul>
-                                            <!--<li>
-                                                <a href="#">
-                                                    <p>Medical prescription</p>
-                                                    <span>December6, 2016-rod</span>
-                                                </a>
-                                            </li>-->
-                                            <!--<li>
+                                            <li>
                                                 <div class="add-edit-content-wrapper">
                                                     <div id="ex-content-wrapper">
                                                         <a href="#">
@@ -129,11 +129,17 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>-->
-                                            
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    <p>Medical prescription</p>
+                                                    <span>December6, 2016-rod</span>
+                                                </a>
+                                            </li>
                                         </ul>                                    
                                     </div>
                                 </div>
+                                
                                 <!-- tab reimburse -->
                                 <div role="tabpanel" class="tab-pane" id="reimburse">
                                     <div class="reimburse-content">
@@ -183,19 +189,19 @@
                             </a>
                         </div>
                         <div class="click-able-box">
-                            <a href="add-expense.html?page=document">
+                            <a href="add-expense.html">
                                 <h3>Add Note or Document</h3>
-                                <p>Add other health related document for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc</p>
+                                <p>Add other health related documents for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc</p>
                             </a>
                         </div>
-                        <div class="close-big-btn"><a href="expense.html">Close</a></div>
+                        <div class="close-big-btn"><a href="#">Close</a></div>
                     </div>
                 </div>
-                <div>
-                </div>
+
             </div>
             <div class="overlay" data-sidebar-overlay></div>
         </main>
+
 
         <!-- edit Modal start from here -->
         <div class="modal fade edit-modal" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -215,33 +221,28 @@
                 </div>
             </div>
         </div>
-        
+
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/jquery.circliful.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
+        <script type="text/javascript" src="js/cigna-medical.js"></script>
         <script type="text/javascript" src="js/common-details.js"></script>
-        <script type="text/javascript" src="js/expense.js"></script>
-        
         <script>
-            $(document).ready(function () {
-                $("#add-entry").click(function () {
-                    $("#add-entry-screen").show();
-                });
-            });
-                /*$(document).ready(
+            $(document).ready(
                     function () {
                         $("#add-entry").click(function () {
                             $("#add-entry-screen").show();
                         });
-                        $(".ex-content-wrapper").click(function () {
-                            alert('xxx');
-                            //$("#edit-wrapper").show();
-                            $('.edit-content', this).show();
+                        $("#ex-content-wrapper").click(function () {
+                            $("#edit-wrapper").show();
                         });
-                    });*/
-            
+                    });
+
+
+
+
         </script>
     </body>
 </html>

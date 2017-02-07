@@ -47,11 +47,34 @@
                 var exp_cont = '';
                 $.each(result.expense, function(key, row){
                     exp_cont += '<li>\
-                    <a href="#">\
-                        <p>'+row.description+'</p>\
-                        <span>'+row.date+' - '+row.name+'</span>\
-                    </a>\
-                </li>';
+                        <a href="#">\
+                            <p>'+row.description+'</p>\
+                            <span>'+row.date+' - '+row.name+'</span>\
+                        </a>\
+                    </li>';
+                    
+                    /*exp_cont += '<li>\
+                            <div class="add-edit-content-wrapper">\
+                                <div class="ex-content-wrapper">\
+                                        <a href="#">\
+                                                <p>'+row.description+'</p>\
+                                                <span>'+row.date+' - '+row.name+'</span>\
+                                            </a>\
+                                        </div>\
+                                        <div id="edit-wrapper" class="edit-content">\
+                                            <div class="edit-con">\
+                                                <div>\
+                                                    <button class="delete-btn" ><span class="icon-trash-o"></span></button>\
+                                                    <button class="edit-btn" data-toggle="modal" data-target="#edit-modal"><span class="icon-edit"></span></button>\
+                                                </div>\
+                                                <div>\
+                                                    <p>'+row.description+'</p>\
+                                                    <span>'+row.date+' - '+row.name+'</span>\
+                                                </div>\
+                                            </div>\
+                                        </div>\
+                                    </div>\
+                                </li>';*/
                 });
                 $('#expense ul').append(exp_cont);
                 

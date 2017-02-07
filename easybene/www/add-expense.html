@@ -19,6 +19,8 @@
         <link rel="stylesheet" href="css/jquery.circliful.css">
         <link rel="stylesheet" href="css/desktop-style.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
+        
+        <script src="cordova.js"></script>
     </head>
 
     <body>
@@ -53,9 +55,9 @@
                     <div  class="add-entry-screen-wrapper">
                         <div id="expense_success" class="inValidText" style="display: none; position: static; color: blue;">Medical Provider Registered Successfully</div>
                         <div id="error_after_submit" class="inValidText" style="display: none; position: static; color: red;">Please enter required fields</div>
-                        <input type="text" id="page" value="" />
-                        <input type="text" id="expense_image_name_list" value="" />
-                        <input type="text" id="document_image_name_list" value="" />
+                        <input type="hidden" id="page" value="" />
+                        <input type="hidden" id="expense_image_name_list" value="" />
+                        <input type="hidden" id="document_image_name_list" value="" />
                         <div id="expense_div" class="add-content-wrapper" style="display: none; min-height: 426px;">
                             <div id="name_div" class="green-bar-with-arrow">
                                 Rod
@@ -71,8 +73,8 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <ul id="expenseImageFile" class="selected-photo-list">
-                                        <li><img src="images/expense-img.png" alt="expense"/></li>
-                                        <li><img src="images/expense-img.png" alt="expense"/></li>
+                                        <!--<li><img src="images/expense-img.png" alt="expense"/></li>
+                                        <li><img src="images/expense-img.png" alt="expense"/></li>-->
                                     </ul>
                                 </div>
                                 <div class="form-group">                                    
@@ -109,8 +111,8 @@
                                 </div>
                                 <div class="form-group">                                    
                                     <ul id="documentImageFile" class="selected-photo-list">
-                                        <li><img src="images/expense-img.png" alt="note"/></li>
-                                        <li><img src="images/expense-img.png" alt="note"/></li>
+                                        <!--<li><img src="images/expense-img.png" alt="note"/></li>
+                                        <li><img src="images/expense-img.png" alt="note"/></li>-->
                                     </ul>
                                 </div>
                                 <div class="form-group">                                    
@@ -168,10 +170,10 @@
                     <div class="modal-body">
                         <p class="select-photo-text">Select photo options:</p>
                         <ul class="photo-ooptions-list">
-                            <li><a href="javascript: void(0)" onclick="openCamera()">Take photo</a></li>
-                            <li><a href="#">Use Last Photo Taken</a></li>
-                            <li><a href="#">From Library</a></li>
-                            <li><a href="#">From Dropbox</a></li>
+                            <li><a href="javascript: void(0)" class="take_photo">Take photo</a></li>
+                            <!--<li><a href="#">Use Last Photo Taken</a></li>-->
+                            <li><a href="javascript: void(0)"  class="from_library">From Library</a></li>
+                            <!--<li><a href="#">From Dropbox</a></li>-->
                         </ul>
                         
                     </div>

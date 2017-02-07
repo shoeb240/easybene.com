@@ -1581,7 +1581,7 @@ table tr td p {
 textarea {
     resize: none;;
 }
-.modal-content.select-expense-modal {
+.modal-content.select-expense-modal, .edit-modal {
     min-width: 250px;
 }
 .custom-select-style {
@@ -1605,22 +1605,22 @@ textarea {
 .custom-select-style select:focus {
     outline: none;
 }
-.select-expense-modal .modal-footer {
+.select-expense-modal .modal-footer, .edit-modal .modal-footer {
     border: none;
 }
-.select-expense-modal .modal-footer button {
+.modal-footer button {
     padding: 4px 7px;
     border-radius: 0;
     border: none;
 }
-.select-expense-modal .modal-footer button.btn.btn-default {
+.modal-footer button.btn.btn-default {
     background: #f6f7f8;
 }
-.select-expense-modal .modal-footer button.btn.btn-primary {
+.modal-footer button.btn.btn-primary {
     background: #0cd1e3;
     border-color: #0cd1e3;
 }
-.select-expense-modal .modal-footer button.btn.btn-primary:hover {
+.modal-footer button.btn.btn-primary:hover {
     background: #0cb4c3;
     border-color:  #0cb4c3;
 }
@@ -1694,6 +1694,19 @@ textarea {
 .vault-content ul li span {
     font-size: 11px;
 }
+.add-edit-content-wrapper {
+    position: relative;
+}
+.edit-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: 0 auto;
+    z-index: 2;
+    background: #fff;
+}
 .selected-photo-list {
     padding: 0;
 }
@@ -1723,4 +1736,65 @@ textarea {
 .total-ammonut {
     border-top: 1px solid #222;
     padding-top: 5px;
+}
+#edit-wrapper {
+    display: none;
+}
+.edit-con {
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+.edit-con > div {
+    display: table-cell;
+    vertical-align: middle;
+    width: auto;
+}
+.edit-con > div button {
+    border: none;
+    text-align: center;
+    height: 100%;
+    padding: 10px;
+    line-height: 15px;
+}
+.edit-con > div button.delete-btn {
+    background:#ef1a33;
+}
+.edit-con > div button.delete-btn:hover {
+    background:#a10d1e;
+}
+.edit-con > div button.edit-btn {
+    background: #00a3c8;
+}
+.edit-con > div button.edit-btn:hover {
+    background: #21cff7;
+}
+.edit-con > div button  span {
+    font-size: 20px;
+    color: #fff;
+}
+.edit-con > div:first-child {
+    padding-left: 5px;
+    width: 95px;
+}
+.edit-modal .modal-dialog {
+    max-width: 250px;
+}
+.edit-modal .modal-body {
+    text-align: center;
+}
+.edit-modal .modal-body p {
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 16px;
+}
+.edit-modal .modal-body h3 {
+    font-size: 15px;
+    margin: 0;
+}
+.form-group .form-control {
+    border-color: #e7e7e7;
+    border-radius: 0;
+    box-shadow: none;
+    height: 38px;
 }

@@ -7,16 +7,19 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.app.easybene"
         },
-        "cordova-plugin-camera": {
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "com.app.easybene"
         },
         "cordova-plugin-device": {
             "PACKAGE_NAME": "com.app.easybene"
         },
-        "cordova-plugin-console": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.app.easybene"
+        },
+        "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.app.easybene"
         },
         "cordova-plugin-media": {
@@ -25,14 +28,14 @@
         "cordova-plugin-media-capture": {
             "PACKAGE_NAME": "com.app.easybene"
         },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.app.easybene"
-        },
-        "cordova-plugin-file-transfer": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.app.easybene"
         }
     },
     "dependent_plugins": {
+        "cordova-plugin-android-permissions": {
+            "PACKAGE_NAME": "com.app.easybene"
+        },
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.app.easybene"
         }

@@ -44,13 +44,27 @@ class UploadController extends My_Controller_ApiAbstract //Zend_Controller_Actio
         /*echo '<pre>';
         print_r($_FILES);
         print_r($_POST);
-        print_r($_PUT);
-        print_r($_GET);
         echo '</pre>';*/
+        
+        $type = '.jpeg';
+        switch ($_FILES['type']) {
+            case 'image/jpeg':
+                    $type = '.jpeg';
+                brek;
+            case 'image/png':
+                    $type = '.png';
+                brek;
+        }
+        $image_name = $_POST['value1'] . $type;
+        
         try{
-            move_uploaded_file($_FILES["file"]["tmp_name"], APPLICATION_PATH . '/../camera/' . time() . '.jpeg');            
+            $result = move_uploaded_file($_FILES["file"]["tmp_name"], APPLICATION_PATH . '/../camera/' . $image_name);            
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();
+        }
+        
+        if ($result) {
+            echo $image_name;
         }
     }
 

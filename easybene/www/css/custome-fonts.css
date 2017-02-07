@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'apps-font';
-  src:  url('../fonts/apps-font.eot?v831q8');
-  src:  url('../fonts/apps-font.eot?v831q8#iefix') format('embedded-opentype'),
-    url('../fonts/apps-font.ttf?v831q8') format('truetype'),
-    url('../fonts/apps-font.woff?v831q8') format('woff'),
-    url('../fonts/apps-font.svg?v831q8#apps-font') format('svg');
+  src:  url('../fonts/apps-font.eot?j9ifb7');
+  src:  url('../fonts/apps-font.eot?j9ifb7#iefix') format('embedded-opentype'),
+    url('../fonts/apps-font.ttf?j9ifb7') format('truetype'),
+    url('../fonts/apps-font.woff?j9ifb7') format('woff'),
+    url('../fonts/apps-font.svg?j9ifb7#apps-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -98,6 +98,15 @@
 }
 .icon-check:before {
   content: "\f00c";
+}
+.icon-trash-o:before {
+  content: "\f014";
+}
+.icon-edit:before {
+  content: "\f044";
+}
+.icon-pencil-square-o:before {
+  content: "\f044";
 }
 .icon-caret-down:before {
   content: "\f0d7";
