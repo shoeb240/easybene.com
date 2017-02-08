@@ -49,8 +49,25 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
     
     public function getAction()
     {
-        $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "GET - There is no such functionality at this moment");
-        exit;
+        try {
+            $user_id = $this->_getParam('user_id', null);
+            $id = $this->_getParam('id', null);
+            $act = $this->_getParam('act', null);
+
+            if ($act == 'del') {
+                $expenseMapper = new Application_Model_ExpenseMapper();
+                $document_id = $expenseMapper->delete($user_id, $id);
+            } else if ($act == 'save') {
+                $price = $this->_getParam('data', null);
+                $expenseMapper = new Application_Model_ExpenseMapper();
+                $document_id = $expenseMapper->saveExpensePrice($user_id, $id, $price);
+            } else {
+                $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "GET - There is no such functionality at this moment");
+                exit;
+            }
+        } catch (Exception $ex) {
+            echo "Failed" . $ex->getMessage();
+        }
     }
 
     public function postAction()
@@ -68,7 +85,7 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
             $expense_id = $expenseMapper->saveExpense($user_id, $name, $expense_type, $description, $date, $amount, $additional_details);
             
             $image_list = $this->_getParam('image_list', null);
-            $image_arr = explode(',', $image_list);
+            $image_arr = explode(',', trim($image_list, ","));
             
             foreach($image_arr as $image) {
                 $expenseImageMapper = new Application_Model_ExpenseImageMapper();

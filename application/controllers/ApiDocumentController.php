@@ -34,8 +34,21 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
     
     public function getAction()
     {
-        $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "GET - There is no such functionality at this moment");
-        exit;
+        try {
+            $user_id = $this->_getParam('user_id', null);
+            $id = $this->_getParam('id', null);
+            $act = $this->_getParam('act', null);
+
+            if ($act == 'del') {
+                $documentMapper = new Application_Model_DocumentMapper();
+                $document_id = $documentMapper->delete($user_id, $id);
+            } else {
+                $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "GET - There is no such functionality at this moment");
+                exit;
+            }
+        } catch (Exception $ex) {
+            echo "Failed" . $ex->getMessage();
+        }
     }
 
     public function postAction()
@@ -50,7 +63,7 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
             $document_id = $documentMapper->saveDocument($user_id, $name, $description, $additional_details);
 
             $image_list = $this->_getParam('image_list', null);
-            $image_arr = explode(',', $image_list);
+            $image_arr = explode(',', trim($image_list, ","));
             
             foreach($image_arr as $image) {
                 $documentImageMapper = new Application_Model_DocumentImageMapper();
@@ -74,8 +87,8 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
     public function deleteAction()
     {
         $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "DELETE - There is no such functionality at this moment");
-        exit;
-    }
+                exit;
+            }
     
     protected function getScraperConfig()
     {

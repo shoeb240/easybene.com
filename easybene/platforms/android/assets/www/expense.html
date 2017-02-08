@@ -18,6 +18,69 @@
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
         <link rel="stylesheet" href="css/desktop-style.css">
+        <script>
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
+
+            function show_icons(ths, id){
+                $(".edit-content").css('display', 'none');
+                $(ths).parent().children(".edit-content").css('display', 'block');
+            }
+            
+            function show_edit_modal(id, price){
+                                $("#edit_id").val(id);
+                                $("#edit_price").val(price);
+                                $('#edit-modal').modal('show');
+
+            }
+            
+            function delete_expense(ths, id) {
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-expense/'+username+'/'+token+'/'+id+'/del',
+                    type: 'get',
+                    dataType: 'html',
+                    async: false,
+                    success: function(result) {
+                        $(ths).parents('.add-edit-content-wrapper').css('display', 'none');
+                    },
+                    error: function() {
+                    }
+                });
+            }
+            
+            function delete_document(ths, id) {
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-document/'+username+'/'+token+'/'+id+'/del',
+                    type: 'get',
+                    dataType: 'html',
+                    async: false,
+                    success: function(result) {
+                        $(ths).parents('.add-edit-content-wrapper').css('display', 'none');
+                    },
+                    error: function() {
+                    }
+                });
+            }
+            
+            function save_price() {
+                var id = $('#edit_id').val();
+                var price = $('#edit_price').val();
+                
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-expense/'+username+'/'+token+'/'+id+'/save/'+price,
+                    type: 'get',
+                    dataType: 'html',
+                    async: false,
+                    success: function(result) {
+                        //$('#edit-modal').modal('hide');
+                        location.href = 'expense.html?page=expense'
+                    },
+                    error: function(){
+                        
+                    }
+                });
+            }
+        </script>
     </head>
     <body>
 
@@ -88,12 +151,6 @@
                                     <!--if there is a document then this div will show just remove display: none css--> 
                                     <div class="vault-content" style="display: block;">
                                         <ul>
-                                            <!--<li>
-                                                <a href="#">
-                                                    <p>Medical prescription</p>
-                                                    <span>December6, 2016-rod</span>
-                                                </a>
-                                            </li>-->
                                         </ul>
                                     </div>
                                 </div>
@@ -101,36 +158,6 @@
                                 <div role="tabpanel" class="tab-pane" id="expense">
                                     <div class="vault-content">
                                         <ul>
-                                            <!--<li>
-                                                <a href="#">
-                                                    <p>Medical prescription</p>
-                                                    <span>December6, 2016-rod</span>
-                                                </a>
-                                            </li>-->
-                                            <!--<li>
-                                                <div class="add-edit-content-wrapper">
-                                                    <div id="ex-content-wrapper">
-                                                        <a href="#">
-                                                            <p>Medical prescription</p>
-                                                            <span>December6, 2016-rod</span>
-                                                        </a>
-                                                    </div>
-                                                    <div id="edit-wrapper" class="edit-content">
-                                                        <div class="edit-con">
-                                                            <div>
-                                                                <button class="delete-btn" ><span class="icon-trash-o"></span></button>
-                                                                <button class="edit-btn" data-toggle="modal" data-target="#edit-modal"><span class="icon-edit"></span></button>
-                                                            </div>
-                                                            <div>
-                                                                <p>Edit</p>
-                                                                <span>December6, 2016-rod</span>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>-->
-                                            
                                         </ul>                                    
                                     </div>
                                 </div>
@@ -205,12 +232,13 @@
                         <h3>Expense Recorded</h3>
                         <p>Include one space before the opening brace of declaration blocks for legibility.Include one space before the opening brace of declaration blocks for legibility.</p>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="$20.00">
+                            <input id="edit_id" type="text" value="">
+                            <input id="edit_price" type="text" class="form-control" placeholder="$20.00">
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary" onclick="save_price()">Save changes</button>
                     </div>
                 </div>
             </div>
@@ -225,23 +253,87 @@
         <script type="text/javascript" src="js/expense.js"></script>
         
         <script>
+        function prepareExpenseData() {
+        
+        $.ajax({
+            url: 'https://easybene.com/index.php/api-expense/'+username+'/'+token,
+            type: "GET",
+            dataType: 'json',
+            async: false,
+            success: function(result) {
+                var exp_cont = '';
+                $.each(result.expense, function(key, row){
+                    /*exp_cont += '<li>\
+                        <a href="#">\
+                            <p>'+row.description+'</p>\
+                            <span>'+row.date+' - '+row.name+'</span>\
+                        </a>\
+                    </li>';*/
+                    
+                    exp_cont += '<li>\
+                            <div class="add-edit-content-wrapper">\
+                                <div class="ex-content-wrapper" onclick="show_icons(this)">\
+                                    <a href="javascript: void(0)" id="orig_row">\
+                                        <p>'+row.description+'</p>\
+                                        <span>'+row.date+' - '+row.name+'</span>\
+                                    </a>\
+                                </div>\
+                                <div id="edit-wrapper" class="edit-content">\
+                                    <div class="edit-con">\
+                                        <div>\
+                                            <button class="delete-btn" onclick="delete_expense(this, \''+row.id+'\')"><span class="icon-trash-o"></span></button>\
+                                            <button class="edit-btn"  onclick="show_edit_modal(\''+row.id+'\', \''+row.amount+'\')"><span class="icon-edit"></span></button>\
+                                        </div>\
+                                        <div>\
+                                            <p>'+row.description+'</p>\
+                                            <span>'+row.date+' - '+row.name+'</span>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </li>';
+                });
+                $('#expense ul').append(exp_cont);
+                
+                var doc_cont = '';
+                $.each(result.document, function(key, row){
+                    doc_cont += '<li>\
+                            <div class="add-edit-content-wrapper">\
+                                <div class="ex-content-wrapper" onclick="show_icons(this)">\
+                                    <a href="javascript: void(0)" id="orig_row">\
+                                        <p>'+row.description+'</p>\
+                                        <span>'+row.date+' - '+row.name+'</span>\
+                                    </a>\
+                                </div>\
+                                <div id="edit-wrapper" class="edit-content">\
+                                    <div class="edit-con">\
+                                        <div>\
+                                            <button class="delete-btn" onclick="delete_document(this, \''+row.id+'\')"><span class="icon-trash-o"></span></button>\
+                                        </div>\
+                                        <div>\
+                                            <p>'+row.description+'</p>\
+                                            <span>'+row.date+' - '+row.name+'</span>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </li>';
+                });
+                $('#document ul').append(doc_cont);
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                /*console.log(xhr);
+                console.log(ajaxOptions);
+                console.log(thrownError);*/
+            },
+        });
+    }
+    
             $(document).ready(function () {
                 $("#add-entry").click(function () {
                     $("#add-entry-screen").show();
                 });
             });
-                /*$(document).ready(
-                    function () {
-                        $("#add-entry").click(function () {
-                            $("#add-entry-screen").show();
-                        });
-                        $(".ex-content-wrapper").click(function () {
-                            alert('xxx');
-                            //$("#edit-wrapper").show();
-                            $('.edit-content', this).show();
-                        });
-                    });*/
-            
         </script>
     </body>
 </html>

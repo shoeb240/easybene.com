@@ -107,4 +107,17 @@ class Application_Model_DocumentMapper
         return $this->getTable()->insert($data);
     }
     
+    /**
+     * Delete document
+     *
+     * @param  int $userId
+     * @param  int $id
+     * @return int 
+     */
+    public function delete($userId, $id)
+    {
+        $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $id);
+        return $this->getTable()->delete($where);
+        
+    }
 }

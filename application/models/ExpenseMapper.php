@@ -116,4 +116,32 @@ class Application_Model_ExpenseMapper
         return $this->getTable()->insert($data);
     }
     
+    /**
+     * Save user
+     *
+     * @param  Application_Model_User $scrape
+     * @return int
+     */
+    public function saveExpensePrice($user_id, $id, $price)
+    {   echo $user_id .'='. $id .'='. $price;
+    
+        $data['amount'] = $price;
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
+        
+        return $this->getTable()->update($data, $where);
+    }
+    
+    /**
+     * Delete document
+     *
+     * @param  int $userId
+     * @param  int $id
+     * @return int 
+     */
+    public function delete($userId, $id)
+    {
+        $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $id);
+        return $this->getTable()->delete($where);
+        
+    }
 }
