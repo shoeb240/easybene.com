@@ -27,6 +27,10 @@
                 $(ths).parent().children(".edit-content").css('display', 'block');
             }
             
+            function remove_icons(ths, id){
+                $(ths).parent().children(".edit-content").css('display', 'none');
+            }
+            
             function show_edit_modal(id, price){
                                 $("#edit_id").val(id);
                                 $("#edit_price").val(price);
@@ -272,7 +276,7 @@
                                     </a>\
                                 </div>\
                                 <a class="click-arrow" href="add-expense.html?page=expense&id='+row.id+'"><span class="icon-uniE762"></span></a>\
-                                <div id="edit-wrapper" class="edit-content">\
+                                <div id="edit-wrapper" class="edit-content" onclick="remove_icons(this)">\
                                     <div class="edit-con">\
                                         <div>\
                                             <button class="delete-btn" onclick="delete_expense(this, \''+row.id+'\')"><span class="icon-trash-o"></span></button>\
@@ -300,9 +304,9 @@
                                     </a>\
                                 </div>\
                                 <a class="click-arrow" href="add-expense.html?page=document&id='+row.id+'"><span class="icon-uniE762"></span></a>\
-                                <div id="edit-wrapper" class="edit-content">\
+                                <div id="edit-wrapper" class="edit-content" onclick="remove_icons(this)">\
                                     <div class="edit-con">\
-                                        <div>\
+                                        <div style="width: 50px">\
                                             <button class="delete-btn" onclick="delete_document(this, \''+row.id+'\')"><span class="icon-trash-o"></span></button>\
                                         </div>\
                                         <div>\
