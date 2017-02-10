@@ -51,7 +51,7 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
     {
         try {
             $user_id = $this->_getParam('user_id', null);
-            $id = $this->_getParam('id', null);
+            $expenseId = $this->_getParam('id', null);
             $act = $this->_getParam('act', null);
 
             if ($act == 'del') {
@@ -61,6 +61,14 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
                 $price = $this->_getParam('data', null);
                 $expenseMapper = new Application_Model_ExpenseMapper();
                 $document_id = $expenseMapper->saveExpensePrice($user_id, $id, $price);
+            } else if ($act == 'info') {
+                $expenseMapper = new Application_Model_ExpenseMapper();
+                $arr['expense'] = $expenseMapper->getExpense($expenseId);
+                
+                $expenseImageMapper = new Application_Model_ExpenseImageMapper();
+                $arr['expense_image_arr'] = $expenseImageMapper->getExpenseImage($user_id, $expenseId);
+                
+                echo json_encode($arr);
             } else {
                 $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "GET - There is no such functionality at this moment");
                 exit;

@@ -32,11 +32,18 @@ class Application_Model_DocumentMapper
     public function getDocument($documentId)
     {
         $select = $this->getTable()->select();
-        $select->from('document', array('*'))
-               ->where('id = ?', $documentId);
+        $select->where('id = ?', $documentId);
         $row = $this->getTable()->fetchRow($select);
         
-        return $row;
+        $document = array();
+        $document['id'] = $row->id;
+        $document['user_id'] = $row->user_id;
+        $document['name'] = $row->name;
+        $document['description'] = $row->description;
+        $document['date'] = date("m-d-Y", strtotime($row->date));
+        $document['additional_details'] = $row->additional_details;
+        
+        return $document;
     }
     
     public function getDocumentByUser($userId)

@@ -7,11 +7,12 @@
     $(window).load(function(){
         if (username && token) {
             var page = getQueryString('page');
+            var id = getQueryString('id');
             $('#name_div').html(username);
             $('#name').val(username);
             $('#name_document_div').html(username);
             $('#name_document').val(username);
-            selectExpenseNote(page);
+            selectExpenseNote(page, id);
         } else {
             ShowLogin();
         }
@@ -35,15 +36,17 @@
         location.href = 'index.html';
     }
     
-    function selectExpenseNote(page) {
+    function selectExpenseNote(page, id) {
         if (page == 'document') {
             $('#note_div').css('display', 'block');
             $('#expense_div').css('display', 'none');
             $('#page').val('document');
+            populate_document_data(id)
         } else {
             $('#note_div').css('display', 'none');
             $('#expense_div').css('display', 'block');
             $('#page').val('expense');
+            populate_expense_data(id)
         }
     }
     
@@ -237,6 +240,60 @@
     function show_ok(ths)
     {
         $("#error_after_submit").css("display", "none");
+    }
+    
+    function populate_expense_data(expense_id)
+    {
+        $.ajax({
+            url: 'https://easybene.com/index.php/api-expense/'+username+'/'+token+'/'+expense_id+'/info',
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(result){
+                var expense = result.expense;
+                var expense_image_arr = result.expense_image_arr;
+                $('#expense_type').val(expense.expense_type);
+                $('#expense_type_prompt').html(expense.expense_type);
+                $('#description').val(expense.description);
+                $('#datepicker').val(expense.date);
+                $('#amount').val(expense.amount);
+                $('#additional_details').val(expense.additional_details);
+                
+                $.each(expense_image_arr, function(key, each_image) {
+                    elem = '<li><img src="https://easybene.com/camera/'+each_image.image+'" alt="expense"/></li>';
+                    $("#expenseImageFile").append(elem);
+                    $("#expense_image_name_list").val($("#expense_image_name_list").val() + ',' + each_image.image);
+                });
+            },
+            error: function(){
+
+            }
+        });
+    }
+    
+    function populate_document_data(document_id)
+    {
+        $.ajax({
+            url: 'https://easybene.com/index.php/api-document/'+username+'/'+token+'/'+document_id+'/info',
+            type: 'GET',
+            dataType: 'json',
+            async: false,
+            success: function(result){
+                var document = result.document;
+                var document_image_arr = result.document_image_arr;
+                $('#description_document').val(document.description);
+                $('#additional_details_document').val(document.additional_details);
+                
+                $.each(document_image_arr, function(key, each_image) {
+                    elem = '<li><img src="https://easybene.com/camera/'+each_image.image+'" alt="document"/></li>';
+                    $("#documentImageFile").append(elem);
+                    $("#document_image_name_list").val($("#document_image_name_list").val() + ',' + each_image.image);
+                });
+            },
+            error: function(){
+
+            }
+        });
     }
 
     function SaveExpense() {

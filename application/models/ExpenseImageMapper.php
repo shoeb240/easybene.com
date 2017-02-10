@@ -29,7 +29,7 @@ class Application_Model_ExpenseImageMapper
         return $this->_dbTable;
     }
     
-    public function getExpenseImage($expenseId, $userId)
+    public function getExpenseImage($userId, $expenseId)
     {
         $select = $this->getTable()->select();
         $select->from('expense_image', array('*'))

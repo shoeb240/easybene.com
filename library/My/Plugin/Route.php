@@ -47,8 +47,8 @@ class My_Plugin_Route extends Zend_Controller_Plugin_Abstract
                                   array('controller' => 'api-expense', 'action' => 'index', 'id' => null, 'act' => null, 'data' => null));
         $router->addRoute('indexApiExpense', $route);
         
-        $route = new Zend_Controller_Router_Route('api-document/:username/:token/:id/:act',
-                                  array('controller' => 'api-document', 'action' => 'index', 'id' => null, 'act' => null));
+        $route = new Zend_Controller_Router_Route('api-document/:username/:token/:id/:act/:data',
+                                  array('controller' => 'api-document', 'action' => 'index', 'id' => null, 'act' => null, 'data' => null));
         $router->addRoute('indexApiDocument', $route);
         
         

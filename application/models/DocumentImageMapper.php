@@ -29,7 +29,7 @@ class Application_Model_DocumentImageMapper
         return $this->_dbTable;
     }
     
-    public function getDocumentImage($documentId, $userId)
+    public function getDocumentImage($userId, $documentId)
     {
         $select = $this->getTable()->select();
         $select->from('document_image', array('*'))

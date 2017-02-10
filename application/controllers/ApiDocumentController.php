@@ -36,12 +36,24 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
     {
         try {
             $user_id = $this->_getParam('user_id', null);
-            $id = $this->_getParam('id', null);
+            $documentId = $this->_getParam('id', null);
             $act = $this->_getParam('act', null);
 
             if ($act == 'del') {
                 $documentMapper = new Application_Model_DocumentMapper();
                 $document_id = $documentMapper->delete($user_id, $id);
+            } else if ($act == 'save') {
+                $price = $this->_getParam('data', null);
+                $documentMapper = new Application_Model_DocumentMapper();
+                $document_id = $documentMapper->saveDocumentPrice($user_id, $id, $price);
+            } else if ($act == 'info') {
+                $documentMapper = new Application_Model_DocumentMapper();
+                $arr['document'] = $documentMapper->getDocument($documentId);
+                
+                $documentImageMapper = new Application_Model_DocumentImageMapper();
+                $arr['document_image_arr'] = $documentImageMapper->getDocumentImage($user_id, $documentId);
+                
+                echo json_encode($arr);
             } else {
                 $this->_error(My_Controller_ApiAbstract::ERROR_NOTFOUND, "GET - There is no such functionality at this moment");
                 exit;

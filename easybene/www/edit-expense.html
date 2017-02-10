@@ -56,8 +56,8 @@
                         <div id="expense_success" class="inValidText" style="display: none; position: static; color: blue;">Medical Provider Registered Successfully</div>
                         <div id="error_after_submit" class="inValidText" style="display: none; position: static; color: red;">Please enter required fields</div>
                         <input type="hidden" id="page" value="" />
-                        <input type="text" id="expense_image_name_list" value="" />
-                        <input type="text" id="document_image_name_list" value="" />
+                        <input type="hidden" id="expense_image_name_list" value="" />
+                        <input type="hidden" id="document_image_name_list" value="" />
                         <div id="expense_div" class="add-content-wrapper" style="display: none; min-height: 426px;">
                             <div id="name_div" class="green-bar-with-arrow">
                                 Rod
@@ -65,7 +65,7 @@
                             <input type="hidden" id="name" value="" />
                             <div class="green-bar-with-arrow light-green">
                                 <a id="expense_type_prompt" href="#"  data-toggle="modal" data-target="#select-expense">Select Expense Type</a>
-                                <input type="hidden" id="expense_type" value="" />
+                                <input type="hidden" name="expense_type" id="expense_type" value="" />
                             </div>
                             <div class="custom-add-from-content">
                                 <div class="form-group">                                    
@@ -205,6 +205,36 @@
             $(function () {
                 $("#datepicker").datepicker();
             });
+            
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem("token");
+    
+            var getQueryString = function ( field ) {
+                var href = window.location.href;
+                var reg = new RegExp( '[?&]' + field + '=([^&#]*)', 'i' );
+                var string = reg.exec(href);
+                return string ? string[1] : null;
+            };
+    
+            function populate_data()
+            {
+                var expense_id = getQueryString('id');
+
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-expense/'+username+'/'+token+'/'+expense_id+'/info',
+                    type: 'GET',
+                    dataType: 'json',
+                    async: true,
+                    success: function(result){
+                        alert(result..description);
+                    },
+                    error: function(){
+                        
+                    }
+                });
+            }
+            
+            populate_data();
         </script>
         
     </body>

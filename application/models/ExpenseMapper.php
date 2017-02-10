@@ -32,11 +32,20 @@ class Application_Model_ExpenseMapper
     public function getExpense($expenseId)
     {
         $select = $this->getTable()->select();
-        $select->from('expense', array('*'))
-               ->where('id = ?', $expenseId);
+        $select->where('id = ?', $expenseId);
         $row = $this->getTable()->fetchRow($select);
         
-        return $row;
+        $expense = array();
+        $expense['id'] = $row->id;
+        $expense['user_id'] = $row->user_id;
+        $expense['name'] = $row->name;
+        $expense['expense_type'] = $row->expense_type;
+        $expense['description'] = $row->description;
+        $expense['date'] = date("m-d-Y", strtotime($row->date));
+        $expense['amount'] = $row->amount;
+        $expense['additional_details'] = $row->additional_details;
+        
+        return $expense;
     }
     
     public function getExpenseByUser($userId)

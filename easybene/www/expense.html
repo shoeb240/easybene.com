@@ -263,13 +263,6 @@
             success: function(result) {
                 var exp_cont = '';
                 $.each(result.expense, function(key, row){
-                    /*exp_cont += '<li>\
-                        <a href="#">\
-                            <p>'+row.description+'</p>\
-                            <span>'+row.date+' - '+row.name+'</span>\
-                        </a>\
-                    </li>';*/
-                    
                     exp_cont += '<li>\
                             <div class="add-edit-content-wrapper">\
                                 <div class="ex-content-wrapper" onclick="show_icons(this)">\
@@ -290,6 +283,7 @@
                                         </div>\
                                     </div>\
                                 </div>\
+                                <div><a href="add-expense.html?page=expense&id='+row.id+'">Edit</a></div>\
                             </div>\
                         </li>';
                 });
@@ -316,6 +310,7 @@
                                         </div>\
                                     </div>\
                                 </div>\
+                                <div><a href="add-expense.html?page=document&id='+row.id+'">Edit</a></div>\
                             </div>\
                         </li>';
                 });
