@@ -1489,13 +1489,9 @@ table tr td p {
     padding: 7px;
     text-align: center;
     font-size: 20px;
-    border-radius: 4px;
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    z-index: 0; 
+    border-radius: 4px;    
     cursor: pointer;
+    margin-top: 30px;
 }
 .add-content-wrapper {
     position: relative;
@@ -1549,11 +1545,7 @@ table tr td p {
     font-size: 20px;
     border-radius: 4px;
     cursor: pointer;
-    margin-top: 40px;
-    position: absolute;
-    bottom: 52px;
-    left: 0;
-    right: 0;
+    margin-top: 40px;  
 }
 .submit-big-btn:hover {
     background: #0cb4c3;
@@ -1671,20 +1663,15 @@ textarea {
 .vault-content ul li a:hover {
     background: rgba(247, 247, 247, 0.6);
 } 
-.vault-content ul li a:after {
+/*.vault-content ul li a:after {
     content: "\e762";
     font-family: "apps-font" !important;
     font-style: normal;
     font-variant: normal;
     font-weight: normal;
     line-height: 1;
-    text-transform: none;
-    position: absolute;
-    right: 10px;
-    top: 25%;
-    font-size: 24px;
-    color: #00a3c8;
-}
+    
+}*/
 .vault-content ul li p {
     margin-bottom: 0;
     color: #222;
@@ -1696,6 +1683,23 @@ textarea {
 }
 .add-edit-content-wrapper {
     position: relative;
+}
+.add-edit-content-wrapper .click-arrow {
+    text-transform: none;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    bottom: 5px;
+    font-size: 24px;
+    color: #00a3c8;        
+    border-left: 1px solid #ccc;
+    line-height: 25px;
+}
+.add-edit-content-wrapper .click-arrow span {
+    font-size: 20px;
+}
+.add-edit-content-wrapper .ex-content {
+    max-width: 82%;
 }
 .edit-content {
     position: absolute;
