@@ -115,15 +115,35 @@ class Application_Model_DocumentMapper
     }
     
     /**
+     * Update document
+     *
+     * @param  Application_Model_User $scrape
+     * @return int
+     */
+    public function updateDocument($user_id, $id, $name, $description, $additional_details)
+    {
+        $data = array(
+            'name' => $name . 'THIS',
+            'description' => $description,
+            'additional_details' => $additional_details,
+            'date' => date('Y-m-d'),
+        );
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
+        
+        return $this->getTable()->update($data, $where);
+    }
+    
+    /**
      * Delete document
      *
      * @param  int $userId
      * @param  int $id
      * @return int 
      */
-    public function delete($userId, $id)
+    public function delete($user_id, $id)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $id);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
+        
         return $this->getTable()->delete($where);
         
     }

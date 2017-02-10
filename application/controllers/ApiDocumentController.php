@@ -36,7 +36,7 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
     {
         try {
             $user_id = $this->_getParam('user_id', null);
-            $documentId = $this->_getParam('id', null);
+            $document_id = $this->_getParam('id', null);
             $act = $this->_getParam('act', null);
 
             if ($act == 'del') {
@@ -48,10 +48,10 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
                 $document_id = $documentMapper->saveDocumentPrice($user_id, $id, $price);
             } else if ($act == 'info') {
                 $documentMapper = new Application_Model_DocumentMapper();
-                $arr['document'] = $documentMapper->getDocument($documentId);
+                $arr['document'] = $documentMapper->getDocument($document_id);
                 
                 $documentImageMapper = new Application_Model_DocumentImageMapper();
-                $arr['document_image_arr'] = $documentImageMapper->getDocumentImage($user_id, $documentId);
+                $arr['document_image_arr'] = $documentImageMapper->getDocumentImage($user_id, $document_id);
                 
                 echo json_encode($arr);
             } else {
@@ -67,13 +67,23 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
     {
         try {
             $user_id = $this->_getParam('user_id', null);
+            $document_id = $this->_getParam('id', null);
+            
             $name = $this->_getParam('name', null);
             $description = $this->_getParam('description', null);
             $additional_details = $this->_getParam('additional_details', null);
 
-            $documentMapper = new Application_Model_DocumentMapper();
-            $document_id = $documentMapper->saveDocument($user_id, $name, $description, $additional_details);
-
+            if ($document_id) {
+                $documentMapper = new Application_Model_DocumentMapper();
+                $documentMapper->updateDocument($user_id, $document_id, $name, $description, $additional_details);
+                
+                $documentImageMapper = new Application_Model_DocumentImageMapper();
+                $documentImageMapper->delete($user_id, $document_id);
+            } else {
+                $documentMapper = new Application_Model_DocumentMapper();
+                $document_id = $documentMapper->saveDocument($user_id, $name, $description, $additional_details);
+            }
+            
             $image_list = $this->_getParam('image_list', null);
             $image_arr = explode(',', trim($image_list, ","));
             

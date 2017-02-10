@@ -70,4 +70,20 @@ class Application_Model_ExpenseImageMapper
         return $this->getTable()->insert($data);
     }
     
+    /**
+     * Delete expense
+     *
+     * @param  int $userId
+     * @param  int $id
+     * @return int 
+     */
+    public function delete($user_id, $id)
+    {
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND expense_id = ' . $id);
+
+        return $this->getTable()->delete($where);
+        
+    }
+
+    
 }

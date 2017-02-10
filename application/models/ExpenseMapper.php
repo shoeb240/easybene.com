@@ -141,15 +141,37 @@ class Application_Model_ExpenseMapper
     }
     
     /**
-     * Delete document
+     * Update expense
+     *
+     * @param  Application_Model_User $scrape
+     * @return int
+     */
+    public function updateExpense($user_id, $id, $name, $expense_type, $description, $date, $amount, $additional_details)
+    {
+        $data = array(
+            'name' => $name,
+            'expense_type' => $expense_type,
+            'description' => $description,
+            'date' => date('Y-m-d', strtotime($date)),
+            'amount' => $amount,
+            'additional_details' => $additional_details,
+        );
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
+        
+        return $this->getTable()->update($data, $where);
+    }
+    
+    /**
+     * Delete expense
      *
      * @param  int $userId
      * @param  int $id
      * @return int 
      */
-    public function delete($userId, $id)
+    public function delete($user_id, $id)
     {
-        $where = $this->getTable()->getAdapter()->quoteInto('id = ?', $id);
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
+        
         return $this->getTable()->delete($where);
         
     }

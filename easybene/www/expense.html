@@ -280,10 +280,10 @@
                                         <div>\
                                             <p>'+row.description+'</p>\
                                             <span>'+row.date+' - '+row.name+'</span>\
+                                            <div style="float: right"><a href="add-expense.html?page=expense&id='+row.id+'">Edit</a></div>\
                                         </div>\
                                     </div>\
                                 </div>\
-                                <div><a href="add-expense.html?page=expense&id='+row.id+'">Edit</a></div>\
                             </div>\
                         </li>';
                 });
@@ -306,11 +306,11 @@
                                         </div>\
                                         <div>\
                                             <p>'+row.description+'</p>\
-                                            <span>'+row.date+' - '+row.name+'</span>\
+                                            <span>'+row.date+' - '+row.name+'</span>\\n\
+                                            <div style="float: right"><a href="add-expense.html?page=document&id='+row.id+'">Edit</a></div>\
                                         </div>\
                                     </div>\
                                 </div>\
-                                <div><a href="add-expense.html?page=document&id='+row.id+'">Edit</a></div>\
                             </div>\
                         </li>';
                 });

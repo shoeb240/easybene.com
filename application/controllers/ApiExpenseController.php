@@ -82,6 +82,8 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
     {
         try {
             $user_id = $this->_getParam('user_id', null);
+            $expense_id = $this->_getParam('id', null);
+            
             $name = $this->_getParam('name', null);
             $expense_type = $this->_getParam('expense_type', null);
             $description = $this->_getParam('description', null);
@@ -89,8 +91,16 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
             $amount = $this->_getParam('amount', null);
             $additional_details = $this->_getParam('additional_details', null);
 
-            $expenseMapper = new Application_Model_ExpenseMapper();
-            $expense_id = $expenseMapper->saveExpense($user_id, $name, $expense_type, $description, $date, $amount, $additional_details);
+            if ($expense_id) {
+                $expenseMapper = new Application_Model_ExpenseMapper();
+                $expenseMapper->updateExpense($user_id, $expense_id, $name, $expense_type, $description, $date, $amount, $additional_details);
+                
+                $expenseImageMapper = new Application_Model_ExpenseImageMapper();
+                $expenseImageMapper->delete($user_id, $expense_id);
+            } else {
+                $expenseMapper = new Application_Model_ExpenseMapper();
+                $expense_id = $expenseMapper->saveExpense($user_id, $name, $expense_type, $description, $date, $amount, $additional_details);
+            }
             
             $image_list = $this->_getParam('image_list', null);
             $image_arr = explode(',', trim($image_list, ","));

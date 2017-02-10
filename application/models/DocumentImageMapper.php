@@ -70,4 +70,18 @@ class Application_Model_DocumentImageMapper
         return $this->getTable()->insert($data);
     }
     
+    /**
+     * Delete document
+     *
+     * @param  int $userId
+     * @param  int $id
+     * @return int 
+     */
+    public function delete($user_id, $id)
+    {
+        $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND document_id = ' . $id);
+
+        return $this->getTable()->delete($where);
+        
+    }
 }

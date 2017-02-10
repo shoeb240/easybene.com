@@ -253,7 +253,9 @@
                 var expense = result.expense;
                 var expense_image_arr = result.expense_image_arr;
                 $('#expense_type').val(expense.expense_type);
-                $('#expense_type_prompt').html(expense.expense_type);
+                if (expense.expense_type) {
+                    $('#expense_type_prompt').html(expense.expense_type);
+                }
                 $('#description').val(expense.description);
                 $('#datepicker').val(expense.date);
                 $('#amount').val(expense.amount);
@@ -299,6 +301,7 @@
     function SaveExpense() {
         var username = window.localStorage.getItem('username');
         var token = window.localStorage.getItem("token");
+        var id = getQueryString('id');
 
         var name = $('#name').val();
         var expense_type = $('#expense_type').val();
@@ -308,11 +311,17 @@
         var additional_details = $('#additional_details').val();
         var image_list = $("#expense_image_name_list").val();
 
+        var url = '';
+        if (id) {
+            url = 'https://easybene.com/index.php/api-expense/'+username+'/'+token+'/'+id;
+        } else {
+            url = 'https://easybene.com/index.php/api-expense/'+username+'/'+token;
+        }
         $.ajax({
-            url: 'https://easybene.com/index.php/api-expense/'+username+'/'+token,
+            url: url,
             type: "POST",
             data: 'name=' + name + '&expense_type=' + expense_type + '&description=' + description + '&date=' + date + '&amount=' + amount + '&additional_details=' + additional_details + '&image_list=' + image_list,
-            dataType: 'json',
+            dataType: 'html',
             async: false,
             success: function (result) {
                 location.href = "expense.html?page=expense";
@@ -325,17 +334,24 @@
     function SaveDocument() {
         var username = window.localStorage.getItem('username');
         var token = window.localStorage.getItem("token");
+        var id = getQueryString('id');
 
         var name_document = $('#name_document').val();
         var description_document = $('#description_document').val();
         var additional_details_document = $('#additional_details_document').val();
         var image_list = $("#document_image_name_list").val();
 
+        var url = '';
+        if (id) {
+            url = 'https://easybene.com/index.php/api-document/'+username+'/'+token+'/'+id;
+        } else {
+            url = 'https://easybene.com/index.php/api-document/'+username+'/'+token;
+        }
         $.ajax({
-            url: 'https://easybene.com/index.php/api-document/'+username+'/'+token,
+            url: url,
             type: "POST",
             data: 'name=' + name_document + '&description=' + description_document + '&additional_details=' + additional_details_document + '&image_list=' + image_list,
-            dataType: 'json',
+            dataType: 'html',
             async: false,
             success: function (result) {
                 location.href = "expense.html";
