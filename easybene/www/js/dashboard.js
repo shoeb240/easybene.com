@@ -179,9 +179,12 @@
             async: false,
             success: function(result) {
                 //console.log(result);
-                graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible, result.medical_data_exists);
-                graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible, result.dental_data_exists);
-                graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible, result.vision_data_exists);
+                graph(result.medical_percent, result.medical_deductible_met, medical_site, 'medical', result.medical_deductible, result.medical_data_exists, '', '');
+                graph(result.dental_percent, result.dental_deductible_met, dental_site, 'dental', result.dental_deductible, result.dental_data_exists, '', '');
+                graph(result.vision_percent, result.vision_deductible_met, vision_site, 'vision', result.vision_deductible, result.vision_data_exists, '', '');
+                graph(result.funds_percent, result.funds_denominator, funds_site, 'funds', result.funds_nominator, result.funds_data_exists, '', '');
+                graph(result.day_care_FSA_percent, result.day_care_FSA_denominator, funds_site, 'day_care_FSA', result.day_care_FSA_nominator, result.day_care_FSA_data_exists, 'Reimbursed', 'Annual Election');
+                graph(result.health_care_FSA_percent, result.health_care_FSA_denominator, funds_site, 'health_care_FSA', result.health_care_FSA_nominator, result.health_care_FSA_data_exists, 'Reimbursed', 'Annual Election');
                 
                 if (!funds_site || funds_site == 'null' || funds_site == 'undefined') {
                     $("#summary_link_funds").css("color", "#f8c572");
@@ -201,8 +204,15 @@
         
     }
     
-    function graph(percent, deductible_met, site, site_type, deductible, data_exists)
+    function graph(percent, deductible_met, site, site_type, deductible, data_exists, first_heading, second_heading)
     {
+        if (!first_heading) {
+            first_heading = 'Deductible';
+        }
+        if (!second_heading) {
+            second_heading = 'Total Spent';
+        }
+        
         var graph_id = "#"+site_type+"-circle";
         var image_id = "#"+site_type+"_image";
         var fontColor = "#14efef";
@@ -218,7 +228,7 @@
             var site_lower = site.toLowerCase();
             var image_name = site_lower + "_logo.jpg";
             if (data_exists === 'yes') {
-                $(graph_id).parent().children("p.status-text").html("Deductible <span>$" + deductible + "</span><br />Total Spent <span>$" + deductible_met + "</span>");
+                $(graph_id).parent().children("p.status-text").html(first_heading + " <span>$" + deductible + "</span><br />" + second_heading + " <span>$" + deductible_met + "</span>");
                 $(graph_id).parent().removeClass("orange-graph");
                 $("#summary_link_" + site_type).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html">' + site_type + '</a>');
                 $(image_id).html('<a style="color: #14efef" href="' + site + '-' + site_type + '.html"><img style="height: 40px; border: 1px solid grey; padding: 2px; margin: 7px;" src="images/' + image_name + '" alt="" /></a>');
