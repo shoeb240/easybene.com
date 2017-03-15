@@ -7,174 +7,177 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <title>My App</title>
         <!-- Path to Framework7 Library CSS-->
-        <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
         <!-- Path to your custom app styles-->
-        <link rel="stylesheet" href="css/app.css">
-        <link rel="stylesheet" href="css/slidebars-theme.css">
+
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
         <link rel="stylesheet" href="css/desktop-style.css">
+        <link rel="stylesheet" href="css/app-new-style.css">
     </head>
     <body>
 
-        <!-- Top Navigation Bar -->
-        <div class="sb-navbar sb-slide">
-            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
-            <!--             Left Slidebar control -->
-            <div class="sb-toggle-left">
-                <a href="#" data-sidebar-button>
-                    <span class="navicon-line"></span>
-                    <span class="navicon-line"></span>
-                    <span class="navicon-line"></span>
-                </a>
-            </div>
-            <div class="clearfix"></div>
-            <h2 class="page-title">Insurance Details</h2>
+         <!-- Top Navigation Bar -->
+        <section class="intro-setion dashboard-dasktop">
+            <div class="intro-content">
+                <nav id="navbar-main" class="navbar navbar-inverse affix">
+                    <div class="navbar-header">
+                        <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">                           
+                            <img src="images/logo.png" alt="logo" class="gray-logo" />
+                        </a>
+                        <ul class="top-list">
 
-        </div>
-        <aside data-sidebar>
-            <div  class="">
-                <div class="sb-slidebar sb-left">	
-
-                    <!--                     Lists in Slidebars -->
-                    <ul class="sb-menu">
-                    </ul>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Your main site content in here -->
-        <main>
-            <div id="main-content">
-
-
-                <div class="page-content medical-grap">
-                    <div class="content-block less-margin">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
-                            <li role="presentation" class="active">
-                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
-                                </a>
+                            <li><a href="#"> <i class="fa fa-book" aria-hidden="true"></i> Recommendations</a></li>
+                            <li><a href="expense.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
+                            <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
+                            <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
+                        </ul>
+                        <ul class="navbar-right">    
+                            <li class="profile-pic">
+                                <a href="#" style="background: url('images/pro-pic.jpg')"></a>
                             </li>
-                            <li role="presentation">
-                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
-                            </li>
+                            <li><div class="dropdown">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                                        <span class="top_right_username"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a></li>
+                                        <li><a href="#"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a></li>
+                                        <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> Settings</a></li>
+                                        <li><a  href="#signOutModal" data-toggle="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li> 
                         </ul>
                     </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav visible-xs">    
+                            <li><a href="dashboard.html#dashboard_body"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
 
-                    <div class="id-card content-block">
-                        <!-- Buttons row as tabs controller -->
-                        <div class="buttons-row id-card-tab">
-                            <!-- Link to 1st tab, active -->
-                            <a id="top_tab_link_medical" class="tab-link active button" href="javascript: void(0);">Medical</a>
-                            <!-- Link to 2nd tab -->
-                            <a id="top_tab_link_dental" class="tab-link button" href="javascript: void(0);">Dental</a>
-                            <!-- Link to 3rd tab -->
-                            <a id="top_tab_link_vision" class="tab-link button" href="javascript: void(0);">Vision</a>
-                        </div>
+                        </ul>
+
                     </div>
-
-                    <div class="content-block less-padding">
-
-                        <!--<div class="dropdown">
-                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                Others ID Card
-                                <span class="icon-navicon"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                                <li><a href="Cigna-medical.html">Claim</a></li>
-                                <li><a href="Cigna-medical-deductible.html">Deductible</a></li>
-                            </ul>
-                        </div>-->
-                        
-                        <div class="table-text">
-                            
-                            <div id="claim_div" style="display: block;">
-                                <div class="tbl-header-wrapper">
-                                    <h3>Medical Claims</h3>
-                                    <p class="sub-info">Cigna</p>
-                                </div>
-                                <div class="">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
-
-                                                </span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <th>Date</th>
-                                                <th>For</th>
-                                                <th>Total</th>
-                                                <th>You Pay</th>
-                                                <!--<th>Status</th>-->
-                                            </tr>
-                                        </thead>
-
-                                        <tbody id="claim">
-
-                                        </tbody>
-                                    </table> 
-                                </div>
-                            </div>
-
-                            <div id="deductible_div" style="display: none;">
-                                <div class="tbl-header-wrapper">
-                                    <h3>Medical Deductible</h3>
-                                    <p class="sub-info">Cigna</p>
-                                </div>
-                                <div class="">
-
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <a style="color: #14efef;" href="javascript:void(0);" id="claim_link">< Medical Claim</a>
-                                        </div>
-                                    </div>
-
-                                    <div class="circle-wrapper saperator">
-                                        <div id="plan-deductible-circle"></div>
-                                        <p><img style="height: 30px;" id="medical_image" src="" alt="" /></p>
-                                        <p>Plan Deductible </p>
-                                        <p class="status-text"  style="top: 5px;"></p>
-                                    </div>
-
-                                    <div class="circle-wrapper">
-                                        <div id="out-of-pocket-circle"></div>
-                                        <p><img style="height: 30px;" id="dental_image" src="" alt="" /></p>
-                                        <p>Out of Pocket Maximum </p>
-                                        <p class="status-text"  style="top: 5px;"></p>
-                                    </div>
-
-                                    <div class="clearfix"></div>
-
-                                </div>
-                            </div>
-
-                        </div>
-
+                    <!--                        /.nav-collapse -->
+                </nav>
+                <div class="clearfix"></div>
+            </div>
+        </section>  
+        <!-- Your main site content in here -->
+        <div class="container">
+            <div class="page-content medical-grap">
+                <div class="id-card content-block">
+                    <!-- Buttons row as tabs controller -->
+                    <div class="common-tab id-card-tab">
+                        <!-- Link to 1st tab, active -->
+                        <a id="top_tab_link_medical" class="tab-link active button" href="javascript: void(0);">Medical</a>
+                        <!-- Link to 2nd tab -->
+                        <a id="top_tab_link_dental" class="tab-link button" href="javascript: void(0);">Dental</a>
+                        <!-- Link to 3rd tab -->
+                        <a id="top_tab_link_vision" class="tab-link button" href="javascript: void(0);">Vision</a>
                     </div>
                 </div>
 
+                <div class="content-block less-padding">
 
+                    <div class="table-text">
+
+                        <div id="claim_div" style="display: none;">
+                            <div class="tbl-header-wrapper">
+                                <h3>Medical Claims</h3>
+                                <p class="sub-info">Cigna</p>
+                            </div>
+                            <div class="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="link-btn" href="javascript:void(0);" id="deductible_link">Medical Deductible <span class="icon-angle-double-right">
+
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Date</th>
+                                            <th>For</th>
+                                            <th>Total</th>
+                                            <th>You Pay</th>
+                                            <!--<th>Status</th>-->
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="claim">
+
+                                    </tbody>
+                                </table> 
+                            </div>
+                        </div>
+
+                        <div id="deductible_div" style="display: block;">
+                            <div class="tbl-header-wrapper">
+                                <h3>Medical Deductible</h3>
+                                <p class="sub-info">Cigna</p>
+                            </div>
+                            <div class="">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a class="inner-link" href="javascript:void(0);" id="claim_link"><i class="fa fa-angle-double-left" aria-hidden="true"></i>  Medical Claim</a>
+                                    </div>
+                                </div>
+
+                                <div class="circle-wrapper saperator">
+                                    <div id="plan-deductible-circle"></div>
+                                    <p><img style="height: 30px;" id="medical_image" src="" alt="" /></p>
+                                    <p>Plan Deductible </p>
+                                    <p class="status-text"  style="top: 5px;"></p>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="circle-wrapper saperator">
+                                    <div id="out-of-pocket-circle"></div>
+                                    <p><img style="height: 30px;" id="dental_image" src="" alt="" /></p>
+                                    <p>Out of Pocket Maximum </p>
+                                    <p class="status-text"  style="top: 5px;"></p>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="overlay" data-sidebar-overlay></div>
-        </main>
+        </div>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>EasyBene Bills services provided by EasyBene Payments Inc. under applicable <a href="#">licenses</a>.</p>
+                        <p>&COPY; 2016 EasyBene, Inc. All rights reserved.<br />
+                            Terms, conditions, features, availability, pricing, fees, service and support options subject to change without notice.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
-        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
         <script type="text/javascript" src="js/jquery.circliful.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
         <script type="text/javascript" src="js/cigna-medical.js"></script>

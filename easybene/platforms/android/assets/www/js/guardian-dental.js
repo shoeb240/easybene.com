@@ -40,7 +40,7 @@
                                 status = 'Processed';
                                 cssclass = 'processed';
                             }
-                            $('#claim').append('<tr><td>'+row.paid_date+'</td><td><p>'+row.patient_name+'</p></td><td>'+row.submitted_charges+'</td><td>'+row.i_owe+'</td><td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td></tr>');
+                            $('#claim').append('<tr><td>'+row.paid_date+'</td><td><p>'+row.patient_name+'</p></td><td>'+row.submitted_charges+'</td><td>'+row.i_owe+'</td><!--<td><span class="'+status.toLowerCase()+'">'+cssclass+'</span></td>--></tr>');
                         });
                     } else {
                         $('#claim').append('<tr role="row"><td colspan="5">No data available</td></tr>');
