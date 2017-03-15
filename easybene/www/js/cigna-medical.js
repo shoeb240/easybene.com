@@ -9,7 +9,7 @@
             $("#top_tab_link_medical").addClass("active");
             $("#top_tab_link_dental").removeClass("active");
             $("#top_tab_link_vision").removeClass("active");
-            GetDentalData();
+            GetMedicalData();
         } else {
             ShowLogin();
         }
@@ -25,7 +25,7 @@
         location.href = 'index.html';
     }
     
-    function GetDentalData() {
+    function GetMedicalData() {
         var username = window.localStorage.getItem("username");
         var token = window.localStorage.getItem("token");
         var status = '';
@@ -118,9 +118,9 @@
             animationStep: 6,
             foregroundBorderWidth: 2,
             backgroundBorderWidth: 2,
-            backgroundColor: "#3c4447",
+             backgroundColor: "#f9f9f9",
             foregroundColor: foregroundColor,
-            fillColor: '#262e31',
+            fillColor: '#f9f9f9',
             percent: percent,
             fontColor: fontColor,
             percentageTextSize: 30

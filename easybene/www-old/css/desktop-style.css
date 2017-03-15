@@ -1,0 +1,42 @@
+@media all and (min-width: 768px) {
+    .page-content {
+        padding: 2% 15px;
+    }
+    .circle-wrapper {
+        padding: 0;
+    }
+    .svg-container {
+        width: 70%;
+    }
+    .circle-wrapper .status-text {
+      font-size: 22px;
+    }
+
+    .content-block {
+        width: 1170px !important;
+        margin: 15px auto !important;
+        max-width: 100%;
+    }
+    .provider-login-wrapper .login-list {
+        max-width: 500px;
+        margin: 10px auto;
+    }
+    .btn-wrapper {
+        max-width: 160px;
+    }
+
+    #main-content {
+        top: 35px;
+    }
+
+    .buttons-row.id-card-tab {
+        margin: 0 auto;
+        max-width: 450px;
+    }
+    .chosen-container-multi .chosen-choices {
+        min-height: 38px;
+        background-image: none;
+        border-color: #e5e5e5;
+    }
+
+}

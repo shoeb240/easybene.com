@@ -3,9 +3,13 @@
     
     var username = window.localStorage.getItem('username');
     var token = window.localStorage.getItem("token");
+    $(".top_right_username").html(username);
     
     $(window).load(function(){
-        sideMenu();
+        if (username && token) {
+            setLogoutTimer();
+        }
+        //sideMenu();
     });
     
     function sideMenu()
@@ -34,7 +38,6 @@
         if (funds_site && funds_site != 'null' && funds_site != 'undefined') {
             li_html += '<li><a href="funds.html">Funds</a></li>';
         }
-        li_html += '<li><a href="expense.html">Expense</a></li>';
         //li_html += '<li><a href="test.html">Graph</a></li>';
         //li_html += '<li><a href="test-2.html">Table</a></li>';
         //li_html += '<li><a href="test-3.html">ID Card</a></li>';
@@ -61,5 +64,26 @@
         history.go(-1);
     });
     
+    
+    var timeoutTimer;
+
+    function setLogoutTimer() {
+        timeoutTimer = setTimeout(timeoutLogout, 1800000); // Auto logout after 30mins of inactivity
+    }
+
+    function timeoutLogout() {
+        location.href = "logout.html";
+    }
+    
+    function resetTimer() {
+        clearTimeout(timeoutTimer);
+        setLogoutTimer();
+    }
+
+    if (username && token) {
+        $(this).mousemove(function(e){
+                resetTimer();
+        });
+    }
     
 }());    

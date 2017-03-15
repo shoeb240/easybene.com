@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>My App</title>
+        <!-- Path to Framework7 Library CSS-->
+        <link rel="stylesheet" href="css/framework7.ios.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <!--        <link rel="stylesheet" href="https://i.icomoon.io/public/temp/27ba7afcf2/apps-font/style.css">-->
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/app.css">
+        <link rel="stylesheet" href="css/slidebars-theme.css">
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+    </head>
+    <body>
+
+        <!-- Top Navigation Bar -->
+        <div class="sb-navbar sb-slide">
+            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
+            <!--             Left Slidebar control -->
+            <div class="sb-toggle-left">
+                <a href="#" data-sidebar-button>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                    <span class="navicon-line"></span>
+                </a>
+            </div>
+            <div class="clearfix"></div>
+            <h2 class="page-title">Sign In</h2>
+
+        </div>
+        <aside data-sidebar>
+            <div  class="">
+                <div class="sb-slidebar sb-left">	
+
+                    <!--                     Lists in Slidebars -->
+                    <ul class="sb-menu">
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Your main site content in here -->
+        <main>
+            <div id="main-content">
+
+
+                <div class="page-content login-page-content">            
+                    <div class="content-block">
+                        <div class="content-block-inner">
+                            <div class="logo-wrapper">
+                                <img src="images/logo.png" alt="logo" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-block login-list">
+                        <ul>
+                            <!--                        Text inputs -->
+                            <li><div id="error_after_submit" style="display: none; position: static;" class="inValidText">Email and/or Password did not match</div></li>
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-envelope"></i></div>
+                                    <div class="item-inner">                                               
+                                        <div class="item-input">
+                                        <input id="login_email" type="email" placeholder="E-mail">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Email</div>
+                            </li>
+                            <!--                        added this class(.error-found) for error massage-->
+                            <li>
+                                <div class="item-content">
+                                    <div class="item-media"><i class="icon-lock"></i></div>
+                                    <div class="item-inner">
+                                        <div class="item-input">
+                                        <input id="login_password" type="password" placeholder="Password">
+                                            <i style="display: none;" class="valid-field"></i>
+                                            <i style="display: none;" class="inValid-field"></i>  
+                                        </div>
+                                    </div>                                            
+                                </div>       
+                                <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Invalid Password</div>
+                            </li>
+                            <li class="btn-wrapper">
+                            <a href="javascript:void(0);" id="login_next2"><button type="submit"><i class=' icon-cloud-check'></i>Sign In</button></a>
+                        </li><!-- href="welcome.html" -->
+                        </ul>
+
+                        <!-- <p class="forgot-pass"><a href="#">forgot password ?</a></p> -->
+                        <div class="privacy-text">
+                            <!-- <p>By tapping Sign in you agree to our  <a href="">License Agreement</a> and <a href="#">Privacy Statement</a> </p> -->
+                            <a class="free-sign-up" href="sign-up-free.html">Sign Up For Free</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="overlay" data-sidebar-overlay></div>
+        </main>
+
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/left-side-bar.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/common-all.js"></script>
+        
+        <script>
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
+
+        function show_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "block");
+            $(ths).closest("li").addClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "block");
+        }
+        
+        function remove_error(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "none");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        function show_ok(ths)
+        {
+            $(ths).parent().children(".valid-field").css("display", "block");
+            $(ths).parent().children(".inValid-field").css("display", "none");
+            $(ths).closest("li").removeClass("error-found");
+            $(ths).closest("li").children(".inValidText").css("display", "none");
+        }
+        
+        $('#login_email').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if (!isEmail($(this).val())) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+        
+        $('#login_password').on("change", function(){
+            $("#error_after_submit").css("display", "none");
+            if ($(this).val().length < 8) {
+                show_error(this);
+            } else {
+                remove_error(this);
+            }
+        });
+    
+        function validation_check(msg) {
+            var valid = true;
+            
+            if (!isEmail($('#login_email').val())) {
+                show_error($('#login_email'));
+                valid = false;
+            } else {
+                remove_error($('#login_email'));
+            }
+
+            if ($('#login_password').val().length < 8) {
+                show_error($('#login_password'));
+                valid = false;
+            } else {
+                remove_error($('#login_password'));
+            }
+
+            return valid;
+        }
+        
+        $('#login_next2').on('click', function() {
+            if (validation_check()) {
+                ProcessLogin();
+            }
+        });
+
+        function ProcessLogin() {
+            var email = $('#login_email').val();
+            var password = $('#login_password').val();
+            $.ajax({
+                url: 'https://easybene.com/index.php/auth',
+                type: "POST",
+                data: 'username='+email+'&password='+password,
+                dataType: 'json',
+                async: false,
+                success: function(result) {
+                        //console.log(result);
+                        window.localStorage.setItem("username", email);
+                        window.localStorage.setItem("token", result.token);
+                        window.localStorage.setItem("token_expire", result.token_expire);
+                        window.localStorage.setItem('medical_site', result.medical_site);
+                        window.localStorage.setItem('dental_site', result.dental_site);
+                        window.localStorage.setItem('vision_site', result.vision_site);
+                        window.localStorage.setItem('funds_site', result.funds_site);
+
+                        location.href = "index.html";
+                    },
+                error: function(xhr, ajaxOptions, thrownError) {
+                        //ShowLoginFail(xhr.responseJSON);
+                        //alert(xhr.responseJSON);
+                        $("#error_after_submit").css("display", "block");
+                    },
+            });
+        }
+
+
+        </script>
+    </body>
+</html>

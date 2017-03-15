@@ -5,203 +5,211 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <title>My App</title>
+        <title>Easy Bene</title>
         <!-- Path to Framework7 Library CSS-->
-        <link rel="stylesheet" href="css/framework7.ios.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Path to your custom app styles-->
-        <link rel="stylesheet" href="css/app.css">
-        <link rel="stylesheet" href="css/slidebars-theme.css">
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
         <link rel="stylesheet" href="css/desktop-style.css">
+        <link rel="stylesheet" href="css/app-new-style.css">
     </head>
     <body>
 
         <!-- Top Navigation Bar -->
-        <div class="sb-navbar sb-slide">
-            <a class="back-btn" href="javascript: void(0);"><i class="icon-angle-left"></i></a>  
-            <!--             Left Slidebar control -->
-            <div class="sb-toggle-left">
-                <a href="#" data-sidebar-button>
-                    <span class="navicon-line"></span>
-                    <span class="navicon-line"></span>
-                    <span class="navicon-line"></span>
-                </a>
-            </div>
-            <div class="clearfix"></div>
-            <h2 class="page-title">Insurance Details</h2>
+        <section class="intro-setion dashboard-dasktop">
+            <div class="intro-content">
+                <nav id="navbar-main" class="navbar navbar-inverse affix">
+                    <div class="navbar-header">
+                        <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">                           
+                            <img src="images/logo.png" alt="logo" class="gray-logo" />
+                        </a>
+                        <ul class="top-list">
 
-        </div>
-        <aside data-sidebar>
-            <div  class="">
-                <div class="sb-slidebar sb-left">	
-
-                    <!--                     Lists in Slidebars -->
-                    <ul class="sb-menu">
-                    </ul>
-                </div>
-            </div>
-        </aside>
-
-        <!-- Your main site content in here -->
-        <main>
-            <div id="main-content">
-                <div class="page-content medical-grap">
-                    <div class="content-block less-margin">
-                        <!-- Nav tabs -->
-                        <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
-                            <li role="presentation" class="active">
-                                <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
-                                </a>
+                            <li><a href="#"> <i class="fa fa-book" aria-hidden="true"></i> Recommendations</a></li>
+                            <li><a href="expense.html"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
+                            <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
+                            <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
+                        </ul>
+                        <ul class="navbar-right">    
+                            <li class="profile-pic">
+                                <a href="#" style="background: url('images/pro-pic.jpg')"></a>
                             </li>
-                            <li role="presentation">
-                                <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
-                            </li>
-                            <li role="presentation">
-                                <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
-                            </li>
+                            <li><div class="dropdown">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                                        <span class="top_right_username"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a></li>
+                                        <li><a href="#"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a></li>
+                                        <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> Settings</a></li>
+                                        <li><a  href="#signOutModal" data-toggle="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li> 
                         </ul>
                     </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav visible-xs">    
+                            <li><a href="dashboard.html#dashboard_body"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
 
-                    <div class="id-card content-block">
-                        <div class="custom-tab" > 
-                            <!-- Nav tabs -->
-                            <ul class="nav nav-tabs" role="tablist">
-                                <li role="presentation" class="active"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Documents</a></li>
-                                <li role="presentation"><a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a></li>
-                                <li role="presentation"><a href="#reimburse" aria-controls="reimburse" role="tab" data-toggle="tab">Reimburse</a></li>
-                            </ul>
-                            <!-- Tab panes -->
-                            <!--tab documents-->
-                            <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="documents">
-                                    <!--if there is no document then this this div will show-->
-                                    <div class="no-doc-found">No Documents or notes found</div>
-                                    <!--if there is a documents then this div will show just remove display: none css--> 
-                                    <div class="vault-content" style="display: none;">
-                                        <ul>
-                                            <li>
-                                                <a href="#">
-                                                    <p>Medical prescription</p>
-                                                    <span>December6, 2016-rod</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <p>Medical prescription</p>
-                                                    <span>December6, 2016-rod</span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
+                        </ul>
+
+                    </div>
+                    <!--                        /.nav-collapse -->
+                </nav>
+                <div class="clearfix"></div>
+            </div>
+        </section>
+
+        <!-- Your main site content in here -->
+        <div class="container">
+            <div class="page-content medical-grap">              
+
+                <div class="id-card content-block">
+                    <div class="custom-tab" > 
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#documents" aria-controls="documents" role="tab" data-toggle="tab">Documents</a></li>
+                            <li role="presentation"><a href="#expenses" aria-controls="expenses" role="tab" data-toggle="tab">Expenses</a></li>
+                            <li role="presentation"><a href="#reimburse" aria-controls="reimburse" role="tab" data-toggle="tab">Reimburse</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <!--tab documents-->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="documents">
+                                <!--if there is no document then this this div will show-->
+                                <div class="no-doc-found">No Documents or notes found</div>
+                                <!--if there is a documents then this div will show just remove display: none css--> 
+                                <div class="vault-content" style="display: none;">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <p>Medical prescription</p>
+                                                <span>December6, 2016-rod</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <p>Medical prescription</p>
+                                                <span>December6, 2016-rod</span>
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                
-                                <!--tab expenses-->
-                                <div role="tabpanel" class="tab-pane" id="expenses">
-                                    <div class="vault-content">
-                                        <ul>
-                                            <li>
-                                                <div class="add-edit-content-wrapper">
-                                                    <div id="ex-content-wrapper">
-                                                        <a href="#">
-                                                            <p>Medical prescription</p>
-                                                            <span>December6, 2016-rod</span>
-                                                        </a>
-                                                    </div>
-                                                    <div id="edit-wrapper" class="edit-content">
-                                                        <div class="edit-con">
-                                                            <div>
-                                                                <button class="delete-btn" ><span class="icon-trash-o"></span></button>
-                                                                <button class="edit-btn" data-toggle="modal" data-target="#edit-modal"><span class="icon-edit"></span></button>
-                                                            </div>
-                                                            <div>
-                                                                <p>Edit</p>
-                                                                <span>December6, 2016-rod</span>
-                                                            </div>
+                            </div>
 
+                            <!--tab expenses-->
+                            <div role="tabpanel" class="tab-pane" id="expenses">
+                                <div class="vault-content">
+                                    <ul>
+                                        <li>
+                                            <div class="add-edit-content-wrapper">
+                                                <div id="ex-content-wrapper">
+                                                    <a href="#">
+                                                        <p>Medical prescription</p>
+                                                        <span>December6, 2016-rod</span>
+                                                    </a>
+                                                </div>
+                                                <div id="edit-wrapper" class="edit-content">
+                                                    <div class="edit-con">
+                                                        <div>
+                                                            <button class="delete-btn" ><span class="icon-trash-o"></span></button>
+                                                            <button class="edit-btn" data-toggle="modal" data-target="#edit-modal"><span class="icon-edit"></span></button>
                                                         </div>
+                                                        <div>
+                                                            <p>Edit</p>
+                                                            <span>December6, 2016-rod</span>
+                                                        </div>
+
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <p>Medical prescription</p>
-                                                    <span>December6, 2016-rod</span>
-                                                </a>
-                                            </li>
-                                        </ul>                                    
-                                    </div>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <p>Medical prescription</p>
+                                                <span>December6, 2016-rod</span>
+                                            </a>
+                                        </li>
+                                    </ul>                                    
                                 </div>
-                                
-                                <!-- tab reimburse -->
-                                <div role="tabpanel" class="tab-pane" id="reimburse">
-                                    <div class="reimburse-content">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <p class="label-text">Qualified Expenses</p>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <p class="ammount-number">$20.00</p>
-                                            </div>
+                            </div>
+
+                            <!-- tab reimburse -->
+                            <div role="tabpanel" class="tab-pane" id="reimburse">
+                                <div class="reimburse-content">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="label-text">Qualified Expenses</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <p class="label-text">Paid with HSA Funds</p>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <p class="ammount-number" >$00.00</p>
-                                            </div>
+                                        <div class="col-xs-6">
+                                            <p class="ammount-number">$20.00</p>
                                         </div>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <p class="label-text">Eligible for withdrawal<br/> (From HSA Funds)</p>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <p class="ammount-number total-ammonut">$20.00</p>
-                                            </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="label-text">Paid with HSA Funds</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="ammount-number" >$00.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="label-text">Eligible for withdrawal<br/> (From HSA Funds)</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="ammount-number total-ammonut">$20.00</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="plus-img-wrapper" id="add-entry">
-                            <a href="#"><img src="images/plus.png" alt="plus icon" class="img-responsive" /></a>
-                        </div>
+                    </div>
+                    <div class="plus-img-wrapper" id="add-entry">
+                        <a href="#"><img src="images/plus.png" alt="plus icon" class="img-responsive" /></a>
                     </div>
                 </div>
-
-                <div id="add-entry-screen">
-                    <div class="add-content-wrapper">
-                        <div class="green-bar-with-arrow">
-                            <a href="#">Rod</a>
-                        </div>
-                        <div class="click-able-box">
-                            <a href="add-expense.html">
-                                <h3>Add an Expense </h3>
-                                <p>Record a Medical expense you paid for out-of-pocket or with HSA funds Attach receipts, insurance Explanation of bennefit (EOB's). Statements, or other proof of payment.</p>
-                            </a>
-                        </div>
-                        <div class="click-able-box">
-                            <a href="add-expense.html">
-                                <h3>Add Note or Document</h3>
-                                <p>Add other health related documents for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc</p>
-                            </a>
-                        </div>
-                        <div class="close-big-btn"><a href="#">Close</a></div>
-                    </div>
-                </div>
-
             </div>
-            <div class="overlay" data-sidebar-overlay></div>
-        </main>
 
+
+            <div id="add-entry-screen">
+                <div class="add-content-wrapper">
+                    <div class="green-bar-with-arrow">
+                        <a href="#">Rod</a>
+                    </div>
+                    <div class="click-able-box">
+                        <a href="add-expense.html">
+                            <h3>Add an Expense </h3>
+                            <p>Record a Medical expense you paid for out-of-pocket or with HSA funds Attach receipts, insurance Explanation of bennefit (EOB's). Statements, or other proof of payment.</p>
+                        </a>
+                    </div>
+                    <div class="click-able-box">
+                        <a href="add-expense.html">
+                            <h3>Add Note or Document</h3>
+                            <p>Add other health related documents for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc</p>
+                        </a>
+                    </div>
+                    <div class="close-big-btn"><a href="#">Close</a></div>
+                </div>
+            </div>
+        </div>
 
         <!-- edit Modal start from here -->
         <div class="modal fade edit-modal" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -222,9 +230,20 @@
             </div>
         </div>
 
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <p>EasyBene Bills services provided by EasyBene Payments Inc. under applicable <a href="#">licenses</a>.</p>
+                        <p>&COPY; 2016 EasyBene, Inc. All rights reserved.<br />
+                            Terms, conditions, features, availability, pricing, fees, service and support options subject to change without notice.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/left-side-bar.js"></script>
         <script type="text/javascript" src="js/jquery.circliful.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
         <script type="text/javascript" src="js/cigna-medical.js"></script>
@@ -239,10 +258,6 @@
                             $("#edit-wrapper").show();
                         });
                     });
-
-
-
-
         </script>
     </body>
 </html>

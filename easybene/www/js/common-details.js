@@ -30,6 +30,7 @@
         if (vision_site && vision_site != 'null' && vision_site != 'undefined') {
             $("#top_tab_link_vision, #vision_bottom_link").on("click", function() {
                 //location.href = vision_site + "-vision.html"
+                $('#top_tab_link_vision').blur();
             });
         }
 
