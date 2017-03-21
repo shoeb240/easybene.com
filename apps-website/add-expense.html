@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>Easybene</title>
+        <!-- Path to Framework7 Library CSS-->
+
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Path to your custom app styles-->
+        <link rel="stylesheet" href="css/app.css">       
+        <link rel="stylesheet" href="css/main-style.css">
+        <link rel="stylesheet" href="css/custome-fonts.css">
+        <link rel="stylesheet" href="css/jquery.circliful.css">
+        <link rel="stylesheet" href="css/desktop-style.css">
+        <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
+        <script>
+            var username = window.localStorage.getItem('username');
+            var token = window.localStorage.getItem("token");
+            if (username && token) {
+
+            } else {
+                location.href = 'index.html';
+            }
+        </script>
+    </head>
+    <body>
+
+        <section class="intro-setion dashboard-dasktop">
+            <div class="intro-content">
+                <nav id="navbar-main" class="navbar navbar-inverse affix">
+                    <div class="navbar-header">
+                        <button  type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">                           
+                            <img src="images/logo.png" alt="logo" class="gray-logo" />
+                        </a>
+                        <ul class="top-list">
+
+                            <li><a href="#"> <i class="fa fa-book" aria-hidden="true"></i> Recommendations</a></li>
+                            <li><a href="#"><i class="fa fa-handshake-o" aria-hidden="true"></i> Document Vault</a></li>
+                            <li><a href="#"><i class="fa fa-lightbulb-o" aria-hidden="true"></i>DYK?</a></li>                                                 
+                            <li><a href="#"><i class="fa fa-snowflake-o" aria-hidden="true"></i> Settings</a></li>                                                 
+                        </ul>
+                        <ul class="navbar-right">    
+                            <li class="profile-pic">
+                                <a href="#" style="background: url('images/pro-pic.jpg')"></a>
+                            </li>
+                            <li><div class="dropdown">
+                                    <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                                        <span class="top_right_username"></span>
+                                        <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                        <li><a href="#"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>Edit Profile</a></li>
+                                        <li><a href="#"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Change Password</a></li>
+                                        <li><a href="#"><i class="fa fa-gear" aria-hidden="true"></i> Settings</a></li>
+                                        <li><a  href="#signOutModal" data-toggle="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                                    </ul>
+                                </div>
+                            </li> 
+                        </ul>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav visible-xs">    
+                            <li><a href="dashboard.html#dashboard_body" class="active"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
+
+                        </ul>
+
+                    </div>
+                    <!--                        /.nav-collapse -->
+                </nav>
+                <div class="clearfix"></div>
+            </div>
+        </section>     
+        <!-- Your main site content in here -->
+        <div class="container">
+            <div class="page-content medical-grap tab-none-for-desktop">
+
+                <div class="desktop-content-wrapper">
+                    <ol class="breadcrumb" >
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active">Expenses</li>
+                    </ol>
+
+                    <div class="content-block less-padding desktop-margin">
+                        <div class="table-text">
+                            <div class="expenses-tab-wrapper">
+
+                                <!-- Expenses Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active"><a href="#document-tab" aria-controls="document-tab" role="tab" data-toggle="tab"><i class="fa fa-file-text" aria-hidden="true"></i><span>Documents</span></a></li>
+                                    <li role="presentation"><a href="#expenses-tab" aria-controls="expenses-tab" role="tab" data-toggle="tab"><i class="fa fa-credit-card" aria-hidden="true"></i><span>Expenses</span></a></li>
+                                    <li role="presentation"><a href="#reimburse-tab" aria-controls="reimburse-tab" role="tab" data-toggle="tab"><i class="fa fa-cc-mastercard" aria-hidden="true"></i><span>Reimburse</span></a></li>
+
+                                </ul>
+
+                                <!-- Expenses Tab panes start from here -->
+                                <div class="tab-content">
+                                    <!--document tab-->
+                                    <div role="tabpanel" class="tab-pane active" id="document-tab">
+
+                                        <div class="doc-content-wrapper document no-document">
+                                            <!--no document found start from here-->
+                                            <div class="addbtn">                                                
+                                                <a class="btn icon-btn" id="addNoteBtn" title="Add Note or Document" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Add other health related documents for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc"><i class="fa fa-plus btn-glyphicon" aria-hidden="true"></i>Add Note or Document</a>
+                                            </div>
+                                            <!-- //no document found end here-->
+                                            <!--two from start from here-->
+                                            <div class="add-form-wrapper">
+                                                <div>
+                                                    <!-- add document  start from here -->
+                                                    <form class="addNoteFrom">
+                                                        <a href="#" class="back-to-no-doc">back</a>
+                                                        <div class="add-common-form">
+                                                            <h2>Add Note or Document</h2>
+                                                            <div class="custom-add-from-content">
+
+
+                                                                <div class="form-group">                                    
+                                                                    <input type="text" class="form-control" placeholder="Enter a description of the expense">
+                                                                </div>
+                                                                <div class="form-group inline-input">                                    
+                                                                    <input type="text" id="datepicker" class="form-control" placeholder="Select Date">
+                                                                    <input type="text" class="form-control" placeholder="Enter Amount">
+                                                                    <div class="clearfix"></div>
+                                                                </div>
+
+                                                                <div class="form-group">   
+                                                                    <input type="file" class="filestyle" data-buttonText="Find file">
+                                                                    <ul class="selected-photo-list">
+                                                                        <li><img src="images/expense-img.png" alt="expense"/></li>
+                                                                        <li><img src="images/expense-img.png" alt="expense"/></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="form-group">                                    
+                                                                    <textarea   class="form-control" placeholder="Additional details about  the expense"></textarea>
+                                                                </div>
+                                                                <div class="form-group">                                    
+                                                                    <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />
+                                                                </div>
+                                                                <input type="submit" class="btn btn-primary"  value="Add Note or Document"/>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </form>
+                                                    <!-- //add document  start from here -->
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+                                    <!--Expense tab-->
+                                    <div role="tabpanel" class="tab-pane" id="expenses-tab">
+                                        <div class="expense-list-wrapper">
+                                            <div class="expen-content-wrapper">
+                                                <div class="name-letter">R</div>
+                                                <div class="expen-des">
+                                                    <h4>Medical prescription</h4>
+                                                    <p>Rod Brathwaite</p>
+                                                </div>
+                                                <div>
+                                                    <p>20/02/2017</p>
+                                                </div>
+                                                <div class="action-btn-wrapper">
+                                                    <p>Action</p>
+                                                    <div class="action-btn">
+                                                        <a href="#"><i class="fa fa-edit" aria-hidden="true" data-toggle="modal" data-target=".edit-modal"></i></a>
+                                                        <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="expen-content-wrapper">
+                                                <div class="name-letter">A</div>
+                                                <div class="expen-des">
+                                                    <h4>Medical prescription</h4>
+                                                    <p>Aklima Iren</p>
+                                                </div>
+                                                <div class="">
+                                                    <p>20/02/2017</p>
+
+                                                </div>
+                                                <div class="action-btn-wrapper">
+                                                    <p>Action</p>
+                                                    <div class="action-btn">
+                                                        <a href="#"><i class="fa fa-edit" aria-hidden="true" data-toggle="modal" data-target=".edit-modal"></i></a>
+                                                        <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="expen-content-wrapper">
+                                                <div class="name-letter">S</div>
+                                                <div class="expen-des">
+                                                    <h4>Medical prescription</h4>
+                                                    <p>Shoeb Abdullah</p>
+                                                </div>
+                                                <div>
+                                                    <p>20/02/2017</p>
+                                                </div>
+                                                <div class="action-btn-wrapper">
+                                                    <p>Action</p>
+                                                    <div class="action-btn">
+                                                        <a href="#"><i class="fa fa-edit" aria-hidden="true" data-toggle="modal" data-target=".edit-modal"></i></a>
+                                                        <a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <!--                                        <div class="doc-content-wrapper document no-document">
+                                                                                  //  no document found start from here
+                                                                                    <div class="addbtn">                                               
+                                                                                        <a class="btn icon-btn" id="addExpenBtn" title="Add an Expense" data-toggle="popover" data-trigger="hover" data-placement="top" data-content="Record a Medical expense you paid for out-of-pocket or with HSA funds Attach receipts, insurance Explanation of bennefit (EOB's). Statements, or other proof of payment."><i class="fa fa-plus btn-glyphicon" aria-hidden="true"></i>Add an Expense</a>
+                                                                                    </div>
+                                                                                     //no document found end here
+                                                                                    two from start from here
+                                                                                    <div class="add-form-wrapper">
+                                                                                        <div>
+                                                                                            // add expense  start from here
+                                                                                            <form class="addExpenFrom">      
+                                                                                                <a href="#" class="back-to-no-expen">back</a>
+                                                                                                <div class="add-common-form">
+                                                                                                    <h2>Add an Expense</h2>
+                                                                                                    <div class="custom-add-from-content">
+                                                                                                        <div class="form-group">                                                                                        <input type="text" class="form-control" placeholder="Enter a description of the expense">
+                                                                                                        </div>
+                                                                                                        <div class="form-group inline-input">                                    
+                                                                                                            <input type="text" id="datepicker" class="form-control" placeholder="Select Date">
+                                                                                                            <input type="text" class="form-control" placeholder="Enter Amount">
+                                                                                                            <div class="clearfix"></div>
+                                                                                                        </div>
+                                                                                                        <div class="form-group">   
+                                                                                                            <input type="file" class="filestyle" data-buttonText="Find file">
+                                                                                                            <ul class="selected-photo-list">
+                                                                                                                <li><img src="images/expense-img.png" alt="expense"/></li>
+                                                                                                                <li><img src="images/expense-img.png" alt="expense"/></li>
+                                                                                                            </ul>
+                                                                                                        </div>
+                                                                                                        <div class="form-group">                                    
+                                                                                                            <textarea   class="form-control" placeholder="Additional details about  the expense"></textarea>
+                                                                                                        </div>
+                                                                                                        <div class="form-group">                                    
+                                                                                                            <input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />
+                                                                                                        </div>
+                                                                                                        <input type="submit" class="btn btn-primary"  value="add expenes"/>
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                                                                            </form>
+                                                                                             // add expense end here 
+                                                                                        </div>
+                                                                                    </div>
+                                        
+                                                                                </div>-->
+                                    </div>
+                                    <!--Reimburse tab-->
+                                    <div role="tabpanel" class="tab-pane" id="reimburse-tab">
+                                        <div class="reimburse-content">
+                                            <h2>Lorem ipsum for Reimburse</h2>
+                                            <div class="reimburse"> 
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <p class="label-text">Qualified Expenses</p>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <p class="ammount-number">$20.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <p class="label-text">Paid with HSA Funds</p>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <p class="ammount-number" >$00.00</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-xs-6">
+                                                        <p class="label-text">Eligible for withdrawal<br/> (From HSA Funds)</p>
+                                                    </div>
+                                                    <div class="col-xs-6">
+                                                        <p class="ammount-number total-ammonut">$20.00</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>                              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--left menu start from here-->
+                <div class="left-menu nav nav-pills nav-stacked" id="myAffix" data-spy="affix">
+                    <nav>
+                        <ul class="" >
+                            <li><a href="dashboard.html#dashboard_body"><i class="fa fa-home" aria-hidden="true"></i> Dashboard</a></li>
+                            <li><a href="dashboard.html#medical-panel"><i class="fa fa-user-md" aria-hidden="true"></i> Medical</a></li>
+                            <li><a href="dashboard.html#dental-panel"><i class="fa fa-ambulance" aria-hidden="true"></i> Dental</a></li>
+                            <li><a href="dashboard.html#funds-panel"><i class="fa fa-bank" aria-hidden="true"></i> Funds</a></li>
+                            <li><a href="provider-settings.html"><i class="fa fa-cog" aria-hidden="true"></i> Provider Settings</a></li>
+                            <li><a href="id-card.html"  class="active"><i class="fa fa-drivers-license-o" aria-hidden="true"></i> ID Card</a></li>
+                            <li><a href="logout.html"><i class="fa fa-sign-out" aria-hidden="true"></i> Sign Out</a></li>
+                        </ul>
+                    </nav>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="social-media-list">
+                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
+                            <li><a href="#">Media Inquiries</a></li>
+                        </ul>
+                        <ul class="footer-menu-list">
+                            <li><a href="#">Support</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Press</a></li>
+                            <li><a href="#">Canada</a></li>
+                            <li><a href="#">Partners</a></li>
+                            <li><a href="#">Security</a></li>
+                            <li><a href="#">Terms of Use</a></li>
+                            <li><a href="#"> Privacy</a></li>
+                            <li><a href="#">Legal & Trademark Notices</a></li>
+                            <li><a href="#">About EasyBene</a></li>
+                            <li><a href="#">About EasyBene Bill Payment</a></li>
+                            <li><a href="#">Credit Score</a></li>
+                            <li><a href="#">Money Manager</a></li>
+                            <li><a href="#">Sitemap</a></li>
+                        </ul>
+
+                        <p>EasyBene Bills services provided by EasyBene Payments Inc. under applicable <a href="#">licenses</a>.</p>
+                        <p>&COPY; 2016 EasyBene, Inc. All rights reserved.<br />
+                            Terms, conditions, features, availability, pricing, fees, service and support options subject to change without notice.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Modal HTML -->
+        <div id="signOutModal" class="small-modal verticl-centermodal modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>                    
+                    </div>
+                    <div class="modal-body">
+                        <p>Really Do You Want To Sign Out?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-reset" data-dismiss="modal">Cancel</button>
+                        <button type="button"  onclick="javascript: location.href = 'logout.html'" class="btn btn-action">Yes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- edit Modal start from here -->
+        <div class="modal fade edit-modal" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <h3>Expense Recorded</h3>
+                        <p>Include one space before the opening brace of declaration blocks for legibility.Include one space before the opening brace of declaration blocks for legibility.</p>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="$20.00">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>      
+        <script type="text/javascript" src="js/common-all.js"></script>
+        <script type="text/javascript" src="js/common-details.js"></script>
+        <script type="text/javascript" src="js/bootstrap-filestyle.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap-tagsinput.js"></script>
+        <script>
+                            function GetIdCardData() {
+                                var username = window.localStorage.getItem("username");
+                                var token = window.localStorage.getItem("token");
+                                $.ajax({
+                                    url: 'https://easybene.com/index.php/api-id-card/' + username + '/' + token,
+                                    type: "GET",
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (result) {
+                                        console.log(result);
+                                        if (result.cigna) {
+                                            $("#cigna_id_card").css("display", "block");
+                                            $("#cigna_name").html(result.cigna.name);
+                                            $("#cigna_card_id").html(result.cigna.card_id);
+                                            $("#cigna_group").html(result.cigna.group);
+                                            $("#cigna_issuer").html(result.cigna.issuer);
+                                            $("#cigna_RxBIN").html(result.cigna.RxBIN);
+                                            $("#cigna_RxPCN").html(result.cigna.RxPCN);
+                                            $("#cigna_RxGrp").html(result.cigna.RxGrp);
+                                            $("#cigna_RxID").html(result.cigna.RxID);
+                                        }
+
+                                        if (result.guardian) {
+                                            $("#guardian_id_card").css("display", "block");
+                                            $("#guardian_subscriber").html(result.guardian.subscriber);
+                                            $("#guardian_card_id").html(result.guardian.card_id);
+                                            $("#guardian_plan_number").html(result.guardian.plan_number);
+                                            $("#guardian_member_id").html(result.guardian.member_id);
+                                            $("#guardian_customer_response_unit").html(result.guardian.customer_response_unit);
+                                        }
+
+                                        if (result.anthem) {
+                                            $("#anthem_id_card").css("display", "block");
+                                            $("#anthem_name").html(result.anthem.name);
+                                            $("#anthem_card_id").html(result.anthem.card_id);
+                                            $("#anthem_group").html(result.anthem.group);
+                                            $("#anthem_issuer").html(result.anthem.issuer);
+                                            $("#anthem_RxBIN").html(result.anthem.RxBIN);
+                                            $("#anthem_RxPCN").html(result.anthem.RxPCN);
+                                            $("#anthem_RxGrp").html(result.anthem.RxGrp);
+                                            $("#anthem_RxID").html(result.anthem.RxID);
+                                        }
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        //console.log(xhr);
+                                        //console.log(ajaxOptions);
+                                        //console.log(thrownError);
+                                    },
+                                });
+                            }
+
+                            GetIdCardData();
+        </script>
+        <script>
+            $('#myAffix').affix({
+                offset: {
+                    top: 150,
+                    bottom: function () {
+                        return (this.bottom = $('footer').outerHeight(true))
+                    }
+                }
+            })
+        </script>
+        <script>
+            // script for popover
+            $(document).ready(function () {
+                $('[data-toggle="popover"]').popover();
+            });
+
+            //script for custom input type file 
+            $(":file").filestyle({buttonText: "Find file"});
+
+            //script for add button related show hide
+            var noDocMainWrapper = document.querySelector(".no-document");
+            var backNoDoc = document.querySelector(".back-to-no-doc");
+            var backNoExpen = document.querySelector(".back-to-no-expen");
+
+            var expenElement = document.querySelector(".add-exp-note");
+
+            var addExBtnElement = document.querySelector("#addExpenBtn");
+            var addNoteBtnElement = document.querySelector("#addNoteBtn");
+
+            var addExFormElement = document.querySelector(".addExpenFrom");
+            var addNoteFormElement = document.querySelector(".addNoteFrom");
+
+            addNoteBtnElement.addEventListener("click", function () {
+                addNoteFormElement.classList.add("add-note-form-open");
+                noDocMainWrapper.classList.remove("no-document");
+                addNoteBtnElement.style.display = "none";
+            });
+
+
+            backNoDoc.addEventListener("click", function () {
+                addNoteFormElement.classList.remove("add-note-form-open");
+                noDocMainWrapper.classList.add("no-document");
+                addNoteBtnElement.style.display = "inline-block";
+            });
+
+            addExBtnElement.addEventListener("click", function () {
+                addExFormElement.classList.add("add-expen-form-open");
+                noDocMainWrapper.classList.remove("no-document");
+                addExBtnElement.style.display = "none";
+            });
+
+
+            backNoExpen.addEventListener("click", function () {
+                addExFormElement.classList.remove("add-expen-form-open");
+                noDocMainWrapper.classList.add("no-document");
+                addExBtnElement.style.display = "inline-block";
+            });
+
+        </script>
+    </body>
+</html> 
