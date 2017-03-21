@@ -56,11 +56,11 @@ class ApiExpenseController extends My_Controller_ApiAbstract //Zend_Controller_A
 
             if ($act == 'del') {
                 $expenseMapper = new Application_Model_ExpenseMapper();
-                $document_id = $expenseMapper->delete($user_id, $id);
+                $expenseMapper->delete($user_id, $expenseId);
             } else if ($act == 'save') {
                 $price = $this->_getParam('data', null);
                 $expenseMapper = new Application_Model_ExpenseMapper();
-                $document_id = $expenseMapper->saveExpensePrice($user_id, $id, $price);
+                $expenseMapper->saveExpensePrice($user_id, $expenseId, $price);
             } else if ($act == 'info') {
                 $expenseMapper = new Application_Model_ExpenseMapper();
                 $arr['expense'] = $expenseMapper->getExpense($expenseId);

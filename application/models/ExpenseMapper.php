@@ -132,15 +132,14 @@ class Application_Model_ExpenseMapper
      * @return int
      */
     public function saveExpensePrice($user_id, $id, $price)
-    {   echo $user_id .'='. $id .'='. $price;
-    
+    {   
         $data['amount'] = $price;
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
         
         return $this->getTable()->update($data, $where);
     }
     
-    /**
+        /**
      * Update expense
      *
      * @param  Application_Model_User $scrape
@@ -171,7 +170,7 @@ class Application_Model_ExpenseMapper
     public function delete($user_id, $id)
     {
         $where = $this->getTable()->getAdapter()->quoteInto('user_id = ' . $user_id . ' AND id = ' . $id);
-        
+
         return $this->getTable()->delete($where);
         
     }

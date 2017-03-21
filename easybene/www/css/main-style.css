@@ -1490,12 +1490,8 @@ table tr td p {
     text-align: center;
     font-size: 20px;
     border-radius: 4px;
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    z-index: 0; 
     cursor: pointer;
+    margin-bottom: 20px;
 }
 .add-content-wrapper {
     position: relative;
@@ -1550,10 +1546,7 @@ table tr td p {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 40px;
-    position: absolute;
-    bottom: 52px;
-    left: 0;
-    right: 0;
+   
 }
 .submit-big-btn:hover {
     background: #0cb4c3;
@@ -1671,20 +1664,7 @@ textarea {
 .vault-content ul li a:hover {
     background: rgba(247, 247, 247, 0.6);
 } 
-.vault-content ul li a:after {
-    content: "\e762";
-    font-family: "apps-font" !important;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1;
-    text-transform: none;
-    position: absolute;
-    right: 10px;
-    top: 25%;
-    font-size: 24px;
-    color: #00a3c8;
-}
+
 .vault-content ul li p {
     margin-bottom: 0;
     color: #222;

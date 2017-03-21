@@ -41,11 +41,11 @@ class ApiDocumentController extends My_Controller_ApiAbstract //Zend_Controller_
 
             if ($act == 'del') {
                 $documentMapper = new Application_Model_DocumentMapper();
-                $document_id = $documentMapper->delete($user_id, $id);
+                $documentMapper->delete($user_id, $document_id);
             } else if ($act == 'save') {
                 $price = $this->_getParam('data', null);
                 $documentMapper = new Application_Model_DocumentMapper();
-                $document_id = $documentMapper->saveDocumentPrice($user_id, $id, $price);
+                $documentMapper->saveDocumentPrice($user_id, $document_id, $price);
             } else if ($act == 'info') {
                 $documentMapper = new Application_Model_DocumentMapper();
                 $arr['document'] = $documentMapper->getDocument($document_id);
