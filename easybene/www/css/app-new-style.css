@@ -30,6 +30,7 @@
     background: #fff;
     padding: 10px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .table-responsive tr td p {
     color: #222;
@@ -147,25 +148,28 @@ body {
     font-size: 15px;
 }
 .plus-img-wrapper {
-    bottom: 67px;
+    bottom: 160px;
     position: fixed;
     right: 15px;
     width: 40px;
+    z-index: 1;
 }
 #add-entry-screen {
     display: none;
     background: #f4f4f4;
     border: 1px solid #e7e7e7;
-    bottom: 0;
-    height: 100%;
     position: absolute;
-    top: 52px;
-    width: 100%;
+    top: 0;
+    width: 95%;
     z-index: 20;
     padding: 5px;
     overflow-y: auto;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    padding: 10px 15px 10px;
 }
-
+#add-entry-screen
 .green-bar-with-arrow {
     background: #66ccff;
     color: #fff;
@@ -243,10 +247,13 @@ body {
 }
 .add-content-wrapper {
     position: relative;
-    min-height: 490px;
-    margin-bottom: 20px;
+    margin-bottom: 0!important;
+    max-height: 327px;
+    overflow: auto;
 }
-
+.add-content-wrapper-top {
+    position: relative;
+}
 .page-content.page-white-bg {
     background: #f4f4f4;
     border: 1px solid #e7e7e7;
@@ -394,6 +401,8 @@ textarea {
 .vault-content ul {
     list-style: outside none none;
     padding: 0;
+    max-height: 205px;
+    overflow-y: auto;
 }
 .vault-content ul li {
     background: #fff none repeat scroll 0 0;
