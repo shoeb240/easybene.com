@@ -38,6 +38,7 @@
         if (funds_site && funds_site != 'null' && funds_site != 'undefined') {
             li_html += '<li><a href="funds.html">Funds</a></li>';
         }
+        li_html += '<li><a href="expense.html">Expense</a></li>';
         //li_html += '<li><a href="test.html">Graph</a></li>';
         //li_html += '<li><a href="test-2.html">Table</a></li>';
         //li_html += '<li><a href="test-3.html">ID Card</a></li>';

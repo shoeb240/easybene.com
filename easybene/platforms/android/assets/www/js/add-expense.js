@@ -151,11 +151,11 @@
         var page = $('#page').val();
         
         if (page == 'expense') {
-            elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="'+imgUri+'" alt=""/></a></li>';
+            elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="'+imgUri+'" alt="expense"/></a></li>';
             $("#expenseImageFile").append(elem);
             $("#expense_image_name_list").val($("#expense_image_name_list").val() + ',' + uploaded_img_name);
         } else {
-            elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="'+imgUri+'" alt=""/></a></li>';
+            elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="'+imgUri+'" alt="document"/></a></li>';
             $("#documentImageFile").append(elem);
             $("#document_image_name_list").val($("#document_image_name_list").val() + ',' + uploaded_img_name);
         }
@@ -262,7 +262,7 @@
                 $('#additional_details').val(expense.additional_details);
                 
                 $.each(expense_image_arr, function(key, each_image) {
-                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/'+each_image.image+'" alt=""/></a></li>';
+                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/'+each_image.image+'" alt="expense"/></a></li>';
                     $("#expenseImageFile").append(elem);
                     $("#expense_image_name_list").val($("#expense_image_name_list").val() + ',' + each_image.image);
                 });
@@ -287,7 +287,7 @@
                 $('#additional_details_document').val(document.additional_details);
                 
                 $.each(document_image_arr, function(key, each_image) {
-                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/'+each_image.image+'" alt="" /></a></li>';
+                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/'+each_image.image+'" alt="document" /></a></li>';
                     $("#documentImageFile").append(elem);
                     $("#document_image_name_list").val($("#document_image_name_list").val() + ',' + each_image.image);
                 });

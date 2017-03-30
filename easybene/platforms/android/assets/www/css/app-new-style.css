@@ -30,6 +30,7 @@
     background: #fff;
     padding: 10px;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 .table-responsive tr td p {
     color: #222;
@@ -66,7 +67,7 @@ table tr:first-child {
     line-height: 36px;
     padding: 0 2rem;
     text-transform: uppercase;
-    margin: 20px auto;
+    margin: 0 auto;
     font-weight: 600;
 
 }
@@ -102,11 +103,17 @@ body {
     margin-bottom: 150px;
 }
 
+ .circle-wrapper {
+    margin: 20px auto !important;
+}
+
 /*css for documentation start from here*/
 
 .custom-tab .nav.nav-tabs {
     border: 1px solid #fff;
     margin: 0 auto;
+    background: #25cbf5;
+    padding: 0;
 }
 .custom-tab .nav-tabs > li > a {
     border-right: 1px solid #fff;
@@ -141,25 +148,28 @@ body {
     font-size: 15px;
 }
 .plus-img-wrapper {
-    bottom: 67px;
+    bottom: 160px;
     position: fixed;
     right: 15px;
     width: 40px;
+    z-index: 1;
 }
 #add-entry-screen {
     display: none;
     background: #f4f4f4;
     border: 1px solid #e7e7e7;
-    bottom: 0;
-    height: 100%;
     position: absolute;
-    top: 52px;
-    width: 100%;
+    top: 0;
+    width: 95%;
     z-index: 20;
     padding: 5px;
     overflow-y: auto;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    padding: 10px 15px 10px;
 }
-
+#add-entry-screen
 .green-bar-with-arrow {
     background: #66ccff;
     color: #fff;
@@ -233,19 +243,17 @@ body {
     text-align: center;
     font-size: 20px;
     border-radius: 4px;
-    position: absolute;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    z-index: 0; 
     cursor: pointer;
 }
 .add-content-wrapper {
     position: relative;
-    min-height: 490px;
-    margin-bottom: 20px;
+    margin-bottom: 0!important;
+    max-height: 327px;
+    overflow: auto;
 }
-
+.add-content-wrapper-top {
+    position: relative;
+}
 .page-content.page-white-bg {
     background: #f4f4f4;
     border: 1px solid #e7e7e7;
@@ -293,10 +301,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     margin-top: 40px;
-    position: absolute;
-    bottom: 52px;
-    left: 0;
-    right: 0;
+    margin-bottom: 20px;
 }
 .submit-big-btn:hover {
     background: #0cb4c3;
@@ -391,48 +396,34 @@ textarea {
     text-align: center;
 }
 .vault-content {
-    background: #f8f8f8; 
+    background: #f8f8f8 none repeat scroll 0 0;
 }
-
 .vault-content ul {
+    list-style: outside none none;
     padding: 0;
-    list-style: none;
+    max-height: 205px;
+    overflow-y: auto;
 }
-
 .vault-content ul li {
-    display: block; 
+    background: #fff none repeat scroll 0 0;
     border-bottom: 1px solid #e7e7e7;
-    background: #fff;
+    display: block;
 }
 .vault-content ul li a {
-    padding: 8px 10px;
-    display: block;
     color: #222;
-    text-decoration: none;
+    display: block;
+    padding: 8px 10px;
     position: relative;
+    text-decoration: none;
 }
 .vault-content ul li a:hover {
-    background: rgba(247, 247, 247, 0.6);
-} 
-.vault-content ul li a:after {
-    content: "\e762";
-    font-family: "apps-font" !important;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: normal;
-    line-height: 1;
-    text-transform: none;
-    position: absolute;
-    right: 10px;
-    top: 25%;
-    font-size: 24px;
-    color: #00a3c8;
+    background: rgba(247, 247, 247, 0.6) none repeat scroll 0 0;
 }
 .vault-content ul li p {
-    margin-bottom: 0;
     color: #222;
     font-size: 16px;
     line-height: normal;
+    margin-bottom: 0;
 }
 .vault-content ul li span {
     font-size: 11px;
@@ -440,15 +431,32 @@ textarea {
 .add-edit-content-wrapper {
     position: relative;
 }
-.edit-content {
+.add-edit-content-wrapper .click-arrow {
+    border-left: 1px solid #ccc;
+    bottom: 5px;
+    color: #00a3c8;
+    font-size: 24px;
+    line-height: 25px;
     position: absolute;
-    top: 0;
-    left: 0;
     right: 0;
+    text-transform: none;
+    top: 5px;
+}
+.add-edit-content-wrapper .click-arrow span {
+    font-size: 20px;
+}
+.add-edit-content-wrapper .ex-content {
+    max-width: 82%;
+}
+.edit-content {
+    background: #fff none repeat scroll 0 0;
     bottom: 0;
+    left: 0;
     margin: 0 auto;
+    position: absolute;
+    right: 0;
+    top: 0;
     z-index: 2;
-    background: #fff;
 }
 .selected-photo-list {
     padding: 0;
@@ -461,6 +469,7 @@ textarea {
 }
 .selected-photo-list li img {
     max-width: 50px;
+    height: 50px;
 }
 .reimburse-content {
     background: #fff;  

@@ -7,18 +7,19 @@
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
         <title>Easy Bene</title>
         <!-- Path to Framework7 Library CSS-->
-
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <!-- Path to your custom app styles-->
+
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
         <link rel="stylesheet" href="css/desktop-style.css">
-        <link rel="stylesheet" href="css/jquery-ui.css">        
-        <link rel="stylesheet" href="css/app-new-style.css">
-
+        <link rel="stylesheet" href="css/jquery-ui.css">
+        <link rel="stylesheet" href="css/app-new-style.css">   
+        <link rel="stylesheet" href="css/jquery-ui.theme.min.css">   
         <script src="cordova.js"></script>
     </head>
 
@@ -78,174 +79,173 @@
                 </nav>
                 <div class="clearfix"></div>
             </div>
-        </section>       
+        </section>   
         <!-- Your main site content in here -->
-        <div class="container">
-            <div class="page-content gray-bg-wrapper">
-                <div  class="add-entry-screen-wrapper">
-                    <div id="expense_success" class="inValidText" style="display: none; position: static; color: blue;">Medical Provider Registered Successfully</div>
-                    <div id="error_after_submit" class="inValidText" style="display: none; position: static; color: red;">Please enter required fields</div>
-                    <input type="hidden" id="page" value="" />
-                    <input type="hidden" id="expense_image_name_list" value="" />
-                    <input type="hidden" id="document_image_name_list" value="" />
-                    <div id="expense_div" class="add-content-wrapper" style="display: block; min-height: 426px;">
-                        <div id="name_div" class="green-bar-with-arrow">
-                            Rod
-                        </div>
-                        <input type="hidden" id="name" value="" />
-                        <div class="green-bar-with-arrow light-green">
-                            <a id="expense_type_prompt" href="#"  data-toggle="modal" data-target="#select-expense">Select Expense Type</a>
-                            <input type="hidden" id="expense_type" value="" />
-                        </div>
-                        <div class="custom-add-from-content">
-                            <div class="form-group">                                    
-                                <button type="button" class="form-control" data-toggle="modal" data-target="#select-photo" ><span class="icon-uniE774 icon-plus"></span></button>                                    
+
+            <div id="top_container" class="container">
+                <div class="page-content gray-bg-wrapper">
+                    <div  class="add-entry-screen-wrapper">
+                        <div id="expense_success" class="inValidText" style="display: none; position: static; color: blue;">Medical Provider Registered Successfully</div>
+                        <div id="error_after_submit" class="inValidText" style="display: none; position: static; color: red;">Please enter required fields</div>
+                        <input type="hidden" id="page" value="" />
+                        <input type="hidden" id="expense_image_name_list" value="" />
+                        <input type="hidden" id="document_image_name_list" value="" />
+                        <div id="expense_div" class="add-content-wrapper" style="display: none; min-height: 426px;">
+                            <div id="name_div" class="green-bar-with-arrow">
+                                Rod
                             </div>
-                            <div class="form-group">                                    
-                                <ul id="expenseImageFile" class="selected-photo-list">
-                                    <!--<li><img src="images/expense-img.png" alt="expense"/></li>
-                                    <li><img src="images/expense-img.png" alt="expense"/></li>-->
-                                </ul>
+                            <input type="hidden" id="name" value="" />
+                            <div class="green-bar-with-arrow light-green">
+                                <a id="expense_type_prompt" href="#"  data-toggle="modal" data-target="#select-expense">Select Expense Type</a>
+                                <input type="hidden" id="expense_type" value="" />
                             </div>
-                            <div class="form-group">                                    
-                                <input id="description" type="text" class="form-control" placeholder="Enter a description of the expense">
-                            </div>
-                            <div class="form-group inline-input">                                    
-                                <input type="text" id="datepicker" class="form-control" placeholder="Select Date">
-                                <input type="text" id="amount" class="form-control" placeholder="Enter Amount">
-                                <div class="clearfix"></div>
-                            </div>
-                            <div class="form-group">                                    
-                                <textarea  id="additional_details" class="form-control" placeholder="Additional details about  the expense"></textarea>
-                            </div>
-                            <!--<div class="form-group">                                    
-                                <div class="form-control add-wrapper">
-                                    <span>tag one,</span>
-                                    <span>tag two</span>
-                                    <a href="#">Add tag</a>
+                            <div class="custom-add-from-content">
+                                <div class="form-group">                                    
+                                    <button type="button" class="form-control" data-toggle="modal" data-target="#select-photo" ><span class="icon-uniE774 icon-plus"></span></button>                                    
                                 </div>
-                            </div>-->
-                        </div>
-                        <div class="submit-big-btn"><a id="save_expense" href="javascript:void(0);">Submit</a></div>
-                        <div class="close-big-btn"><a href="expense.html">Close</a></div>
-                    </div>
-
-                    <div id="note_div" class="add-content-wrapper" style="min-height: 328px; display: none;">
-                        <div id="name_document_div" class="green-bar-with-arrow">
-                            Rod
-                        </div>
-                        <input type="hidden" id="name_document" value="" />
-                        <div class="custom-add-from-content">
-                            <div class="form-group">                                    
-                                <button type="button" class="form-control" data-toggle="modal" data-target="#select-photo" ><span class="icon-uniE774 icon-plus"></span></button>                                    
-                            </div>
-                            <div class="form-group">                                    
-                                <ul id="documentImageFile" class="selected-photo-list">
-                                    <!--<li><img src="images/expense-img.png" alt="note"/></li>
-                                    <li><img src="images/expense-img.png" alt="note"/></li>-->
-                                </ul>
-                            </div>
-                            <div class="form-group">                                    
-                                <input id="description_document" type="text" class="form-control" placeholder="Enter a description of the note">
-                            </div>
-                            <div class="form-group">                                    
-                                <textarea  id="additional_details_document" class="form-control" placeholder="Additional details about  the note"></textarea>
-                            </div>
-                            <!--<div class="form-group">                                    
-                                <div class="form-control add-wrapper">
-                                    <span>tag one,</span>
-                                    <span>tag two</span>
-                                    <a href="#">Add tag</a>
+                                <div class="form-group">                                    
+                                    <ul id="expenseImageFile" class="selected-photo-list">
+                                        <!--<li><img src="images/expense-img.png" alt="expense"/></li>
+                                        <li><img src="images/expense-img.png" alt="expense"/></li>-->
+                                    </ul>
                                 </div>
-                            </div>-->
+                                <div class="form-group">                                    
+                                    <input id="description" type="text" class="form-control" placeholder="Enter a description of the expense">
+                                </div>
+                                <div class="form-group inline-input">                                    
+                                    <input type="text" id="datepicker" class="form-control" placeholder="Select Date">
+                                    <input type="text" id="amount" class="form-control" placeholder="Enter Amount">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="form-group">                                    
+                                    <textarea  id="additional_details" class="form-control" placeholder="Additional details about  the expense"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="submit-big-btn"><a id="save_expense" href="javascript:void(0);">Submit</a></div>
+                            <div class="close-big-btn"><a href="expense.html">Close</a></div>
                         </div>
-                        <div class="submit-big-btn"><a id="save_document" href="javascript:void(0);">Submit</a></div>
-                        <div class="close-big-btn"><a href="expense.html">Close</a></div>
-                    </div>
 
+                        <div id="note_div" class="add-content-wrapper" style="min-height: 328px; display: none;">
+                            <div id="name_document_div" class="green-bar-with-arrow">
+                                Rod
+                            </div>
+                            <input type="hidden" id="name_document" value="" />
+                            <div class="custom-add-from-content">
+                                <div class="form-group">                                    
+                                    <button type="button" class="form-control" data-toggle="modal" data-target="#select-photo" ><span class="icon-uniE774 icon-plus"></span></button>                                    
+                                </div>
+                                <div class="form-group">                                    
+                                    <ul id="documentImageFile" class="selected-photo-list">
+                                        <!--<li><img src="images/expense-img.png" alt="note"/></li>
+                                        <li><img src="images/expense-img.png" alt="note"/></li>-->
+                                    </ul>
+                                </div>
+                                <div class="form-group">                                    
+                                    <input id="description_document" type="text" class="form-control" placeholder="Enter a description of the note">
+                                </div>
+                                <div class="form-group">                                    
+                                    <textarea  id="additional_details_document" class="form-control" placeholder="Additional details about  the note"></textarea>
+                                </div>
+
+                            </div>
+                            <div class="submit-big-btn"><a id="save_document" href="javascript:void(0);">Submit</a></div>
+                            <div class="close-big-btn"><a href="expense.html">Close</a></div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <footer class="footer">
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12">                       
-                        <p>EasyBene Bills services provided by EasyBene Payments Inc. under applicable <a href="#">licenses</a>.</p>
-                        <p>&COPY; 2016 EasyBene, Inc. All rights reserved.<br />
-                            Terms, conditions, features, availability, pricing, fees, service and support options subject to change without notice.</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-
-
-        <!-- Modal -->
-        <!--Select Expense Type modal-->
-        <div class="modal fade" id="select-expense" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content select-expense-modal">
-                    <div class="modal-body">
-                        <p>Select Expense Type:</p>
-                        <div class="custom-select-style">
-                            <select id="expense_type_select">
-                                <option value="volvo">Medical fees Copays</option>
-                                <option value="saab">dental fees Copays</option>
-                                <option value="mercedes">Over the counter Medicines</option>
-                                <option value="audi">Vision fees Copays</option>
-                            </select>
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <p>EasyBene Bills services provided by EasyBene Payments Inc. under applicable <a href="#">licenses</a>.</p>
+                            <p>&COPY; 2016 EasyBene, Inc. All rights reserved.<br />
+                                Terms, conditions, features, availability, pricing, fees, service and support options subject to change without notice.</p>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button id="expense_type_button" type="button" class="btn btn-primary">Select</button>
+                </div>
+            </footer>
+
+            <!-- Modal -->
+            <!--Select Expense Type modal-->
+            <div class="modal fade" id="select-expense" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content select-expense-modal">
+                        <div class="modal-body">
+                            <p>Select Expense Type:</p>
+                            <div class="custom-select-style">
+                                <select id="expense_type_select">
+                                    <option value="volvo">Medical fees Copays</option>
+                                    <option value="saab">dental fees Copays</option>
+                                    <option value="mercedes">Over the counter Medicines</option>
+                                    <option value="audi">Vision fees Copays</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button id="expense_type_button" type="button" class="btn btn-primary">Select</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--Select photo from modal-->
-        <div class="modal fade" id="select-photo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content select-expense-modal">
-                    <div class="modal-body">
-                        <p class="select-photo-text">Select photo options:</p>
-                        <ul class="photo-ooptions-list">
-                            <li><a href="javascript: void(0)" class="take_photo">Take photo</a></li>
-                            <!--<li><a href="#">Use Last Photo Taken</a></li>-->
-                            <li><a href="javascript: void(0)"  class="from_library">From Library</a></li>
-                            <!--<li><a href="#">From Dropbox</a></li>-->
-                        </ul>
+            <!--Select photo from modal-->
+            <div class="modal fade" id="select-photo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content select-expense-modal">
+                        <div class="modal-body">
+                            <p class="select-photo-text">Select photo options:</p>
+                            <ul class="photo-ooptions-list">
+                                <li><a href="javascript: void(0)" class="take_photo">Take photo</a></li>
+                                <!--<li><a href="#">Use Last Photo Taken</a></li>-->
+                                <li><a href="javascript: void(0)"  class="from_library">From Library</a></li>
+                                <!--<li><a href="#">From Dropbox</a></li>-->
+                            </ul>
 
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        <button type="button" class="btn btn-primary">Select</button>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-primary">Select</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            
+            <div id="dialog">
+                <img id="dalog_img" width="100%" src="" alt="" />
+            </div>
 
-        <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.js"></script>
-        <script type="text/javascript" src="js/jquery.circliful.js"></script>
-        <script type="text/javascript" src="js/common-all.js"></script>
-        <script type="text/javascript" src="js/common-details.js"></script>
-        <script type="text/javascript" src="js/add-expense.js"></script>
-        <script>
-            $(document).ready(
-                    function () {
-                        $("#add-entry").click(function () {
-                            $("#add-entry-screen").show();
-                        });
+            <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
+            <script type="text/javascript" src="js/bootstrap.min.js"></script>
+            <script type="text/javascript" src="js/jquery-ui.js"></script>
+            <script type="text/javascript" src="js/jquery.circliful.js"></script>
+            <script type="text/javascript" src="js/common-all.js"></script>
+            <script type="text/javascript" src="js/common-details.js"></script>
+            <script type="text/javascript" src="js/add-expense.js"></script>
+            <script>
+                $(document).ready(
+                function () {
+                    $("#add-entry").click(function () {
+                        $("#add-entry-screen").show();
                     });
-        </script>
-        <script>
-            $(function () {
-                $("#datepicker").datepicker();
-            });
-        </script>
+                });
+
+                function show_enlarged(ths){
+                    $( "#dialog" ).dialog( "open" );
+                    $('#dalog_img').attr('src', $('img', ths).attr('src'));
+                };
+            </script>
+            <script>
+                $(function () {
+                    $("#datepicker").datepicker();
+                });
+                
+                $("#dialog").dialog({ autoOpen: false, position: { my: "center center", at: "center center", of: '#top_container'} });
+                
+            </script>
 
     </body>
 </html>

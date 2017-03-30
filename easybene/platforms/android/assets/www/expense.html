@@ -5,51 +5,84 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <title>Easy Bene</title>
+        <title>Easy Bene </title>
         <!-- Path to Framework7 Library CSS-->
         <link rel="stylesheet" href="css/bootstrap.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&subset=greek" rel="stylesheet">    
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <!-- Path to your custom app styles-->
         <link rel="stylesheet" href="css/main-style.css">
         <link rel="stylesheet" href="css/custome-fonts.css">
         <link rel="stylesheet" href="css/jquery.circliful.css">
-
-        <!-- ============================================
-        ================= Stylesheets ===================
-        ============================================= -->
-        <!-- vendor css files -->
-        <link rel="stylesheet" href="js/vendor/chosen/chosen.css">
         <link rel="stylesheet" href="css/desktop-style.css">
-        <link rel="stylesheet" href="css/app-new-style.css">
+        <link rel="stylesheet" href="css/app-new-style.css">    
+        <script>
+            var username = window.localStorage.getItem("username");
+            var token = window.localStorage.getItem("token");
 
-        <script src="cordova.js"></script>
-
-        <style>
-            .login-list li {
-                margin: 0 auto 3px;
-                width: 85%;
+            function show_icons(ths, id) {
+                $(".edit-content").css('display', 'none');
+                $(ths).parent().children(".edit-content").css('display', 'block');
             }
 
-            .btn-wrapper {
-                border: medium none !important;
-                margin-top: 5px !important;
+            function remove_icons(ths, id) {
+                $(ths).parent().children(".edit-content").css('display', 'none');
             }
 
-            .provider-login-wrapper .login-list {
-                margin-top: 10px;
+            function show_edit_modal(id, price) {
+                $("#edit_id").val(id);
+                $("#edit_price").val(price);
+                $('#edit-modal').modal('show');
+
             }
 
-            .btn-wrapper button {
-                font-size: 16px;
+            function delete_expense(ths, id) {
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-expense/' + username + '/' + token + '/' + id + '/del',
+                    type: 'get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (result) {
+                        $(ths).parents('.add-edit-content-wrapper').css('display', 'none');
+                    },
+                    error: function () {
+                    }
+                });
             }
 
-            .login-list li.error-found {
-                position: relative;
-                margin-bottom: 50px;
+            function delete_document(ths, id) {
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-document/' + username + '/' + token + '/' + id + '/del',
+                    type: 'get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (result) {
+                        $(ths).parents('.add-edit-content-wrapper').css('display', 'none');
+                    },
+                    error: function () {
+                    }
+                });
             }
-        </style>
 
+            function save_price() {
+                var id = $('#edit_id').val();
+                var price = $('#edit_price').val();
+
+                $.ajax({
+                    url: 'https://easybene.com/index.php/api-expense/' + username + '/' + token + '/' + id + '/save/' + price,
+                    type: 'get',
+                    dataType: 'html',
+                    async: false,
+                    success: function (result) {
+                        //$('#edit-modal').modal('hide');
+                        location.href = 'expense.html?page=expense'
+                    },
+                    error: function () {
+
+                    }
+                });
+            }
+        </script>
     </head>
     <body>
 
@@ -112,186 +145,115 @@
         </section>  
 
         <!-- Your main site content in here -->
-        <div class="container">
+        <div class="container add-content-wrapper-top">
+            <div class="page-content medical-grap">
+                <div class="content-block less-margin">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs tab-bottom-fixed" role="tablist" style="background-color: white;">
+                        <li role="presentation" class="active">
+                            <a id="medical_bottom_link" href="javascript: void(0);"><i class="icon-medical51"></i>Medical <span class="badge bg-red">5</span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a id="dental_bottom_link" href="javascript: void(0);"><i class="icon-dentist"></i>Dental</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="vision_bottom_link" href="javascript: void(0);"><i class="icon-heart36"></i>Vision</a>
+                        </li>
+                        <li role="presentation">
+                            <a id="funds_bottom_link" href="javascript: void(0);"><i class="icon-medicine"></i>Funds</a>
+                        </li>
+                    </ul>
+                </div>
 
+                <div class=" id-card content-block">
+                    <div class="custom-tab" > 
+                        <!-- Nav tabs -->
+                        <ul class="common-tab nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a id="document_a" href="#document" aria-controls="document" role="tab" data-toggle="tab">Documents</a></li>
+                            <li role="presentation"><a id="expense_a" href="#expense" aria-controls="expense" role="tab" data-toggle="tab">Expenses</a></li>
+                            <li role="presentation"><a href="#reimburse" aria-controls="reimburse" role="tab" data-toggle="tab">Reimburse</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <!--tab document-->
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="document">
+                                <!--if there is no document then this this div will show-->
+                                <div class="no-doc-found" style="display: none;">No Documents or notes found</div>
 
-            <div class="page-content search-prvider-page">
-
-                <div class="content-block less-margin provider-settings-wrapper">
-
-                    <!-- Tab panes -->
-                    <div class="tab-content">
-
-                        <div id="site_reg_div" class="provider-login-wrapper" style="display: block; box-shadow: none; margin: 0;">
-                            <h2></h2>
-                            <div>
-                                <!--<div class="col-md-12 text-center"  style="float:left;">-->
-                                <div class="list-block login-list">
-                                    <div id="floatingBarsG" class="floatingBarsG_medical" style="display: none;">
-                                        <div class="blockG" id="rotateG_01"></div>
-                                        <div class="blockG" id="rotateG_02"></div>
-                                        <div class="blockG" id="rotateG_03"></div>
-                                        <div class="blockG" id="rotateG_04"></div>
-                                        <div class="blockG" id="rotateG_05"></div>
-                                        <div class="blockG" id="rotateG_06"></div>
-                                        <div class="blockG" id="rotateG_07"></div>
-                                        <div class="blockG" id="rotateG_08"></div>
-                                    </div>
+                                <!--if there is a document then this div will show just remove display: none css--> 
+                                <div class="vault-content" style="display: block;">
                                     <ul>
-                                        <li class="heading-exp">Expense</li>
-                                        <li>
-                                            <div id="medical_success" class="inValidText" style="display: none; position: static;background: #00a5ff none repeat scroll 0 0; border: 1px solid #0097ff; width: 100%;">Medical Provider Registered Successfully</div>
-                                            <div id="medical_error" class="inValidText" style="display: none; position: static; width: 100%;">Medical Provider Registration Failed</div>
-                                        </li>
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-media"><i class="icon-user"></i></div>
-                                                <div id="medical_provider_div" class="item-inner">                                               
-                                                    <div class="item-input">
-                                                        <select id="expense_type">
-                                                            <option value="">--Select Expense Type--</option>
-                                                            <option>Medical Fees and Copays</option>
-                                                            <option>Dental Fees and Copays</option>
-                                                            <option>Prescription Fees and Copays</option>
-                                                            <option>Vision Fees and Copays</option>
-                                                        </select>
-                                                        <i style="display: none;" class="valid-field"></i>
-                                                        <i style="display: none;" class="inValid-field"></i> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Select a expense type</div>
-                                        </li>
-
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-media"><i class="fa fa-camera" aria-hidden="true"></i></div>
-                                                <div class="item-inner">                                               
-                                                    <div class="item-input cam-link">
-                                                        <a  id="camera_link" href="#cameraModal" role="button" data-toggle="modal">Camera</a>                  
-                                                        <img id="imageFile" src="" />
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-inner">                                                                                        <div class="item-media"><i class="fa fa-credit-card" aria-hidden="true"></i></div>
-                                                    <div class="item-input">
-                                                        <input id="description"  type="text" placeholder="Enter a description of the expense">
-                                                        <i style="display: none;" class="valid-field"></i>
-                                                        <i style="display: none;" class="inValid-field"></i> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Enter a expense description</div>
-                                        </li>
-
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-inner">                                                                                        <div class="item-media"><i class="fa fa-calendar" aria-hidden="true"></i></div>
-                                                    <div class="item-input">
-                                                        <input id="date"  type="text" placeholder="mm/dd/yyyy">
-                                                        <i style="display: none;" class="valid-field"></i>
-                                                        <i style="display: none;" class="inValid-field"></i> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Enter a expense date</div>
-                                        </li>
-
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-inner">                                                                                        <div class="item-media"><i class="fa fa-money" aria-hidden="true"></i></div>
-                                                    <div class="item-input">
-                                                        <input id="amount"  type="text" placeholder="0.00">
-                                                        <i style="display: none;" class="valid-field"></i>
-                                                        <i style="display: none;" class="inValid-field"></i> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div style="display: none;" class="inValidText"><i class="icon-caret-up"></i>Enter a expense amount</div>
-                                        </li>
-
-                                        <li>
-                                            <div class="item-content">
-                                                <div class="item-inner">                                                                                        <div class="item-media"><i class="fa fa-newspaper-o" aria-hidden="true"></i></div>
-                                                    <div class="item-input">
-                                                        <input id="additional_details"  type="text" placeholder="Additional details about expense">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </li>
-
-
-                                        <li class="btn-wrapper">
-                                            <a id="save_expense" href="javascript:void(0);" ><button type="submit">Save</button></a>
-                                            <a id="show_dashboard" href="index.html" ><button type="submit">Cancel</button></a>
-                                            <div class="clearfix"></div>
-                                        </li>
-
                                     </ul>
                                 </div>
-                            </div> 
-                            <div style="clear:both;"></div>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal HTML -->
-        <div id="Why-imp-Modal" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">                    
-                    <div class="modal-body">
-                        <div class="why-important-text-wrapper">
-                            <div class="why-important-text-wrapper-text">
-                                <h3>Linking is how the magic Happens</h3>
-                                <p>It's totally safe and secure. We just need permission to connect with your account so we can do out thing.We'll be able to show you where your money goes, where you can save, offer you budget suggestions, help you stay on top of bills and more </p>
-                                <a data-dismiss="modal" style="cursor: pointer">Got it</a>
                             </div>
-                        </div>
-                    </div>                    
-                </div>
-            </div>
-        </div>
-
-        <div id="cameraModal" class="verticl-centermodal modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="input-wrapper" style="text-align: center;">
-                            Photo Options
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="openCamera()">Take Photo</a></span>
+                            <!--tab expense-->
+                            <div role="tabpanel" class="tab-pane" id="expense">
+                                <div class="vault-content">
+                                    <ul>
+                                    </ul>                                    
+                                </div>
                             </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon">Use Last Photo Taken</span>
-                            </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon"><a href="javascript: void(0)" onclick="fromLibrary()">From Library</a></span>
-                            </div>
-                        </div>
-                        <div class="input-wrapper">
-                            <div class="input-group">
-                                <span class="input-group-addon">From Dropbox</span>
+                            <!-- tab reimburse -->
+                            <div role="tabpanel" class="tab-pane" id="reimburse">
+                                <div class="reimburse-content">
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="label-text">Qualified Expenses</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="ammount-number">$20.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="label-text">Paid with HSA Funds</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="ammount-number" >$00.00</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-6">
+                                            <p class="label-text">Eligible for withdrawal<br/> (From HSA Funds)</p>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <p class="ammount-number total-ammonut">$20.00</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="plus-img-wrapper" id="add-entry">
+                        <a href="#"><img src="images/plus.png" alt="plus icon" class="img-responsive" /></a>
+                    </div>
                 </div>
             </div>
-        </div>
 
+            <div id="add-entry-screen">
+                <div class="add-content-wrapper">
+                    <div class="green-bar-with-arrow">
+                        <a href="#">Rod</a>
+                    </div>
+                    <div class="click-able-box">
+                        <a href="add-expense.html">
+                            <h3>Add an Expense </h3>
+                            <p>Record a Medical expense you paid for out-of-pocket or with HSA funds Attach receipts, insurance Explanation of bennefit (EOB's). Statements, or other proof of payment.</p>
+                        </a>
+                    </div>
+                    <div class="click-able-box">
+                        <a href="add-expense.html?page=document">
+                            <h3>Add Note or Document</h3>
+                            <p>Add other health related document for future referennce such as insurance cards, Prescriptions, Immunization records. Doctor's business cards, referrals, lab results, photos of medications, etc</p>
+                        </a>
+                    </div>
+                    <div class="close-big-btn"><a href="expense.html">Close</a></div>
+                </div>
+            </div>
+            <div>
+            </div>
+        </div>
         <footer class="footer">
             <div class="container">
                 <div class="row">
@@ -304,203 +266,110 @@
             </div>
         </footer>
 
+        <!-- edit Modal start from here -->
+        <div class="modal fade edit-modal" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">                    
+                    <div class="modal-body">
+                        <h3>Expense Recorded</h3>
+                        <p>Include one space before the opening brace of declaration blocks for legibility.Include one space before the opening brace of declaration blocks for legibility.</p>
+                        <div class="form-group">
+                            <input id="edit_id" type="text" value="">
+                            <input id="edit_price" type="text" class="form-control" placeholder="$20.00">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-primary" onclick="save_price()">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="js/jquery.circliful.js"></script>
         <script type="text/javascript" src="js/common-all.js"></script>
-
-
-        <!-- ============================================
-       ============== Vendor JavaScripts ===============
-       ============================================= -->
-        <script src="js/vendor/jRespond/jRespond.min.js"></script>
-
-        <script src="js/vendor/animsition/js/jquery.animsition.min.js"></script>
-
-        <script src="js/vendor/chosen/chosen.jquery.js"></script>
-
-        <!--/ vendor javascripts -->
-
-        <!-- ============================================
-        ============== Custom JavaScripts ===============
-        ============================================= -->
-        <script src="js/main.js"></script>
-        <!--/ custom javascripts -->
-
+        <script type="text/javascript" src="js/common-details.js"></script>
+        <script type="text/javascript" src="js/expense.js"></script>
 
         <script>
+                            function prepareExpenseData() {
 
-                                    function setOptions(srcType) {
-                                        var options = {
-                                            // Some common settings are 20, 50, and 100
-                                            quality: 50,
-                                            destinationType: Camera.DestinationType.FILE_URI,
-                                            // In this app, dynamically set the picture source, Camera or photo gallery
-                                            sourceType: srcType,
-                                            encodingType: Camera.EncodingType.JPEG,
-                                            mediaType: Camera.MediaType.PICTURE,
-                                            allowEdit: true,
-                                            targetWidth: 100,
-                                            targetHeight: 100,
-                                            correctOrientation: true  //Corrects Android orientation quirks
-                                        }
-                                        return options;
-                                    }
-
-                                    function openCamera() {
-                                        alert('opening camera');
-                                        var srcType = Camera.PictureSourceType.CAMERA;
-                                        var options = setOptions(srcType);
-
-                                        navigator.camera.getPicture(cameraSuccess, cameraError, options);
-
-                                        $('#cameraModal').modal('hide');
-                                    }
-
-                                    function fromLibrary() {
-                                        alert('From library');
-                                        var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
-                                        var options = setOptions(srcType);
-
-                                        navigator.camera.getPicture(cameraSuccess, cameraError, options);
-
-                                        $('#cameraModal').modal('hide');
-                                    }
-
-                                    function cameraSuccess(imageUri) {
-
-                                        alert(imageUri);
-
-                                        uploadPhoto(imageUri);
-
-                                        displayImage(imageUri);
-                                    }
-
-                                    function cameraError(error) {
-                                        //console.debug("Unable to obtain picture: " + error, "app");
-                                        alert("Unable to obtain picture: " + error);
-
-                                    }
-
-                                    // Below one succeeded
-                                    function uploadPhoto(imageURI) {
-                                        alert('in the function');
-                                        var options = new FileUploadOptions();
-                                        options.fileKey = "file";
-                                        options.fileName = imageURI.substr(imageURI.lastIndexOf('/') + 1);
-                                        options.mimeType = "image/jpeg";
-                                        alert('settings parms');
-                                        var params = new Object();
-                                        params.value1 = "test";
-                                        params.value2 = "param";
-
-                                        options.params = params;
-                                        options.chunkedMode = false;
-                                        alert('transferring...');
-
-                                        var username = window.localStorage.getItem("username");
-                                        var token = window.localStorage.getItem("token");
-
-                                        var ft = new FileTransfer();
-                                        ft.upload(imageURI, 'https://easybene.com/index.php/upload/' + username + '/' + token, win, fail, options);
-                                    }
-
-                                    function win(r) {
-                                        alert(r.response);
-                                    }
-
-                                    function fail(error) {
-                                        alert("An error has occurred: Code = " + error.code);
-                                    }
-
-                                    function displayImage(imgUri) {
-
-                                        var elem = document.getElementById('imageFile');
-                                        elem.src = imgUri;
-                                    }
-
-                                    $('#save_expense').on('click', function () {
-                                        if (validation_check()) {
-                                            //SaveExpense();
-                                            alert("cxvcx");
-                                        }
-                                    });
-
-                                    function validation_check(msg) {
-                                        var valid = true;
-
-                                        if ($('#expense_type').val() == '') {
-                                            show_error($('#expense_type'));
-                                            valid = false;
-                                        } else {
-                                            show_ok($('#expense_type'));
-                                        }
-
-                                        if ($('#description').val().length < 2) {
-                                            show_error($('#description'));
-                                            valid = false;
-                                        } else {
-                                            show_ok($('#description'));
-                                        }
-
-                                        if ($('#date').val().length < 10) {
-                                            show_error($('#date'));
-                                            valid = false;
-                                        } else {
-                                            show_ok($('#date'));
-                                        }
-
-                                        if ($('#amount').val() == '') {
-                                            show_error($('#amount'));
-                                            valid = false;
-                                        } else {
-                                            show_ok($('#amount'));
-                                        }
-
-                                        return valid;
-                                    }
-
-                                    function show_error(ths)
-                                    {
-                                        $(ths).parent().children(".valid-field").css("display", "none");
-                                        $(ths).parent().children(".inValid-field").css("display", "block");
-                                        $(ths).closest("li").addClass("error-found");
-                                        $(ths).closest("li").children(".inValidText").css("display", "block");
-                                    }
-
-                                    function show_ok(ths)
-                                    {
-                                        $(ths).parent().children(".valid-field").css("display", "block");
-                                        $(ths).parent().children(".inValid-field").css("display", "none");
-                                        $(ths).closest("li").removeClass("error-found");
-                                        $(ths).closest("li").children(".inValidText").css("display", "none");
-                                    }
-
-                                    function SaveExpense() {
-                                        var expense_type = $('#expense_type').val();
-                                        var description = $('#description').val();
-                                        var date = $('#date').val();
-                                        var amount = $('#amount').val();
-                                        var additional_details = $('#additional_details').val();
-                                        $.ajax({
-                                            url: 'https://easybene.com/index.php/auth/register',
-                                            type: "POST",
-                                            data: 'expense_type=' + expense_type + '&description=' + description + '&date=' + date + '&amount=' + amount + '&additional_details=' + additional_details,
-                                            dataType: 'json',
-                                            async: false,
-                                            success: function (result) {
-                                                //console.log(result);
-                                                //ShowLoginRegSucc();
-
-                                                location.href = "index.html";
-                                            },
-                                            error: function (xhr, ajaxOptions, thrownError) {
-                                                //ShowRegFail(xhr.responseJSON);
-                                                //console.log(xhr.responseJSON);
-                                                $("#error_after_submit").html(xhr.responseJSON);
-                                                $("#error_after_submit").css("display", "block");
-                                            },
+                                $.ajax({
+                                    url: 'https://easybene.com/index.php/api-expense/' + username + '/' + token,
+                                    type: "GET",
+                                    dataType: 'json',
+                                    async: false,
+                                    success: function (result) {
+                                        var exp_cont = '';
+                                        $.each(result.expense, function (key, row) {
+                                            exp_cont += '<li>\
+                            <div class="add-edit-content-wrapper">\
+                                <div class="ex-content-wrapper" onclick="show_icons(this)">\
+                                    <a href="javascript: void(0)" id="orig_row">\
+                                        <p>' + row.description + '</p>\
+                                        <span>' + row.date + ' - ' + row.name + '</span>\
+                                    </a>\
+                                </div>\
+                                <a class="click-arrow" href="add-expense.html?page=expense&id=' + row.id + '"><span class="icon-uniE762"></span></a>\
+                                <div id="edit-wrapper" class="edit-content" onclick="remove_icons(this)">\
+                                    <div class="edit-con">\
+                                        <div>\
+                                            <button class="delete-btn" onclick="delete_expense(this, \'' + row.id + '\')"><span class="icon-trash-o"></span></button>\
+                                            <button class="edit-btn"  onclick="show_edit_modal(\'' + row.id + '\', \'' + row.amount + '\')"><span class="icon-edit"></span></button>\
+                                        </div>\
+                                        <div>\
+                                            <p>' + row.description + '</p>\
+                                            <span>' + row.date + ' - ' + row.name + '</span>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </li>';
                                         });
-                                    }
+                                        $('#expense ul').append(exp_cont);
+
+                                        var doc_cont = '';
+                                        $.each(result.document, function (key, row) {
+                                            doc_cont += '<li>\
+                            <div class="add-edit-content-wrapper">\
+                                <div class="ex-content-wrapper" onclick="show_icons(this)">\
+                                    <a href="javascript: void(0)" id="orig_row">\
+                                        <p>' + row.description + '</p>\
+                                        <span>' + row.date + ' - ' + row.name + '</span>\
+                                    </a>\
+                                </div>\
+                                <a class="click-arrow" href="add-expense.html?page=document&id=' + row.id + '"><span class="icon-uniE762"></span></a>\
+                                <div id="edit-wrapper" class="edit-content" onclick="remove_icons(this)">\
+                                    <div class="edit-con">\
+                                        <div style="width: 50px">\
+                                            <button class="delete-btn" onclick="delete_document(this, \'' + row.id + '\')"><span class="icon-trash-o"></span></button>\
+                                        </div>\
+                                        <div>\
+                                            <p>' + row.description + '</p>\
+                                            <span>' + row.date + ' - ' + row.name + '</span>\
+                                        </div>\
+                                    </div>\
+                                </div>\
+                            </div>\
+                        </li>';
+                                        });
+                                        $('#document ul').append(doc_cont);
+                                    },
+                                    error: function (xhr, ajaxOptions, thrownError) {
+                                        /*console.log(xhr);
+                                         console.log(ajaxOptions);
+                                         console.log(thrownError);*/
+                                    },
+                                });
+                            }
+
+                            $(document).ready(function () {
+                                $("#add-entry").click(function () {
+                                    $("#add-entry-screen").show();
+                                });
+                            });
         </script>
     </body>
 </html>

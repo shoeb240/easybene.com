@@ -18,7 +18,8 @@
         <link rel="stylesheet" href="css/jquery.circliful.css">
         <link rel="stylesheet" href="css/desktop-style.css">
         <link rel="stylesheet" href="css/jquery-ui.css">
-        <link rel="stylesheet" href="css/app-new-style.css">        
+        <link rel="stylesheet" href="css/app-new-style.css">   
+        <link rel="stylesheet" href="css/jquery-ui.theme.min.css">   
         <script src="cordova.js"></script>
     </head>
 
@@ -81,7 +82,7 @@
         </section>   
         <!-- Your main site content in here -->
 
-            <div class="container">
+            <div id="top_container" class="container">
                 <div class="page-content gray-bg-wrapper">
                     <div  class="add-entry-screen-wrapper">
                         <div id="expense_success" class="inValidText" style="display: none; position: static; color: blue;">Medical Provider Registered Successfully</div>
@@ -212,6 +213,10 @@
                     </div>
                 </div>
             </div>
+            
+            <div id="dialog">
+                <img id="dalog_img" width="100%" src="" alt="" />
+            </div>
 
             <script type="text/javascript" src="js/jquery_1.10.2_jquery.min.js"></script>
             <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -222,16 +227,24 @@
             <script type="text/javascript" src="js/add-expense.js"></script>
             <script>
                 $(document).ready(
-                        function () {
-                            $("#add-entry").click(function () {
-                                $("#add-entry-screen").show();
-                            });
-                        });
+                function () {
+                    $("#add-entry").click(function () {
+                        $("#add-entry-screen").show();
+                    });
+                });
+
+                function show_enlarged(ths){
+                    $( "#dialog" ).dialog( "open" );
+                    $('#dalog_img').attr('src', $('img', ths).attr('src'));
+                };
             </script>
             <script>
                 $(function () {
                     $("#datepicker").datepicker();
                 });
+                
+                $("#dialog").dialog({ autoOpen: false, position: { my: "center center", at: "center center", of: '#top_container'} });
+                
             </script>
 
     </body>
