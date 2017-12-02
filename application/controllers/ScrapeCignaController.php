@@ -65,7 +65,10 @@ class ScrapeCignaController extends My_Controller_ScrapeBase
         $this->_helper->viewRenderer->setNoRender(true);
         
         $usersAll = $this->prepareUsersForRun($this->provider_name, $this->provider_type);
-
+        /*echo '<pre>';
+        print_r($usersAll);
+        echo '</pre>';
+        die();*/
         $ret = $this->runAllUsers($usersAll);
         
         echo $ret;
@@ -81,6 +84,10 @@ class ScrapeCignaController extends My_Controller_ScrapeBase
         $this->_helper->viewRenderer->setNoRender(true);
        
         $usersAll = $this->prepareUsersForExecution($this->provider_name, $this->provider_type);
+        /*echo '<pre>';
+        print_r($usersAll);
+        echo '</pre>';
+        die();*/
         $ret = $this->executeAllUsers($usersAll);
         
         echo $ret;

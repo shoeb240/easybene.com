@@ -1,0 +1,185 @@
+@charset "UTF-8";
+.intro-setion.how-it-work-intro {
+    background: url("../images/how-it-work-banner.png") no-repeat center center;
+    margin-top: 75px;
+    height: auto;
+    position: relative;
+    padding-bottom: 140px;
+    padding-top: 35px;
+}
+.how-it-work-intro .intro-content-text P {
+    font-weight: normal;
+}
+.how-it-work-intro .parallax-overlay {
+    opacity: .65;
+}
+
+
+.common-section-tab {
+    border-bottom: 1px solid #dddddd;
+    text-align: center;
+    margin-bottom: 50px;
+}
+.all-in-one-section-one img {
+    display: inline-block;
+}
+.section-heading.small-heading h2 {
+    font-size: 28px;
+    text-transform: capitalize;
+}
+.section-heading.small-heading p {
+    font-size: 18px;
+}
+.common-section-tab .dis-table {
+    display: table;
+    width: 100%;
+    vertical-align: middle;
+    padding-top: 30px;
+}
+.common-section-tab .dis-table.without-big-header {
+    width: 70%;
+    margin: 0 auto;
+}
+.common-section-tab .dis-table .dis-table-cell {
+    display: table-cell;
+    vertical-align: middle;
+    width: 50%;
+    padding: 0 20px;
+}
+.small-heading {
+    font-size: 18px;
+    font-weight: 700;
+}
+.regular-text {
+    font-size: 16px;
+    line-height: 26px;
+}
+.dis-table-cell .square-text-box {
+    max-width: 300px;
+    text-align: left;
+    margin-bottom: 40px;
+}
+.sign-up-section .inner-page-sign-up h2 {
+    font-size: 24px;
+    text-transform: capitalize;
+}
+.sign-up-section .inner-page-sign-up  img {
+    margin: auto;
+}
+/*css for press page*/
+.intro-setion.press-into-section {
+    background: #d9d9d9 none repeat scroll 0 0;
+    display: block;
+    height: auto;
+    max-height: 377px;
+    min-height: auto;
+    padding-bottom: 72px;
+}
+.intro-setion.press-into-section h1 {
+    font-size: 60px;
+    text-align: center;
+    color: #000;
+    padding-top: 50px;
+}
+.press-into-section .parallax-overlay {
+    opacity: 1;
+    background: none;
+}
+.top-social-list li a {
+    color: #fff;
+}
+.top-social-list li a:hover {
+    color: #25cbf5;
+}
+.top-social-list li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 15px;
+}
+.top-social-list {
+    font-size: 25px;
+    padding-left: 0;
+    margin-top: 30px;
+}
+.meduim-heading {
+    font-size: 28px;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+.press-content-section {
+    background: #d9d9d9;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.text-align-center {
+    text-align: center;
+}
+.press-content-section .container {
+    max-width: 100%;
+    width: 800px;
+    background: #fff;
+}
+.press-content-section .container .row {
+    border-bottom: 1px solid #d9d9d9; 
+    margin-bottom: 40px;
+}
+.date-of-news {
+    font-size: 12px;
+    color: #666;
+}
+.row.margin-bottom {
+    margin-bottom: 0 !important;
+}
+.press-content-section .small-heading {
+    margin-top: 0;
+}
+.press-content-section  .text-align-center {
+    margin-bottom: 40px;
+}
+.small-news-section .regular-text {
+    font-size: 14px;
+    line-height: 15px;
+}
+.small-news-section {
+    background: #d9d9d9; 
+    margin: 40px 0;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.small-news-section  .container {
+    background: #fff;
+    padding: 40px 15px;
+}
+.recent-news {
+    padding-left: 40px;
+    margin: 40px 0 20px 0;
+}
+@media (max-width: 767px) {
+    .common-section-tab .dis-table {
+        display: block;
+        vertical-align: middle;
+        padding-top: 30px;
+    }
+    .common-section-tab .dis-table .dis-table-cell {
+        display: block;
+        vertical-align: middle;
+        width: 100%;
+        padding: 0 20px;
+    }
+    .dis-table-cell .square-text-box {
+        margin: 20px auto;
+    }
+    .recent-news {
+        padding-left: 0;
+    }
+    .press-content-section .square-text-box {
+        margin: 20px 0;
+    }
+    .intro-setion.press-into-section h1 {
+        font-size: 40px;
+        margin-top: 20px;
+    }
+    .press-into-section .intro-content-text {
+        margin-top: 50px;
+    }
+}

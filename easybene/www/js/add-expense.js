@@ -60,8 +60,8 @@
             encodingType: Camera.EncodingType.JPEG,
             mediaType: Camera.MediaType.PICTURE,
             allowEdit: true,
-            targetWidth: 100,
-            targetHeight: 100,
+            //targetWidth: 100,
+            //targetHeight: 100,
             correctOrientation: true  //Corrects Android orientation quirks
         }
         return options;
@@ -262,7 +262,7 @@
                 $('#additional_details').val(expense.additional_details);
                 
                 $.each(expense_image_arr, function(key, each_image) {
-                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/'+each_image.image+'" alt=""/></a></li>';
+                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/thumb_'+each_image.image+'" alt=""/></a></li>';
                     $("#expenseImageFile").append(elem);
                     $("#expense_image_name_list").val($("#expense_image_name_list").val() + ',' + each_image.image);
                 });
@@ -287,7 +287,7 @@
                 $('#additional_details_document').val(document.additional_details);
                 
                 $.each(document_image_arr, function(key, each_image) {
-                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/'+each_image.image+'" alt="" /></a></li>';
+                    elem = '<li><a href="javascript: void();" onclick="show_enlarged(this)"><img src="https://easybene.com/camera/thumb_'+each_image.image+'" alt="" /></a></li>';
                     $("#documentImageFile").append(elem);
                     $("#document_image_name_list").val($("#document_image_name_list").val() + ',' + each_image.image);
                 });

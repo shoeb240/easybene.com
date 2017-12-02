@@ -235,7 +235,8 @@
 
                 function show_enlarged(ths){
                     $( "#dialog" ).dialog( "open" );
-                    $('#dalog_img').attr('src', $('img', ths).attr('src'));
+                    var tsrc = $('img', ths).attr('src');
+                    $('#dalog_img').attr('src', tsrc.replace('thumb_', ''));
                 };
             </script>
             <script>

@@ -59,6 +59,8 @@ class UploadController extends My_Controller_ApiAbstract //Zend_Controller_Actio
         
         try{
             $result = move_uploaded_file($_FILES["file"]["tmp_name"], APPLICATION_PATH . '/../camera/' . $image_name);            
+            
+            $this->resize_image(APPLICATION_PATH . '/../camera/' . $image_name, 100, 100, APPLICATION_PATH . '/../camera/thumb_' . $image_name);
         } catch (Exception $ex) {
             echo "Failed" . $ex->getMessage();
         }
@@ -80,8 +82,46 @@ class UploadController extends My_Controller_ApiAbstract //Zend_Controller_Actio
         exit;
     }
     
-    
-    
-    
-    
+    private function resize_image($file, $w, $h, $output) {
+        
+        list($width, $height, $type) = getimagesize($file);
+
+        $r = $width / $height;
+
+        $newwidth = $h*$r;
+        $newheight = $h;
+
+
+        switch ( $type ) {
+            case IMAGETYPE_GIF:
+              $src = imagecreatefromgif($file);
+            break;
+            case IMAGETYPE_JPEG:
+              $src = imagecreatefromjpeg($file);
+            break;
+            case IMAGETYPE_PNG:
+              $src = imagecreatefrompng($file);
+            break;
+            default:
+              return false;
+        }
+
+        $dst = imagecreatetruecolor($newwidth, $newheight);
+        imagecopyresampled($dst, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+        switch ( $type ) {
+            case IMAGETYPE_GIF:
+              imagegif($dst, $output);
+            break;
+            case IMAGETYPE_JPEG:
+              imagejpeg($dst, $output);
+            break;
+            case IMAGETYPE_PNG:
+              imagepng($dst, $output);
+            break;
+            default:
+              return false;
+        }
+    }
+
 }

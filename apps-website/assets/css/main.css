@@ -7971,7 +7971,7 @@ header a {
   width: 18%;
 }
 
-.intro-setion .navbar ul li a:hover::before {
+.intro-setion .navbar ul li a:hover::before, .intro-setion .navbar ul li a:focus::before, .intro-setion .navbar ul li.active a::before {
   background: #25cbf5 none repeat scroll 0 0;
   bottom: 22px;
   content: "";
